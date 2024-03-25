@@ -1,19 +1,13 @@
 package org.duckstudy.calculator.core;
-public class Calculator {
-    public static int add(int a, int b){
-        return a + b;
-    }
+public interface Calculator {
+    int add(int value);
 
-    public static int subtract(int a, int b){
-        return a - b;
-    }
+    int subtract(int value);
 
-    public static int multiply(int a, int b){
-        return a * b;
-    }
+    int multiply(int value);
 
-    public static int divide(int a, int b){
-        if (b==0) throw new IllegalArgumentException("b cannot be zero");
-        else return a / b;
-    }
+    int divide(int value) throws ArithmeticException;
+
+    void reset();
+
 }
