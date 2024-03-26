@@ -1,12 +1,12 @@
 package org.duckstudy.calculator.core;
-public interface Calculator {
-    int add(int value);
+public interface Calculator<T extends Number> {
+    T add(T value);
 
-    int subtract(int value);
+    T subtract(T value);
 
-    int multiply(int value);
+    T multiply(T value);
 
-    int divide(int value) throws ArithmeticException;
+    T divide(T value) throws ArithmeticException;
 
     void reset();
 
