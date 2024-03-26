@@ -19,7 +19,7 @@ public class IntegerCalculator implements Calculator<Integer>{
     }
 
     @Override
-    public Integer divide(Integer value) throws UnsupportedOperationException {
+    public Integer divide(Integer value) throws ArithmeticException {
         if (value == 0){
             throw new ArithmeticException("Division by zero is not allowed");
         }
