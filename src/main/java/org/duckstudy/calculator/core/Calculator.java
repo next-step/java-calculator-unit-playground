@@ -1,5 +1,5 @@
 package org.duckstudy.calculator.core;
-public interface Calculator<T extends Number> {
+public interface Calculator<T> {
     T add(T value);
 
     T subtract(T value);
