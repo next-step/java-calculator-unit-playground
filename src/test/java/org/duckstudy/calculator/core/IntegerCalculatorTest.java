@@ -80,6 +80,7 @@ public class IntegerCalculatorTest {
         void addTestSuccess(int expected, int... values){
             // given
             IntegerCalculator ic = new IntegerCalculator();
+            ic.add(2);
 
             // when
             int result = 0;
@@ -93,8 +94,8 @@ public class IntegerCalculatorTest {
 
         private static Stream<Arguments> methodSourceSubtractTestArguments(){
             return Stream.of(
-                Arguments.arguments(6, new int[]{2, 3}),
-                Arguments.arguments(-20, new int[]{4, -5})
+                Arguments.arguments(12, new int[]{2, 3}),
+                Arguments.arguments(-40, new int[]{4, -5})
             );
         }
     }
