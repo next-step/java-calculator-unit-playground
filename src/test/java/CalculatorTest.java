@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -67,5 +68,20 @@ class CalculatorTest {
 
         // then
         assertEquals(16, dividedResult);
+    }
+
+    @Test
+    @DisplayName("우항의 값이 0이라면 나눌 수 없다.")
+    void canNot_divide_bvZero() {
+        // given
+        int a = 32;
+        int b = 0;
+
+        // when
+        String message = assertThrows(ArithmeticException.class, () -> calculator.divide(a, b))
+                .getMessage();
+
+        // then
+        assertEquals(message, "0으로 나눌 수 없습니다.");
     }
 }
