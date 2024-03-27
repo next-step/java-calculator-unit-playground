@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DisplayName("정수 계산기 테스트")
 public class IntegerCalculatorTest {
 
-    IntegerCalculator ic = new IntegerCalculator();
+    private IntegerCalculator ic = new IntegerCalculator();
 
     @AfterEach
     void tearDown() {
