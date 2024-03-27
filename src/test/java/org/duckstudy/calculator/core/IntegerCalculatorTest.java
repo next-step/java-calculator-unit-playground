@@ -1,5 +1,6 @@
 package org.duckstudy.calculator.core;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("정수 계산기 테스트")
 public class IntegerCalculatorTest {
+
+    IntegerCalculator ic = new IntegerCalculator();
+
+    @AfterEach
+    void tearDown() {
+        ic.reset();
+    }
+
     @Nested
     @DisplayName("덧셈 테스트")
     class AddTest {
@@ -23,7 +32,6 @@ public class IntegerCalculatorTest {
         @DisplayName("[성공] 덧셈 테스트")
         void addTestSuccess(int expected, int... values) {
             // given
-            IntegerCalculator ic = new IntegerCalculator();
             int result = 0;
 
             // when
@@ -52,7 +60,6 @@ public class IntegerCalculatorTest {
         @DisplayName("[성공] 뺄셈 테스트")
         void addTestSuccess(int expected, int... values) {
             // given
-            IntegerCalculator ic = new IntegerCalculator();
 
             // when
             int result = 0;
@@ -81,7 +88,6 @@ public class IntegerCalculatorTest {
         @DisplayName("[성공] 곱셈 테스트")
         void addTestSuccess(int expected, int... values) {
             // given
-            IntegerCalculator ic = new IntegerCalculator();
             ic.add(2);
 
             // when
@@ -111,7 +117,6 @@ public class IntegerCalculatorTest {
         @DisplayName("[성공] 나눗셈 테스트")
         void addTestSuccess(int expected, int... values) {
             // given
-            IntegerCalculator ic = new IntegerCalculator();
             ic.add(12);
 
             // when
@@ -134,7 +139,6 @@ public class IntegerCalculatorTest {
         @DisplayName("[실패] 나눗셈 테스트")
         void addTestFail() {
             // given
-            IntegerCalculator ic = new IntegerCalculator();
             ic.add(12);
 
             // when, then
