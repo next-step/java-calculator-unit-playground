@@ -29,7 +29,7 @@ public class IntegerCalculatorTest {
 
         @ParameterizedTest
         @MethodSource("methodSourceAddTestArguments")
-        @DisplayName("[성공] 덧셈 테스트")
+        @DisplayName("입력받은 수로 더한 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
             // given
             int result = 0;
@@ -57,7 +57,7 @@ public class IntegerCalculatorTest {
 
         @ParameterizedTest
         @MethodSource("methodSourceSubtractTestArguments")
-        @DisplayName("[성공] 뺄셈 테스트")
+        @DisplayName("입력받은 수로 뺀 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
             // given
 
@@ -85,7 +85,7 @@ public class IntegerCalculatorTest {
 
         @ParameterizedTest
         @MethodSource("methodSourceSubtractTestArguments")
-        @DisplayName("[성공] 곱셈 테스트")
+        @DisplayName("입력받은 수로 곱한 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
             // given
             ic.add(2);
@@ -114,7 +114,7 @@ public class IntegerCalculatorTest {
 
         @ParameterizedTest
         @MethodSource("methodSourceSubtractTestArguments")
-        @DisplayName("[성공] 나눗셈 테스트")
+        @DisplayName("입력받은 수로 나눈 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
             // given
             ic.add(12);
@@ -136,7 +136,7 @@ public class IntegerCalculatorTest {
         }
 
         @Test
-        @DisplayName("[실패] 나눗셈 테스트")
+        @DisplayName("0으로 나누면 예외가 발생한다")
         void addTestFail() {
             // given
             ic.add(12);
