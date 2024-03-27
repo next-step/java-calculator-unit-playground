@@ -15,6 +15,9 @@ public class IntegerCalculator implements Calculator<Integer>{
 
     @Override
     public Integer multiply(Integer value) {
+        if (result == 0) {
+            result = 1;
+        }
         return result *= value;
     }
 
