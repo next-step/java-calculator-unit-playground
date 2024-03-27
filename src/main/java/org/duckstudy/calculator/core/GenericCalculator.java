@@ -8,7 +8,7 @@ import java.util.function.Function;
     - BigDecimal 타입으로 계산한다.
     - Function의 toType() 메서드로 결과값을 입력값의 타입(T)로 형변환한다.
  */
-public class GenericCalculator<T extends Number> implements Calculator<T>{
+public class GenericCalculator<T extends Number> implements Calculator<T> {
     private BigDecimal result;
     private Function<BigDecimal, T> toType;
 

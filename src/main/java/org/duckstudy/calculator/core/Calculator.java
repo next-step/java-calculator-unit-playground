@@ -1,4 +1,5 @@
 package org.duckstudy.calculator.core;
+
 public interface Calculator<T> {
     T add(T value);
 
