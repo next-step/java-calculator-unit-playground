@@ -78,8 +78,7 @@ class CalculatorTest {
         int b = 0;
 
         // when
-        String message = assertThrows(ArithmeticException.class, () -> calculator.divide(a, b))
-                .getMessage();
+        String message = assertThrows(ArithmeticException.class, () -> calculator.divide(a, b)).getMessage();
 
         // then
         assertEquals(message, "0으로 나눌 수 없습니다.");
