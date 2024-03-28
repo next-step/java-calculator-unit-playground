@@ -3,7 +3,7 @@ package org.duckstudy.calculator.core;
 import java.math.BigDecimal;
 import java.util.function.Function;
 
-public class GenericCalculator<T extends Number> implements Calculator<T> {
+public class GenericCalculator<T extends Number> implements Calculator<T, T> {
     private BigDecimal result;
     private Function<BigDecimal, T> toType;
 
