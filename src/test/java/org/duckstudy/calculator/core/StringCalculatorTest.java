@@ -45,6 +45,7 @@ public class StringCalculatorTest {
                     Arguments.arguments(3, "1,2"),
                     Arguments.arguments(6, "1,2,3"),
                     Arguments.arguments(6, "1,2:3"),
+                    Arguments.arguments(60, "10,20:30"),
 
                     Arguments.arguments(6, "//;\\n1;2;3"),
                     Arguments.arguments(6, "//!\\n1!2!3"),
@@ -72,7 +73,31 @@ public class StringCalculatorTest {
                     Arguments.arguments("//;\\n1;k;3"),
                     Arguments.arguments("//;\\n-1;2;3"),
                     Arguments.arguments("//;\\n1;-1;3"),
-                    Arguments.arguments("//;\\n;;;2;3")
+                    Arguments.arguments("//;\\n;;;2;3"),
+
+                    Arguments.arguments("//;\\n;1.1;2;3")
+
+            );
+        }
+
+        @ParameterizedTest
+        @MethodSource("methodSourceAddTestFailCustomDelimiterArguments")
+        @DisplayName("커스텀 구분자를 제대로 지정하지 않을 경우 RuntimeException 발생한다")
+        void addTestFailCustomDelimiter(String value) {
+            // given
+
+            // when, then
+            assertAll(
+                    () -> assertThrowsExactly(RuntimeException.class, () -> sc.add(value))
+
+            );
+        }
+
+        private static Stream<Arguments> methodSourceAddTestFailCustomDelimiterArguments() {
+            return Stream.of(
+                    Arguments.arguments("//;\\k1,2:3;4"),
+                    Arguments.arguments("/;\\n1,2:3;4"),
+                    Arguments.arguments("a;\\n1,2:3;4")
             );
         }
     }
