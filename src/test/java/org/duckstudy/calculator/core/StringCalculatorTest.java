@@ -3,7 +3,6 @@ package org.duckstudy.calculator.core;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -42,25 +41,38 @@ public class StringCalculatorTest {
 
         private static Stream<Arguments> methodSourceAddTestSuccessArguments() {
             return Stream.of(
-                    Arguments.arguments(6, "//;\\n1;2;3"),
                     Arguments.arguments(0, ""),
                     Arguments.arguments(3, "1,2"),
+                    Arguments.arguments(6, "1,2,3"),
+                    Arguments.arguments(6, "1,2:3"),
+
+                    Arguments.arguments(6, "//;\\n1;2;3"),
                     Arguments.arguments(6, "//!\\n1!2!3"),
-                    Arguments.arguments(6, "//!\\n1!2!3")
+                    Arguments.arguments(6, "//!!\\n1!!2!!3"),
+                    Arguments.arguments(6, "//abc\\n1abc2abc3"),
+                    Arguments.arguments(10, "//abc\\n1,2:3abc4")
             );
         }
 
-        @Test
+        @ParameterizedTest
+        @MethodSource("methodSourceAddTestFailArguments")
         @DisplayName("숫자 이외의 값 또는 음수 전달시 RuntimeException 발생한다")
-        void addTestSuccess() {
+        void addTestFail(String value) {
             // given
 
             // when, then
             assertAll(
-                    () -> assertThrows(RuntimeException.class, () -> sc.add("//;\\n1;-;3")),
-                    () -> assertThrows(RuntimeException.class, () -> sc.add("//;\\n1;o;3")),
-                    () -> assertThrows(RuntimeException.class, () -> sc.add("//;\\n!!;2;3")),
-                    () -> assertThrows(RuntimeException.class, () -> sc.add("//;\\n-1;2;3"))
+                    () -> assertThrowsExactly(RuntimeException.class, () -> sc.add(value))
+
+            );
+        }
+
+        private static Stream<Arguments> methodSourceAddTestFailArguments() {
+            return Stream.of(
+                    Arguments.arguments("//;\\n1;k;3"),
+                    Arguments.arguments("//;\\n-1;2;3"),
+                    Arguments.arguments("//;\\n1;-1;3"),
+                    Arguments.arguments("//;\\n;;;2;3")
             );
         }
     }
