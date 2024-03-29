@@ -71,7 +71,7 @@ class StringCalculatorTest {
         class ContextWithWrongBasicExpression {
 
             @ParameterizedTest
-            @ValueSource(strings = {"1;2,3", "1,2,3;", "asdf", "'"})
+            @ValueSource(strings = {"1;2,3", "1,2,3;", "'"})
             @DisplayName("포맷이 잘못되었다는 예외를 발생시킵니다.")
             void add_exception_withWrongBasicExpression(String expression) {
                 // when
@@ -87,7 +87,7 @@ class StringCalculatorTest {
         class ContextWithWrongCustomExpression {
 
             @ParameterizedTest
-            @ValueSource(strings = {"//;\n1:2:3", "//;\n1,2,3;", "//;\nasdf", "//;n\n'"})
+            @ValueSource(strings = {"//;\n1:2:3", "//;\n1,2,3;", "//;n\n'"})
             @DisplayName("포맷이 잘못되었다는 예외를 발생시킵니다.")
             void add_exception_withWrongBasicExpression(String expression) {
                 // when
@@ -111,6 +111,22 @@ class StringCalculatorTest {
 
                 // then
                 assertEquals(message, "표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 숫자 이외의 값이 주어진다면")
+        class ContextWithNonNumberExpression {
+
+            @ParameterizedTest
+            @ValueSource(strings = {"//;\na;b;c", "a,d:3", "//;\no", "g"})
+            @DisplayName("포맷이 잘못되었다는 예외를 발생시킵니다.")
+            void add_exception_withWrongBasicExpression(String expression) {
+                // when
+                String message = assertThrows(RuntimeException.class, () -> calculator.add(expression)).getMessage();
+
+                // then
+                assertEquals(message, "표현식의 입력이 잘못됐습니다. [잘못된 표현식 포맷]");
             }
         }
     }
