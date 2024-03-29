@@ -2,6 +2,9 @@ package org.duckstudy.calculator.core;
 
 import org.duckstudy.calculator.util.StringUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator implements Calculator<String, Integer> {
     private int result = 0;
 
@@ -12,10 +15,12 @@ public class StringCalculator implements Calculator<String, Integer> {
         }
 
         StringBuilder delimiter = new StringBuilder(":|,");
-        if (value.startsWith("//")) {
-            int delimiterEndIdx = value.indexOf("\\");
-            delimiter.append("|").append(value, 2, delimiterEndIdx);
-            value = value.substring(delimiterEndIdx + 2);
+        String regex = "//(.+?)\\\\n";
+        Matcher customDelimiter = Pattern.compile(regex).matcher(value);
+
+        if (customDelimiter.find()) {
+            delimiter.append("|").append(customDelimiter.group(1));
+            value = value.substring(customDelimiter.end());
         }
 
         for (String num : value.split(delimiter.toString())) {
