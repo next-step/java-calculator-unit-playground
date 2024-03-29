@@ -11,16 +11,16 @@ public class StringCalculator implements Calculator<String, Integer> {
             return result;
         }
 
-        StringBuilder delimeter = new StringBuilder(":|,");
+        StringBuilder delimiter = new StringBuilder(":|,");
         if (value.startsWith("//")) {
             int delimiterEndIdx = value.indexOf("\\");
-            delimeter.append("|" + value.substring(2, delimiterEndIdx));
+            delimiter.append("|").append(value, 2, delimiterEndIdx);
             value = value.substring(delimiterEndIdx + 2);
         }
 
-        for (String num : value.split(delimeter.toString())) {
+        for (String num : value.split(delimiter.toString())) {
             if (num.startsWith("-") || !StringUtil.isNumberic(num)) {
-                throw new IllegalArgumentException("Invalid input");
+                throw new RuntimeException("Invalid input");
             }
             result += Integer.parseInt(num);
         }
