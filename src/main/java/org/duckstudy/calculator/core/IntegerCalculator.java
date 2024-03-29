@@ -1,6 +1,6 @@
 package org.duckstudy.calculator.core;
 
-public class IntegerCalculator implements Calculator<Integer> {
+public class IntegerCalculator implements Calculator<Integer, Integer> {
     private Integer result = 0;
 
     @Override
