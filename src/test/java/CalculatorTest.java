@@ -40,4 +40,12 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("0으로 나눗셈을 하면 ArithmeticException 예외가 발생한다")
+    void divide_zero() {
+        assertThrows(ArithmeticException.class, () -> {
+            new Calculator().divide(8, 0);
+        });
+    }
 }
