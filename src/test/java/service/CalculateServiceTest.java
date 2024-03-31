@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class CalculateServiceTest {
 
-    CalculateService calculateService = new CalculateService();
+    private static final CalculateService calculateService = new CalculateService();
 
     private static Stream<Arguments> methodSourceOfPlus() {
         return Stream.of(
@@ -20,6 +20,15 @@ class CalculateServiceTest {
         );
     }
 
+
+    @ParameterizedTest(name = "{0} + {1} = {2}")
+    @MethodSource("methodSourceOfPlus")
+    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 더해진(+) 값이 반환된다.")
+    void plusTest(String x, String y, long result) {
+        assertEquals(calculateService.plus(x, y), result);
+    }
+
+
     private static Stream<Arguments> methodSourceOfMinus() {
         return Stream.of(
             Arguments.arguments("3", "2.0", 1),
@@ -28,6 +37,14 @@ class CalculateServiceTest {
             Arguments.arguments("+3.5", "+2.2", 1)
         );
     }
+
+    @ParameterizedTest(name = "{0} - {1} = {2}")
+    @MethodSource("methodSourceOfMinus")
+    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 빼진(-) 값이 반환된다.")
+    void minusTest(String x, String y, long result) {
+        assertEquals(calculateService.minus(x, y), result);
+    }
+
 
     private static Stream<Arguments> methodSourceOfMultiply() {
         return Stream.of(
@@ -39,6 +56,14 @@ class CalculateServiceTest {
         );
     }
 
+    @ParameterizedTest(name = "{0} x {1} = {2}")
+    @MethodSource("methodSourceOfMultiply")
+    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 곱해진(x) 값이 반환된다.")
+    void multiplyTest(String x, String y, long result) {
+        assertEquals(calculateService.multiply(x, y), result);
+    }
+
+
     private static Stream<Arguments> methodSourceOfDivide() {
         return Stream.of(
             Arguments.arguments("6", "2", 3),
@@ -48,7 +73,15 @@ class CalculateServiceTest {
         );
     }
 
-    private static Stream<Arguments> methodSourceOfNotNumber() {
+    @ParameterizedTest(name = "{0} % {1} = {2}")
+    @MethodSource("methodSourceOfDivide")
+    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 나눠진(%) 값이 반환된다.")
+    void divideTest(String x, String y, long result) {
+        assertEquals(calculateService.divide(x, y), result);
+    }
+
+
+    private static Stream<Arguments> methodSourceOfNotNumberInput() {
         return Stream.of(
             Arguments.arguments("+", "3"),
             Arguments.arguments("1", "1.1.1"),
@@ -57,37 +90,8 @@ class CalculateServiceTest {
         );
     }
 
-    @ParameterizedTest(name = "{0} + {1} = {2}")
-    @MethodSource("methodSourceOfPlus")
-    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 더해진(+) 값이 반환된다.")
-    void plusTest(String x, String y, int result) {
-        assertEquals(calculateService.plus(x, y), result);
-    }
-
-    @ParameterizedTest(name = "{0} - {1} = {2}")
-    @MethodSource("methodSourceOfMinus")
-    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 빼진(-) 값이 반환된다.")
-    void minusTest(String x, String y, int result) {
-        assertEquals(calculateService.minus(x, y), result);
-    }
-
-    @ParameterizedTest(name = "{0} x {1} = {2}")
-    @MethodSource("methodSourceOfMultiply")
-    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 곱해진(x) 값이 반환된다.")
-    void multiplyTest(String x, String y, int result) {
-        assertEquals(calculateService.multiply(x, y), result);
-    }
-
-    @ParameterizedTest(name = "{0} % {1} = {2}")
-    @MethodSource("methodSourceOfDivide")
-    @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 나눠진(%) 값이 반환된다.")
-    void divideTest(String x, String y, int result) {
-        assertEquals(calculateService.divide(x, y), result);
-    }
-
-
     @ParameterizedTest(name = "x = {0}, y = {1}")
-    @MethodSource("methodSourceOfNotNumber")
+    @MethodSource("methodSourceOfNotNumberInput")
     @DisplayName("숫자 형식이 아닌 문자열이 들어오면 에러가 발생한다.")
     void errorCaseOfIllegalInput(String x, String y) {
         assertAll(

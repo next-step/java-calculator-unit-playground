@@ -18,6 +18,6 @@ public class Calculator {
         if (y == 0) {
             throw new IllegalArgumentException("[ERROR] 0으로는 나눌 수 없습니다.");
         }
-        return (int) (x/y);
+        return (int) (x / y);
     }
 }
