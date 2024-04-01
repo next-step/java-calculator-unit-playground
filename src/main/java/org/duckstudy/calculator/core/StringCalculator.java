@@ -6,7 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator implements Calculator<String, Integer> {
-    private int result = 0;
+    private static final int INITIAL_RESULT = 0;
+    private int result = INITIAL_RESULT;
 
     @Override
     public Integer add(String value) {
@@ -50,6 +51,6 @@ public class StringCalculator implements Calculator<String, Integer> {
 
     @Override
     public void reset() {
-        result = 0;
+        result = INITIAL_RESULT;
     }
 }

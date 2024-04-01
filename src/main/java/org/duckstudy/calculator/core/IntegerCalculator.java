@@ -1,7 +1,8 @@
 package org.duckstudy.calculator.core;
 
 public class IntegerCalculator implements Calculator<Integer, Integer> {
-    private Integer result = 0;
+    private static final int INITIAL_RESULT = 0;
+    private Integer result = INITIAL_RESULT;
 
     @Override
     public Integer add(Integer value) {
@@ -28,6 +29,6 @@ public class IntegerCalculator implements Calculator<Integer, Integer> {
 
     @Override
     public void reset() {
-        result = 0;
+        result = INITIAL_RESULT;
     }
 }
