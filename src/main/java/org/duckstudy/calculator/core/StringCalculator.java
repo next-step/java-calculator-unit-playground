@@ -36,7 +36,7 @@ public class StringCalculator implements Calculator<String, Integer> {
         return result;
     }
 
-    public static boolean isNumberic(String value) {
+    public boolean isNumberic(String value) {
         return value.matches("[+]?\\d+");
     }
 
