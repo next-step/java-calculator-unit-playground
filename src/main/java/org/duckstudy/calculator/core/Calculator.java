@@ -7,7 +7,7 @@ public interface Calculator<T, R> {
 
     R multiply(T value);
 
-    R divide(T value) throws ArithmeticException;
+    R divide(T value);
 
     void reset();
 
