@@ -59,7 +59,7 @@ public class StringCalculator {
     }
 
     private int parseInt(final String input) {
-        if (input == null || input.isBlank()) {
+        if (input.isBlank()) {
             return 0;
         }
 
