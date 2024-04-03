@@ -26,7 +26,7 @@ public class StringCalculator {
                 .anyMatch(n -> n < 0);
 
         if (hasNegativeValue) {
-            throw new RuntimeException("표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
         }
     }
 
@@ -66,7 +66,7 @@ public class StringCalculator {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new RuntimeException("표현식의 입력이 잘못됐습니다. [잘못된 표현식 포맷]");
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [잘못된 표현식 포맷]");
         }
     }
 }
