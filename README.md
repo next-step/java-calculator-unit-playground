@@ -37,3 +37,14 @@
 ### 구현 상세
 - `StringCalculator` : `Calculator` 인터페이스를 구현한 문자열 계산기 클래스이다.
 - `StringCalculatorTest` : JUni5를 이용하여 `StringCalculator` 클래스를 테스트하는 테스트 클래스이다.
+
+## 4단계 : 리팩토링
+### 새로운 프로그래밍 요구사항
+- 기존 JUnit5로 작성되어 있던 단위 테스트를 `AssertJ`로 리팩터링한다.
+- JUnit5에서 제공하는 기능과 AssertJ에서 제공하는 기능을 사용해보고, 어떠한 차이가 있는지 경험한다.
+
+### 기존 프로그래밍 요구사항
+- 메인 메서드는 만들지 않는다.
+
+### 구현 상세
+- `IntegerCalculatorTest`, `StringCalculatorTest` 리팩토링 : 기존 단위 테스트 코드에 AssertJ를 도입한다.
