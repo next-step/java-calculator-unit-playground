@@ -1,9 +1,11 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -127,6 +129,20 @@ class StringCalculatorTest {
 
                 // then
                 assertEquals(message, "표현식의 입력이 잘못됐습니다. [잘못된 표현식 포맷]");
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 NULL이 주어진다면")
+        class ContextWithNull {
+
+            @Test
+            @DisplayName("NULL을 입력할 수 없다는 예외를 발생시킵니다.")
+            void add_exception_withNullExpression() {
+                // expect
+                Assertions.assertThatThrownBy(() -> calculator.add(null))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("표현식의 입력이 잘못됐습니다. [NULL 입력 예외]");
             }
         }
     }

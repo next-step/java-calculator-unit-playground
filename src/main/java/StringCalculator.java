@@ -10,6 +10,9 @@ public class StringCalculator {
     private static final String BASIC_SEPARATOR_REGX = "[,:]";
 
     public int add(final String expression) {
+        if (expression == null) {
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [NULL 입력 예외]");
+        }
         List<Integer> numbers = convertToNumbers(expression);
         validateNegativeValue(numbers);
 
