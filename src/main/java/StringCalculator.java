@@ -21,15 +21,6 @@ public class StringCalculator {
                 .sum();
     }
 
-    private void validateNegativeValue(final List<Integer> numbers) {
-        boolean hasNegativeValue = numbers.stream()
-                .anyMatch(n -> n < 0);
-
-        if (hasNegativeValue) {
-            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
-        }
-    }
-
     private List<Integer> convertToNumbers(final String expression) {
         if (isCustomExpression(expression)) {
             return splitCustom(expression).stream()
@@ -39,6 +30,15 @@ public class StringCalculator {
         return splitBasic(expression).stream()
                 .map(this::parseInt)
                 .toList();
+    }
+
+    private void validateNegativeValue(final List<Integer> numbers) {
+        boolean hasNegativeValue = numbers.stream()
+                .anyMatch(n -> n < 0);
+
+        if (hasNegativeValue) {
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
+        }
     }
 
     private boolean isCustomExpression(final String expression) {
