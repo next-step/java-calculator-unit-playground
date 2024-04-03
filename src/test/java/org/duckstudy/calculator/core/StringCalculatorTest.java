@@ -9,11 +9,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 계산기 테스트")
-public class StringCalculatorTest {
+class StringCalculatorTest {
 
     private StringCalculator sc = new StringCalculator();
 
@@ -31,7 +31,7 @@ public class StringCalculatorTest {
         @DisplayName("기본 구분자를 통해 각 숫자의 합을 반환한다")
         void addTestWithDefaultDelimiterSuccess(int expected, String value) {
             // given, when, then
-            assertEquals(expected, sc.add(value));
+            assertThat(sc.add(value)).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceAddTestWithDefaultDelimiterSuccessArguments() {
@@ -47,7 +47,7 @@ public class StringCalculatorTest {
         @DisplayName("커스텀 구분자를 입력받는 경우 커스텀 구분자를 통해 각 숫자의 합을 반환한다")
         void addTestWithCustomDelimiterSuccess(int expected, String value) {
             // given, when, then
-            assertEquals(expected, sc.add(value));
+            assertThat(sc.add(value)).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceAddTestWithCustomDelimiterSuccessArguments() {
@@ -62,7 +62,9 @@ public class StringCalculatorTest {
         @DisplayName("숫자 이외의 값 또는 음수 전달시 RuntimeException 발생한다")
         void addTestFail(String value) {
             // given, when, then
-            assertThrowsExactly(RuntimeException.class, () -> sc.add(value));
+            assertThatThrownBy(() -> sc.add(value))
+                    .isExactlyInstanceOf(RuntimeException.class)
+                    .hasMessage("Invalid input");
         }
 
         private static Stream<Arguments> methodSourceAddTestFailArguments() {
@@ -80,7 +82,9 @@ public class StringCalculatorTest {
         @DisplayName("커스텀 구분자를 제대로 지정하지 않을 경우 RuntimeException 발생한다")
         void addTestFailCustomDelimiter(String value) {
             // given, when, then
-            assertThrowsExactly(RuntimeException.class, () -> sc.add(value));
+            assertThatThrownBy(() -> sc.add(value))
+                    .isExactlyInstanceOf(RuntimeException.class)
+                    .hasMessage("Invalid input");
         }
 
         private static Stream<Arguments> methodSourceAddTestFailCustomDelimiterArguments() {

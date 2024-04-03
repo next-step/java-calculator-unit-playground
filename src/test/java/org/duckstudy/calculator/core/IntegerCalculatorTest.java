@@ -10,11 +10,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("정수 계산기 테스트")
-public class IntegerCalculatorTest {
+class IntegerCalculatorTest {
 
     private IntegerCalculator ic = new IntegerCalculator();
 
@@ -40,7 +40,7 @@ public class IntegerCalculatorTest {
             }
 
             // then
-            assertEquals(expected, result);
+            assertThat(result).isEqualTo(result);
         }
 
         private static Stream<Arguments> methodSourceAddTestArguments() {
@@ -60,15 +60,15 @@ public class IntegerCalculatorTest {
         @DisplayName("입력받은 수로 뺀 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
             // given
+            int result = 0;
 
             // when
-            int result = 0;
             for (int value : values) {
                 result = ic.subtract(value);
             }
 
             // then
-            assertEquals(expected, result);
+            assertThat(result).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceSubtractTestArguments() {
@@ -97,7 +97,7 @@ public class IntegerCalculatorTest {
             }
 
             // then
-            assertEquals(expected, result);
+            assertThat(result).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceSubtractTestArguments() {
@@ -125,7 +125,7 @@ public class IntegerCalculatorTest {
                 result = ic.divide(value);
             }
             // then
-            assertEquals(expected, result);
+            assertThat(result).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceSubtractTestArguments() {
@@ -142,7 +142,9 @@ public class IntegerCalculatorTest {
             ic.add(12);
 
             // when, then
-            assertThrows(ArithmeticException.class, () -> ic.divide(0));
+            assertThatThrownBy(() -> ic.divide(0))
+                    .isInstanceOf(ArithmeticException.class)
+                    .hasMessage("Division by zero is not allowed");
         }
     }
 
