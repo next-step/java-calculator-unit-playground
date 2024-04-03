@@ -88,4 +88,14 @@ class CalculatorTest {
         );
     }
 
+    @Test
+    @DisplayName("표현 가능한 정수 범위 -2147483648 ~ 2147483647를 벗어나면 에러가 발생한다.")
+    void checkInvalidAnswer() {
+        assertAll(
+            () -> assertThrows(IllegalArgumentException.class, () -> calculator.plus(Integer.MAX_VALUE, 1)),
+            () -> assertThrows(IllegalArgumentException.class, () -> calculator.minus(Integer.MIN_VALUE, 1)),
+            () -> assertThrows(IllegalArgumentException.class, () -> calculator.multiply(Integer.MAX_VALUE, 2))
+        );
+    }
+
 }
