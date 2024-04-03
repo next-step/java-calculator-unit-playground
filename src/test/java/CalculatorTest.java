@@ -50,7 +50,7 @@ public class CalculatorTest {
         @DisplayName("계산기 Input 변환 테스트")
         @ParameterizedTest
         @MethodSource("methodSourceTestArguments")
-        public void formatterTest(int expected, String value) {
+        public void formatterTest(double expected, String value) {
             assertEquals(expected,Calculator.stringToDouble(value));
         }
 
