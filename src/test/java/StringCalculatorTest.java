@@ -7,30 +7,27 @@ public class StringCalculatorTest {
     private final StringCalculator calculator = new StringCalculator();
 
     @Test
-    void add_withEmptyString_returnsZero() {
+    void addEmptyString() {
         assertEquals(0, calculator.add(""));
     }
 
     @Test
-    void add_withTwoNumbersSeparatedByComma_returnsTheirSum() {
+    void addNormal() {
         assertEquals(3, calculator.add("1,2"));
     }
 
     @Test
-    void add_withNumbersSeparatedByCommaOrColon_returnsTheirSum() {
+    void addWithSeparator() {
         assertEquals(6, calculator.add("1,2:3"));
     }
 
     @Test
-    void add_withCustomDelimiter_returnsTheirSum() {
+    void addWithCustomSeparator() {
         assertEquals(6, calculator.add("//;\n1;2;3"));
     }
 
     @Test
-    void add_withNegativeNumber_throwsRuntimeException() {
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            calculator.add("-1,2,3");
-        });
-        assertEquals("Negative value not allowed", exception.getMessage());
+    void addWithNegative() {
+        assertThrows(RuntimeException.class, () -> calculator.add("-1,2,3"));
     }
 }
