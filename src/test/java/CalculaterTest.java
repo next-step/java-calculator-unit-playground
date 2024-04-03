@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,5 +36,11 @@ class CalculaterTest {
     void divide() {
         int actual = calculater.divide(1, 2);
         assertThat(actual).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("0으로 나누다.")
+    void divideZero() {
+        assertThrows(RuntimeException.class, () -> calculater.divide(1, 0));
     }
 }
