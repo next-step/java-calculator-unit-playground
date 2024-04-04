@@ -113,3 +113,9 @@ public class StringCalculator {
     }
 }
 ```
+
+# 4단계 - 리팩터링
+
+- AssertJ 사용해보기
+
+- 사용해보면서 assertThatThrowBy 메서드에서 hasMessage를 사용했더니, 기존 assertThrows로 발견 못했던 에러를 발견해서 테스트 케이스를 좀 더 수정해볼 수 있었다.
