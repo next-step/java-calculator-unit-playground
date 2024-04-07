@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 
 public class StringCalculator implements Calculator<String, Integer> {
     private static final int INITIAL_RESULT = 0;
-    private final Pattern customDelimiterPattern = Pattern.compile("//(.+?)\\\\n");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.+?)\\\\n");
+    private static final String NUMERIC_REGEX = "[+]?\\d+";
     private int result;
 
     public StringCalculator() {
@@ -19,7 +20,7 @@ public class StringCalculator implements Calculator<String, Integer> {
         }
 
         StringBuilder delimiter = new StringBuilder(":|,");
-        Matcher customDelimiter = customDelimiterPattern.matcher(value);
+        Matcher customDelimiter = CUSTOM_DELIMITER_PATTERN.matcher(value);
 
         if (customDelimiter.find()) {
             delimiter.append("|").append(customDelimiter.group(1));
@@ -37,7 +38,7 @@ public class StringCalculator implements Calculator<String, Integer> {
     }
 
     public boolean isNumberic(String value) {
-        return value.matches("[+]?\\d+");
+        return value.matches(NUMERIC_REGEX);
     }
 
     @Override
