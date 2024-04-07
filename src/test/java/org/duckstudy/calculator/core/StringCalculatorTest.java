@@ -1,16 +1,15 @@
 package org.duckstudy.calculator.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 계산기 테스트")
 class StringCalculatorTest {
@@ -30,8 +29,9 @@ class StringCalculatorTest {
         @MethodSource("methodSourceAddTestWithDefaultDelimiterSuccessArguments")
         @DisplayName("기본 구분자를 통해 각 숫자의 합을 반환한다")
         void addTestWithDefaultDelimiterSuccess(int expected, String value) {
-            // given, when, then
-            assertThat(sc.add(value)).isEqualTo(expected);
+            Integer actual = sc.add(value);
+
+            assertThat(actual).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceAddTestWithDefaultDelimiterSuccessArguments() {
@@ -46,8 +46,9 @@ class StringCalculatorTest {
         @MethodSource("methodSourceAddTestWithCustomDelimiterSuccessArguments")
         @DisplayName("커스텀 구분자를 입력받는 경우 커스텀 구분자를 통해 각 숫자의 합을 반환한다")
         void addTestWithCustomDelimiterSuccess(int expected, String value) {
-            // given, when, then
-            assertThat(sc.add(value)).isEqualTo(expected);
+            Integer actual = sc.add(value);
+
+            assertThat(actual).isEqualTo(expected);
         }
 
         private static Stream<Arguments> methodSourceAddTestWithCustomDelimiterSuccessArguments() {

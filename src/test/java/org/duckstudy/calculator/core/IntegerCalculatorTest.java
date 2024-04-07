@@ -1,5 +1,9 @@
 package org.duckstudy.calculator.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -7,11 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("정수 계산기 테스트")
 class IntegerCalculatorTest {
@@ -31,15 +30,12 @@ class IntegerCalculatorTest {
         @MethodSource("methodSourceAddTestArguments")
         @DisplayName("입력받은 수로 더한 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
-            // given
             int result = 0;
 
-            // when
             for (int value : values) {
                 result = ic.add(value);
             }
 
-            // then
             assertThat(result).isEqualTo(result);
         }
 
@@ -59,15 +55,12 @@ class IntegerCalculatorTest {
         @MethodSource("methodSourceSubtractTestArguments")
         @DisplayName("입력받은 수로 뺀 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
-            // given
             int result = 0;
 
-            // when
             for (int value : values) {
                 result = ic.subtract(value);
             }
 
-            // then
             assertThat(result).isEqualTo(expected);
         }
 
@@ -87,16 +80,13 @@ class IntegerCalculatorTest {
         @MethodSource("methodSourceSubtractTestArguments")
         @DisplayName("입력받은 수로 곱한 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
-            // given
+            int result = 0;
             ic.add(2);
 
-            // when
-            int result = 0;
             for (int value : values) {
                 result = ic.multiply(value);
             }
 
-            // then
             assertThat(result).isEqualTo(expected);
         }
 
@@ -116,15 +106,13 @@ class IntegerCalculatorTest {
         @MethodSource("methodSourceSubtractTestArguments")
         @DisplayName("입력받은 수로 나눈 값을 반환한다")
         void addTestSuccess(int expected, int... values) {
-            // given
+            int result = 0;
             ic.add(12);
 
-            // when
-            int result = 0;
             for (int value : values) {
                 result = ic.divide(value);
             }
-            // then
+
             assertThat(result).isEqualTo(expected);
         }
 
@@ -138,10 +126,8 @@ class IntegerCalculatorTest {
         @Test
         @DisplayName("0으로 나누면 예외가 발생한다")
         void addTestFail() {
-            // given
             ic.add(12);
 
-            // when, then
             assertThatThrownBy(() -> ic.divide(0))
                     .isInstanceOf(ArithmeticException.class)
                     .hasMessage("Division by zero is not allowed");
