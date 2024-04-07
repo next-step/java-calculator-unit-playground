@@ -30,7 +30,7 @@ public class SimpleCalculateService {
 
     private double parseDouble(String input) {
         if (!isNumber(input)) {
-            throw new IllegalArgumentException("[ERROR] input 값 " + input + "은 숫자가 아닙니다.");
+            throw new IllegalArgumentException(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", input));
         }
         return Double.parseDouble(input);
     }

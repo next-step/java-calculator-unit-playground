@@ -3,9 +3,6 @@ package model;
 public class SimpleCalculator {
 
     public static int plus(double x, double y) {
-        if (x + y > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException();
-        }
         return getValidResult(x + y);
     }
 
