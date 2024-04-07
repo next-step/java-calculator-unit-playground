@@ -1,5 +1,6 @@
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +26,7 @@ class CalculatorTest {
         int addedResult = calculator.add(a, b);
 
         // then
-        assertEquals(5, addedResult);
+        assertThat(addedResult).isEqualTo(5);
     }
 
     @Test
@@ -39,7 +40,7 @@ class CalculatorTest {
         int subtractedResult = calculator.subtract(a, b);
 
         // then
-        assertEquals(1, subtractedResult);
+        assertEquals(subtractedResult, 1);
     }
 
     @Test
@@ -53,7 +54,7 @@ class CalculatorTest {
         int multipliedResult = calculator.multiply(a, b);
 
         // then
-        assertEquals(6, multipliedResult);
+        assertThat(multipliedResult).isEqualTo(6);
     }
 
     @Test
@@ -67,7 +68,7 @@ class CalculatorTest {
         int dividedResult = calculator.divide(a, b);
 
         // then
-        assertEquals(16, dividedResult);
+        assertThat(dividedResult).isEqualTo(16);
     }
 
     @Test
@@ -77,10 +78,9 @@ class CalculatorTest {
         int a = 32;
         int b = 0;
 
-        // when
-        String message = assertThrows(ArithmeticException.class, () -> calculator.divide(a, b)).getMessage();
-
-        // then
-        assertEquals(message, "0으로 나눌 수 없습니다.");
+        // expect
+        assertThatThrownBy(() -> calculator.divide(a, b))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("0으로 나눌 수 없습니다.");
     }
 }

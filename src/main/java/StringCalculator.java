@@ -10,21 +10,15 @@ public class StringCalculator {
     private static final String BASIC_SEPARATOR_REGX = "[,:]";
 
     public int add(final String expression) {
+        if (expression == null) {
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [NULL 입력 예외]");
+        }
         List<Integer> numbers = convertToNumbers(expression);
         validateNegativeValue(numbers);
 
         return numbers.stream()
                 .mapToInt(Integer::valueOf)
                 .sum();
-    }
-
-    private void validateNegativeValue(final List<Integer> numbers) {
-        boolean hasNegativeValue = numbers.stream()
-                .anyMatch(n -> n < 0);
-
-        if (hasNegativeValue) {
-            throw new RuntimeException("표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
-        }
     }
 
     private List<Integer> convertToNumbers(final String expression) {
@@ -36,6 +30,15 @@ public class StringCalculator {
         return splitBasic(expression).stream()
                 .map(this::parseInt)
                 .toList();
+    }
+
+    private void validateNegativeValue(final List<Integer> numbers) {
+        boolean hasNegativeValue = numbers.stream()
+                .anyMatch(n -> n < 0);
+
+        if (hasNegativeValue) {
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [음수 입력 예외]");
+        }
     }
 
     private boolean isCustomExpression(final String expression) {
@@ -56,14 +59,14 @@ public class StringCalculator {
     }
 
     private int parseInt(final String input) {
-        if (input == null || input.isBlank()) {
+        if (input.isBlank()) {
             return 0;
         }
 
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new RuntimeException("표현식의 입력이 잘못됐습니다. [잘못된 표현식 포맷]");
+            throw new IllegalArgumentException("표현식의 입력이 잘못됐습니다. [잘못된 표현식 포맷]");
         }
     }
 }
