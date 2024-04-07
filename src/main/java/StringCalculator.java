@@ -12,6 +12,7 @@ public class StringCalculator {
         String customDelimiter = "";
         if(input.substring(0,2).equals("//")){
             customDelimiter = input.substring(2).split("\n")[0];
+            input = input.split("\n")[1];
         }
         String regex = ",|:";
         if(customDelimiter.length() > 0) {
