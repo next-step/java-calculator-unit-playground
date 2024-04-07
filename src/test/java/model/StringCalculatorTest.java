@@ -1,6 +1,6 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
@@ -24,7 +24,8 @@ class StringCalculatorTest {
     @CsvSource({"1,1", "2,3", "3,6","4,10"})
     void testCalculatorPlusMethod(int input, int expectResult) {
         stringCalculator.plus(input);
-        assertEquals(stringCalculator.getResult(), expectResult);
+        assertThat(stringCalculator.getResult())
+            .isEqualTo(expectResult);
     }
 
     @Test
@@ -35,7 +36,8 @@ class StringCalculatorTest {
             stringCalculator.plus(input);
         }
         stringCalculator.resetResult();
-        assertEquals(stringCalculator.getResult(), 0);
+        assertThat(stringCalculator.getResult())
+            .isEqualTo(0);
     }
 
 
