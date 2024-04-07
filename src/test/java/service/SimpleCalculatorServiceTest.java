@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.Stream;
-import model.SimpleCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -101,19 +100,19 @@ class SimpleCalculatorServiceTest {
     @DisplayName("숫자 형식이 아닌 문자열이 들어오면 에러가 발생한다.")
     void errorCaseOfIllegalInput(String x, String y) {
 
-        assertThatThrownBy(() -> SimpleCalculator.divide(3, simpleCalculateService.plus(x, y)))
+        assertThatThrownBy(() -> simpleCalculateService.plus(x, y))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
 
-        assertThatThrownBy(() -> SimpleCalculator.divide(3, simpleCalculateService.minus(x, y)))
+        assertThatThrownBy(() -> simpleCalculateService.minus(x, y))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
 
-        assertThatThrownBy(() -> SimpleCalculator.divide(3, simpleCalculateService.divide(x, y)))
+        assertThatThrownBy(() -> simpleCalculateService.divide(x, y))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
 
-        assertThatThrownBy(() -> SimpleCalculator.divide(3, simpleCalculateService.multiply(x, y)))
+        assertThatThrownBy(() -> simpleCalculateService.multiply(x, y))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
     }
