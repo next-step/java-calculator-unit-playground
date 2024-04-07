@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 계산기 JUnit5 테스트")
 public class StringCalculatorTest {
@@ -14,5 +16,28 @@ public class StringCalculatorTest {
         assertEquals(23, StringCalculator.sum("6:5,7,5"));
         assertThrows(RuntimeException.class, () -> StringCalculator.sum("6,6;7;3"));
         assertThrows(RuntimeException.class, () -> StringCalculator.sum("//}\n6,6,;3"));
+    }
+
+    @DisplayName("문자열 계산기 덧셈 테스트 AssertJ")
+    @Test
+    public void addAssertJTest() {
+        assertThat(StringCalculator.sum("6:5")).isEqualTo(11);
+        assertThat(StringCalculator.sum("//'\n6'5:4")).isEqualTo(15);
+        assertThat(StringCalculator.sum("6:5,7,5")).isEqualTo(23);
+        assertThatThrownBy(() -> {
+                StringCalculator.sum("6,6;7;3");
+            }).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> {
+            StringCalculator.sum("//}\n6,6,;3"
+            );
+        }).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> {
+            StringCalculator.sum("4:-5:7"
+            );
+        }).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> {
+            StringCalculator.sum("일:오:7"
+            );
+        }).isInstanceOf(RuntimeException.class);
     }
 }
