@@ -16,7 +16,7 @@ public class StringCalculator {
 
     private void updateDelimiter(final String expression) {
         if (canChangeNewDelimiter(expression)) {
-            delimiter = List.of("(" + expression.substring(2, expression.indexOf("\n")) + ")");
+            delimiter = List.of(expression.substring(2, expression.indexOf("\n")));
             strings = expression.substring(expression.indexOf("\n") + 1);
         } else {
             strings = expression; // 원래 if 문에 return으로 끝내고 else를 주는 편인데, 이 편이 좀 더 가독성이 좋아보여 else로 해봄
