@@ -3,6 +3,8 @@ import java.util.List;
 
 public class StringCalculator {
 
+    public static final String REGEX_NOT_NUMBER = "[\\D]*";
+    public static final String REGEX_CAN_CUSTOM_DELIMITER = "^//.+\n.*";
     private List<String> delimiter = Arrays.asList(":", ",");
 
     private String strings;
@@ -24,8 +26,7 @@ public class StringCalculator {
     }
 
     private boolean canChangeNewDelimiter(String expression) {
-        final String regex = "^//.+\n.*";
-        return expression.matches(regex);
+        return expression.matches(REGEX_CAN_CUSTOM_DELIMITER);
     }
 
     private void makeOperands() {
@@ -34,7 +35,7 @@ public class StringCalculator {
 
     private void checkValidate() {
         try {
-            if (Arrays.stream(operands).anyMatch(s -> s.matches("[\\D]*"))) {
+            if (Arrays.stream(operands).anyMatch(s -> s.matches(REGEX_NOT_NUMBER))) {
                 throw new RuntimeException("문자열은 들어올 수 없습니다");
             }
 
