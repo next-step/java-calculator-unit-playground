@@ -1,6 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -69,7 +68,6 @@ class StringCalculatorTestWithAssertJ {
     @ValueSource(strings = {"1,2,a", "1,가,-3", "//석주\n1석주a석주-3"})
     @DisplayName("숫자 이외의 값을 전달하는 경우 RuntimeException throw")
     void insertNotNumber(String value) {
-        assertThrows(RuntimeException.class, () -> new StringCalculator(value).calculate());
         assertThatThrownBy(() -> new StringCalculator(value).calculate())
             .hasMessage("문자열은 들어올 수 없습니다")
             .isInstanceOf(RuntimeException.class);
