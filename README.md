@@ -114,6 +114,79 @@ public class StringCalculator {
 }
 ```
 
+## 3차 시도
+
+- 한 객체에서 두 가지 책임을 맡고 있다는 피드백을 받아서 책임을 더 분리하는 것을 도전
+- DelimiterParser에서 표현식을 파싱해서 StringCalculator는 반환 된 값만 계산 해보도록 변경
+- 파싱하는 책임을 Parser에게 맡기고, 계산기는 유효하게 반환된 배열만 계산하는 책임을 부여하니 좀 더 역할이 명확해진 느낌이 듬
+
+```java
+public class DelimiterParser {
+
+    public static final String REGEX_NOT_NUMBER = "\\D+";
+    public static final String REGEX_CAN_CUSTOM_DELIMITER = "^//.+\n.*";
+
+    private List<String> delimiter = Arrays.asList(":", ",");
+
+    public String[] parse(final String expression) {
+        final String updatedExpression = updateDelimiter(expression);
+
+        String[] operands = updatedExpression.split(String.join("|", delimiter));
+
+        checkValidate(operands);
+
+        return operands;
+    }
+
+    private String updateDelimiter(final String expression) {
+        if (canChangeNewDelimiter(expression)) {
+            delimiter = List.of(expression.substring(2, expression.indexOf("\n")));
+            return expression.substring(expression.indexOf("\n") + 1);
+        } else {
+            return expression; // 원래 if 문에 return으로 끝내고 else를 주는 편인데, 이 편이 좀 더 가독성이 좋아보여 else로 해봄
+        }
+    }
+
+    private boolean canChangeNewDelimiter(String expression) {
+        return expression.matches(REGEX_CAN_CUSTOM_DELIMITER);
+    }
+
+    private void checkValidate(String[] operands) {
+        if (Arrays.stream(operands).anyMatch(s -> s.matches(REGEX_NOT_NUMBER))) {
+            throw new RuntimeException("문자열은 들어올 수 없습니다");
+        }
+
+        if (Arrays.stream(operands).anyMatch(s -> Integer.parseInt(s) < 0)) {
+            throw new RuntimeException("음수는 들어올 수 없습니다");
+        }
+    }
+}
+```
+
+```java
+public class StringCalculatorWithParser {
+
+    private final DelimiterParser delimiterParser;
+
+    public StringCalculatorWithParser(DelimiterParser delimiterParser) {
+        this.delimiterParser = delimiterParser;
+    }
+
+    public int calculate(final String expression) {
+
+        String[] operands = delimiterParser.parse(expression);
+
+        if (operands.length == 0) {
+            return 0;
+        }
+
+        return Arrays.stream(operands)
+            .mapToInt(Integer::parseInt)
+            .sum();
+    }
+}
+```
+
 # 4단계 - 리팩터링
 
 - AssertJ 사용해보기
