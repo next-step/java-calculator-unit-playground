@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class StringCalculatorServiceTest {
@@ -21,9 +20,17 @@ class StringCalculatorServiceTest {
         stringCalculatorService = new StringCalculatorService();
     }
 
+    private static Stream<Arguments> methodSourceOfGetCustomSeparator() {
+        return Stream.of(
+            Arguments.arguments("//.\n", "."),
+            Arguments.arguments("//~\n", "~"),
+            Arguments.arguments("//123\n", "123")
+        );
+    }
+
 
     @ParameterizedTest(name = "{0}을 입력하면 커스텀 구분자 {1}이 추출된다.")
-    @CsvSource({"//.\\n, .", "//~\\n, ~", "//123\\n, 123"})
+    @MethodSource("methodSourceOfGetCustomSeparator")
     @DisplayName("//과 \\n 사이의 string은 커스텀 구분자이다")
     void testCustomSeparator(String expression, String expectedCustomSeparator) {
         assertThat(stringCalculatorService.getCustomSeparator(expression))
@@ -82,9 +89,14 @@ class StringCalculatorServiceTest {
     private static Stream<Arguments> methodSourceOfGetTokens() {
         return Stream.of(
             Arguments.arguments("1,2,3", List.of("1", "2", "3")),
-            Arguments.arguments("//.\\n1.2:3.4", List.of("1", "2", "3", "4")),
-            Arguments.arguments("//[\\n1[2[3", List.of("1", "2", "3")),
-            Arguments.arguments("//!\\n1!2!3", List.of("1", "2", "3"))
+            Arguments.arguments("//.\n1.2:3.4", List.of("1", "2", "3", "4")),
+            Arguments.arguments("//[\n1[2[3", List.of("1", "2", "3")),
+            Arguments.arguments("//!\n1!2!3", List.of("1", "2", "3")),
+            Arguments.arguments("//\t\n1\t2\t3", List.of("1", "2", "3")),
+            Arguments.arguments("//'\n1'2:3", List.of("1", "2", "3")),
+            Arguments.arguments("//\b\n1\b2:3", List.of("1", "2", "3")),
+            Arguments.arguments("//\s\n1\s2:3", List.of("1", "2", "3")),
+            Arguments.arguments("//|\n1|2:3", List.of("1", "2", "3"))
         );
     }
 
@@ -99,8 +111,8 @@ class StringCalculatorServiceTest {
     private static Stream<Arguments> methodSourceOfCalculateTest() {
         return Stream.of(
             Arguments.arguments("1,2|3", 6),
-            Arguments.arguments("//|\\n10|20:30", 60),
-            Arguments.arguments("//.\\n10.20:30,40", 100)
+            Arguments.arguments("//|\n10|20:30", 60),
+            Arguments.arguments("//.\n10.20:30,40", 100)
         );
     }
 

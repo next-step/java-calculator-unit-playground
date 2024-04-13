@@ -12,13 +12,14 @@ public class StringCalculatorService {
     private final StringCalculator stringCalculator = new StringCalculator();
 
     private final List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
-    private final Pattern PATTERN_OF_NEED_TO_ADD_CUSTOM_SEPARATOR = Pattern.compile("^//(.*)\\\\n.*$");
+    private final Pattern PATTERN_OF_NEED_TO_ADD_CUSTOM_SEPARATOR = Pattern.compile("^//(.*)\\n.*$");
     private final String SEPARATOR_PREFIX = "[";
     private final String SEPARATOR_SUFFIX = "]";
     private final String SEPARATOR_DELIMITER = "|";
 
 
     public int calculate(String expression) {
+        stringCalculator.resetResult();
         List<String> tokens = getTokens(expression);
         return plusAllTokens(tokens);
     }
@@ -45,11 +46,11 @@ public class StringCalculatorService {
     }
 
     public String getCustomSeparator(String expression) {
-        return expression.substring(2, expression.indexOf("\\n"));
+        return expression.substring(2, expression.indexOf("\n"));
     }
 
     private String getExpression(String expression) {
-        return expression.substring(expression.indexOf("\\n")+2);
+        return expression.substring(expression.indexOf("\n") + 1);
     }
 
     private String getSeparateRegex() {
@@ -82,7 +83,7 @@ public class StringCalculatorService {
 
     public boolean isNeedToAddCustomSeparator(String expression) {
         return PATTERN_OF_NEED_TO_ADD_CUSTOM_SEPARATOR.matcher(expression)
-                .matches();
+            .matches();
     }
 
     private boolean isNeedEscapeString(String expression) {
