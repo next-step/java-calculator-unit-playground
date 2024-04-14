@@ -37,4 +37,16 @@ public class StringCalculatorTest {
             StringCalculator.sum("일:오:7");
         }).isInstanceOf(RuntimeException.class);
     }
+
+    @DisplayName("문자열 계산기 전처리 테스트 AssertJ")
+    @Test
+    public void stringToIntArrayAssertJTest(){
+        assertThat(StringCalculator.stringToIntArray("6:5")).isEqualTo(new int[] {6,5});
+        assertThat(StringCalculator.stringToIntArray("//'\n6'5'4")).isEqualTo(new int[] {6,5,4});
+        assertThat(StringCalculator.stringToIntArray("//|\n6|5,4")).isEqualTo(new int[] {6,5,4});
+        assertThatThrownBy(() -> {
+            StringCalculator.stringToIntArray("//}\nㄱ,j,3"
+            );
+        }).isInstanceOf(RuntimeException.class);
+    }
 }
