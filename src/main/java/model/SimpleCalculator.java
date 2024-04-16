@@ -21,10 +21,10 @@ public class SimpleCalculator {
         return getValidResult(x / y);
     }
 
-    private static int getValidResult(double input) {
-        if (input > Integer.MAX_VALUE || input < Integer.MIN_VALUE ) {
+    private static int getValidResult(double calculatedResult) {
+        if (calculatedResult > Integer.MAX_VALUE || calculatedResult < Integer.MIN_VALUE ) {
             throw new IllegalArgumentException("[ERROR] 결과 값이 표현 가능한 정수 범위를 넘어갔습니다.");
         }
-        return (int) input;
+        return (int) calculatedResult;
     }
 }
