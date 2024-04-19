@@ -31,10 +31,17 @@ public class DelimiterParser {
     }
 
     private void checkValidate(String[] operands) {
+        checkOnlyNumber(operands);
+        checkOnlyPositiveNumber(operands);
+    }
+
+    private void checkOnlyNumber(String[] operands) {
         if (Arrays.stream(operands).anyMatch(s -> s.matches(REGEX_NOT_NUMBER))) {
             throw new RuntimeException("문자열은 들어올 수 없습니다");
         }
+    }
 
+    private void checkOnlyPositiveNumber(String[] operands) {
         if (Arrays.stream(operands).anyMatch(s -> Integer.parseInt(s) < 0)) {
             throw new RuntimeException("음수는 들어올 수 없습니다");
         }
