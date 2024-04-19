@@ -3,8 +3,8 @@ import java.util.List;
 
 public class DelimiterParser {
 
-    public static final String REGEX_NOT_NUMBER = "\\D+";
-    public static final String REGEX_CAN_CUSTOM_DELIMITER = "^//.+\n.*";
+    private static final String REGEX_NOT_NUMBER = "\\D+";
+    private static final String REGEX_CAN_CUSTOM_DELIMITER = "^//.+\n.*";
 
     private List<String> delimiter = Arrays.asList(":", ",");
 
