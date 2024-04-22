@@ -1,43 +1,41 @@
 package service;
 
-import model.Calculator;
+import model.SimpleCalculator;
 
-public class CalculateService {
-
-    private static final Calculator calculator = new Calculator();
+public class SimpleCalculateService {
 
     public int plus(String strX, String strY) {
         double x = parseDouble(strX);
         double y = parseDouble(strY);
-        return calculator.plus(x, y);
+        return SimpleCalculator.plus(x, y);
     }
 
     public int minus(String strX, String strY) {
         double x = parseDouble(strX);
         double y = parseDouble(strY);
-        return calculator.minus(x, y);
+        return SimpleCalculator.minus(x, y);
     }
 
     public int multiply(String strX, String strY) {
         double x = parseDouble(strX);
         double y = parseDouble(strY);
-        return calculator.multiply(x, y);
+        return SimpleCalculator.multiply(x, y);
     }
 
     public int divide(String strX, String strY) {
         double x = parseDouble(strX);
         double y = parseDouble(strY);
-        return calculator.divide(x, y);
+        return SimpleCalculator.divide(x, y);
     }
 
     private double parseDouble(String input) {
         if (!isNumber(input)) {
-            throw new IllegalArgumentException("[ERROR] input 값 " + input + "은 숫자가 아닙니다.");
+            throw new IllegalArgumentException(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", input));
         }
         return Double.parseDouble(input);
     }
 
     private boolean isNumber(String input) {
-        return input != null && input.matches("[-+]?\\d*\\.?\\d+");
+        return input != null && input.matches("[+-]?\\d+\\.?\\d*");
     }
 }

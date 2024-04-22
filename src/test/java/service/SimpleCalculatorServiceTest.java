@@ -1,6 +1,7 @@
 package service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -8,9 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class CalculateServiceTest {
+class SimpleCalculatorServiceTest {
 
-    private static final CalculateService calculateService = new CalculateService();
+    private static final SimpleCalculateService simpleCalculateService = new SimpleCalculateService();
 
     private static Stream<Arguments> methodSourceOfPlus() {
         return Stream.of(
@@ -25,7 +26,8 @@ class CalculateServiceTest {
     @MethodSource("methodSourceOfPlus")
     @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 더해진(+) 값이 반환된다.")
     void plusTest(String x, String y, long result) {
-        assertEquals(calculateService.plus(x, y), result);
+        assertThat(simpleCalculateService.plus(x, y))
+            .isEqualTo(result);
     }
 
 
@@ -42,7 +44,8 @@ class CalculateServiceTest {
     @MethodSource("methodSourceOfMinus")
     @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 빼진(-) 값이 반환된다.")
     void minusTest(String x, String y, long result) {
-        assertEquals(calculateService.minus(x, y), result);
+        assertThat(simpleCalculateService.minus(x, y))
+            .isEqualTo(result);
     }
 
 
@@ -60,7 +63,8 @@ class CalculateServiceTest {
     @MethodSource("methodSourceOfMultiply")
     @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 곱해진(x) 값이 반환된다.")
     void multiplyTest(String x, String y, long result) {
-        assertEquals(calculateService.multiply(x, y), result);
+        assertThat(simpleCalculateService.multiply(x, y))
+            .isEqualTo(result);
     }
 
 
@@ -77,16 +81,17 @@ class CalculateServiceTest {
     @MethodSource("methodSourceOfDivide")
     @DisplayName("숫자 형식의 문자열 두 개가 들어오면 정상적으로 나눠진(%) 값이 반환된다.")
     void divideTest(String x, String y, long result) {
-        assertEquals(calculateService.divide(x, y), result);
+        assertThat(simpleCalculateService.divide(x, y))
+            .isEqualTo(result);
     }
 
 
     private static Stream<Arguments> methodSourceOfNotNumberInput() {
         return Stream.of(
-            Arguments.arguments("+", "3"),
-            Arguments.arguments("1", "1.1.1"),
+            Arguments.arguments(".1", "3"),
+            Arguments.arguments("1.1.1", "1"),
             Arguments.arguments("일", "2"),
-            Arguments.arguments("1.0", "x")
+            Arguments.arguments("x", "1")
         );
     }
 
@@ -94,11 +99,21 @@ class CalculateServiceTest {
     @MethodSource("methodSourceOfNotNumberInput")
     @DisplayName("숫자 형식이 아닌 문자열이 들어오면 에러가 발생한다.")
     void errorCaseOfIllegalInput(String x, String y) {
-        assertAll(
-            () -> assertThrows(IllegalArgumentException.class, () -> calculateService.plus(x, y)),
-            () -> assertThrows(IllegalArgumentException.class, () -> calculateService.minus(x, y)),
-            () -> assertThrows(IllegalArgumentException.class, () -> calculateService.divide(x, y)),
-            () -> assertThrows(IllegalArgumentException.class, () -> calculateService.multiply(x, y))
-        );
+
+        assertThatThrownBy(() -> simpleCalculateService.plus(x, y))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
+
+        assertThatThrownBy(() -> simpleCalculateService.minus(x, y))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
+
+        assertThatThrownBy(() -> simpleCalculateService.divide(x, y))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
+
+        assertThatThrownBy(() -> simpleCalculateService.multiply(x, y))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(String.format("[ERROR] input 값 %s은 숫자가 아닙니다.", x));
     }
 }
