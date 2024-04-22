@@ -5,49 +5,61 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("계산기 JUnit5 테스트")
 public class CalculatorTest {
     @DisplayName("계산기 덧셈 테스트")
     @Test
     public void addTest() {
-        assertEquals(11, Calculator.add("6", "5"));
-        assertThrows(IllegalArgumentException.class, () -> Calculator.add("text", "4"));
-        assertThrows(IllegalArgumentException.class, () -> Calculator.add(Integer.toString(Integer.MAX_VALUE), "4"));
+        assertThat(Calculator.add("6","5")).isEqualTo(11);
+        assertThatThrownBy(() -> {
+            Calculator.add("text","4");
+        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            Calculator.add(Integer.toString(Integer.MAX_VALUE),"4");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("계산기 뺄셈 테스트")
     @Test
     public void subtractTest() {
-        assertEquals(-1, Calculator.subtract("3", "4"));
-        assertThrows(IllegalArgumentException.class, () -> Calculator.subtract(Integer.toString(Integer.MAX_VALUE), "-4"));
+        assertThat(Calculator.subtract("3","4")).isEqualTo(-1);
+        assertThatThrownBy(() -> {
+            Calculator.subtract(Integer.toString(Integer.MAX_VALUE),"-4");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("계산기 곱하기 테스트")
     @Test
     public void multiplyTest() {
-        assertEquals(12, Calculator.multiply("3", "4"));
+        assertThat(Calculator.multiply("3","4")).isEqualTo(12);
     }
 
     @DisplayName("계산기 나누기 테스트")
     @Test
     public void divideTest() {
-        assertEquals(2, Calculator.divide("4", "2"));
-        assertThrows(IllegalArgumentException.class, () -> Calculator.divide("7", "0"));
+        assertThat(Calculator.divide("4","2")).isEqualTo(2);
+        assertThatThrownBy(() -> {
+            Calculator.divide("7","0");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("계산기 Input 예외처리 테스트")
     @Test
     void formatterExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> Calculator.stringToDouble("이것은 한글"));
+        assertThatThrownBy(() -> {
+            Calculator.stringToDouble("이것은 한글");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("계산기 Input 변환 테스트")
     @ParameterizedTest
     @MethodSource("methodSourceTestArguments")
     public void formatterTest(double expected, String value) {
-        assertEquals(expected,Calculator.stringToDouble(value));
+        assertThat(Calculator.stringToDouble(value)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> methodSourceTestArguments() {
