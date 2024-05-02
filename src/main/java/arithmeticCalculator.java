@@ -1,10 +1,6 @@
 public class arithmeticCalculator {
-//    private static final String PLUS = "+";
-//    private static final String MINUS = "-";
-//    private static final String DIVIDE = "-";
-//    private static final String MULTIPLY = "-";
-    private static int result;
 
+    private static int result;
 
     void plusCalculate(int num1, int num2) {
         result = num1 + num2;
