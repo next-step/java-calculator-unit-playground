@@ -1,6 +1,6 @@
 public class arithmeticCalculator {
 
-    private static int result;
+    static int result;
 
     void plusCalculate(int num1, int num2) {
         result = num1 + num2;
