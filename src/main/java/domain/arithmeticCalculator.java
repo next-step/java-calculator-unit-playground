@@ -1,3 +1,5 @@
+package domain;
+
 public class arithmeticCalculator {
 
     static int result;
