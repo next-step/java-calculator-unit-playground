@@ -1,4 +1,4 @@
-package exception.exceptions;
+package calculator.exception.exceptions;
 
 public class DivideZeroOperationException extends RuntimeException {
 

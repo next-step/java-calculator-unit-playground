@@ -1,6 +1,6 @@
-package model;
+package calculator.model;
 
-import exception.exceptions.DivideZeroOperationException;
+import calculator.exception.exceptions.DivideZeroOperationException;
 
 public class Calculator {
 
