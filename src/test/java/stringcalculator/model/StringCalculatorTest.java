@@ -10,8 +10,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringcalculator.exception.exceptions.OperandArgumentFormatException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 계산기 테스트")
 @SuppressWarnings("NonAsciiCharacters")
@@ -32,7 +32,7 @@ class StringCalculatorTest {
         int sum = stringCalculator.extractSumNumbers(input);
 
         // then
-        assertEquals(sum, 6);
+        assertThat(sum).isEqualTo(6);
     }
 
     @Test
@@ -44,7 +44,7 @@ class StringCalculatorTest {
         int sum = stringCalculator.extractSumNumbers(input);
 
         // then
-        assertEquals(sum, 0);
+        assertThat(sum).isEqualTo(0);
     }
 
     @ValueSource(strings = {"//?\n1?2?3", "//.\n1.2.3"})
@@ -54,7 +54,7 @@ class StringCalculatorTest {
         int sum = stringCalculator.extractSumNumbers(input);
 
         // then
-        assertEquals(sum, 6);
+        assertThat(sum).isEqualTo(6);
     }
 
     @Nested
@@ -66,7 +66,8 @@ class StringCalculatorTest {
             String input = "1-2:3";
 
             // when & then
-            assertThrows(OperandArgumentFormatException.class, () -> stringCalculator.extractSumNumbers(input));
+            assertThatThrownBy(() -> stringCalculator.extractSumNumbers(input))
+                            .isInstanceOf(OperandArgumentFormatException.class);
         }
 
         @Test
@@ -75,7 +76,8 @@ class StringCalculatorTest {
             String input = null;
 
             // when & then
-            assertThrows(OperandArgumentFormatException.class, () -> stringCalculator.extractSumNumbers(input));
+            assertThatThrownBy(() -> stringCalculator.extractSumNumbers(input))
+                    .isInstanceOf(OperandArgumentFormatException.class);
         }
 
         @Test
@@ -84,14 +86,16 @@ class StringCalculatorTest {
             String input = "//!\n1!2?3";
 
             // when & then
-            assertThrows(OperandArgumentFormatException.class, () -> stringCalculator.extractSumNumbers(input));
+            assertThatThrownBy(() -> stringCalculator.extractSumNumbers(input))
+                    .isInstanceOf(OperandArgumentFormatException.class);
         }
 
         @ValueSource(strings = {"/!\n1!2!3", "//!\1!2!3"})
         @ParameterizedTest(name = "입력값이 [{0}]인 경우")
         void 커스텀_구분자_조건이_충족되지_않을_경우_예외(final String input) {
             // when & then
-            assertThrows(OperandArgumentFormatException.class, () -> stringCalculator.extractSumNumbers(input));
+            assertThatThrownBy(() -> stringCalculator.extractSumNumbers(input))
+                    .isInstanceOf(OperandArgumentFormatException.class);
         }
 
         @Test
@@ -100,7 +104,8 @@ class StringCalculatorTest {
             String input = "//1\n1:2:3";
 
             // when & then
-            assertThrows(OperandArgumentFormatException.class, () -> stringCalculator.extractSumNumbers(input));
+            assertThatThrownBy(() -> stringCalculator.extractSumNumbers(input))
+                    .isInstanceOf(OperandArgumentFormatException.class);
         }
     }
 }

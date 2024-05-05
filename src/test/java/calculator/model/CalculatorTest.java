@@ -8,8 +8,8 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("초간단 계산기 테스트")
 @SuppressWarnings("NonAsciiCharacters")
@@ -36,7 +36,7 @@ class CalculatorTest {
             int addValue = calculator.add(number1, number2);
 
             // then
-            assertEquals(addValue, number1 + number2);
+            assertThat(addValue).isEqualTo(number1 + number2);
         }
 
         @Test
@@ -49,7 +49,7 @@ class CalculatorTest {
             int minusValue = calculator.minus(number1, number2);
 
             // then
-            assertEquals(minusValue, number1 - number2);
+            assertThat(minusValue).isEqualTo(number1 - number2);
         }
 
         @Test
@@ -62,7 +62,7 @@ class CalculatorTest {
             int multipleValue = calculator.multiply(number1, number2);
 
             // then
-            assertEquals(multipleValue, number1 * number2);
+            assertThat(multipleValue).isEqualTo(number1 * number2);
         }
 
         @Test
@@ -75,7 +75,7 @@ class CalculatorTest {
             int divideValue = calculator.divide(number1, number2);
 
             // then
-            assertEquals(divideValue, number1 / number2);
+            assertThat(divideValue).isEqualTo(number1 / number2);
         }
     }
 
@@ -86,6 +86,7 @@ class CalculatorTest {
         int number2 = 0;
 
         // when & then
-        assertThrows(DivideZeroOperationException.class, () -> calculator.divide(number1, number2));
+        assertThatThrownBy(() -> calculator.divide(number1, number2))
+                .isInstanceOf(DivideZeroOperationException.class);
     }
 }
