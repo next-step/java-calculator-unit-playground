@@ -3,20 +3,24 @@ package domain;
 public class Calculator {
     private static int result;
 
-    void add(int a, int b){
+    public int add(int a, int b){
         result=a+b;
+        return result;
     }
 
-    void subtract(int a, int b){
+    public int subtract(int a, int b){
         result=a-b;
+        return result;
     }
 
-    void multiply(int a, int b){
+    public int multiply(int a, int b){
         result=a*b;
+        return result;
     }
 
-    void divide(int a, int b){
+    public int divide(int a, int b){
         result=a/b;
+        return result;
     }
 
 }
