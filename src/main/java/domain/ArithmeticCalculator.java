@@ -2,42 +2,50 @@ package domain;
 
 public class ArithmeticCalculator {
 
-    private static int i;
-    private static int result;
     private static final int INITIAL_NUMBER = 0;
-    private static final int ARRAY_RESET = 100;
+    private static final int MULTIPLE_DIVIDE_NUMBER = 1;
+    private int[] intArr;
+    private int result = INITIAL_NUMBER;
 
-    SplitString arr = new SplitString();
-
-    public void plusCalculate() {
-        result = INITIAL_NUMBER;
-        arr.intArr = new int[ARRAY_RESET];
-        for (i = INITIAL_NUMBER; i < arr.intArr.length; i++) {
-            result += arr.intArr[i];
-        }
+    public int getResult() {
+        return result;
     }
 
-    void minusCalculate() {
-        result = INITIAL_NUMBER;
-        arr.intArr = new int[ARRAY_RESET];
-        for (i = INITIAL_NUMBER; i < arr.intArr.length; i++) {
-            result -= arr.intArr[i];
+    public int plusCalculate(String str) {
+        resetArr(str);
+        for (int i = INITIAL_NUMBER; i < intArr.length; i++) {
+            result += intArr[i];
         }
+        return result;
     }
 
-    void divideCalculate() {
-        result = INITIAL_NUMBER;
-        arr.intArr = new int[ARRAY_RESET];
-        for (i = INITIAL_NUMBER; i < arr.intArr.length; i++) {
-            result += arr.intArr[i];
+    public int minusCalculate(String str) {
+        resetArr(str);
+        for (int i = INITIAL_NUMBER; i < intArr.length; i++) {
+            result -= intArr[i];
         }
+        return result;
     }
 
-    void multipleCaculate() {
-        result = INITIAL_NUMBER;
-        arr.intArr = new int[ARRAY_RESET];
-        for (i = INITIAL_NUMBER; i < arr.intArr.length; i++) {
-            result *= arr.intArr[i];
+    public int divideCalculate(String str) {
+        resetArr(str);
+        result = intArr[0];
+        for (int i = MULTIPLE_DIVIDE_NUMBER; i < intArr.length; i++) {
+            result /= intArr[i];
         }
+        return result;
+    }
+
+    public int multipleCaculate(String str) {
+        resetArr(str);
+        for (int i = INITIAL_NUMBER; i < intArr.length; i++) {
+            result = MULTIPLE_DIVIDE_NUMBER;
+            result *= intArr[i];
+        }
+        return result;
+    }
+
+    private void resetArr(String strArr) {
+        intArr = new int[strArr.length()];
     }
 }
