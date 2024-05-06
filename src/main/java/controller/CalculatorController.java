@@ -1,21 +1,22 @@
 package controller;
 
 import domain.ArithmeticCalculator;
-import domain.SplitString;
 import view.InputView;
+import view.OutputView;
 
 public class CalculatorController {
 
-    public void controller() {
+    private final InputView inputView;
+    private final OutputView outputView;
 
-        SplitString ss = new SplitString();
-        ArithmeticCalculator ac = new ArithmeticCalculator();
-        InputView inputview = new InputView();
-
-        ss.splitStr("1,2,3");
-        ac.plusCalculate();
-        inputview.printing();
+    public CalculatorController(InputView inputView, OutputView outputView, ArithmeticCalculator arithmeticCalculator) {
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
-
+    void startCalculator(String str) {
+        ArithmeticCalculator calculator = new ArithmeticCalculator();
+        String input = inputView.calculatorInput();
+        calculator.plusCalculate(outputView.splitStr(input));
+    }
 }
