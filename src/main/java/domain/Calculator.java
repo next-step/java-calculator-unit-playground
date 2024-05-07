@@ -2,7 +2,7 @@ package domain;
 
 public class Calculator {
 
-    final int DO_NOT_BE_DIVIDE_NUMBER = 0;
+    private final int CAN_NOT_BE_DIVIDE_NUMBER = 0;
 
     public int add(int num1, int num2) {
         return num1 + num2;
@@ -17,7 +17,7 @@ public class Calculator {
     }
 
     public int divide(int num1, int num2) {
-        if (num2 == DO_NOT_BE_DIVIDE_NUMBER) {
+        if (num2 == CAN_NOT_BE_DIVIDE_NUMBER) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
         return num1 / num2;
