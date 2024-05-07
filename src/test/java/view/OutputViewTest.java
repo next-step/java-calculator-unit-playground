@@ -22,4 +22,16 @@ class OutputViewTest {
         //then
         assertEquals(expectedValue, actualValue);
     }
+    @Test
+    void 예외_처리_테스트(){
+        //given
+        OutputView outputView = new OutputView();
+        List<Integer> expectedValue = new ArrayList<>();
+
+        //when
+        List<Integer> actualValue = outputView.parseString("//;\n1;a;3");
+
+        //then
+        assertEquals(expectedValue, actualValue);
+    }
 }
