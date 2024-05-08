@@ -1,51 +1,45 @@
 package domain;
 
+import java.util.ArrayList;
+
 public class ArithmeticCalculator {
 
-    private static final int INITIAL_NUMBER = 0;
-    private static final int MULTIPLE_DIVIDE_NUMBER = 1;
-    private int[] intArr;
-    private int result = INITIAL_NUMBER;
+    private static final int INITIAL_NUMBER = 1;
 
-    public int getResult() {
-        return result;
+    private final ArrayList<Integer> numbers;
+    private int result;
+
+    public ArithmeticCalculator(ArrayList<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public int plusCalculate(String str) {
-        resetArr(str);
-        for (int i = INITIAL_NUMBER; i < intArr.length; i++) {
-            result += intArr[i];
+    public int plusCalculate() {
+        for (Integer number : numbers) {
+            result += number;
         }
         return result;
     }
 
-    public int minusCalculate(String str) {
-        resetArr(str);
-        for (int i = INITIAL_NUMBER; i < intArr.length; i++) {
-            result -= intArr[i];
+    public int minusCalculate() {
+        for (Integer number : numbers) {
+            result -= number;
         }
         return result;
     }
 
-    public int divideCalculate(String str) {
-        resetArr(str);
-        result = intArr[0];
-        for (int i = MULTIPLE_DIVIDE_NUMBER; i < intArr.length; i++) {
-            result /= intArr[i];
+    public int divideCalculate() {
+        result = numbers.get(0);
+        for (int i = 1; i < numbers.size(); i++) {
+            result /= numbers.get(i);
         }
         return result;
     }
 
-    public int multipleCaculate(String str) {
-        resetArr(str);
-        for (int i = INITIAL_NUMBER; i < intArr.length; i++) {
-            result = MULTIPLE_DIVIDE_NUMBER;
-            result *= intArr[i];
+    public int multipleCalculate() {
+        result = INITIAL_NUMBER;
+        for (Integer number : numbers) {
+            result *= number;
         }
         return result;
-    }
-
-    private void resetArr(String strArr) {
-        intArr = new int[strArr.length()];
     }
 }
