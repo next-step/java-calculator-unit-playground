@@ -15,7 +15,7 @@ class StringCalculatorTest {
         //given
         final String standardStrings = "1:2:3";
         final StringCalculator stringcalculator = new StringCalculator(standardStrings);
-        final List<String> expected = new ArrayList<>(Arrays.asList("1","2","3"));
+        final List<String> expected = new ArrayList<>(Arrays.asList("1", "2", "3"));
 
         //when
         final List<String> actual = stringcalculator.parseStrings();
@@ -29,7 +29,7 @@ class StringCalculatorTest {
         //given
         final String customStrings = "//;\\n1;2;3";
         final StringCalculator stringcalculator = new StringCalculator(customStrings);
-        final List<String> expected = new ArrayList<>(Arrays.asList("1","2","3"));
+        final List<String> expected = new ArrayList<>(Arrays.asList("1", "2", "3"));
 
         //when
         final List<String> actual = stringcalculator.parseStrings();
@@ -44,7 +44,7 @@ class StringCalculatorTest {
         final String standardStrings = "1:2:3";
         final StringCalculator stringcalculator = new StringCalculator(standardStrings);
         final List<String> splitStrings = stringcalculator.parseStrings();
-        final List<Integer> expected = new ArrayList<>(Arrays.asList(1,2,3));
+        final List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3));
 
         //when
         final List<Integer> actual = stringcalculator.changeStringsToNumbers(splitStrings);
@@ -59,7 +59,7 @@ class StringCalculatorTest {
         final String standardStrings = "//;\\n1;2;3";
         final StringCalculator stringcalculator = new StringCalculator(standardStrings);
         final List<String> splitStrings = stringcalculator.parseStrings();
-        final List<Integer> expected = new ArrayList<>(Arrays.asList(1,2,3));
+        final List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3));
 
         //when
         final List<Integer> actual = stringcalculator.changeStringsToNumbers(splitStrings);
@@ -77,10 +77,10 @@ class StringCalculatorTest {
         var expected = "제대로 입력하세요.";
 
         //when
-        final RuntimeException actual = assertThrows(RuntimeException.class,()->stringcalculator.changeStringsToNumbers(splitStrings));
+        final RuntimeException actual = assertThrows(RuntimeException.class, () -> stringcalculator.changeStringsToNumbers(splitStrings));
 
         //then
-        assertEquals(expected,actual.getMessage());
+        assertEquals(expected, actual.getMessage());
     }
 
     @Test
@@ -92,10 +92,10 @@ class StringCalculatorTest {
         var expected = "음수 입력 불가.";
 
         //when
-        final RuntimeException actual = assertThrows(RuntimeException.class,()->stringcalculator.changeStringsToNumbers(splitStrings));
+        final RuntimeException actual = assertThrows(RuntimeException.class, () -> stringcalculator.changeStringsToNumbers(splitStrings));
 
         //then
-        assertEquals(expected,actual.getMessage());
+        assertEquals(expected, actual.getMessage());
     }
 
     @Test
@@ -103,7 +103,7 @@ class StringCalculatorTest {
         //given
         final String standardStrings = "//;\\n1;2;3";
         final StringCalculator stringcalculator = new StringCalculator(standardStrings);
-        final List<Integer> numberList = new ArrayList<>(Arrays.asList(1,2,3));
+        final List<Integer> numberList = new ArrayList<>(Arrays.asList(1, 2, 3));
         final int expected = 6;
 
         //when
