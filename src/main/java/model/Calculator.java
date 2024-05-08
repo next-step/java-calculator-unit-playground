@@ -1,13 +1,12 @@
 package model;
-
-import view.InputView;
-
-import java.util.List;
-
 public class Calculator {
-    List<Integer> realNumber = InputView.getNumber();
-    int num1 = realNumber.get(0);
-    int num2 = realNumber.get(1);
+    private final int num1;
+    private final int num2;
+
+    public Calculator(int num1, int num2){
+        this.num1 = num1;
+        this.num2 = num2;
+    }
 
     public int addNumbers(){
         return num1 + num2;
