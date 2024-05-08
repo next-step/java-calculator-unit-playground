@@ -21,7 +21,6 @@ public class StringCalculator {
     }
 
     public List<String> parseStrings() {
-        // //;\n1;2;3
         String checkCustomOrStandard = inputStrings.substring(INITIAL_NUMBER, FIRST_NUMBER);
         if (!checkCustomOrStandard.equals(CHECK_CUSTOM_OR_STANDARD)) {
             String[] splitStrings = inputStrings.split(STANDARD_SPLIT_STRINGS);
