@@ -10,7 +10,7 @@ public class StringCalculator {
     private final int FIRST_NUMBER = 1;
     private final int SECOND_NUMBER = 2;
     private final int THIRD_NUMBER = 3;
-    private final int CUSTOM_STRING_START_NUMBER = 5;
+    private final int CUSTOM_STRING_SPLIT_NUMBER = 5;
     private final String EXCEPTION_MINUS = "음수 입력 불가.";
     private final String EXCEPTION_INCORRECT = "제대로 입력하세요.";
     private final String CHECK_CUSTOM_OR_STANDARD = "/";
@@ -21,13 +21,14 @@ public class StringCalculator {
     }
 
     public List<String> parseStrings() {
+        // //;\n1;2;3
         String checkCustomOrStandard = inputStrings.substring(INITIAL_NUMBER, FIRST_NUMBER);
         if (!checkCustomOrStandard.equals(CHECK_CUSTOM_OR_STANDARD)) {
             String[] splitStrings = inputStrings.split(STANDARD_SPLIT_STRINGS);
             return List.of(splitStrings);
         }
         String delimiter = inputStrings.substring(SECOND_NUMBER, THIRD_NUMBER);
-        String divideStrings = inputStrings.substring(CUSTOM_STRING_START_NUMBER);
+        String divideStrings = inputStrings.substring(CUSTOM_STRING_SPLIT_NUMBER);
         String[] splitStrings = divideStrings.split(delimiter);
         return List.of(splitStrings);
     }
