@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -16,12 +15,12 @@ class ArithmeticCalculatorTest {
     void 덧셈을_한다() {
         // given
         ArrayList<Integer> numbers = new ArrayList<>();
+        ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
         numbers.add(3);
         numbers.add(5);
         numbers.add(7);
-        ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
         // when
-        int result = calculator.plusCalculate();
+        int result = calculator.getPlusResult();
         // then
         assertEquals(15, result);
     }
@@ -35,9 +34,9 @@ class ArithmeticCalculatorTest {
         numbers.add(7);
         ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
         // when
-        int result=calculator.minusCalculate();
+        int result = calculator.getMinusResult();
         // then
-        assertEquals(-15,result);
+        assertEquals(-15, result);
     }
 
     @Test
@@ -49,9 +48,9 @@ class ArithmeticCalculatorTest {
         numbers.add(7);
         ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
         // when
-        int result=calculator.multipleCalculate();
+        int result = calculator.getMultipleResult();
         // then
-        assertEquals(105,result);
+        assertEquals(105, result);
     }
 
     @DisplayName("나눗셈 테스트")
@@ -67,9 +66,9 @@ class ArithmeticCalculatorTest {
             numbers.add(1);
             ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
             // when
-            int result=calculator.divideCalculate();
+            int result = calculator.getDivideResult();
             // then
-            assertEquals(2 ,result);
+            assertEquals(2, result);
         }
     }
 }
