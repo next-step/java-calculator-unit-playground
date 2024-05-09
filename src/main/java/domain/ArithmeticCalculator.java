@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ArithmeticCalculator {
 
+    private static final int INITIAL_RESULT_NUM=0;
     private static final int INITIAL_NUMBER = 1;
 
     private final ArrayList<Integer> numbers;
@@ -11,6 +12,7 @@ public class ArithmeticCalculator {
 
     public ArithmeticCalculator(ArrayList<Integer> numbers) {
         this.numbers = numbers;
+        this.result = INITIAL_RESULT_NUM;
     }
 
     public int plusCalculate() {
