@@ -5,15 +5,15 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private final String STANDARD_SPLIT_STRINGS = "[,|:]";
-    private final int INITIAL_NUMBER = 0;
-    private final int FIRST_NUMBER = 1;
-    private final int SECOND_NUMBER = 2;
-    private final int THIRD_NUMBER = 3;
-    private final int CUSTOM_STRING_SPLIT_NUMBER = 5;
-    private final String EXCEPTION_MINUS = "음수 입력 불가.";
-    private final String EXCEPTION_INCORRECT = "제대로 입력하세요.";
-    private final String CHECK_CUSTOM_OR_STANDARD = "/";
+    private static final String STANDARD_SPLIT_STRINGS = "[,|:]";
+    private static final int INITIAL_NUMBER = 0;
+    private static final int FIRST_NUMBER = 1;
+    private static final int SECOND_NUMBER = 2;
+    private static final int THIRD_NUMBER = 3;
+    private static final int CUSTOM_STRING_SPLIT_NUMBER = 5;
+    private static final String EXCEPTION_MINUS = "음수 입력 불가.";
+    private static final String EXCEPTION_INCORRECT = "제대로 입력하세요.";
+    private static final String CHECK_CUSTOM_OR_STANDARD = "/";
     private final String inputStrings;
 
     public StringCalculator(final String inputStrings) {
