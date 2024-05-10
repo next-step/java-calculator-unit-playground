@@ -23,5 +23,4 @@ public class CalculatorController {
         List<Integer> numberList = stringCalculator.changeStringsToNumbers(paresStrings);
         outputView.printNumber(stringCalculator.addNumbers(numberList));
     }
-
 }

@@ -9,5 +9,4 @@ public class InputView {
     public String getString() {
         return input.next();
     }
-
 }

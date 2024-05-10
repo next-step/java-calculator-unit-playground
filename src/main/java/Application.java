@@ -10,5 +10,4 @@ public class Application {
         CalculatorController calculatorController = new CalculatorController(inputView, outputView);
         calculatorController.startCalculator();
     }
-
 }

@@ -112,5 +112,4 @@ class StringCalculatorTest {
         //then
         assertEquals(expected, actual);
     }
-
 }
