@@ -48,7 +48,7 @@ public class StringCalculator {
 
     private void validateMinusNumber(List<Integer> numberList) {
         for (Integer realNumber : numberList) {
-            if (realNumber < 0) {
+            if (realNumber < INITIAL_NUMBER) {
                 throw new RuntimeException(EXCEPTION_MINUS);
             }
         }
