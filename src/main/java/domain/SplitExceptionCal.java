@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SplitExceptionCal {
-    private static final String FOR_SPLIT="//|\\n";
+    private static final String SPLIT_WORD = "//|\\n";
     private static final int DISTINCTION_FRONT = 1;
     private static final int DISTINCTION_BACK = 2;
 
@@ -20,7 +20,7 @@ public class SplitExceptionCal {
     }
 
     private List<String> parseInput(String input) {
-        String[] parts = input.split(FOR_SPLIT);
+        String[] parts = input.split(SPLIT_WORD);
         String delimiter = parts[DISTINCTION_FRONT];
         String[] values = parts[DISTINCTION_BACK].split(delimiter);
         return Arrays.asList(values);
