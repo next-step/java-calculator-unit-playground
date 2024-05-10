@@ -19,8 +19,8 @@ public class CalculatorController {
     public void startCalculator(){
         String inputStrings = inputView.getString();
         StringCalculator stringCalculator = new StringCalculator(inputStrings);
-        List<String> paresStrings = stringCalculator.parseStrings();
-        List<Integer> numberList = stringCalculator.changeStringsToNumbers(paresStrings);
-        outputView.printNumber(stringCalculator.addNumbers(numberList));
+        List<String> parseInputStrings = stringCalculator.parseStrings();
+        List<Integer> sumParseStrings = stringCalculator.changeStringsToNumbers(parseInputStrings);
+        outputView.printNumber(stringCalculator.addNumbers(sumParseStrings));
     }
 }
