@@ -1,6 +1,8 @@
 package stringCalcculator.model;
 
 public class StringCalculator {
+
+    private static final String DEFAULTS = ",|:";
     public boolean checkBlank(String input){
         return input == null || input.isEmpty();
     }
@@ -9,7 +11,7 @@ public class StringCalculator {
         if (input.startsWith("//")) {
             return splitByCustom(input);
         }
-        return input.split(",|:");
+        return input.split(DEFAULTS);
     }
 
     public String[] splitByCustom(String input){
@@ -19,11 +21,15 @@ public class StringCalculator {
     }
 
     public int[] listToInt(String[] inputList){
-        int[] numberList = new int[inputList.length];
-        for (int i = 0; i < inputList.length; i++){
-            numberList[i] = convertToInt(inputList[i]);
+        try {
+            int[] numberList = new int[inputList.length];
+            for (int i = 0; i < inputList.length; i++) {
+                numberList[i] = convertToInt(inputList[i]);
+            }
+            return numberList;
+        } catch (NumberFormatException e){
+            throw new RuntimeException("숫자가 아닌 다른 형식이 포함되었습니다.");
         }
-        return numberList;
     }
 
     public int convertToInt(String input){
