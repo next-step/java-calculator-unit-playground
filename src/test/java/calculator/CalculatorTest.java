@@ -17,7 +17,7 @@ public class CalculatorTest {
 
         @DisplayName("입력내용 저장 테스트")
         @Test
-        void inputTest() {
+        void inputAndSaveTest() {
             //given
             InputStream input = System.in;
             ByteArrayInputStream in = new ByteArrayInputStream("2,1".getBytes());
