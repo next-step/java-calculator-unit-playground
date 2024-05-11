@@ -36,18 +36,17 @@ public class CalculatorTest {
             assertEquals(calculator.divide(a,b),a/b);
         }
 
+        @Test
+        void 분모_0을_나눈_경우(){
+            final int a=5;
+            final int b=0;
+
+            assertThrows(ArithmeticException.class, ()->{
+                calculator.divide(a,b);
+            });
+
+        }
 
     }
-
-    void 공백_입력_확인_테스트(){
-
-    }
-
-
-
-
-
-
-
 
 }
