@@ -3,30 +3,36 @@ import model.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import view.CalculatorView;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CalculatorTest {
-//    @Nested
-//    @DisplayName("입력관련 테스트")
-//    public class InputTest{
-//
-//        @DisplayName("입력내용 저장 테스트")
-//        @Test
-//        void inputTest(){
-//            //given
-//            //when
-//            //then
-//        }
-//
-//        @DisplayName("문자열 정수 변환 테스트")
-//        @Test
-//        void typeTest(){
-//            //given
-//            //when
-//            //then
-//        }
-//    }
+    @Nested
+    @DisplayName("입력관련 테스트")
+    public class InputTest {
+
+        @DisplayName("입력내용 저장 테스트")
+        @Test
+        void inputTest() {
+            //given
+            InputStream input = System.in;
+            ByteArrayInputStream in = new ByteArrayInputStream("2,1".getBytes());
+            System.setIn(in);
+            List<Integer> testList = CalculatorView.getNumber();
+            int num1 = testList.get(0);
+            int num2 = testList.get(1);
+            //when
+            //Then
+            assertEquals(2, num1, "값이 일치하지 않습니다.");
+            assertEquals(1, num2, "값이 일치하지 않습니다.");
+            assertNotEquals(1, num1, "값이 일치합니다!");
+            assertNotEquals(2, num2, "값이 일치합니다!");
+        }
+    }
 
     @Nested
     @DisplayName("계산기능 테스트")
