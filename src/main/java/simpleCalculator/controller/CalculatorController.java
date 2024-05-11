@@ -1,6 +1,6 @@
-package controller;
-import model.Calculator;
-import view.CalculatorView;
+package simpleCalculator.controller;
+import simpleCalculator.model.Calculator;
+import simpleCalculator.view.CalculatorView;
 import java.util.List;
 
 public class CalculatorController {

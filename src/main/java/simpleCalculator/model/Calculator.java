@@ -1,4 +1,4 @@
-package model;
+package simpleCalculator.model;
 public class Calculator {
     private final int num1;
     private final int num2;

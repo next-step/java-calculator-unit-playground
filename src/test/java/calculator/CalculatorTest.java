@@ -1,9 +1,9 @@
-package function;
-import model.Calculator;
+package calculator;
+import simpleCalculator.model.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import view.CalculatorView;
+import simpleCalculator.view.CalculatorView;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
