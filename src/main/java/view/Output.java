@@ -3,7 +3,7 @@ package view;
 import domain.Calculator;
 
 public class Output {
-    public static int printAnswer(){
-        return Calculator.getAnswer();
+    public void printAnswer(int answer){
+        System.out.println(answer);
     }
 }
