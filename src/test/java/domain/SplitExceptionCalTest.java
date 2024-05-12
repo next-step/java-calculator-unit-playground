@@ -23,7 +23,7 @@ class SplitExceptionCalTest {
         List<String> result = splitExceptionCal.getParsedInput(input);
         List<String> expected = Arrays.asList("1", "2", "3");
         // then
-        assertEquals(expected, result, "주어진 문자열에서 숫자를 분리할 수 있어야 합니다.");
+        assertEquals(expected, result);
     }
 
     @Test
