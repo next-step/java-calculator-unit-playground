@@ -1,37 +1,38 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SplitExceptionCal {
-    private static final String SPLIT_WORD = "//|\\n";
-    private static final int DISTINCTION_FRONT = 1;
-    private static final int DISTINCTION_BACK = 2;
+    private static final int CUT_NUMBER = 5;
+    private static final int DISTINCTION_FRONT = 2;
+    private static final int DISTINCTION_BACK = 3;
 
-    private List<String> parsedValue = new ArrayList<>();
+    private final List<String> parsedValue = new ArrayList<>();
 
-    public List<String> getParseInput(String input) {
+    public List<String> getParsedInput(String input) {
         return parseInput(input);
-    }    //"//;\n1;2;3"
+    }
 
     public List<String> getParseException(List<String> values) {
         return parseException(values);
     }
 
-    private List<String> parseInput(String input) {
-        String[] parts = input.split(SPLIT_WORD);
-        String delimiter = parts[DISTINCTION_FRONT];
-        String[] values = parts[DISTINCTION_BACK].split(delimiter);
-        return Arrays.asList(values);
+    public List<String> parseInput(String input) {
+        String delimiter = input.substring(DISTINCTION_FRONT, DISTINCTION_BACK);
+        String divideStrings = input.substring(CUT_NUMBER);
+        String[] splitStrings = divideStrings.split(delimiter);
+        return List.of(splitStrings);
     }
 
     private List<String> parseException(List<String> values) {
-        try {
-            int parsedNumber = Integer.parseInt(values.toString());
-            parsedValue.add(String.valueOf(parsedNumber));
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
+        for (String value : values) {
+            try {
+                int parsedNumber = Integer.parseInt(value);
+                parsedValue.add(String.valueOf(parsedNumber));
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(e);
+            }
         }
         return parsedValue;
     }
