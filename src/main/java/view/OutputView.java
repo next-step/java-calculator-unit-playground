@@ -1,15 +1,10 @@
 package view;
 
-import java.util.Scanner;
-
 public class Outputview {
-
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        InputView inputView = new InputView();
-        String input = inputView.getCalculator();
-        System.out.println("계산 결과:");
-        System.out.println(input);
+    public void resultLast(int plusResult, int minusResult, int divideResult, int multiplyResult) {
+        System.out.println("덧셈 결과: " + plusResult);
+        System.out.println("뺄셈 결과: " + minusResult);
+        System.out.println("나눗셈 결과: " + divideResult);
+        System.out.println("곱셈 결과: " + multiplyResult);
     }
 }
