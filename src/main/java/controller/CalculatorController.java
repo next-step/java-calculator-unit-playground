@@ -1,22 +1,35 @@
 package controller;
 
 import domain.ArithmeticCalculator;
+import domain.SplitExceptionCal;
 import view.InputView;
-import view.OutputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalculatorController {
 
-    private final InputView inputView;
-    private final OutputView outputView;
+    public static void main(String[] args) {
+        InputView inputView = new InputView();
+        String input = inputView.getCalculator();
+        SplitExceptionCal splitExceptionCal = new SplitExceptionCal();
+        List<String> parsedInput = splitExceptionCal.getParsedInput(input);
+        List<String> parsedValue = splitExceptionCal.getParseException(parsedInput);
 
-    public CalculatorController(InputView inputView, OutputView outputView, ArithmeticCalculator arithmeticCalculator) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-    }
+        List<Integer> numbers = new ArrayList<>();
+        for (String value : parsedValue) {
+            numbers.add(Integer.parseInt(value));
+        }
 
-    void startCalculator(String str) {
-        ArithmeticCalculator calculator = new ArithmeticCalculator();
-        String input = inputView.calculatorInput();
-        calculator.plusCalculate(outputView.splitStr(input));
+        ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
+        int plusResult = calculator.plusCalculate();
+        int minusResult = calculator.minusCalculate();
+        int divideResult = calculator.divideCalculate();
+        int multiplyResult = calculator.multipleCalculate();
+
+        System.out.println("덧셈 결과: " + plusResult);
+        System.out.println("뺄셈 결과: " + minusResult);
+        System.out.println("나눗셈 결과: " + divideResult);
+        System.out.println("곱셈 결과: " + multiplyResult);
     }
 }
