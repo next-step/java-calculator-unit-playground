@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SuppressWarnings("NonAsciiCharacters")
 class ArithmeticCalculatorTest {
 
+
     @Test
     void 덧셈을_한다() {
         // given
@@ -20,7 +21,7 @@ class ArithmeticCalculatorTest {
         numbers.add(5);
         numbers.add(7);
         // when
-        int result = calculator.getPlusResult();
+        int result = calculator.plusCalculate();
         // then
         assertEquals(15, result);
     }
@@ -34,7 +35,7 @@ class ArithmeticCalculatorTest {
         numbers.add(7);
         ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
         // when
-        int result = calculator.getMinusResult();
+        int result = calculator.minusCalculate();
         // then
         assertEquals(-15, result);
     }
@@ -48,7 +49,7 @@ class ArithmeticCalculatorTest {
         numbers.add(7);
         ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
         // when
-        int result = calculator.getMultipleResult();
+        int result = calculator.multipleCalculate();
         // then
         assertEquals(105, result);
     }
@@ -66,7 +67,7 @@ class ArithmeticCalculatorTest {
             numbers.add(1);
             ArithmeticCalculator calculator = new ArithmeticCalculator(numbers);
             // when
-            int result = calculator.getDivideResult();
+            int result = calculator.divideCalculate();
             // then
             assertEquals(2, result);
         }
