@@ -19,6 +19,7 @@ public class CalculatorTest {
         @DisplayName("입력내용 저장 테스트")
         @Test
         void inputAndSaveTest() {
+
             //given
             InputStream input = System.in;
             ByteArrayInputStream in = new ByteArrayInputStream("2,1".getBytes());
@@ -44,9 +45,10 @@ public class CalculatorTest {
 
         Calculator calculator = new Calculator(testNum1, testNum2);
 
-        @DisplayName("더하기 테스트 1")
+        @DisplayName("더하기 테스트 : 예측값과 입력값이 같은 경우")
         @Test
         void addTest() {
+
             //given
             int expectValue = 3;
             int testAdd = calculator.addNumbers();
@@ -55,9 +57,10 @@ public class CalculatorTest {
             assertEquals(testAdd, expectValue, "값이 일치하지 않습니다.");
         }
 
-        @DisplayName("더하기 테스트 2")
+        @DisplayName("더하기 테스트 : 예측값과 입력값이 다른 경우")
         @Test
         void addFailTest() {
+
             //given
             int failValue = 0;
             int testAdd = calculator.addNumbers();
@@ -66,9 +69,10 @@ public class CalculatorTest {
             assertNotEquals(testAdd, failValue, "값이 일치합니다!");
         }
 
-        @DisplayName("빼기 테스트 1")
+        @DisplayName("빼기 테스트 : 예측값과 입력값이 같은 경우")
         @Test
         void subTest() {
+
             //given
             int expectValue = 1;
             int testSub = calculator.subNumbers();
@@ -77,9 +81,10 @@ public class CalculatorTest {
             assertEquals(testSub, expectValue, "값이 일치하지 않습니다.");
         }
 
-        @DisplayName("빼기 테스트 2")
+        @DisplayName("빼기 테스트 : 예측값과 입력값이 다른 경우")
         @Test
         void subFailTest() {
+
             //given
             int failValue = 0;
             int testSub = calculator.addNumbers();
@@ -88,9 +93,10 @@ public class CalculatorTest {
             assertNotEquals(testSub, failValue, "값이 일치합니다!");
         }
 
-        @DisplayName("나누기 테스트 1")
+        @DisplayName("나누기 테스트 : 예측값과 입력값이 같은 경우")
         @Test
         void divideTest() {
+
             //given
             int expectValue = 2;
             int testDivide = calculator.divideNumbers();
@@ -100,9 +106,10 @@ public class CalculatorTest {
             assertEquals(testDivide, expectValue, "값이 일치하지 않습니다.");
         }
 
-        @DisplayName("나누기 테스트 2")
+        @DisplayName("나누기 테스트 : 예측값과 입력값이 다른 경우")
         @Test
         void divideFailTest() {
+
             //given
             int failValue = 0;
             int testDivide = calculator.addNumbers();
@@ -111,9 +118,10 @@ public class CalculatorTest {
             assertNotEquals(testDivide, failValue, "값이 일치합니다!");
         }
 
-        @DisplayName("곱하기 테스트 1")
+        @DisplayName("곱하기 테스트 : 예측값과 입력값이 같은 경우")
         @Test
         void multipleTest() {
+
             //given
             int expectValue = 2;
             int testMultiple = calculator.multipleNumbers();
@@ -122,9 +130,10 @@ public class CalculatorTest {
             assertEquals(testMultiple, expectValue, "값이 일치하지 않습니다.");
         }
 
-        @DisplayName("곱하기 테스트 2")
+        @DisplayName("곱하기 테스트 : 예측값과 입력값이 다른 경우")
         @Test
         void multipleFailTest() {
+
             //given
             int failValue = 0;
             int testMultiple = calculator.addNumbers();
