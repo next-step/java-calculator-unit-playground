@@ -1,4 +1,5 @@
 package calculator;
+
 import simpleCalculator.model.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -37,12 +38,15 @@ public class CalculatorTest {
     @Nested
     @DisplayName("계산기능 테스트")
     public class functionTest {
+
         int testNum1 = 2;
         int testNum2 = 1;
+
         Calculator calculator = new Calculator(testNum1, testNum2);
+
         @DisplayName("더하기 테스트 1")
         @Test
-        void addTest(){
+        void addTest() {
             //given
             int expectValue = 3;
             int testAdd = calculator.addNumbers();
@@ -53,7 +57,7 @@ public class CalculatorTest {
 
         @DisplayName("더하기 테스트 2")
         @Test
-        void addFailTest(){
+        void addFailTest() {
             //given
             int failValue = 0;
             int testAdd = calculator.addNumbers();
@@ -64,7 +68,7 @@ public class CalculatorTest {
 
         @DisplayName("빼기 테스트 1")
         @Test
-        void subTest(){
+        void subTest() {
             //given
             int expectValue = 1;
             int testSub = calculator.subNumbers();
@@ -75,7 +79,7 @@ public class CalculatorTest {
 
         @DisplayName("빼기 테스트 2")
         @Test
-        void subFailTest(){
+        void subFailTest() {
             //given
             int failValue = 0;
             int testSub = calculator.addNumbers();
@@ -86,7 +90,7 @@ public class CalculatorTest {
 
         @DisplayName("나누기 테스트 1")
         @Test
-        void divideTest(){
+        void divideTest() {
             //given
             int expectValue = 2;
             int testDivide = calculator.divideNumbers();
@@ -98,7 +102,7 @@ public class CalculatorTest {
 
         @DisplayName("나누기 테스트 2")
         @Test
-        void divideFailTest(){
+        void divideFailTest() {
             //given
             int failValue = 0;
             int testDivide = calculator.addNumbers();
@@ -109,7 +113,7 @@ public class CalculatorTest {
 
         @DisplayName("곱하기 테스트 1")
         @Test
-        void multipleTest(){
+        void multipleTest() {
             //given
             int expectValue = 2;
             int testMultiple = calculator.multipleNumbers();
@@ -120,7 +124,7 @@ public class CalculatorTest {
 
         @DisplayName("곱하기 테스트 2")
         @Test
-        void multipleFailTest(){
+        void multipleFailTest() {
             //given
             int failValue = 0;
             int testMultiple = calculator.addNumbers();
