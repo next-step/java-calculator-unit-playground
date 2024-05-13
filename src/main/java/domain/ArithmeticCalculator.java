@@ -22,11 +22,8 @@ public class ArithmeticCalculator {
     }
 
     public int minusCalculate() {
-        int result = INITIAL_RESULT_NUM;
-        for (Integer number : numbers) {
-            result -= number;
-        }
-        return result;
+        return numbers.stream().reduce(INITIAL_RESULT_NUM,
+                (result, number) -> result - number);
     }
 
     public int divideCalculate() {
