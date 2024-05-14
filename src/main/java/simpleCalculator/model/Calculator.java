@@ -27,9 +27,9 @@ public class Calculator {
 
     private int[] convertToIntList(String[] inputList) {
         try {
-            int[] numberList = new int[(inputList.length + ONE) / TWO];
-            for (int i = ZERO, j = ZERO; i < inputList.length; i += TWO, j++) {
-                numberList[j] = convertToInt(inputList[i]);
+            int[] numberList = new int[inputList.length];
+            for (int i = ZERO; i < inputList.length; i++) {
+                numberList[i] = convertToInt(inputList[i]);
             }
             return numberList;
         } catch (NumberFormatException e) {
