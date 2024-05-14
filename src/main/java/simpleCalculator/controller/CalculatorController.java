@@ -1,35 +1,43 @@
 package simpleCalculator.controller;
 
 import simpleCalculator.model.Calculator;
-import simpleCalculator.view.CalculatorView;
-import java.util.List;
+import simpleCalculator.model.StringCalculator;
+import simpleCalculator.view.InputView;
+import simpleCalculator.view.OutView;
 
 public class CalculatorController {
 
-    List<Integer> numbers = CalculatorView.getNumber();
-    Calculator calculator = new Calculator(numbers.get(0), numbers.get(1));
+    private InputView inputView;
+    private OutView outView;
+    private Calculator calculator;
+    private StringCalculator stringCalculator;
 
-    public void doAdd() {
-
-        int addResult = calculator.addNumbers();
-        System.out.println("덧셈 결과 : " + addResult);
+    public CalculatorController() {
+        this.inputView = new InputView();
+        this.outView = new OutView();
+        this.calculator = new Calculator();
+        this.stringCalculator = new StringCalculator();
     }
 
-    public void doSub() {
+    private void runSimpleCalculator() {
+        String input = inputView.getSimpleNumber();
+        calculator.setNumber(input);
 
-        int subResult = calculator.subNumbers();
-        System.out.println("뺄셈 결과 : " + subResult);
+        int resultAdd = calculator.addNumbers();
+        int resultSub = calculator.subNumbers();
+        int resultDiv = calculator.divideNumbers();
+        int resultMul = calculator.multipleNumbers();
+
+        outView.printResult(resultAdd);
+        outView.printResult(resultSub);
+        outView.printResult(resultDiv);
+        outView.printResult(resultMul);
     }
 
-    public void doDivide() {
+    private void runStringCalculator() {
+        String input = inputView.getStringNumber();
+        int result = stringCalculator.add(input);
 
-        int divideResult = calculator.divideNumbers();
-        System.out.println("나눗셈 결과 : " + divideResult);
-    }
-
-    public void doMultiple() {
-
-        int multipleResult = calculator.multipleNumbers();
-        System.out.println("곱셈 결과 : " + multipleResult);
+        outView.printResult(result);
     }
 }
