@@ -2,7 +2,8 @@ package simpleCalculator.model;
 
 public class StringCalculator {
 
-    private static final String DEFAULTS = ",|:";
+    private static final String SEPARATOR_DEFAULTS = ",|:";
+    private static final int ZERO = 0;
 
     public boolean checkBlank(String input) {
 
@@ -14,13 +15,13 @@ public class StringCalculator {
         if (input.startsWith("//")) {
             return splitByCustom(input);
         }
-        return input.split(DEFAULTS);
+        return input.split(SEPARATOR_DEFAULTS);
     }
 
     public String[] splitByCustom(String input) {
 
         String[] separates = input.split("\n", 2);
-        String custom = separates[0].substring(2);
+        String custom = separates[ZERO].substring(2);
         return separates[1].split(custom);
     }
 
@@ -28,7 +29,7 @@ public class StringCalculator {
 
         try {
             int[] numberList = new int[inputList.length];
-            for (int i = 0; i < inputList.length; i++) {
+            for (int i = ZERO; i < inputList.length; i++) {
                 numberList[i] = convertToInt(inputList[i]);
             }
             return numberList;
@@ -40,7 +41,7 @@ public class StringCalculator {
     public int convertToInt(String input) {
 
         int number = Integer.parseInt(input);
-        if (number < 0) {
+        if (number < ZERO) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
         return number;
@@ -48,7 +49,7 @@ public class StringCalculator {
 
     public int sum(int[] inputList) {
 
-        int total = 0;
+        int total = ZERO;
         for (int number : inputList) {
             total += number;
         }
@@ -58,7 +59,7 @@ public class StringCalculator {
     public int add(String input) {
 
         if (checkBlank(input)) {
-            return 0;
+            return ZERO;
         }
         return sum(listToInt(splitInput(input)));
     }
