@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
+
     private static final String BASIC_DELIMITER=",|:";
     private static final String FIRST_STRING="//";
     private static final String LAST_STRING="\n";
