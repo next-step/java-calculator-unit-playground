@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CalculatorTest {
 
     private static final int EXPECT_VALUE = 3;
-
     private Calculator calculator;
 
     @BeforeEach
@@ -21,7 +20,7 @@ public class CalculatorTest {
 
     @DisplayName("연산기능 테스트")
     @Nested
-    class functionTest{
+    class functionTest {
 
         @DisplayName("더하기")
         @Test
@@ -75,5 +74,4 @@ public class CalculatorTest {
             assertThrows(RuntimeException.class, () -> calculator.setNumber("1,2,3"));
         }
     }
-
 }
