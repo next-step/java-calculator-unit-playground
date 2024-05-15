@@ -30,10 +30,10 @@ public class CalculatorController {
         List<String> strings;
 
         if(stringCalculator.containCustomSplitStr()){
-            strings=stringCalculator.splitCustomSplit();
+            strings=stringCalculator.splitCustom();
         }
         else{
-            strings=stringCalculator.splitBasicSplit();
+            strings=stringCalculator.splitBasic();
         }
 
         List<Integer> numbers=stringCalculator.changeStrToInt(strings);

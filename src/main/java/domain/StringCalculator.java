@@ -26,13 +26,13 @@ public class StringCalculator {
         return customDelimiter;
     }
 
-    public List<String> splitCustomSplit(){
+    public List<String> splitCustom(){
         findCustomSplit();
         String splitStr=input.substring(input.indexOf(LAST_STRING)+1);
         return Arrays.asList(splitStr.split(customDelimiter));
     }
 
-    public List<String> splitBasicSplit(){
+    public List<String> splitBasic(){
         return Arrays.asList(input.split(BASIC_DELIMITER));
     }
 
