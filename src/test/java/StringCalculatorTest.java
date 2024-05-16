@@ -16,7 +16,7 @@ public class StringCalculatorTest {
         final StringCalculator stringCalculator = new StringCalculator(string);
         List<Integer> expected = Arrays.asList(12, 45, 78);
 
-        List<String> splitStrings = stringCalculator.splitBasic();
+        List<String> splitStrings = stringCalculator.checkSplit();
         List<Integer> actual = stringCalculator.changeStrToInt(splitStrings);
 
         assertEquals(expected, actual);
@@ -28,7 +28,7 @@ public class StringCalculatorTest {
         final StringCalculator stringCalculator = new StringCalculator(string);
         List<Integer> expected = Arrays.asList(15, 78);
 
-        List<String> splitStrings = stringCalculator.splitCustom();
+        List<String> splitStrings = stringCalculator.checkSplit();
         List<Integer> actual = stringCalculator.changeStrToInt(splitStrings);
 
         assertEquals(expected, actual);
@@ -40,8 +40,8 @@ public class StringCalculatorTest {
         final StringCalculator stringCalculator = new StringCalculator(string);
         String expected = "공백은 입력할 수 없습니다.";
 
-        Exception exception = assertThrows(NoSuchObjectException.class, stringCalculator::checkBlankInput);
-        String actual = exception.getMessage();
+        Exception exception = assertThrows(RuntimeException.class, stringCalculator::checkSplit);
+        String actual = exception.getCause().getMessage();
 
         assertEquals(expected, actual);
     }
@@ -52,7 +52,7 @@ public class StringCalculatorTest {
         final StringCalculator stringCalculator = new StringCalculator(string);
         String expected = "음수를 입력할 수 없습니다.";
 
-        List<String> splitStrings = stringCalculator.splitBasic();
+        List<String> splitStrings = stringCalculator.checkSplit();
         List<Integer> actualNumbers = stringCalculator.changeStrToInt(splitStrings);
         Exception exception = assertThrows(RuntimeException.class, () ->
                 stringCalculator.getSum(actualNumbers)
@@ -69,7 +69,7 @@ public class StringCalculatorTest {
         final StringCalculator stringCalculator = new StringCalculator(string);
         String expected = "숫자를 입력해주세요.";
 
-        List<String> splitStrings = stringCalculator.splitBasic();
+        List<String> splitStrings = stringCalculator.checkSplit();
         Exception exception = assertThrows(RuntimeException.class, () ->
                 stringCalculator.changeStrToInt(splitStrings)
         );
