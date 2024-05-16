@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
     public String inputString() {
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             return input.nextLine();
         }
         return null;
