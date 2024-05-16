@@ -4,8 +4,12 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public Scanner sc= new Scanner(System.in);
-    public String inputString(){
-        return sc.nextLine();
+    public Scanner input = new Scanner(System.in);
+
+    public String inputString() {
+        while(input.hasNextLine()){
+            return input.nextLine();
+        }
+        return null;
     }
 }
