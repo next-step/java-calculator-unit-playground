@@ -39,7 +39,7 @@ public class Calculator {
 
     public void setNumber(String input) {
         String[] inputList = splitList(input);
-        if(checkHowManyInput(inputList)) {
+        if (checkHowManyInput(inputList)) {
             throw new RuntimeException("2개의 숫자를 입력해주세요.");
         }
         int[] numbers = convertToIntList(inputList);
