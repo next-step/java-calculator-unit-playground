@@ -33,12 +33,12 @@ class CalculatorTest {
 
     @Test
     void stringSumTest() {
-        assertEquals(15, calculator.stringSum("1;2;3;4,5"));
+        assertEquals(15, calculator.stringSum("1:2:3:4,5"));
     }
 
     @Test
     void stringSumTestWithCustomSeq() {
-        assertEquals(11, calculator.stringSum("//y\n1y5y1y1y1y2"));
+        assertEquals(11, calculator.stringSum("//y\n1y5,1y1y1y2"));
     }
 
     @Nested
@@ -61,7 +61,7 @@ class CalculatorTest {
         @Test
         void stringSumTestWithWrongString3() {
             assertThrows(RuntimeException.class, () -> {
-                calculator.stringSum("1,2,3,44:5");
+                calculator.stringSum("1,2,3,44;5");
             });
         }
     }

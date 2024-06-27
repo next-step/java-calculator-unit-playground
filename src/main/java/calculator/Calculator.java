@@ -29,7 +29,7 @@ public class Calculator {
             customSeparator = split[0].substring(2);
             target = split[1];
         }
-        String regex = "[\\;\\," + customSeparator + "]";
+        String regex = "[\\:\\," + customSeparator + "]";
         String[] numbers = target.split(regex);
 
         int sum = 0;
