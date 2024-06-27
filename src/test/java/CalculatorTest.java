@@ -1,3 +1,4 @@
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -8,39 +9,42 @@ class CalculatorTest {
 
     @Test
     void add() {
-        assertEquals(3, calculator.add(1, 2));
+        assertThat(calculator.add(1, 2)).isEqualTo(3);
     }
 
     @Test
     void subtract() {
-        assertEquals(-1, calculator.subtract(1, 2));
+        assertThat(calculator.subtract(1, 2)).isEqualTo(-1);
     }
 
     @Test
     void multiply() {
-        assertEquals(6, calculator.multiply(2, 3));
-        assertEquals(20, calculator.multiply(4, 5));
+        assertThat(calculator.multiply(2, 3)).isEqualTo(6);
+        assertThat(calculator.multiply(4, 5)).isEqualTo(20);
     }
 
     @Test
     void divide() {
-        assertEquals(0, calculator.divide(2, 3));
-        assertEquals(2, calculator.divide(8, 4));
-        assertThrows(RuntimeException.class, () -> calculator.divide(3, 0));
+        assertThat(calculator.divide(2, 3)).isZero();
+        assertThat(calculator.divide(8, 4)).isEqualTo(2);
+
+        assertThrows(ArithmeticException.class, () -> calculator.divide(3, 0));
     }
 
     @Test
     void parseAndSum() {
-        assertEquals(0, calculator.parseAndSum(""));
+        assertThat(calculator.parseAndSum("")).isZero();
+        assertThat(calculator.parseAndSum(" ")).isZero();
+        assertThat(calculator.parseAndSum(",")).isZero();
 
-        assertEquals(6, calculator.parseAndSum("1,2,3"));
-        assertEquals(6, calculator.parseAndSum("1,2:3"));
-        assertEquals(6, calculator.parseAndSum("1:2:3"));
+        assertThat(calculator.parseAndSum("1,2,3")).isEqualTo(6);
+        assertThat(calculator.parseAndSum("1,2:3")).isEqualTo(6);
+        assertThat(calculator.parseAndSum("1:2:3")).isEqualTo(6);
     }
 
     @Test
     void pareAndSumWithCustomSep() {
-        assertEquals(6, calculator.parseAndSum("//;\n1;2;3"));
+        assertThat(calculator.parseAndSum("//;\n1;2;3")).isEqualTo(6);
     }
 
     @Test
