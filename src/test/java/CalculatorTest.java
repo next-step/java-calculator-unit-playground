@@ -28,4 +28,24 @@ class CalculatorTest {
         assertEquals(2, calculator.divide(8, 4));
         assertThrows(RuntimeException.class, () -> calculator.divide(3, 0));
     }
+
+    @Test
+    void parseAndSum() {
+        assertEquals(0, calculator.parseAndSum(""));
+
+        assertEquals(6, calculator.parseAndSum("1,2,3"));
+        assertEquals(6, calculator.parseAndSum("1,2:3"));
+        assertEquals(6, calculator.parseAndSum("1:2:3"));
+    }
+
+    @Test
+    void pareAndSumWithCustomSep() {
+        assertEquals(6, calculator.parseAndSum("//;\n1;2;3"));
+    }
+
+    @Test
+    void parseAndSumWithWrongString() {
+        assertThrows(RuntimeException.class, () -> calculator.parseAndSum("//a\n1;2;3"));
+        assertThrows(RuntimeException.class, () -> calculator.parseAndSum("1;2;3"));
+    }
 }
