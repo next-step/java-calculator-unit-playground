@@ -1,5 +1,6 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -8,27 +9,27 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-    private Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
 
     @Test
     void addTest() {
-        assertEquals(3, calculator.add(1, 2));
+        assertThat(calculator.add(1, 2)).isEqualTo(3);
     }
 
     @Test
     void minusTest() {
-        assertEquals(1, calculator.minus(2, 1));
+        assertThat(calculator.minus(2, 1)).isEqualTo(1);
     }
 
     @Test
     void multipleTest() {
-        assertEquals(2, calculator.multiply(2, 1));
-        assertEquals(8, calculator.multiply(2, 4));
+        assertThat(calculator.multiply(2, 1)).isEqualTo(2);
+        assertThat(calculator.multiply(2, 4)).isEqualTo(8);
     }
 
     @Test
     void divideTest() {
-        assertEquals(2, calculator.divide(8, 4));
+        assertThat(calculator.divide(8, 4)).isEqualTo(2);
     }
 
     @Test
