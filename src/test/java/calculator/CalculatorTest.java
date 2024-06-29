@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
@@ -67,6 +68,21 @@ class CalculatorTest {
     @Nested
     class 문자열_더하기를_수행한다 {
 
+        @DisplayName("빈 값이 들어오는 경우 0을 반환")
+        @ParameterizedTest(name = ("{0}이 들어오는 경우 0을 반환한다"))
+        @EmptySource
+        void withEmptyString(String input) {
+            assertEquals(0, calculator.stringSum(input));
+        }
+
+        @Test
+        @DisplayName("null이 들어오는 경우 예외")
+        void withNull() {
+            assertThrows(RuntimeException.class, () -> {
+                calculator.stringSum(null);
+            });
+        }
+
         @Test
         @DisplayName("기본 구분자는 :과 ,이다")
         void default_delimiter() {
@@ -74,7 +90,7 @@ class CalculatorTest {
         }
 
         @Test
-        @DisplayName("임의의 구분자를 지정할 수 있다.")
+        @DisplayName("임의의 구분자를 지정할 수 있다")
         void stringSumTestWithCustomSeq() {
             assertEquals(11, calculator.stringSum("//y\n1y5,1y1y1y2"));
         }

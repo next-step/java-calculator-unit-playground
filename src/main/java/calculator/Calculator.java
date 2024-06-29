@@ -22,7 +22,7 @@ public class Calculator {
         String target = input;
         String customSeparator = "";
         if (target == null) {
-            throw new RuntimeException("잘못된 문자열 형식입니다. input: " + input);
+            throw new RuntimeException("잘못된 문자열 형식입니다. input: " + null);
         }
         if (input.startsWith("//")) {
             String[] split = input.split("\n");
@@ -33,6 +33,9 @@ public class Calculator {
         String[] numbers = target.split(regex);
 
         int sum = 0;
+        if (input.isBlank()) {
+            return sum;
+        }
         for (String number : numbers) {
             try {
                 int parsed = Integer.parseInt(number);
