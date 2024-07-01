@@ -16,6 +16,11 @@ public class Calculator {
     }
 
     public int parseAndSum(String input) {
+
+        if (input == null) {
+            throw new RuntimeException("Input cannot be null");
+        }
+
         String customSeparator = "";
         if (input.startsWith("//")) {
             String[] split = input.split("\n");
