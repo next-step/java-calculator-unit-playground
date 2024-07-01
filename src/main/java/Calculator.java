@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Calculator {
 
     int add(int i, int j) {
@@ -19,25 +17,28 @@ public class Calculator {
     }
 
     int stringAdd(String input) {
-        String customSeparator = "";
-        String[] expressions = {};
-
-        if (input.startsWith("//")) {
-            expressions = input.split("\n");
-            customSeparator = expressions[0].substring(2);
+        if (input.isBlank()) {
+            throw new RuntimeException();
         }
-        String[] expression = expressions[1].split("[,|:|" + customSeparator + "]");
+
+        String customSeparator = "";
+        if (input.startsWith("//")) {
+            String[] expressions = input.split("\n");
+            customSeparator = expressions[0].substring(2);
+            input = expressions[1];
+        }
+        String[] strList = input.split("[,:" + customSeparator + "]");
 
         int result = 0;
-        for (String a : expression) {
+        for (String str : strList) {
             try {
-                int num = Integer.parseInt(a);
+                int num = Integer.parseInt(str);
                 if (num < 0) {
                     throw new RuntimeException();
                 }
                 result += num;
             } catch (Exception e) {
-                throw new RuntimeException("잘못된 문자열입니다.");
+                throw new RuntimeException("잘못된 문자열입니다. string: " + str);
             }
         }
 
