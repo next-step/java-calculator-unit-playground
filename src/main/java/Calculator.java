@@ -17,6 +17,11 @@ public class Calculator {
 
     public int stringAdd(String str){
         String custom = "";
+
+        if(str == null) {
+            throw new NullPointerException("문자열이 비었습니다!");
+        }
+
         int total = 0;
 
         if(!str.isBlank() && str.charAt(0) == '/'){
