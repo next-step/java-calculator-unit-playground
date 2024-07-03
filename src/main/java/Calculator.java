@@ -20,14 +20,8 @@ public class Calculator {
         if (input.isBlank()) {
             throw new RuntimeException();
         }
-
-        String customSeparator = "";
-        if (input.startsWith("//")) {
-            String[] expressions = input.split("\n");
-            customSeparator = expressions[0].substring(2);
-            input = expressions[1];
-        }
-        String[] strList = input.split("[,:" + customSeparator + "]");
+        CustomStringExtractor extractor = new CustomStringExtractor();
+        String[] strList = extractor.extractString(input);
 
         int result = 0;
         for (String str : strList) {
@@ -41,7 +35,6 @@ public class Calculator {
                 throw new RuntimeException("잘못된 문자열입니다. string: " + str);
             }
         }
-
         return result;
     }
 }

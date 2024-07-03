@@ -1,6 +1,5 @@
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,38 +10,38 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("두 수를 받아 덧셈을 한다.")
-    void addTest(){
+    void addTest() {
         assertThat(calculator.add(1, 2)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("두 수를 받아 뺄셈을 한다.")
-    void subtractTest(){
+    void subtractTest() {
         assertThat(calculator.subtract(1, 2)).isEqualTo(-1);
     }
 
     @Test
     @DisplayName("두 수를 받아 곱셈을 한다.")
-    void multipleTest(){
+    void multipleTest() {
         assertThat(calculator.multiple(1, 2)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("두 수를 받아 나눗셈을 한다.")
-    void divideTest(){
+    void divideTest() {
         assertThat(calculator.divide(1, 2)).isEqualTo(0);
     }
 
     @Test
     @DisplayName("문자열을 입력받고, 문자열 내의 숫자들의 합을 계산한다.")
-    void stringCalculatorTest(){
+    void stringCalculatorTest() {
         assertThat(calculator.stringAdd("//;\n1,2;3:4")).isEqualTo(10);
         assertThat(calculator.stringAdd("1,2,3,4")).isEqualTo(10);
     }
 
     @Test
     @DisplayName("잘못된 문자열을 입력받는다. - 음수")
-    void negativeNumberTest(){
+    void negativeNumberTest() {
         assertThatThrownBy(() -> {
             assertThat(calculator.stringAdd("//;\n1,-2;3:4")).isEqualTo(10);
         }).isInstanceOf(RuntimeException.class)
@@ -51,7 +50,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("잘못된 문자열을 입력받는다. - 숫자가 아닌 문자열")
-    void noneNumberTest(){
+    void noneNumberTest() {
         assertThatThrownBy(() -> {
             assertThat(calculator.stringAdd("//;\n1,A;3:4")).isEqualTo(10);
         }).isInstanceOf(RuntimeException.class)
