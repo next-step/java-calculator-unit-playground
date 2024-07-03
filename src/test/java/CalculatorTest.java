@@ -1,7 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,17 +49,13 @@ class CalculatorTest {
     @DisplayName("음수가 있으면 RuntimeExcrption")
     void negativeRuntimeException() {
         assertThatThrownBy(() -> {
-            addNegative();
-        } ).isInstanceOf(RuntimeException.class);
-    }
-
-    private void addNegative() {
-        calculator.stringAdd("-5,3");
+            calculator.stringAdd("-5,3");
+        }).isInstanceOf(RuntimeException.class);
     }
 
     @Test
     @DisplayName("빈 문자열은 0")
     void emptyString() {
-        assertThat( calculator.stringAdd("")).isZero();
+        assertThat(calculator.stringAdd("")).isZero();
     }
 }
