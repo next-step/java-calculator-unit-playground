@@ -11,10 +11,10 @@ public class CalculatorController {
         final char operation;
 
         PrintMessage(ASK_FIRST_OPERATION_MESSAGE);
-        firstOperation = InputView.InputOperator();
+        firstOperation = InputView.InputOperation();
 
         PrintMessage(ASK_TWICE_OPERATION_MESSAGE);
-        secondOperation = InputView.InputOperator();
+        secondOperation = InputView.InputOperation();
 
         PrintMessage(ASK_OPERATOR_MESSAGE);
         operation = InputView.InputOperator();
