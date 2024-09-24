@@ -15,6 +15,16 @@ public class Calculator {
     }
 
     public static int divide(int firstOperand, int secondOperand) {
+        validateDividerIsZero(secondOperand);
+
         return firstOperand / secondOperand;
+    }
+
+    private static void validateDividerIsZero(int number) {
+        if(isZero(number)) throw new IllegalArgumentException("Division by zero");
+    }
+
+    private static boolean isZero(int number) {
+        return number == 0;
     }
 }
