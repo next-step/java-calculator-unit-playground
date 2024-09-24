@@ -72,4 +72,42 @@ class CalculatorTest {
     }
   }
 
+  @Nested
+  @DisplayName("문자열 계산기 테스트")
+  class StringCalculatorTest {
+
+    @Test
+    @DisplayName("(:) 구분자 입력 테스트")
+    void ColonSplitTest() {
+      String input = "3:4:7";
+
+      int expected = 14;
+      int actual = calculator.stringToSum(input);
+
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("(,) 구분자 입력 테스트")
+    void commaSplitTest() {
+      String input = "3,4,7";
+
+      int expected = 14;
+      int actual = calculator.stringToSum(input);
+
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 입력 테스트")
+    void customSplitTest() {
+      String input = "// \\n3 4 7";
+
+      int expected = 14;
+      int actual = calculator.stringToSum(input);
+
+      assertEquals(expected, actual);
+    }
+
+  }
 }
