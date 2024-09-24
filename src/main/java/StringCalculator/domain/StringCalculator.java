@@ -7,18 +7,14 @@ import static StringCalculator.util.Config.*;
 import static java.lang.String.format;
 
 public class StringCalculator {
-    private static List<String> operations = new ArrayList<String>();
+    private static List<String> operations;
 
     public static int stringCalculate(String input) {
         parsing(input);
 
-        int result = 0;
-
-        result =  operations.stream()
+        return operations.stream()
                 .mapToInt(Integer::parseInt)
                 .sum();
-
-        return result;
     }
 
     private static void parsing(String input) {
