@@ -1,27 +1,20 @@
 package calculator.domain;
 
 public class Calculator {
-    private static int firstOperand;
-    private static int secondOperand;
 
-    public Calculator(int firstOperand, int secondOperand) {
-        this.firstOperand = firstOperand;
-        this.secondOperand = secondOperand;
-    }
-
-    public static int add() {
+    public static int add(int firstOperand, int secondOperand) {
         return firstOperand + secondOperand;
     }
 
-    public static int subtract() {
+    public static int subtract(int firstOperand, int secondOperand) {
         return firstOperand - secondOperand;
     }
 
-    public static int multiply() {
+    public static int multiply(int firstOperand, int secondOperand) {
         return firstOperand * secondOperand;
     }
 
-    public static int divide() {
+    public static int divide(int firstOperand, int secondOperand) {
         return firstOperand / secondOperand;
     }
 }

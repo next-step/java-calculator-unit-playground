@@ -24,20 +24,20 @@ public class CalculatorController {
     }
 
     private static void calculate(int firstOperation, int secondOperation, char operation) {
-        Calculator calculator = new Calculator(firstOperation, secondOperation);
+        Calculator calculator = new Calculator();
         int result;
 
         if (operation == '+') {
-            result = calculator.add();
+            result = calculator.add(firstOperation, secondOperation);
         }
         else if (operation == '-') {
-            result = calculator.subtract();
+            result = calculator.subtract(firstOperation, secondOperation);
         }
         else if (operation == '*') {
-            result = calculator.multiply();
+            result = calculator.multiply(firstOperation, secondOperation);
         }
         else if (operation == '/') {
-            result = calculator.divide();
+            result = calculator.divide(firstOperation, secondOperation);
         }
         else throw new RuntimeException("Invalid operation");
 
