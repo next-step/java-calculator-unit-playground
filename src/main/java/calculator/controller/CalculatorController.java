@@ -14,11 +14,11 @@ public class CalculatorController {
         PrintMessage(ASK_FIRST_OPERATION_MESSAGE);
         firstOperation = InputView.InputOperation();
 
-        PrintMessage(ASK_TWICE_OPERATION_MESSAGE);
-        secondOperation = InputView.InputOperation();
-
         PrintMessage(ASK_OPERATOR_MESSAGE);
         operation = InputView.InputOperator();
+
+        PrintMessage(ASK_TWICE_OPERATION_MESSAGE);
+        secondOperation = InputView.InputOperation();
 
         calculate(firstOperation, secondOperation, operation);
     }
