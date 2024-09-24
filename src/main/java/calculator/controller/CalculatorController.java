@@ -1,9 +1,9 @@
 package calculator.controller;
 
 import calculator.domain.Calculator;
-import calculator.view.InputView;
+import view.InputView;
 
-import static calculator.view.OutputView.*;
+import static view.OutputView.*;
 
 public class CalculatorController {
     public static void start() {

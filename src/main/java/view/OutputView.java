@@ -1,4 +1,4 @@
-package calculator.view;
+package view;
 
 public class OutputView {
     public static final String ASK_FIRST_OPERATION_MESSAGE = "첫 번째 피연산자를 입력해주세요: ";
