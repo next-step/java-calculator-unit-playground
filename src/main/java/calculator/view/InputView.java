@@ -15,6 +15,17 @@ public class InputView {
     }
 
     public static char InputOperator() {
-        return scanner.next().charAt(0);
+        char operator = scanner.next().charAt(0);
+        validateValidOperator(operator);
+
+        return operator;
+    }
+
+    private static void validateValidOperator(char op) {
+        if(!isOperators(op)) throw new IllegalArgumentException("Invalid operator");
+    }
+
+    private static boolean isOperators(char op) {
+        return op == '+' || op == '-' || op == '*' || op == '/';
     }
 }
