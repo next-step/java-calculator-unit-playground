@@ -21,6 +21,10 @@ public class InputView {
         return operator;
     }
 
+    public static String InputExpression() {
+        return scanner.nextLine();
+    }
+
     private static void validateValidOperator(char op) {
         if(!isOperators(op)) throw new IllegalArgumentException("Invalid operator");
     }

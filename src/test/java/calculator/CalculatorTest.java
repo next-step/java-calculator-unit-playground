@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.view.InputView;
+import view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
