@@ -1,5 +1,6 @@
 package StringCalculator.controller;
 
+import StringCalculator.domain.StringCalculator;
 import view.InputView;
 
 import static StringCalculator.util.Config.*;
@@ -13,5 +14,9 @@ public class StringCalculatorController {
         PrintMessage(ASK_STRING_EXPRESSION_MESSAGE);
 
         String expression = InputView.InputExpression();
+
+        int result = StringCalculator.stringCalculate(expression);
+
+        PrintResult(result);
     }
 }
