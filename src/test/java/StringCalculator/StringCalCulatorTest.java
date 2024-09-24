@@ -30,42 +30,42 @@ public class StringCalCulatorTest {
 
             assertThat(result).isEqualTo(expected);
         }
+    }
 
-        @Nested
-        @DisplayName("input 값 예외처리 테스트")
-        class ValidateTest {
-            @Test
-            @DisplayName("공백 입력")
-            void 공백_입력_시_throw() {
-                assertThatThrownBy(() -> {
-                    StringCalculator.stringCalculate("");
-                }).isInstanceOf(RuntimeException.class);
+    @Nested
+    @DisplayName("input 값 예외처리 테스트")
+    class ValidateTest {
+        @Test
+        @DisplayName("공백 입력")
+        void 공백_입력_시_throw() {
+            assertThatThrownBy(() -> {
+                StringCalculator.stringCalculate("");
+            }).isInstanceOf(RuntimeException.class);
 
-            }
+        }
 
-            @Test
-            @DisplayName("음수 입력")
-            void 음수_입력_시_throw() {
-                assertThatThrownBy(() -> {
-                    StringCalculator.stringCalculate("3,-1,2");
-                }).isInstanceOf(RuntimeException.class);
-            }
+        @Test
+        @DisplayName("음수 입력")
+        void 음수_입력_시_throw() {
+            assertThatThrownBy(() -> {
+                StringCalculator.stringCalculate("3,-1,2");
+            }).isInstanceOf(RuntimeException.class);
+        }
 
-            @Test
-            @DisplayName("맨 앞이 숫자가 아닌 식 입력")
-            void 숫자가_아닐_시_throw() {
-                assertThatThrownBy(() -> {
-                    StringCalculator.stringCalculate("//1,2:3");
-                }).isInstanceOf(RuntimeException.class);
-            }
+        @Test
+        @DisplayName("맨 앞이 숫자가 아닌 식 입력")
+        void 숫자가_아닐_시_throw() {
+            assertThatThrownBy(() -> {
+                StringCalculator.stringCalculate("//1,2:3");
+            }).isInstanceOf(RuntimeException.class);
+        }
 
-            @Test
-            @DisplayName("지정되지 않은 구분자 입력")
-            void 지정된_구분자가_아닐_시_throw() {
-                assertThatThrownBy(() -> {
-                    StringCalculator.stringCalculate("//?\n1?2:3,4]5");
-                }).isInstanceOf(RuntimeException.class);
-            }
+        @Test
+        @DisplayName("지정되지 않은 구분자 입력")
+        void 지정된_구분자가_아닐_시_throw() {
+            assertThatThrownBy(() -> {
+                StringCalculator.stringCalculate("//?\n1?2:3,4]5");
+            }).isInstanceOf(RuntimeException.class);
         }
     }
 }
