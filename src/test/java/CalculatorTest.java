@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 @DisplayName("Calculator 테스트")
 public class CalculatorTest {
@@ -58,6 +59,18 @@ public class CalculatorTest {
       final int result = Calculator.divideAByB(a, b);
 
       assertEquals(2, result);
+    }
+
+    @Test
+    @DisplayName("예외_나눗셈_분모가_0일때_테스트")
+    void testDivisionZero() {
+      final int divided = 4;
+
+      final int divider = 0;
+
+      assertThrows(ArithmeticException.class, ()->{
+        Calculator.divideAByB(divided, divider);
+      });
     }
   }
 
