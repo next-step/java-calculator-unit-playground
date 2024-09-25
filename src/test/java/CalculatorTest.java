@@ -37,6 +37,28 @@ public class CalculatorTest {
 
       assertEquals(-1, result);
     }
+
+    @Test
+    @DisplayName("곱셈_테스트")
+    void testMultiplication() {
+      final int a = 4;
+      final int b = 5;
+
+      final int result = Calculator.multiply(a, b);
+
+      assertEquals(20, result);
+    }
+
+    @Test
+    @DisplayName("나눗셈_테스트")
+    void testDivision() {
+      final int a = 8;
+      final int b = 4;
+
+      final int result = Calculator.divideAByB(a, b);
+
+      assertEquals(2, result);
+    }
   }
 
 }
