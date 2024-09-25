@@ -1,5 +1,6 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,11 +18,24 @@ public class CalculatorTest {
      */
     @Test
     @DisplayName("덧셈_테스트")
-    void Test_Addition() {
+    void testAddition() {
       final int a = 5;
       final int b = 4;
 
-      assertEquals(a + b, Calculator.add(a, b));
+      final int result = Calculator.add(a, b);
+
+      assertEquals(9, result);
+    }
+
+    @Test
+    @DisplayName("뺄셈_테스트")
+    void testSubtraction() {
+      final int a = 4;
+      final int b = 5;
+
+      final int result = Calculator.subtractBFromA(a, b);
+
+      assertEquals(-1, result);
     }
   }
 
