@@ -1,14 +1,17 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ValueExtractor {
   public static String[] extractValueByString(String value) {
-    StringBuilder regex = new StringBuilder("[,");
+    StringBuilder divider = new StringBuilder("[,");
 
-    for (String s : value.split("\n"))
-      if(s.contains("//"))
-        regex.append("|").append(s.substring(2));
-      else
-        value = s;
+    Pattern dividerPattern = Pattern.compile("//(.*?)\n");
+    Matcher matcher = dividerPattern.matcher(value);
 
-    return value.split(regex.append("]").toString());
+    while(matcher.find()) {
+      divider.append("|").append(matcher.group(1));
+    }
+
+    return value.replaceAll(dividerPattern.pattern(), "").split(divider.append("]").toString());
   }
 }
