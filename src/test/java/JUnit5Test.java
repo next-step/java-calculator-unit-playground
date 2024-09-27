@@ -1,3 +1,4 @@
+import java.util.IllegalFormatException;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -68,14 +69,46 @@ public class JUnit5Test {
   @DisplayName("문자열 계산 테스트")
   class StringCirculateTest{
     @Test
-    @DisplayName("덧셈 테스트")
-    void plus(){
+    @DisplayName("구분자가 앞에 있는 경우")
+    void dividerAtFirstOfString(){
       int expected = 1 + 2 + 3;
       int actual = calculator.plus("//;\n1;2;3");
 
       assertEquals(expected, actual);
     }
+    
+    @Test
+    @DisplayName("구분자가 뒤에 있는 경우")
+    void dividerAtEndOfString(){
+      int expected = 1 + 2 + 3;
+      int actual = calculator.plus("1;2;3//;\n");
+
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("구분자가 한개 이상 있는 경우")
+    void dividerIsBackward(){
+      int expected = 1 + 2 + 3;
+      int actual = calculator.plus("//*\n1;2;3//;\n");
+
+      assertEquals(expected, actual);
+
+      actual = calculator.plus("//*\n//;\n1;2;3");
+
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("숫자 이외의 값을 전달하는 경우")
+    void valueIsNotNumeric(){
+      assertThrows(NumberFormatException.class, () -> calculator.plus("//*\n-1?;2;3;l"));
+    }
+
+    @Test
+    @DisplayName("음수를 전달하는 경우")
+    void valueIsNegative(){
+      assertThrows(NumberFormatException.class, () -> calculator.plus("//;\n-1;2;3;"));
+    }
   }
-
-
 }
