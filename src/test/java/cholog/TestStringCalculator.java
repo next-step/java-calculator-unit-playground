@@ -1,7 +1,7 @@
 package cholog;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -24,10 +24,10 @@ public class TestStringCalculator {
 
     //when
     int result = calculator.sum(input);
-    int expected = 6;
+    int expect = 6;
 
     //then
-    assertEquals(expected, result);
+    assertThat(result).isEqualTo(expect);
   }
   @Test
   @DisplayName("구분자 정상 인식 확인")
@@ -37,10 +37,10 @@ public class TestStringCalculator {
 
     //when
     int result = calculator.sum(input);
-    int expected = 6;
+    int expect = 6;
 
     //then
-    assertEquals(expected, result);
+    assertThat(result).isEqualTo(expect);
   }
   @Test
   @DisplayName("지정되지 않은 구분자 에러 확인")
@@ -52,6 +52,6 @@ public class TestStringCalculator {
 
 
     //then
-    assertThrows(Throwable.class, () -> calculator.sum(input));
+    assertThatThrownBy(() -> calculator.sum(input)).isInstanceOf(Throwable.class);
   }
 }

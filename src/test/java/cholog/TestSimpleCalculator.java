@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,7 +29,7 @@ public class TestSimpleCalculator {
     int expect = 15;
 
     //then
-    assertEquals(expect, result);
+    assertThat(result).isEqualTo(expect);
   }
   @Test
   @DisplayName("subtract 정상 동작 확인")
@@ -40,7 +42,7 @@ public class TestSimpleCalculator {
     int expect = 5;
 
     //then
-    assertEquals(expect, result);
+    assertThat(result).isEqualTo(expect);
   }
   @Test
   @DisplayName("multiply 정상 동작 확인")
@@ -53,7 +55,7 @@ public class TestSimpleCalculator {
     int expect = 50;
 
     //then
-    assertEquals(expect, result);
+    assertThat(result).isEqualTo(expect);
   }
   @Test
   @DisplayName("divide 정상 동작 확인")
@@ -66,7 +68,7 @@ public class TestSimpleCalculator {
     int expect = 2;
 
     //then
-    assertEquals(expect, result);
+    assertThat(result).isEqualTo(expect);
   }
   @Test
   @DisplayName("divide by zero 에러 발생 확인")
@@ -77,7 +79,7 @@ public class TestSimpleCalculator {
     //when
 
     //then
-    assertThrows(ArithmeticException.class, () -> calculator.divide(a, b));
+    assertThatThrownBy(() -> calculator.divide(a, b)).isInstanceOf(ArithmeticException.class);
   }
 
 }
