@@ -1,10 +1,11 @@
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Calculator 테스트")
 public class CalculatorTest {
@@ -25,7 +26,8 @@ public class CalculatorTest {
 
       final int result = Calculator.add(a, b);
 
-      assertEquals(9, result);
+//      assertEquals(9, result);
+      assertThat(result).isEqualTo(9);
     }
 
     @Test
@@ -36,7 +38,8 @@ public class CalculatorTest {
 
       final int result = Calculator.subtractBFromA(a, b);
 
-      assertEquals(-1, result);
+//      assertEquals(-1, result);
+      assertThat(result).isEqualTo(-1);
     }
 
     @Test
@@ -47,7 +50,8 @@ public class CalculatorTest {
 
       final int result = Calculator.multiply(a, b);
 
-      assertEquals(20, result);
+//      assertEquals(20, result);
+      assertThat(result).isEqualTo(20);
     }
 
     @Test
@@ -58,7 +62,8 @@ public class CalculatorTest {
 
       final int result = Calculator.divideAByB(a, b);
 
-      assertEquals(2, result);
+//      assertEquals(2, result);
+      assertThat(result).isEqualTo(2);
     }
 
     @Test
@@ -68,9 +73,12 @@ public class CalculatorTest {
 
       final int divider = 0;
 
-      assertThrows(ArithmeticException.class, ()->{
+//      assertThrows(ArithmeticException.class, ()->{
+//        Calculator.divideAByB(divided, divider);
+//      });
+      assertThatThrownBy(() -> {
         Calculator.divideAByB(divided, divider);
-      });
+      }).isInstanceOf(ArithmeticException.class);
     }
   }
 
