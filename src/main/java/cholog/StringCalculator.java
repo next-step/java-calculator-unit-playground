@@ -5,13 +5,16 @@ import java.util.Arrays;
 public class StringCalculator {
   private final StringBuilder regex = new StringBuilder(",|:");
 
-  int sum(String input) {
+  String parse(String input) {
     if (input.startsWith("//")) {
       regex.append("|").append(input.charAt(2));
-      input = input.substring(5);
+      return input.substring(input.indexOf("\n") + 1);
     }
+    return input;
+  }
 
-    return Arrays.stream(input.split(regex.toString()))
+  int sum(String input) {
+    return Arrays.stream(parse(input).split(regex.toString()))
         .mapToInt(Integer::parseInt)
         .sum();
   }
