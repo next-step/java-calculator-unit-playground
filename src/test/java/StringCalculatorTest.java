@@ -56,6 +56,15 @@ public class StringCalculatorTest {
     assertThrows(RuntimeException.class, ()->{
       StringCalculator.parseAndSum(targetText);
     });
+  }
 
+  @Test
+  @DisplayName("덧셈_예외_테스트_케이스_문자인_경우")
+  void testAdditionCaseTextToken() {
+    String targetText = "//;\n12;-24;0,-really:test";
+
+    assertThrows(RuntimeException.class, ()->{
+      StringCalculator.parseAndSum(targetText);
+    });
   }
 }
