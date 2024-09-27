@@ -23,17 +23,21 @@ public final class StringCalculator {
    * @param text 파싱할 문자열
    * @return 파싱결과로 생성된 숫자 배열
    */
-  private static int[] parse(final String text) {
+  private static int[] parse(String text) {
 
-    text.replace("//", "");
-    text.replace("\n", "");
-    int sum = 0;
+    if (text.startsWith("//")) {
+      text = text.replace("//", "");
+      text = text.replace("\n", "");
+      char newToken = text.charAt(0);
+      text = text.replace(newToken + "", ",");
+    }
+    text = text.replace(":", ",");
 
-    String[] tokens = text.split("[,|:]");
+    String[] tokens = text.split(",");
     int[] tokensResult = new int[tokens.length];
 
     for (int i = 0; i < tokens.length; i++) {
-      if (tokens[i].length() == 1) {
+      if (!tokens[i].isEmpty()) {
         tokensResult[i] = Integer.parseInt(tokens[i]);
       }
     }
