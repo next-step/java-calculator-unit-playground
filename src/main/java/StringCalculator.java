@@ -18,8 +18,6 @@ public final class StringCalculator {
   }
 
   /**
-   * TODO: parse 메서드 구현
-   *
    * @param text 파싱할 문자열
    * @return 파싱결과로 생성된 숫자 배열
    */
@@ -38,6 +36,9 @@ public final class StringCalculator {
     for (int i = 0; i < tokens.length; i++) {
       if (!tokens[i].isEmpty()) {
         tokensResult[i] = Integer.parseInt(tokens[i]);
+        if (tokensResult[i] < 0) {
+          throw new RuntimeException();
+        }
       }
     }
 
