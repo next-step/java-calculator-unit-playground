@@ -13,7 +13,7 @@ public class StringCalculator {
     return input;
   }
 
-  int sum(String input) {
+  int sum(String input){
     return Arrays.stream(parse(input).split(regex.toString()))
         .mapToInt(Integer::parseInt)
         .sum();

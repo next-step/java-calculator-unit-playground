@@ -1,6 +1,7 @@
 package cholog;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -40,5 +41,17 @@ public class TestStringCalculator {
 
     //then
     assertEquals(expected, result);
+  }
+  @Test
+  @DisplayName("지정되지 않은 구분자 에러 확인")
+  public void unknownSeperator() {
+    //given
+    String input = "1;2;3";
+
+    //when
+
+
+    //then
+    assertThrows(Throwable.class, () -> calculator.sum(input));
   }
 }
