@@ -31,7 +31,7 @@ public class StringCalculatorTest {
   @Test
   @DisplayName("덧셈_테스트_케이스_구분자가_다른_경우")
   void testAdditionCaseDifferentSeparator() {
-    String targetText = "//;\\n1;2;4";
+    String targetText = "//;\n1;2;4";
 
     int result = StringCalculator.parseAndSum(targetText);
 
