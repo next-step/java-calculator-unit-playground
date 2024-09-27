@@ -26,8 +26,7 @@ public final class StringCalculator {
   private static int[] parse(String text) {
 
     if (text.startsWith("//")) {
-      text = text.replace("//", "");
-      text = text.replace("\n", "");
+      text = text.replace("//", "").replace("\n", "");
       char newToken = text.charAt(0);
       text = text.replace(newToken + "", ",");
     }
