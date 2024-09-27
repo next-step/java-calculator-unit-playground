@@ -1,8 +1,9 @@
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("String Calculator 테스트")
@@ -15,7 +16,8 @@ public class StringCalculatorTest {
 
     int result = StringCalculator.parseAndSum(targetText);
 
-    assertEquals(6, result);
+//    assertEquals(6, result);
+    assertThat(result).isEqualTo(6);
   }
 
   @Test
@@ -25,7 +27,8 @@ public class StringCalculatorTest {
 
     int result = StringCalculator.parseAndSum(targetText);
 
-    assertEquals(3, result);
+//    assertEquals(3, result);
+    assertThat(result).isEqualTo(3);
   }
 
   @Test
@@ -35,7 +38,8 @@ public class StringCalculatorTest {
 
     int result = StringCalculator.parseAndSum(targetText);
 
-    assertEquals(16, result);
+//    assertEquals(16, result);
+    assertThat(result).isEqualTo(16);
   }
 
   @Test
@@ -45,17 +49,21 @@ public class StringCalculatorTest {
 
     int result = StringCalculator.parseAndSum(targetText);
 
-    assertEquals(36, result);
+//    assertEquals(36, result);
+    assertThat(result).isEqualTo(36);
   }
 
   @Test
   @DisplayName("덧셈_예외_테스트_케이스_음수인_경우")
   void testAdditionCaseNegativeNumbers() {
     String targetText = "//;\n12;-24;0,-13:123";
-
-    assertThrows(RuntimeException.class, ()->{
+//
+//    assertThrows(RuntimeException.class, () -> {
+//      StringCalculator.parseAndSum(targetText);
+//    });
+    assertThatThrownBy(() -> {
       StringCalculator.parseAndSum(targetText);
-    });
+    }).isInstanceOf(RuntimeException.class);
   }
 
   @Test
@@ -63,8 +71,11 @@ public class StringCalculatorTest {
   void testAdditionCaseTextToken() {
     String targetText = "//;\n12;-24;0,-really:test";
 
-    assertThrows(RuntimeException.class, ()->{
+//    assertThrows(RuntimeException.class, () -> {
+//      StringCalculator.parseAndSum(targetText);
+//    });
+    assertThatThrownBy(() -> {
       StringCalculator.parseAndSum(targetText);
-    });
+    }).isInstanceOf(RuntimeException.class);
   }
 }
