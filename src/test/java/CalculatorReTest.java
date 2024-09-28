@@ -1,10 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("계산기 테스트")
-class CalculatorTest {
+class CalculatorReTest {
   final Calculator calculator = new Calculator();
 
   @Nested
@@ -20,7 +23,7 @@ class CalculatorTest {
       int expected = 67;
       int actual = calculator.add(num1, num2);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
     @Test
@@ -32,7 +35,7 @@ class CalculatorTest {
       int expected = 79;
       int actual = calculator.sub(num1, num2);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
     @Test
@@ -44,7 +47,7 @@ class CalculatorTest {
       int expected = 253;
       int actual = calculator.multi(num1, num2);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
     @Test
@@ -56,7 +59,7 @@ class CalculatorTest {
       int expected = 7;
       int actual = calculator.divis(num1, num2);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
     @Test
@@ -68,7 +71,7 @@ class CalculatorTest {
       int expected = 4;
       int actual = calculator.divis(num1, num2);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
   }
 
@@ -84,7 +87,7 @@ class CalculatorTest {
       int expected = 14;
       int actual = calculator.stringToSum(input);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
     @Test
@@ -95,7 +98,7 @@ class CalculatorTest {
       int expected = 14;
       int actual = calculator.stringToSum(input);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
     @Test
@@ -106,7 +109,7 @@ class CalculatorTest {
       int expected = 14;
       int actual = calculator.stringToSum(input);
 
-      assertEquals(expected, actual);
+      assertThat(expected).isEqualTo(actual);
     }
 
   }

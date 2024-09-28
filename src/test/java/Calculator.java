@@ -25,8 +25,6 @@ public class Calculator {
    */
   public int stringToSum(String string) {
 
-
-
     String regex = "[:,]";
     Pattern pattern = Pattern.compile("//([^0-9\\\\n])\\\\n");
     Matcher matcher = pattern.matcher(string);
