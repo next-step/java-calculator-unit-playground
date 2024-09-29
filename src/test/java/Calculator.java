@@ -29,14 +29,33 @@ public class Calculator {
     Pattern pattern = Pattern.compile("//([^0-9\\\\n])\\\\n");
     Matcher matcher = pattern.matcher(string);
 
+    // 문자열 해석
     if (matcher.find()) {
       regex = "[" + ":," + matcher.group(1) +"]";
-      string = string.substring(5);
+      try {
+        string = string.substring(5);
+      }
+      catch (Exception e) {
+        throw new RuntimeException("올바르지 않은 문자열 입니다.");
+      }
     }
 
-    String[] strArr = string.split(regex);
 
+    // 문자열 -> 정수배열로 변환
+    String[] strArr = string.split(regex);
     int[] arr = Arrays.stream(strArr).mapToInt(Integer::parseInt).toArray();
-    return Arrays.stream(arr).sum();
+
+
+    // 배열 합 계산
+    int sum = 0;
+    for (int i : arr) {
+
+      // 음수 예외처리
+      if (i < 0) throw new RuntimeException("음수가 포함되어 있습니다.");
+
+      sum += i;
+    }
+
+    return sum;
   }
 }

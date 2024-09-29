@@ -1,6 +1,8 @@
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -110,6 +112,24 @@ class CalculatorReTest {
       int actual = calculator.stringToSum(input);
 
       assertThat(expected).isEqualTo(actual);
+    }
+
+    @Test
+    @DisplayName("음수 입력 테스트")
+    void negativeInputTest() {
+      String input = "//_\\n-3_4_7";
+
+      assertThatThrownBy(() -> calculator.stringToSum(input))
+          .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("잘못된 문자열 테스트")
+    void wrongInputTest() {
+      String input = "// \\n-3_4_7";
+
+      assertThatThrownBy(() -> calculator.stringToSum(input))
+          .isInstanceOf(RuntimeException.class);
     }
 
   }

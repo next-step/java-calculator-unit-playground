@@ -1,7 +1,10 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("계산기 테스트")
 class CalculatorTest {
@@ -107,6 +110,22 @@ class CalculatorTest {
       int actual = calculator.stringToSum(input);
 
       assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("음수 입력 테스트")
+    void negativeInputTest() {
+      String input = "//_\\n-3_4_7";
+
+      assertThrows(RuntimeException.class, () -> calculator.stringToSum(input));
+    }
+
+    @Test
+    @DisplayName("잘못된 문자열 테스트")
+    void wrongInputTest() {
+      String input = "// \\n-3_4_7";
+
+      assertThrows(RuntimeException.class, () -> calculator.stringToSum(input));
     }
 
   }
