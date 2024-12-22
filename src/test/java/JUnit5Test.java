@@ -15,6 +15,8 @@ public class JUnit5Test {
         @DisplayName("더하기 테스트")
         void add_test() {
             assertEquals(calculator.add(1, 2), 3, "더하기 테스트 실패");
+            assertEquals(calculator.add("3,4:2"), 9, "문자열 더하기 테스트 실패");
+            assertEquals(calculator.add("//[\n3[6:5"), 11, "커스텀 구분자 더하기 테스트 실패");
         }
 
         @Test
