@@ -36,7 +36,7 @@ public class Calculator {
       str = text.substring(endIndex + 1);
     }
 
-    String[] tokens = text.split(delimiter);
+    String[] tokens = str.split(delimiter);
     int sum = 0;
 
     for (String token : tokens) {
