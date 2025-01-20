@@ -8,53 +8,53 @@ public class calTest {
 
     @Nested
     @DisplayName("계산기 사칙연산 테스트")
-    class CalTests {
+    class CalTest {
 
         @Test
         void AddTest() {
             Calculator calc = new Calculator();
-            assertEquals(calc.add(2, 3), 5);
+            assertEquals(6, calc.add("1,2;3"));
         }
         @Test
-        void AddWrongTest() {
+        void AddTest2() {
             Calculator calc = new Calculator();
-            assertEquals( calc.add(2, 3), 6);
+            assertEquals(6, calc.add("//;\n1;2;3"));
         }
 
         @Test
         void SubTest() {
             Calculator calc = new Calculator();
-            assertEquals(calc.sub(5, 1), 4);
+            assertEquals(1, calc.sub("8,6;1"));
         }
 
         @Test
-        void SubWrongTest() {
+        void SubTest2() {
             Calculator calc = new Calculator();
-            assertEquals(calc.sub(5, 1), 5);
+            assertEquals(1, calc.sub("//;\n8,6;1"));
         }
 
         @Test
         void MulTest() {
             Calculator calc = new Calculator();
-            assertEquals(calc.mul(2, 3), 6);
+            assertEquals(6, calc.mul("1,2;3"));
         }
 
         @Test
-        void MulWrongTest() {
+        void MulTest2() {
             Calculator calc = new Calculator();
-            assertEquals(calc.mul(2, 3), 5);
+            assertEquals(6, calc.mul("//;\n1,2;3"));
         }
 
         @Test
         void DivTest() {
             Calculator calc = new Calculator();
-            assertEquals(calc.div(6, 3), 2);
+            assertEquals(2, calc.div("12,2;3"));
         }
 
         @Test
-        void DivWrongTest() {
+        void DivTest2() {
             Calculator calc = new Calculator();
-            assertEquals( calc.div(6, 3), 1);
+            assertEquals(2, calc.div("//;\n12,2;3"));
         }
 
     }
