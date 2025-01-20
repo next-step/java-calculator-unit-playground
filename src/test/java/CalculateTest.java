@@ -11,7 +11,6 @@ public class CalculateTest {
     private final int a = 6;
     private final int b = 3;
 
-
     @Test
     @DisplayName("OK : 두 수 덧셈 성공")
     void sum() {
