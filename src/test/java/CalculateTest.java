@@ -1,46 +1,67 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculateTest {
 
     private final Calculate calculate = new Calculate();
 
+    private final int a = 6;
+    private final int b = 3;
+
+
     @Test
     @DisplayName("OK : 두 수 덧셈 성공")
     void sum() {
-        int a = 6;
-        int b = 3;
-        int result = calculate.add(a, b);
-        assertEquals(a + b, result);
+        assertThat(calculate.add(a, b)).isEqualTo(a + b);
     }
 
     @Test
     @DisplayName("OK : 두 수 뺄셈 성공")
     void subtract() {
-        int a = 6;
-        int b = 3;
-        int result = calculate.subtract(a, b);
-        assertEquals(a - b, result);
+        assertThat(calculate.subtract(a, b)).isEqualTo(a - b);
     }
 
     @Test
     @DisplayName("OK : 두 수 곱셈 성공")
     void multiply() {
-        int a = 6;
-        int b = 3;
-        int result = calculate.multiply(a, b);
-        assertEquals(a * b, result);
+        assertThat(calculate.multiply(a, b)).isEqualTo(a * b);
     }
 
     @Test
     @DisplayName("OK : 두 수 나누기 성공")
     void divide() {
-        int a = 6;
-        int b = 3;
-        int result = calculate.divide(a, b);
-        assertEquals(a / b, result);
+        assertThat(calculate.divide(a, b)).isEqualTo(a / b);
+    }
+
+    @Test
+    @DisplayName("OK : 문자열 덧셈 성공")
+    void calculateFromString() {
+        assertThat(calculate.calculateFromString("//;\\n1;2:3")).isEqualTo(6);
+        assertThat(calculate.calculateFromString("1,2:3")).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("ERROR : 문자열 덧셈 실패 - 음수 포함")
+    void string_exception() {
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("//;\\n1,-2:3"));
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("1,-2:3"));
+    }
+
+    @Test
+    @DisplayName("ERROR : 문자열 덧셈 실패 - 잘못된 구분자")
+    void string_exception2() {
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("//;\\n1!2;3"));
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("1!2;3"));
+    }
+
+    @Test
+    @DisplayName("ERROR : 문자열 덧셈 실패 - 잘못된 형식 입력")
+    void string_exception3() {
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("@@;\\n1,2;3"));
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("//;\\n1,#;3"));
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("1,@;3"));
     }
 }

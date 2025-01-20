@@ -26,13 +26,16 @@ public class Calculate {
     public int calculateFromString(String input) {
         StringTokenizer tokenizer = new StringTokenizer(extractDelimitedString(input), extractDelimiters(input));
         int sum = 0;
-
         while (tokenizer.hasMoreTokens()) {
-            int parseInt = Integer.parseInt(tokenizer.nextToken());
-            if (parseInt < 0) {
-                throw new IllegalArgumentException("음수는 들어올 수 없습니다.");
+            try{
+                int parseInt = Integer.parseInt(tokenizer.nextToken());
+                if (parseInt < 0) {
+                    throw new IllegalArgumentException("음수는 들어올 수 없습니다.");
+                }
+                sum += parseInt;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             }
-            sum += parseInt;
         }
 
         return sum;
