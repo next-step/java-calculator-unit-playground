@@ -1,19 +1,19 @@
 public class Calculator
 {
-    public int add(int a, int b)
+    public int add(int first, int second)
     {
-        return a+b;
+        return first+second;
     }
-    public int sub(int a, int b)
+    public int sub(int first, int second)
     {
-        return a-b;
+        return first-second;
     }
-    public int mul(int a, int b)
+    public int mul(int first, int second)
     {
-        return a*b;
+        return first*second;
     }
-    public int div(int a, int b)
+    public int div(int first, int second)
     {
-        return a/b;
+        return first/second;
     }
 }

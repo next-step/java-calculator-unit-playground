@@ -19,6 +19,9 @@ public class RefactoringTest {
                 assertThat(c.sumCalculator("//;\\n1;2;3")).isEqualTo(6);
                 assertThat(c.sumCalculator("//;123\\n4;4;5162637")).isEqualTo(32);
                 assertThat(c.sumCalculator("//;6\\n4;4;516261;37")).isEqualTo(99);
+                assertThat(c.sumCalculator("::")).isEqualTo(0);
+                // 에러 발생 케이스 - 숫자가 아닌 입력
+                // assertThat(c.sumCalculator(";6\\n4;4;516261;37")).isEqualTo(99);
             }
             catch (AssertionError e)
             {
