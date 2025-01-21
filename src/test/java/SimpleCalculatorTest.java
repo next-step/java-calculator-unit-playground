@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimpleCalculatorTest {
     @Nested
-    class SimpleSimpleCalculatorTest {
+    class SimpleTest {
 
         @Test
         void addTest(){
