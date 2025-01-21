@@ -40,27 +40,29 @@ public class CalculateTest {
     void calculateFromString() {
         assertThat(calculate.calculateFromString("//;\\n1;2:3")).isEqualTo(6);
         assertThat(calculate.calculateFromString("1,2:3")).isEqualTo(6);
+        assertThat(calculate.calculateFromString("7")).isEqualTo(7);
     }
 
     @Test
     @DisplayName("ERROR : 문자열 덧셈 실패 - 음수 포함")
-    void string_exception() {
+    void calculateFromString_exception_negative() {
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("//;\\n1,-2:3"));
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("1,-2:3"));
     }
 
     @Test
     @DisplayName("ERROR : 문자열 덧셈 실패 - 잘못된 구분자")
-    void string_exception2() {
+    void calculateFromString_exception_Invalid_delimiter() {
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("//;\\n1!2;3"));
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("1!2;3"));
     }
 
     @Test
     @DisplayName("ERROR : 문자열 덧셈 실패 - 잘못된 형식 입력")
-    void string_exception3() {
+    void calculateFromString_exception_Invalid_Input() {
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("@@;\\n1,2;3"));
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("//;\\n1,#;3"));
         assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString("1,@;3"));
+        assertThrows(IllegalArgumentException.class, () -> calculate.calculateFromString(" "));
     }
 }
