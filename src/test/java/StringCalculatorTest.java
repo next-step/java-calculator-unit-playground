@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
     @Nested
@@ -13,6 +14,7 @@ public class StringCalculatorTest {
             assertEquals(6, calc.sum("1,2,3"));
             assertEquals(3, calc.sum("1:2"));
             assertEquals(38, calc.sum("1:2,3:4,5:6:7:10"));
+            assertEquals(0, calc.sum(""));
         }
 
         @Test
@@ -28,7 +30,12 @@ public class StringCalculatorTest {
         @Test
         void exceptionTest(){
             StringCalculator calc = new StringCalculator();
-            assertEquals(0, calc.sum(""));
+
+            RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                calc.sum("-1,2")
+            );
+
+            assertEquals("음수는 입력이 불가합니다.", exception.getMessage());
         }
     }
 
