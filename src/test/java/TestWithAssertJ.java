@@ -15,3 +15,4 @@ public class TestWithAssertJ {
         }
     }
 }
+1
