@@ -9,5 +9,9 @@ public class TestWithAssertJ {
 
         }
 
+        @Test
+        void stringCalcTest(){
+
+        }
     }
 }
