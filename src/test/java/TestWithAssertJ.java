@@ -6,7 +6,7 @@ public class TestWithAssertJ {
     class CalculatorTest{
         @Test
         void simpleCalcTest(){
-
+            SimpleCalculator calc = new SimpleCalculator();
         }
 
         @Test
