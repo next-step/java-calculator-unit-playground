@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class JUnit5Calculator {
@@ -48,7 +49,11 @@ public class JUnit5Calculator {
         @MethodSource("exampleSource")
         @DisplayName("나눗셈")
         void division(int a, int b) {
-            assertEquals(a / b, calculator.divide(a, b));
+            if (b == 0) {
+                assertThrows(ArithmeticException.class, () -> calculator.divide(a, b));
+            } else {
+                assertEquals(a / b, calculator.divide(a, b));
+            }
         }
     }
 }
