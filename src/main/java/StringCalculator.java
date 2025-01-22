@@ -7,6 +7,10 @@ import java.util.Arrays;
 
 public class StringCalculator {
     public static int test(String str) {
+        if (str == null || str.isEmpty()) {
+            return 0;
+        }
+
         String[] tokens = str.split("[,|:]");
         int res = 0;
 
