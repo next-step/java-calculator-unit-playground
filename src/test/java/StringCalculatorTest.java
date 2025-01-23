@@ -14,10 +14,11 @@ public class StringCalculatorTest {
         assertEquals(6, StringCalculator.calculate(str));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "  "})
     @DisplayName("공백을 줬을 경우 테스트")
-    public void testEmptyValue() {
-        assertEquals(0, StringCalculator.calculate(""));
+    public void testEmptyValue(String value) {
+        assertEquals(0, StringCalculator.calculate(value));
     }
 
     @ParameterizedTest

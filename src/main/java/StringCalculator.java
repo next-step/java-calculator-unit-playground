@@ -11,7 +11,7 @@ public class StringCalculator {
         String[] tokens;
         int res = 0;
 
-        if (str == null || str.isEmpty()) {
+        if (str == null || str.isBlank()) {
             return 0;
         }
 
