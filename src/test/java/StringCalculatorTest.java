@@ -40,4 +40,10 @@ public class StringCalculatorTest {
     public void testEmptyCustomDelimeter() {
         assertThatThrownBy(() -> StringCalculator.calculate("//\n1;2;3")).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    @DisplayName("계산 결과가 int 범위를 벗어나는 경우 예외 발생 테스트")
+    public void testReusltOverflow() {
+        assertThatThrownBy(() -> StringCalculator.calculate("2147483647:2:3")).isInstanceOf(ArithmeticException.class);
+    }
 }

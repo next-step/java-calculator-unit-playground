@@ -45,9 +45,11 @@ public class StringCalculator {
 
         for (String token : tokens) {
             try {
-                res += Integer.parseInt(token);
+                res = Math.addExact(res, Integer.parseInt(token));
             } catch (NumberFormatException e) {
                 throw new RuntimeException("숫자 이외의 값 또는 음수를 전달할 수 없습니다.");
+            } catch (ArithmeticException e) {
+                throw new ArithmeticException("연산 결과가 자료형 int의 범위를 벗어났습니다.");
             }
         }
 
