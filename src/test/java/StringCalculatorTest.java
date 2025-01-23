@@ -19,4 +19,18 @@ public class StringCalculatorTest {
     public void testEmptyValue() {
         assertEquals(0, StringCalculator.test(""));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//!!\n1!!2!!3"})
+    @DisplayName("커스텀 구분자 테스트")
+    public void testCustomDelimeter(String value) {
+        assertEquals(6, StringCalculator.test(value));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"/;\n1;2;3", "/;\t1;2;3", "//;;\n1;2;3"})
+    @DisplayName("커스텀 구분자 형식에 맞지 않을 경우 예외 발생 테스트")
+    public void testCustomDelimeterFormatError(String value) {
+        assertThrows(RuntimeException.class, () -> StringCalculator.test(value));
+    }
 }
