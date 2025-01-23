@@ -28,7 +28,7 @@ public class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"/;\n1;2;3", "/;\t1;2;3", "//;;\n1;2;3"})
+    @ValueSource(strings = {"/;\n1;2;3", "/;\t1;2;3", "//;;\n1;2;3", "// n1 2 3"})
     @DisplayName("커스텀 구분자 형식에 맞지 않을 경우 예외 발생 테스트")
     public void testCustomDelimeterFormatError(String value) {
         assertThrows(RuntimeException.class, () -> StringCalculator.calculate(value));

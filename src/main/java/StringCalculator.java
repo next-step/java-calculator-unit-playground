@@ -34,11 +34,17 @@ public class StringCalculator {
         int startIdx = str.indexOf("//");
         int endIdx = str.indexOf("\n");
 
-        if (startIdx == -1 || endIdx == -1) {
+        if ((startIdx == -1) != (endIdx == -1)) { // 커스텀 구분자 형식인 // 과 \n 중 하나만 존재하는 경우
             throw new RuntimeException("커스텀 구분자 형식에 맞지 않는 문자열을 전달했습니다.");
         }
 
-        return str.substring(startIdx + 2, endIdx);
+        else if ((startIdx != -1)) { // 커스텀 구분자 형식인 경우
+            return str.substring(startIdx + 2, endIdx);
+        }
+
+        else { // 디폴트 구분자 형식인 경우
+            return null;
+        }
     }
 
     public static int sum(String[] tokens) {
