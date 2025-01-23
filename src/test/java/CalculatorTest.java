@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("계산기 기능 테스트 클래스")
@@ -9,7 +12,7 @@ public class CalculatorTest {
     public void testAdd() {
         int num1 = 1, num2 = 2;
 
-        assertEquals(3, Calculator.add(num1, num2));
+        assertThat(3).isEqualTo(Calculator.add(num1, num2));
     }
 
     @Test
@@ -17,7 +20,7 @@ public class CalculatorTest {
     public void testSub() {
         int num1 = 1, num2 = 2;
 
-        assertEquals(-1, Calculator.sub(num1, num2));
+        assertThat(-1).isEqualTo(Calculator.sub(num1, num2));
     }
 
     @Test
@@ -25,7 +28,7 @@ public class CalculatorTest {
     public void testMul() {
         int num1 = 10, num2 = 2;
 
-        assertEquals(20, Calculator.mul(num1, num2));
+        assertThat(20).isEqualTo(Calculator.mul(num1, num2));
     }
 
     @Test
@@ -33,7 +36,7 @@ public class CalculatorTest {
     public void testDiv() {
         int num1 = 1, num2 = 2;
 
-        assertEquals(0, Calculator.div(num1, num2));
+        assertThat(0).isEqualTo(Calculator.div(num1, num2));
     }
 
     @Test
@@ -41,14 +44,24 @@ public class CalculatorTest {
     public void testDivideByZero() {
         int num1 = 2, num2 = 0;
 
-        assertThrows(ArithmeticException.class, () -> Calculator.div(num1, num2));
+        assertThatThrownBy(() -> {
+            Calculator.div(num1, num2);
+        }).isInstanceOf(ArithmeticException.class);
     }
 
     @Test
     @DisplayName("연산 후 int 범위를 벗어나는 지 테스트")
     public void testOverflow() {
-        assertThrows(ArithmeticException.class, () -> Calculator.add(Integer.MAX_VALUE, 1));
-        assertThrows(ArithmeticException.class, () -> Calculator.sub(Integer.MIN_VALUE, 1));
-        assertThrows(ArithmeticException.class, () -> Calculator.mul(Integer.MAX_VALUE, 2));
+        assertThatThrownBy(() -> {
+            Calculator.add(Integer.MAX_VALUE, 1);
+        }).isInstanceOf(ArithmeticException.class);
+
+        assertThatThrownBy(() -> {
+            Calculator.sub(Integer.MIN_VALUE, 1);
+        }).isInstanceOf(ArithmeticException.class);
+
+        assertThatThrownBy(() -> {
+            Calculator.mul(Integer.MAX_VALUE, 2);
+        }).isInstanceOf(ArithmeticException.class);
     }
 }
