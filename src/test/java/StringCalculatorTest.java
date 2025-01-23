@@ -34,4 +34,10 @@ public class StringCalculatorTest {
     public void testCustomDelimeterFormatError(String value) {
         assertThrows(RuntimeException.class, () -> StringCalculator.calculate(value));
     }
+
+    @Test
+    @DisplayName("커스텀 구분자에 아무것도 주지 않은 상황 테스트")
+    public void testEmptyCustomDelimeter() {
+        assertThrows(RuntimeException.class, () -> StringCalculator.calculate("//\n1;2;3"));
+    }
 }

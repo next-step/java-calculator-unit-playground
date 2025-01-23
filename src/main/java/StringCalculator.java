@@ -34,7 +34,7 @@ public class StringCalculator {
         int startIdx = str.indexOf("//");
         int endIdx = str.indexOf("\n");
 
-        if ((startIdx == -1) != (endIdx == -1)) { // 커스텀 구분자 형식인 // 과 \n 중 하나만 존재하는 경우
+        if ((startIdx == -1) != (endIdx == -1) || (startIdx + 2 == endIdx)) { // 커스텀 구분자 형식인 // 과 \n 중 하나만 존재하거나 구분자가 없는 경우
             throw new RuntimeException("커스텀 구분자 형식에 맞지 않는 문자열을 전달했습니다.");
         }
 
