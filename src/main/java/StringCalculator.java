@@ -6,7 +6,7 @@
 import java.util.Arrays;
 
 public class StringCalculator {
-    public static int test(String str) {
+    public static int calculate(String str) {
         String delimeter = "[,|:]";
         String[] tokens;
         int res = 0;
