@@ -4,6 +4,8 @@ input을 받고 빈문자열인지 null인지 체크
 구분자 대로 문자열 계산기 구현
  */
 
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
@@ -40,16 +42,28 @@ public class StringCalculator {
 
         for(var n : strings){
             if(n.isEmpty()) throw new RuntimeException("빈 문자열입니다.");
+
+            int num = checkException(n);
+
             //예외 처리
-            try{
-                int num = Integer.parseInt(n);
-                if(num < 0) throw new RuntimeException("음수는 입력이 불가합니다.");
-                sum += num;
-            }
-            catch(NumberFormatException msg){
-                throw new RuntimeException("잘못된 숫자 형식입니다.");
-            }
+            if(sum > Integer.MAX_VALUE - num) throw new RuntimeException("int 범위를 벗어났습니다.");
+
+            sum += num;
         }
         return sum;
     }
+
+
+    public int checkException(String n){
+        int num;
+        try{
+            num = Integer.parseInt(n);
+            if(num < 0) throw new RuntimeException("음수는 입력이 불가합니다.");
+        }
+        catch(NumberFormatException msg){
+            throw new RuntimeException("int 값을 벗어났거나 잘못된 숫자 형식입니다.");
+        }
+        return num;
+    }
+
 }
