@@ -80,5 +80,4 @@ public class StringCalculator {
         String[] strings = splitInput(checkedInput, idx);
         return sum(strings);
     }
-
 }
