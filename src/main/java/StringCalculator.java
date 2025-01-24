@@ -46,6 +46,7 @@ public class StringCalculator {
     //문자열 덧셈 실행
     public int sum(String[] strings){
         if(strings.length == 0) return 0;
+
         int sum = 0;
 
         for(var n : strings){
