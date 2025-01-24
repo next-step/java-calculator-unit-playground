@@ -55,7 +55,7 @@ public class StringCalculator {
             int num = checkException(n);
 
             //예외 처리
-            if(sum > Integer.MAX_VALUE - num) throw new RuntimeException("int 범위를 벗어났습니다.");
+            if(sum > Integer.MAX_VALUE - num || sum < Integer.MIN_VALUE + num) throw new RuntimeException("int 범위를 벗어났습니다.");
 
             sum += num;
         }

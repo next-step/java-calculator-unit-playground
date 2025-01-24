@@ -36,8 +36,12 @@ public class StringCalculatorTest {
             );
 
             assertEquals("음수는 입력이 불가합니다.", exception.getMessage());
+
+            RuntimeException exception2 = assertThrows(RuntimeException.class, () ->
+                    calc.calculate("2147483647,10")
+            );
+
+            assertEquals("int 범위를 벗어났습니다.", exception2.getMessage());
         }
     }
-
-    //test 파일 더 작성하기 1. 커스텀 문자 다양하게 2. 숫자 다양하게 3. 에러 메세지 정상작동 검사, 빈문자 0 처리
 }
