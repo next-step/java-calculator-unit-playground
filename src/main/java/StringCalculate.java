@@ -31,13 +31,13 @@ public class StringCalculate {
 
     private void validateNonNegativeNumber(int parseInt) {
         if (parseInt < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException("음수가 아닌 정수를 입력해주세요.");
         }
     }
 
     private void validateNumber(String token) {
         if (!token.matches(NUMBER_PATTERN)) {
-            throw new IllegalArgumentException("숫자를 입력 해야합니다.");
+            throw new IllegalArgumentException("음수가 아닌 정수를 입력 해주세요.");
         }
     }
 
@@ -63,7 +63,7 @@ public class StringCalculate {
 
     private boolean validateDelimiterPattern(String input) {
         if (!input.matches(DELIMITER_PATTERN)) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            throw new IllegalArgumentException("제시된 형식에 맞추어 입력 해주세요.");
         }
 
         return true;
