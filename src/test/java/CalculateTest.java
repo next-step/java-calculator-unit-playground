@@ -36,6 +36,12 @@ public class CalculateTest {
     }
 
     @Test
+    @DisplayName("OK : 두 수 나누기 실패 - 0 나누기")
+    void divide_exception_zero() {
+        assertThrows(ArithmeticException.class, () -> calculate.divide(a, 0));
+    }
+
+    @Test
     @DisplayName("OK : 문자열 덧셈 성공")
     void calculateFromString() {
         assertThat(calculate.calculateFromString("//;\\n1;2:3")).isEqualTo(6);
