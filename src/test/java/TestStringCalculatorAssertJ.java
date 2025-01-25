@@ -39,6 +39,10 @@ public class TestStringCalculatorAssertJ {
             assertThat(3).isEqualTo(sc.addAll("1:2"));
             assertThat(1).isEqualTo(sc.addAll("1"));
 
+            //기본 구분자 혼용 사용
+            assertThat(10).isEqualTo(sc.addAll("1,2,3:4"));
+            assertThat(10).isEqualTo(sc.addAll("1:2,3:4"));
+
             //커스텀 구분자 사용
             assertThat(10).isEqualTo(sc.addAll("//;\n1;2;3;4"));
             assertThat(6).isEqualTo(sc.addAll("//;\n1;2;3"));
@@ -49,6 +53,10 @@ public class TestStringCalculatorAssertJ {
             assertThat(6).isEqualTo(sc.addAll("//^\n1^2^3"));
             assertThat(3).isEqualTo(sc.addAll("//^\n1^2"));
             assertThat(1).isEqualTo(sc.addAll("//^\n1"));
+
+            //커스텀 구분자 지정 및 기본 구분자와 혼용 사용
+            assertThat(10).isEqualTo(sc.addAll("//;\n1,2:3;4"));
+            assertThat(15).isEqualTo(sc.addAll("//$\n1,2:3$4,5"));
         }
 
         @Test

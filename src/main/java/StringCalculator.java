@@ -21,9 +21,13 @@ public class StringCalculator {
                 throw new RuntimeException("올바르지 않은 커스텀 구분자 지정 구문입니다.");
             }
 
-            regex = "[" + Pattern.quote(input.substring(2, formatEndIndex)) + "]"; //Pattern.quote를 이용하여 특수문자를 안전하게 처리
+            regex = "[,|:|" + Pattern.quote(input.substring(2, formatEndIndex)) + "]"; //Pattern.quote를 이용하여 특수문자를 안전하게 처리
             input = input.substring(formatEndIndex+1); //커스텀 구분자 지정하는 부분을 제거
 
+        }else if(input.contains("\n"))
+        {
+            // "\n"은 있지만 "//"으로 시작하지 않는 경우에 RuntimeException 던지기
+            throw new RuntimeException("올바르지 않은 커스텀 구분자 지정 구문입니다.");
         }
 
         return calculateSum(input,regex);
