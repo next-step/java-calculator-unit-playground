@@ -11,7 +11,7 @@ public class StringCalculator {
         if(input == null || input.isEmpty()) return 0;
 
         //기본 구분자 정규표현식 (, 또는 :)
-        String splitter = "[,|:]";
+        String regex = "[,|:]";
 
         //커스텀 구분자를 사용하는 경우
         if (input.startsWith("//")) {
@@ -21,16 +21,16 @@ public class StringCalculator {
                 throw new RuntimeException("올바르지 않은 커스텀 구분자 지정 구문입니다.");
             }
 
-            splitter = "[" + Pattern.quote(input.substring(2, formatEndIndex)) + "]"; //Pattern.quote를 이용하여 특수문자를 안전하게 처리
+            regex = "[" + Pattern.quote(input.substring(2, formatEndIndex)) + "]"; //Pattern.quote를 이용하여 특수문자를 안전하게 처리
             input = input.substring(formatEndIndex+1); //커스텀 구분자 지정하는 부분을 제거
 
         }
 
-        return calculateSum(input,splitter);
+        return calculateSum(input,regex);
     }
 
-    private int calculateSum(String numbers, String splitter) {
-        String[] tokens = numbers.split(splitter);
+    private int calculateSum(String numbers, String regex) {
+        String[] tokens = numbers.split(regex);
 
         List<Integer> parsedNumbers = new ArrayList<>();
 
