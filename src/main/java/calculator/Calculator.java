@@ -15,7 +15,7 @@ public class Calculator {
 
     public int divide(int a, int b) {
         if (b == 0) {
-            throw new IllegalArgumentException("Cannot divide by zero");
+            throw new IllegalArgumentException("0으로 나눌수없습니다.");
         }
         return a / b;
     }

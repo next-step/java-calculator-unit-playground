@@ -4,18 +4,24 @@ import java.util.Arrays;
 
 public class StringCalculator {
 
-    public int add(String input){
-        //입력값이 없으면 0반환
+    public int delimiters(String input){
+        //입력값이 없으면 예외를 발생
         if (input==null || input.isEmpty()){
-            return 0;
+            throw new IllegalArgumentException("값이 없거나 0이면 안된다.");
         }
         //구분자 문자열 변수
         String delimiter =",|:";
         //커스텀 구분자 처리
         if (input.startsWith("//")){
             int delimiterIndex= input.indexOf("\n");
-            delimiter = input.substring(2,delimiterIndex);
-            input = input.substring(delimiterIndex +1);
+            String CustomDelimiter = input.substring(2,delimiterIndex);
+            if(CustomDelimiter.contains(",")|| CustomDelimiter.contains(":")){
+                throw new IllegalArgumentException("기본 구분자가 포함되어있다.");
+            }
+            else {
+                delimiter = delimiter+"|"+CustomDelimiter;
+                input = input.substring(delimiterIndex +1);
+            }
         }
 
         String[] tokens = input.split(delimiter);
@@ -26,10 +32,16 @@ public class StringCalculator {
         int sum = 0;
         for (String token : tokens){
             int parsedNumber = parseNuber(token);
-            if (parsedNumber <0){
+            if (parsedNumber < 0){
                 throw new RuntimeException("음수는 허용이 안된다.");
             }
-            sum += parsedNumber;
+            try {
+                sum += parsedNumber;
+            }
+            catch (ArithmeticException e){
+                System.out.println("오버플로우 발생.");
+
+            }
         }
         return sum;
     }
