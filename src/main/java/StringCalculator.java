@@ -54,7 +54,12 @@ public class StringCalculator {
         //숫자를 모두 더해 반환
         int result = 0;
         for(int number : parsedNumbers){
-            result += number;
+            try{
+                result = Math.addExact(result,number); //Math.addExact 정적 메서드로 오버플로우 발생 시 예외 처리
+            }catch(ArithmeticException e){
+                throw new RuntimeException("계산 결과값이 너무 큽니다.");
+            }
+
         }
         return result;
 

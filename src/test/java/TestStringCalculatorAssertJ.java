@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Nested;
 import static org.assertj.core.api.Assertions.*;
 
 public class TestStringCalculatorAssertJ {
-    StringCalculator sc = new StringCalculator();
+    StringCalculator stringCalculator = new StringCalculator();
 
     @Nested
     @DisplayName("문자열 계산기 기능 테스트 (AssertJ)")
@@ -15,7 +15,7 @@ public class TestStringCalculatorAssertJ {
         @DisplayName("빈 문자열 케이스")
         void testEmptyString(){
             //assertEquals(0, sc.addAll(""));
-            assertThat(0).isEqualTo(sc.addAll(""));
+            assertThat(0).isEqualTo(stringCalculator.addAll(""));
         }
 
         @Test
@@ -31,52 +31,56 @@ public class TestStringCalculatorAssertJ {
             assertEquals(3,sc.addAll("1:2"));
             assertEquals(1,sc.addAll("1"));
              */
-            assertThat(10).isEqualTo(sc.addAll("1:2:3:4"));
-            assertThat(10).isEqualTo(sc.addAll("1,2,3,4"));
-            assertThat(6).isEqualTo(sc.addAll("1,2,3"));
-            assertThat(6).isEqualTo(sc.addAll("1:2:3"));
-            assertThat(3).isEqualTo(sc.addAll("1,2"));
-            assertThat(3).isEqualTo(sc.addAll("1:2"));
-            assertThat(1).isEqualTo(sc.addAll("1"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("1:2:3:4"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("1,2,3,4"));
+            assertThat(6).isEqualTo(stringCalculator.addAll("1,2,3"));
+            assertThat(6).isEqualTo(stringCalculator.addAll("1:2:3"));
+            assertThat(3).isEqualTo(stringCalculator.addAll("1,2"));
+            assertThat(3).isEqualTo(stringCalculator.addAll("1:2"));
+            assertThat(1).isEqualTo(stringCalculator.addAll("1"));
 
             //기본 구분자 혼용 사용
-            assertThat(10).isEqualTo(sc.addAll("1,2,3:4"));
-            assertThat(10).isEqualTo(sc.addAll("1:2,3:4"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("1,2,3:4"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("1:2,3:4"));
 
             //커스텀 구분자 사용
-            assertThat(10).isEqualTo(sc.addAll("//;\n1;2;3;4"));
-            assertThat(6).isEqualTo(sc.addAll("//;\n1;2;3"));
-            assertThat(3).isEqualTo(sc.addAll("//;\n1;2"));
-            assertThat(1).isEqualTo(sc.addAll("//;\n1"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("//;\n1;2;3;4"));
+            assertThat(6).isEqualTo(stringCalculator.addAll("//;\n1;2;3"));
+            assertThat(3).isEqualTo(stringCalculator.addAll("//;\n1;2"));
+            assertThat(1).isEqualTo(stringCalculator.addAll("//;\n1"));
 
-            assertThat(10).isEqualTo(sc.addAll("//^\n1^2^3^4"));
-            assertThat(6).isEqualTo(sc.addAll("//^\n1^2^3"));
-            assertThat(3).isEqualTo(sc.addAll("//^\n1^2"));
-            assertThat(1).isEqualTo(sc.addAll("//^\n1"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("//^\n1^2^3^4"));
+            assertThat(6).isEqualTo(stringCalculator.addAll("//^\n1^2^3"));
+            assertThat(3).isEqualTo(stringCalculator.addAll("//^\n1^2"));
+            assertThat(1).isEqualTo(stringCalculator.addAll("//^\n1"));
 
             //커스텀 구분자 지정 및 기본 구분자와 혼용 사용
-            assertThat(10).isEqualTo(sc.addAll("//;\n1,2:3;4"));
-            assertThat(15).isEqualTo(sc.addAll("//$\n1,2:3$4,5"));
+            assertThat(10).isEqualTo(stringCalculator.addAll("//;\n1,2:3;4"));
+            assertThat(15).isEqualTo(stringCalculator.addAll("//$\n1,2:3$4,5"));
         }
 
         @Test
         @DisplayName("RuntimeException 발생 케이스")
         void testRuntimeException() {
             //숫자 이외의 값
-            assertThatThrownBy(() -> sc.addAll("1,a,3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
-            assertThatThrownBy(() -> sc.addAll("1:a:3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
-            assertThatThrownBy(() -> sc.addAll("//^\n1^a^3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
-            assertThatThrownBy(() -> sc.addAll("1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("1,a,3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("1:a:3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("//^\n1^a^3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
 
             //음수 입력 케이스
-            assertThatThrownBy(() -> sc.addAll("1,-2,3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
-            assertThatThrownBy(() -> sc.addAll("1:-2:3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
-            assertThatThrownBy(() -> sc.addAll("//^\n1^-2^3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("1,-2,3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("1:-2:3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("//^\n1^-2^3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
 
             //잘못된 커스텀 지정자 구문
-            assertThatThrownBy(() -> sc.addAll("//;\t1;2;3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
-            assertThatThrownBy(() -> sc.addAll("//;1;2;3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
-            assertThatThrownBy(() -> sc.addAll("^\n1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("//;\t1;2;3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("//;1;2;3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("^\n1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
+
+            //오버플로우 발생 케이스
+            assertThatThrownBy(() -> stringCalculator.addAll("2147483647:1")).hasMessage("계산 결과값이 너무 큽니다.");
+            assertThatThrownBy(() -> stringCalculator.addAll("2147483647:2147483647")).hasMessage("계산 결과값이 너무 큽니다.");
 
         }
     }
