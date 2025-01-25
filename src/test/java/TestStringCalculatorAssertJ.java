@@ -58,6 +58,7 @@ public class TestStringCalculatorAssertJ {
             assertThatThrownBy(() -> sc.addAll("1,a,3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
             assertThatThrownBy(() -> sc.addAll("1:a:3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
             assertThatThrownBy(() -> sc.addAll("//^\n1^a^3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
+            assertThatThrownBy(() -> sc.addAll("1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("숫자 이외의 값이 입력되었습니다.");
 
             //음수 입력 케이스
             assertThatThrownBy(() -> sc.addAll("1,-2,3")).isInstanceOf(RuntimeException.class).hasMessage("음수가 입력되었습니다.");
@@ -67,7 +68,6 @@ public class TestStringCalculatorAssertJ {
             //잘못된 커스텀 지정자 구문
             assertThatThrownBy(() -> sc.addAll("//;\t1;2;3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
             assertThatThrownBy(() -> sc.addAll("//;1;2;3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
-            assertThatThrownBy(() -> sc.addAll("1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
             assertThatThrownBy(() -> sc.addAll("^\n1^2^3")).isInstanceOf(RuntimeException.class).hasMessage("올바르지 않은 커스텀 구분자 지정 구문입니다.");
 
         }
