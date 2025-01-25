@@ -1,7 +1,7 @@
 public class Calculator {
     //Basic Calculator
     //인자 2개를 받아 정수 결과를 반환
-    //사칙연산을 위한 메서드 4개르 제공
+    //사칙연산을 위한 메서드 4개를 제공
 
     public int add(int left, int right){
         return left+right;

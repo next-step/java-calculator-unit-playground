@@ -17,8 +17,8 @@ public class StringCalculator {
         if (input.startsWith("//")) {
             //잘못된 구문에 대한 예외 처리
             int formatEndIndex = input.indexOf("\n");
-            if (formatEndIndex == -1){ // "\n" 을 찾을 수 없느 경우
-                throw new RuntimeException("올바르지 않은 커스텀 구분자 지정입니다.");
+            if (formatEndIndex == -1){ // "\n" 을 찾을 수 없는 경우
+                throw new RuntimeException("올바르지 않은 커스텀 구분자 지정 구문입니다.");
             }
 
             splitter = "[" + Pattern.quote(input.substring(2, formatEndIndex)) + "]"; //Pattern.quote를 이용하여 특수문자를 안전하게 처리
