@@ -45,6 +45,7 @@ public class CalculateTest {
     @DisplayName("OK : 문자열 덧셈 성공")
     void calculateFromString() {
         assertThat(calculate.calculateFromString("//;\\n1;2:3")).isEqualTo(6);
+        assertThat(calculate.calculateFromString("//&\\n1&2&3")).isEqualTo(6);
         assertThat(calculate.calculateFromString("1,2:3")).isEqualTo(6);
         assertThat(calculate.calculateFromString("7")).isEqualTo(7);
     }
