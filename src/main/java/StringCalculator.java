@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Character.isDigit;
+
 public class StringCalculator {
     public int totalNumInString(String str) {
-        String criteria = ", | :";
+        String criteria = ",|:";
 
         if (str.startsWith("//")) {
             int criteriaEndIndex = str.indexOf("\n");
@@ -19,14 +21,15 @@ public class StringCalculator {
 
         for (String s : strs) {
             if (s == null) continue;
-            int number = Integer.parseInt(s);
-            if (number < 0) {
-                throw new RuntimeException("구분자 사이에 음수를 사용할 수 없습니다.");
+            try {
+                int number = Integer.parseInt(s);
+                if (number < 0) {
+                    throw new RuntimeException("구분자 사이에 음수를 사용할 수 없습니다.");
+                }
+                    numbers.add(number);
             }
 
-            try {
-                numbers.add(number);
-            } catch (NumberFormatException e) {
+            catch (NumberFormatException e) {
                 throw new RuntimeException("숫자가 아닌 것은 계산할 수 없습니다.");
             }
         }
