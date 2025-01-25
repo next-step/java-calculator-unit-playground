@@ -47,4 +47,40 @@ public class CalculatorUnitTest {
             assertThrows(IllegalArgumentException.class, () -> calculator.divide(6, 0));
         }
     }
+
+    @Nested
+    @DisplayName("AssertJ 테스트")
+    class AssertJTest {
+
+        @Test
+        @DisplayName("Positive - 덧셈 테스트")
+        void add() {
+            assertThat(calculator.add(6, 3)).isEqualTo(9);
+        }
+
+        @Test
+        @DisplayName("Positive - 뺄셈 테스트")
+        void subtract() {
+            assertThat(calculator.subtract(6, 3)).isEqualTo(3);
+        }
+
+        @Test
+        @DisplayName("Positive - 곱셈 테스트")
+        void multiply() {
+            assertThat(calculator.multiply(6, 3)).isEqualTo(18);
+        }
+
+        @Test
+        @DisplayName("Positive - 나눗셈 테스트")
+        void divide() {
+            assertThat(calculator.divide(6, 3)).isEqualTo(2);
+        }
+
+        @Test
+        @DisplayName("Negative - 0으로 나누기 예외 발생")
+        void divideByZero() {
+            assertThatThrownBy(() -> calculator.divide(6, 0))
+                .isInstanceOf(IllegalArgumentException.class);
+        }
+    }
 }
