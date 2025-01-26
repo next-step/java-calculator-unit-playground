@@ -1,7 +1,7 @@
 import java.util.regex.*;
 
 class StringCalculator {
-    public static int StringCalculator(String str) {
+    public static int calculateSum(String str) {
         String delimiter = ",;"; // 기본 구분자
         String equation = str; // 기본 문장
 
