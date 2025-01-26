@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -7,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class JUnit5Calculator {
@@ -89,6 +91,40 @@ public class JUnit5Calculator {
                 assertEquals(a / b, Calculator.divide(a, b));
             }
             assertThrows(ArithmeticException.class, () -> Calculator.divide(a, 0));
+        }
+    }
+
+    @Nested
+    @DisplayName("문자열 계산기 테스트")
+    class StringCalculatorTest {
+        private static Stream<Arguments> exampleSource() {
+            return Stream.of(
+                    Arguments.arguments("//.\n1.5.3", 9),
+                    Arguments.arguments("1;8,3", 12)
+            );
+        }
+
+        @ParameterizedTest
+        @MethodSource("exampleSource")
+        @DisplayName("문자열 덧셈 테스트")
+        void stringSumTest(String str, int expacted){
+            assertEquals(expacted, StringCalculator.calculateSum(str));
+        }
+
+        @Test
+        @DisplayName("문자열 덧셈 예외 테스트")
+        void stringErrorSumTest() {
+            // 음수 예외 테스트
+            RuntimeException exception1 = assertThrows(RuntimeException.class, () -> {
+                StringCalculator.calculateSum("//.\n1.-5.3");
+            });
+            assertEquals("음수가 아닌 정수를 입력해주세요", exception1.getMessage());
+
+            // 숫자 이외 값 예외 테스트
+            RuntimeException exception2 = assertThrows(RuntimeException.class, () -> {
+                StringCalculator.calculateSum("//.\n1.a.3");
+            });
+            assertEquals("숫자가 아닙니다. 숫자를 입력해주세요.", exception2.getMessage());
         }
     }
 }
