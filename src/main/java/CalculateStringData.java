@@ -20,16 +20,14 @@ public class CalculateStringData {
             }
         }
 
-        return stringSum(numbers, delimiter);
+        return stringSum(numbers.split(delimiter)); // 문자열 분리
     }
 
-    private static int stringSum(String numbers, String delimiter) {
-        String[] strs = numbers.split(delimiter); // 문자열 분리
-
+    private static int stringSum(String[] strs) {
         int sum = 0;
         for (String str : strs) {
             int number = parseNumber(str); // 숫자 검증 및 변환
-            checkNumber(number); // 음수 검증
+            validateNumber(number); // 음수 검증
             sum += number;
         }
 
@@ -46,7 +44,7 @@ public class CalculateStringData {
     }
 
     // 음수 검증하는 메서드
-    private static void checkNumber(int number) {
+    private static void validateNumber(int number) {
         if (number < 0) {
             throw new RuntimeException("음수는 사용하시면 안 돼요");
         }

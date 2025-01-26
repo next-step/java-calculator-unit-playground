@@ -37,7 +37,7 @@ public class CalculatorrrrrTest {
         @DisplayName("0으로 나누면 ArithmeticException이 떠야해요")
         void divWithZero() {
             ArithmeticException ex = assertThrows(ArithmeticException.class, () -> calculator.div(2000, 0));
-            assertNull(ex.getMessage());
+            assertEquals("0으로 나누면 안 돼유", ex.getMessage());
         }
 
     }
