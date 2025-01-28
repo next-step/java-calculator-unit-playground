@@ -1,5 +1,3 @@
-import javax.management.RuntimeErrorException;
-
 public class Calculator {
     public int plus(int a, int b){
         if((a>0 && b>0) && a>Integer.MAX_VALUE-b)   // 둘 다 양수
