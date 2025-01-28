@@ -8,7 +8,7 @@ public class StringCalculator {
             return 0;
         }
 
-        String customDelimter = findCutstomDelimeter(str);
+        String customDelimter = findCustomDelimeter(str);
 
         if (customDelimter != null) {
             delimeter = customDelimter;
@@ -22,7 +22,7 @@ public class StringCalculator {
         return sum(tokens);
     }
 
-    public static String findCutstomDelimeter(String str) {
+    public static String findCustomDelimeter(String str) {
         int idx = 0;
         int startIdx = str.indexOf("//");
         int endIdx = str.indexOf("\n");
