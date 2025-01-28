@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
 
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
@@ -9,16 +12,26 @@ public class StringCalculator {
     }
 
     public int add(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
+        validateInput(input);
+        String[] tokens = splitNumbers(input);
+
+        List<Integer> numbers = parseNumbers(tokens);
+        int sum = 0;
+        for (int value : numbers) {
+            sum = calculator.add(sum, value);
         }
-        String[] numbers = splitNumbers(input);
-        return sum(numbers);
+        return sum;
+    }
+
+    private void validateInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new RuntimeException("Input cannot be null or empty");
+        }
     }
 
     private String[] splitNumbers(String input) {
-        // 커스텀 구분자: "//[커스텀 구분자]\n[숫자]"
         if (input.startsWith("//")) {
+            // 커스텀 구분자: "//[커스텀 구분자]\n[숫자]"
             return splitWithCustomDelimiter(input);
         }
         return input.split(DEFAULT_DELIMITER_REGEX);
@@ -27,30 +40,30 @@ public class StringCalculator {
     private String[] splitWithCustomDelimiter(String input) {
         String[] parts = input.split("\n", 2);
         if (parts.length < 2) {
-            throw new RuntimeException("Cannot use Invalid custom delimiter format");
+            throw new RuntimeException("Invalid custom delimiter format");
         }
         String customDelimiter = parts[0].substring(2);
         return parts[1].split(customDelimiter);
     }
 
-    private int sum(String[] numbers) {
-        int sum = 0;
-        for (String num : numbers) {
-            int value = parseNumber(num);
-            sum = calculator.add(sum, value);
+    private List<Integer> parseNumbers(String[] tokens) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String token : tokens) {
+            int value = parseNumber(token);
+            numbers.add(value);
         }
-        return sum;
+        return numbers;
     }
 
-    private int parseNumber(String num) {
+    private int parseNumber(String token) {
         try {
-            int value = Integer.parseInt(num);
+            int value = Integer.parseInt(token);
             if (value < 0) {
-                throw new RuntimeException(String.format("Cannot use Negative numbers: %s", num));
+                throw new RuntimeException("Cannot use Negative numbers: " + token);
             }
             return value;
         } catch (NumberFormatException e) {
-            throw new RuntimeException(String.format("Cannot use Invalid input: %s", num));
+            throw new RuntimeException("Invalid input: " + token);
         }
     }
 }

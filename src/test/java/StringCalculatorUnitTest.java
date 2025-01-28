@@ -41,15 +41,15 @@ public class StringCalculatorUnitTest {
         }
 
         @Test
-        @DisplayName("Positive - 빈 문자열 = 0")
-        void addWithEmptyString() {
-            assertEquals(0, stringCalculator.add(""));
-        }
-
-        @Test
         @DisplayName("Positive - 단일 숫자")
         void addWithSingleNumber() {
             assertEquals(5, stringCalculator.add("5"));
+        }
+
+        @Test
+        @DisplayName("Negative - 빈 문자열 입력 시 예외 발생")
+        void addWithEmptyString() {
+            assertThrows(RuntimeException.class, () -> stringCalculator.add(""));
         }
 
         @Test
@@ -100,15 +100,16 @@ public class StringCalculatorUnitTest {
         }
 
         @Test
-        @DisplayName("Positive - 빈 문자열 = 0")
-        void addWithEmptyString() {
-            assertThat(stringCalculator.add("")).isEqualTo(0);
-        }
-
-        @Test
         @DisplayName("Positive - 단일 숫자")
         void addWithSingleNumber() {
             assertThat(stringCalculator.add("5")).isEqualTo(5);
+        }
+
+        @Test
+        @DisplayName("Negative - 빈 문자열 입력 시 예외 발생")
+        void addWithEmptyString() {
+            assertThatThrownBy(() -> stringCalculator.add(""))
+                .isInstanceOf(RuntimeException.class);
         }
 
         @Test
