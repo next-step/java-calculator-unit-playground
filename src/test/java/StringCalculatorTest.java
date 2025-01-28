@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("문자열 계산기 테스트")
-public class StringCalculratorTest {
+public class StringCalculatorTest {
+    private StringCalculator calcul = new StringCalculator();
+
     @Test
-    public void NonDelimiterTest(){
-        StringCalculrator calcul = new StringCalculrator();
+    public void nonDelimiterTest(){
         assertEquals(6, calcul.strPlus("1,2,3"));
         assertEquals(6, calcul.strPlus("1:2:3"));
         assertEquals(6, calcul.strPlus("1,2:3"));
@@ -25,8 +26,7 @@ public class StringCalculratorTest {
     }
 
     @Test
-    public void ExistDelimiterTest(){
-        StringCalculrator calcul = new StringCalculrator();
+    public void existDelimiterTest(){
         assertEquals(6, calcul.strPlus("//;\n1;2;3"));
         assertEquals(0, calcul.strPlus("//;\n"));
         
@@ -40,8 +40,7 @@ public class StringCalculratorTest {
     }
 
     @Test
-    public void ExceptionTest(){
-        StringCalculrator calcul = new StringCalculrator();
+    public void exceptionTest(){
         assertThrows(RuntimeException.class, ()->calcul.strPlus("1!2!3"));
         assertThrows(RuntimeException.class, ()->calcul.strPlus("1 2 3"));
         assertThrows(RuntimeException.class, ()->calcul.strPlus("1000000000000,2000000000000"));

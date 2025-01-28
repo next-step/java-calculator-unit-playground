@@ -1,4 +1,4 @@
-public class StringCalculrator {
+public class StringCalculator {
     public int strPlus(String str){
         if(str==null)   throw new RuntimeException("non-input");
 

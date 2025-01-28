@@ -8,8 +8,10 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AssertJTest {
+    @Test
     public void NonDelimiterTest(){
-        StringCalculrator calcul = new StringCalculrator();
+        
+        StringCalculator calcul = new StringCalculator();
 
         assertThat(calcul.strPlus("1,2,3")).isEqualTo(6);
         assertThat(calcul.strPlus("1:2,3")).isEqualTo(6);
@@ -29,7 +31,7 @@ public class AssertJTest {
 
     @Test
     public void ExistDelimiterTest(){
-        StringCalculrator calcul = new StringCalculrator();
+        
 
         assertThat(calcul.strPlus("//;\n1;2;3")).isEqualTo(6);
         assertThat(calcul.strPlus("//;\n")).isEqualTo(0);
@@ -45,7 +47,7 @@ public class AssertJTest {
 
     @Test
     public void ExceptionTest(){
-        StringCalculrator calcul = new StringCalculrator();
+        StringCalculator calcul = new StringCalculator();
 
         assertThatThrownBy(()->calcul.strPlus("1!2!3")).isInstanceOf(RuntimeException.class);
         assertThatThrownBy(()->calcul.strPlus("1 2 3")).isInstanceOf(RuntimeException.class);
