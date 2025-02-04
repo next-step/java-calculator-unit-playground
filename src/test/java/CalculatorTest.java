@@ -23,7 +23,8 @@ class CalculatorTest {
 
         @Test
         @DisplayName("Normal")
-        void subtract() { assertEquals(5, calculator.subtract(10, 5));
+        void subtract() {
+            assertEquals(5, calculator.subtract(10, 5));
         }
     }
 
