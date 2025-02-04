@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
+
     private final Calculator calc = new Calculator();
 
     @Nested
     @DisplayName("더하기_테스트_코드")
     class AddTest{
+
         @Test
         @DisplayName("더하기_테스트_case1:1+2")
         void add(){
@@ -21,6 +23,7 @@ public class CalculatorTest {
     @Nested
     @DisplayName("빼기_테스트_코드")
     class SubtractTest{
+
         @Test
         @DisplayName("빼기_테스트_case1:2-1")
         void subtract(){
@@ -31,6 +34,7 @@ public class CalculatorTest {
     @Nested
     @DisplayName("곱하기_테스트_코드")
     class MultiplyTest{
+
         @Test
         @DisplayName("곱하기_테스트_case1:3*4")
         void multiply(){
@@ -41,6 +45,7 @@ public class CalculatorTest {
     @Nested
     @DisplayName("나누기_테스트_코드")
     class DivideTest{
+
         @Test
         @DisplayName("나누기_테스트_case1:2/1")
         void divide(){
