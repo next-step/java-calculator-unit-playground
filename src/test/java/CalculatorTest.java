@@ -39,7 +39,7 @@ class CalculatorTest {
     }
 
     @Nested
-    class divide {
+    class Divide {
 
         @Test
         @DisplayName("Zero exception")
