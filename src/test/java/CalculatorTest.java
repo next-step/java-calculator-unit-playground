@@ -12,22 +12,13 @@ public class CalculatorTest {
     class addTest {
 
         @Test
-        @DisplayName("덧셈 성공 테스트")
-        void add_SuccessTest() {
+        @DisplayName("정수의 합")
+        void add_Test() {
             final int a = 3;
             final int b = 5;
             final int actual = a+b;
 
             assertEquals(actual, calculator.add(a,b));
-        }
-
-        @Test
-        @DisplayName("덧셈 실패 테스트")
-        void add_FailTest() {
-            final int a = 3;
-            final int b = 5;
-
-            assertNotEquals(0, calculator.add(a,b));
         }
     }
 
@@ -36,22 +27,13 @@ public class CalculatorTest {
     class subtractTest {
 
         @Test
-        @DisplayName("뺄셈 성공 테스트")
-        void subtract_SuccessTest() {
+        @DisplayName("정수의 차")
+        void subtract_Test() {
             final int a = 5;
             final int b = 3;
             final int actual = a-b;
 
             assertEquals(actual, calculator.subtract(a,b));
-        }
-
-        @Test
-        @DisplayName("뺄셈 실패 테스트")
-        void subtract_FailTest() {
-            final int a = 5;
-            final int b = 3;
-
-            assertNotEquals(0, calculator.subtract(a,b));
         }
     }
 
@@ -60,22 +42,13 @@ public class CalculatorTest {
     class multiplyTest {
 
         @Test
-        @DisplayName("곱셈 성공 테스트")
-        void multiply_SuccessTest() {
+        @DisplayName("정수의 곱셈")
+        void multiply_Test() {
             final int a = 5;
             final int b = 3;
             final int actual = a*b;
 
             assertEquals(actual, calculator.multiply(a,b));
-        }
-
-        @Test
-        @DisplayName("곱셈 실패 테스트")
-        void multiply_FailTest() {
-            final int a = 5;
-            final int b = 3;
-
-            assertNotEquals(0, calculator.multiply(a,b));
         }
     }
 
@@ -84,8 +57,8 @@ public class CalculatorTest {
     class divideTest {
 
         @Test
-        @DisplayName("나눗셈 성공 테스트")
-        void divide_SuccessTest() {
+        @DisplayName("정수의 나눗셈")
+        void divide_Test() {
             final int a = 15;
             final int b = 3;
             final int actual = a/b;
@@ -94,8 +67,8 @@ public class CalculatorTest {
         }
 
         @Test
-        @DisplayName("나눗셈 실패 테스트")
-        void divide_FailTest() {
+        @DisplayName("0으로 나누었을 때 ArithmeticException 예외 발생")
+        void divideWithZero_Test() {
             final int a = 15;
             final int b = 0;
 
