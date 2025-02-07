@@ -481,7 +481,6 @@ class CalculatorTest {
         void customSeparator_empty() {
             // given
             String input = Separator.CUSTOM.convertListIntoString(TEST_NUMBERS, "");
-            int expectedResult = getSumOfList(TEST_NUMBERS);
 
             // then
             assertThatThrownBy(() -> calculator.addAll(input))
@@ -493,7 +492,6 @@ class CalculatorTest {
         void negativeException() {
             // given
             String input = Separator.BASIC.convertListIntoString(List.of(1, 2, 3, 4, -5, 6, 7, 8, 9), ",");
-            int expectedResult = getSumOfList(TEST_NUMBERS);
 
             // then
             assertThatThrownBy(() -> calculator.addAll(input))
