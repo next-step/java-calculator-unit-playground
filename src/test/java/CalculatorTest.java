@@ -336,7 +336,7 @@ class CalculatorTest {
 
             // then
             assertThatThrownBy(() -> calculator.divide(a, b))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(ArithmeticException.class);
         }
 
         @Test

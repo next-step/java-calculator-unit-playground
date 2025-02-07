@@ -9,28 +9,20 @@ public class Calculator {
     private static final String CUSTOM_SEPARATOR_STARTER = "//";
     private static final String CUSTOM_SEPARATOR_TERMINATOR = "\n";
 
-    public int add(int a, int b) {
-        validateOperation(a, b, Operator.ADD);
-
-        return a + b;
+    public int add(int leftOperand, int rightOperand) {
+        return Operator.ADD.operate(leftOperand, rightOperand);
     }
 
-    public int subtract(int a, int b) {
-        validateOperation(a, b, Operator.SUBTRACT);
-
-        return a - b;
+    public int subtract(int leftOperand, int rightOperand) {
+        return Operator.SUBTRACT.operate(leftOperand, rightOperand);
     }
 
-    public int multiply(int a, int b) {
-        validateOperation(a, b, Operator.MULTIPLY);
-
-        return a * b;
+    public int multiply(int leftOperand, int rightOperand) {
+        return Operator.MULTIPLY.operate(leftOperand, rightOperand);
     }
 
-    public int divide(int a, int b) {
-        validateOperation(a, b, Operator.DIVIDE);
-
-        return a / b;
+    public int divide(int dividend, int divisor) {
+        return Operator.DIVIDE.operate(dividend, divisor);
     }
 
     /**
@@ -140,79 +132,74 @@ public class Calculator {
         return true;
     }
 
-    private boolean isNegative(int number) {
+    private static boolean isNegative(int number) {
         return number < 0;
     }
 
-    private boolean isZero(int number) {
+    private static boolean isZero(int number) {
         return number == 0;
     }
 
-    private boolean isBiggerThanZero(int number) {
+    private static boolean isBiggerThanZero(int number) {
         return number > 0;
     }
 
-    private boolean isCustomSeparator(String separator) {
+    private static boolean isCustomSeparator(String separator) {
         return !BASIC_SEPARATORS.contains(separator);
     }
 
-    private void validateOperation(int a, int b, Operator operator) {
-        switch (operator) {
-            case ADD, SUBTRACT, MULTIPLY -> {
-                validateOverflow(a, b, operator);
-                validateUnderflow(a, b, operator);
-            }
-            case DIVIDE -> validateDivide(b);
-        }
-    }
-
-    private void validateOverflow(int a, int b, Operator operator) {
-        switch (operator) {
-            case ADD -> {
-                if ((long) a + (long) b > Integer.MAX_VALUE) {
-                    throw new IllegalArgumentException(String.format("(%d) + (%d)는 오버플로우가 발생합니다.", a, b));
-                }
-            }
-            case SUBTRACT -> {
-                if ((long) a - (long) b > Integer.MAX_VALUE) {
-                    throw new IllegalArgumentException(String.format("(%d) - (%d)는 오버플로우가 발생합니다.", a, b));
-                }
-            }
-            case MULTIPLY -> {
-                if ((long) a * (long) b > Integer.MAX_VALUE) {
-                    throw new IllegalArgumentException(String.format("(%d) * (%d)는 오버플로우가 발생합니다.", a, b));
-                }
-            }
-        }
-    }
-
-    private void validateUnderflow(int a, int b, Operator operator) {
-        switch (operator) {
-            case ADD -> {
-                if ((long) a + (long) b < Integer.MIN_VALUE) {
-                    throw new IllegalArgumentException(String.format("(%d) + (%d)는 언더플로우가 발생합니다.", a, b));
-                }
-            }
-            case SUBTRACT -> {
-                if ((long) a - (long) b < Integer.MIN_VALUE) {
-                    throw new IllegalArgumentException(String.format("(%d) - (%d)는 언더플로우가 발생합니다.", a, b));
-                }
-            }
-            case MULTIPLY -> {
-                if ((long) a * (long) b < Integer.MIN_VALUE) {
-                    throw new IllegalArgumentException(String.format("(%d) * (%d)는 언더플로우가 발생합니다.", a, b));
-                }
-            }
-        }
-    }
-
-    private void validateDivide(int divisor) {
-        if (divisor == 0) {
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-        }
-    }
-
     enum Operator {
-        ADD, SUBTRACT, MULTIPLY, DIVIDE
+        ADD {
+            @Override
+            int operate(int leftOperand, int rightOperand) {
+                Operator.validateOutOfRangeIfAdd(leftOperand, rightOperand);
+
+                return leftOperand + rightOperand;
+            }
+        },
+        SUBTRACT {
+            @Override
+            int operate(int leftOperand, int rightOperand) {
+                Operator.validateOutOfRangeIfAdd(leftOperand, -rightOperand);
+
+                return leftOperand - rightOperand;
+            }
+        },
+        MULTIPLY {
+            @Override
+            int operate(int leftOperand, int rightOperand) {
+                Operator.validateOutOfRangeIfMultiply(leftOperand, rightOperand);
+
+                return leftOperand * rightOperand;
+            }
+        },
+        DIVIDE {
+            @Override
+            int operate(int dividend, int divisor) {
+                if (isZero(divisor)) {
+                    throw new ArithmeticException("0으로 나눌 수 없습니다.");
+                }
+
+                return dividend / divisor;
+            }
+        };
+
+        abstract int operate(int leftOperand, int rightOperand);
+
+        private static void validateOutOfRangeIfAdd(int a, int b) {
+            if (isWithoutIntRange((long) a + (long) b)) {
+                throw new IllegalArgumentException(String.format("(%d) + (%d)는 오버플로우 혹은 언더플로우가 발생합니다.", a, b));
+            }
+        }
+
+        private static void validateOutOfRangeIfMultiply(int a, int b) {
+            if (isWithoutIntRange((long) a * (long) b)) {
+                throw new IllegalArgumentException(String.format("(%d) * (%d)는 오버플로우 혹은 언더플로우가 발생합니다.", a, b));
+            }
+        }
+
+        private static boolean isWithoutIntRange(long number) {
+            return  number < Integer.MIN_VALUE || number > Integer.MAX_VALUE;
+        }
     }
 }
