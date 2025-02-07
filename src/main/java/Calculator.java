@@ -188,13 +188,13 @@ public class Calculator {
 
         private static void validateOutOfRangeIfAdd(int a, int b) {
             if (isWithoutIntRange((long) a + (long) b)) {
-                throw new IllegalArgumentException(String.format("(%d) + (%d)는 오버플로우 혹은 언더플로우가 발생합니다.", a, b));
+                throw new IllegalArgumentException(String.format("(%d)와(과) (%d) 연산시 오버플로우 혹은 언더플로우가 발생합니다.", a, b));
             }
         }
 
         private static void validateOutOfRangeIfMultiply(int a, int b) {
             if (isWithoutIntRange((long) a * (long) b)) {
-                throw new IllegalArgumentException(String.format("(%d) * (%d)는 오버플로우 혹은 언더플로우가 발생합니다.", a, b));
+                throw new IllegalArgumentException(String.format("(%d)와(과) (%d) 연산시 오버플로우 혹은 언더플로우가 발생합니다.", a, b));
             }
         }
 
