@@ -2,7 +2,7 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    public static int getSum(String str) {
+    public int getSum(String str) {
 
         if(str.length() == 0) {
             return 0;
@@ -42,7 +42,7 @@ public class StringCalculator {
         return sum;
     }
 
-    public static int parseNumber(String number) {
+    public int parseNumber(String number) {
         // 숫자가 아니라면 예외 발생
         try {
             return Integer.parseInt(number);
