@@ -199,7 +199,7 @@ public class Calculator {
         }
 
         private static boolean isWithoutIntRange(long number) {
-            return  number < Integer.MIN_VALUE || number > Integer.MAX_VALUE;
+            return number < Integer.MIN_VALUE || number > Integer.MAX_VALUE;
         }
     }
 }
