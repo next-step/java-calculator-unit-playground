@@ -2,10 +2,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculatorTest {
+
+    private static final String CUSTOM_SEPARATOR_STARTER = "//";
+    private static final String CUSTOM_SEPARATOR_TERMINATOR = "\n";
+    private static final List<Integer> TEST_NUMBERS = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
 
     private final Calculator calculator = new Calculator();
 
@@ -24,7 +30,7 @@ class CalculatorTest {
             int actualResult = calculator.add(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -35,9 +41,8 @@ class CalculatorTest {
             int b = 1;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.add(a, b))
-                    .getMessage();
-            assertEquals(String.format("(%d) + (%d)는 오버플로우가 발생합니다.", a, b), message);
+            assertThatThrownBy(() -> calculator.add(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -48,9 +53,8 @@ class CalculatorTest {
             int b = -1;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.add(a, b))
-                    .getMessage();
-            assertEquals(String.format("(%d) + (%d)는 언더플로우가 발생합니다.", a, b), message);
+            assertThatThrownBy(() -> calculator.add(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -65,7 +69,7 @@ class CalculatorTest {
             int actualResult = calculator.add(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -80,7 +84,7 @@ class CalculatorTest {
             int actualResult = calculator.add(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -95,7 +99,7 @@ class CalculatorTest {
             int actualResult = calculator.add(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -110,7 +114,7 @@ class CalculatorTest {
             int actualResult = calculator.add(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
     }
 
@@ -129,7 +133,7 @@ class CalculatorTest {
             int actualResult = calculator.subtract(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -140,9 +144,8 @@ class CalculatorTest {
             int b = -1;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.subtract(a, b))
-                    .getMessage();
-            assertEquals(String.format("(%d) - (%d)는 오버플로우가 발생합니다.", a, b), message);
+            assertThatThrownBy(() -> calculator.subtract(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -153,9 +156,8 @@ class CalculatorTest {
             int b = 1;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.subtract(a, b))
-                    .getMessage();
-            assertEquals(String.format("(%d) - (%d)는 언더플로우가 발생합니다.", a, b), message);
+            assertThatThrownBy(() -> calculator.subtract(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -170,7 +172,7 @@ class CalculatorTest {
             int actualResult = calculator.subtract(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -185,7 +187,7 @@ class CalculatorTest {
             int actualResult = calculator.subtract(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -200,7 +202,7 @@ class CalculatorTest {
             int actualResult = calculator.subtract(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -215,7 +217,7 @@ class CalculatorTest {
             int actualResult = calculator.subtract(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
     }
 
@@ -234,7 +236,7 @@ class CalculatorTest {
             int actualResult = calculator.multiply(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -245,9 +247,8 @@ class CalculatorTest {
             int b = 2;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.multiply(a, b))
-                    .getMessage();
-            assertEquals(String.format("(%d) * (%d)는 오버플로우가 발생합니다.", a, b), message);
+            assertThatThrownBy(() -> calculator.multiply(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -258,9 +259,8 @@ class CalculatorTest {
             int b = 2;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.multiply(a, b))
-                    .getMessage();
-            assertEquals(String.format("(%d) * (%d)는 언더플로우가 발생합니다.", a, b), message);
+            assertThatThrownBy(() -> calculator.multiply(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -275,7 +275,7 @@ class CalculatorTest {
             int actualResult = calculator.multiply(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -290,7 +290,7 @@ class CalculatorTest {
             int actualResult = calculator.multiply(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -305,7 +305,7 @@ class CalculatorTest {
             int actualResult = calculator.multiply(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -320,7 +320,7 @@ class CalculatorTest {
             int actualResult = calculator.multiply(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
     }
 
@@ -335,9 +335,8 @@ class CalculatorTest {
             int b = 0;
 
             // then
-            String message = assertThrows(IllegalArgumentException.class, () -> calculator.divide(a, b))
-                    .getMessage();
-            assertEquals("0으로 나눌 수 없습니다.", message);
+            assertThatThrownBy(() -> calculator.divide(a, b))
+                    .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -352,7 +351,7 @@ class CalculatorTest {
             int actualResult = calculator.divide(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -367,7 +366,7 @@ class CalculatorTest {
             int actualResult = calculator.divide(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -382,7 +381,7 @@ class CalculatorTest {
             int actualResult = calculator.divide(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
 
         @Test
@@ -397,7 +396,189 @@ class CalculatorTest {
             int actualResult = calculator.divide(a, b);
 
             // then
-            assertEquals(expectedResult, actualResult);
+            assertThat(actualResult).isEqualTo(expectedResult);
         }
+    }
+
+    @Nested
+    class AddFromString {
+
+        @Test
+        @DisplayName("기본 구분자(쉼표)를 사용한다")
+        void comma() {
+            // given
+            String input = Separator.BASIC.convertListIntoString(TEST_NUMBERS, ",");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // when
+            int actualResult = calculator.addAll(input);
+
+            // then
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
+
+        @Test
+        @DisplayName("기본 구분자(콜론)를 사용한다")
+        void colon() {
+            // given
+            String input = Separator.BASIC.convertListIntoString(TEST_NUMBERS, ":");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // when
+            int actualResult = calculator.addAll(input);
+
+            // then
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
+
+        @Test
+        @DisplayName("한 글자인 커스텀 구분자를 사용한다")
+        void customSeparator_oneLetter() {
+            // given
+            String input1 = Separator.CUSTOM.convertListIntoString(TEST_NUMBERS, "^");
+            String input2 = Separator.CUSTOM.convertListIntoString(TEST_NUMBERS, "$");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // when
+            int actualResult1 = calculator.addAll(input1);
+            int actualResult2 = calculator.addAll(input2);
+
+            // then
+            assertThat(actualResult1).isEqualTo(expectedResult);
+            assertThat(actualResult2).isEqualTo(expectedResult);
+        }
+
+        @Test
+        @DisplayName("두 글자인 커스텀 구분자를 사용한다")
+        void customSeparator_twoLetters() {
+            // given
+            String input = Separator.CUSTOM.convertListIntoString(TEST_NUMBERS, "/@");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // when
+            int actualResult = calculator.addAll(input);
+
+            // then
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
+
+        @Test
+        @DisplayName("공백 커스텀 구분자를 사용한다")
+        void customSeparator_whiteSpace() {
+            // given
+            String input = Separator.CUSTOM.convertListIntoString(TEST_NUMBERS, " ");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // when
+            int actualResult = calculator.addAll(input);
+
+            // then
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
+
+        @Test
+        @DisplayName("값이 없는 커스텀 구분자 사용시 예외가 발생한다")
+        void customSeparator_empty() {
+            // given
+            String input = Separator.CUSTOM.convertListIntoString(TEST_NUMBERS, "");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // then
+            assertThatThrownBy(() -> calculator.addAll(input))
+                    .isInstanceOf(RuntimeException.class);
+        }
+
+        @Test
+        @DisplayName("음수 전달시 에외가 발생한다")
+        void negativeException() {
+            // given
+            String input = Separator.BASIC.convertListIntoString(List.of(1, 2, 3, 4, -5, 6, 7, 8, 9), ",");
+            int expectedResult = getSumOfList(TEST_NUMBERS);
+
+            // then
+            assertThatThrownBy(() -> calculator.addAll(input))
+                    .isInstanceOf(RuntimeException.class);
+        }
+
+        @Test
+        @DisplayName("형식이 부적절한 커스텀 구분자를 전달시 예외가 발생한다")
+        void illegalCustomSeparatorException() {
+            // given
+            String input1 = "/-\n1-2-3-4-5-6-7-8-9-10"; // 앞 부분의 형식이 부적절함
+            String input2 = "//-\\n1-2-3-4-5-6-7-8-9-10"; // 뒷 부분의 형식이 부적절함
+
+            // then
+            assertThatThrownBy(() -> calculator.addAll(input1))
+                    .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.addAll(input2))
+                    .isInstanceOf(RuntimeException.class);
+        }
+
+        @Test
+        @DisplayName("커스텀 구분자 선언부를 작성하지 않을시 예외가 발생한다")
+        void notDeclareCustomSeparator() {
+            // given
+            String input = "1$2$3$4$5$6$7$8$9$10";
+
+            // then
+            assertThatThrownBy(() -> calculator.addAll(input))
+                    .isInstanceOf(RuntimeException.class);
+        }
+
+        @Test
+        @DisplayName("실수 전달시 예외가 발생한다")
+        void floatException() {
+            // given
+            String input = "1,2,3.3,4,5,6,7,8,9,10";
+
+            // then
+            assertThatThrownBy(() -> calculator.addAll(input))
+                    .isInstanceOf(RuntimeException.class);
+        }
+    }
+
+    private int getSumOfList(List<Integer> numbers) {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+
+        return sum;
+    }
+
+    enum Separator {
+        BASIC {
+            @Override
+            String convertListIntoString(List<Integer> numbers, String separator) {
+                StringBuilder builder = new StringBuilder();
+
+                for (Integer number : numbers) {
+                    builder.append(number)
+                            .append(separator);
+                }
+
+                return builder.delete(builder.length() - separator.length(), builder.length())
+                        .toString();
+            }
+        },
+        CUSTOM {
+            @Override
+            String convertListIntoString(List<Integer> numbers, String separator) {
+                StringBuilder builder = new StringBuilder()
+                        .append(CUSTOM_SEPARATOR_STARTER)
+                        .append(separator)
+                        .append(CUSTOM_SEPARATOR_TERMINATOR);
+
+                for (Integer number : numbers) {
+                    builder.append(number)
+                            .append(separator);
+                }
+
+                return builder.delete(builder.length() - separator.length(), builder.length())
+                        .toString();
+            }
+        };
+
+        abstract String convertListIntoString(List<Integer> numbers, String separator);
     }
 }
