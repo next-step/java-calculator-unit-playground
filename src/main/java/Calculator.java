@@ -118,11 +118,7 @@ public class Calculator {
         return isBiggerThanZero(endIndex - CUSTOM_SEPARATOR_STARTER.length());
     }
 
-    private boolean isStartsWithDigit(String string) {
-        return Character.isDigit(string.charAt(0));
-    }
-
-    private boolean isDigit(String string) {
+    private static boolean isDigit(String string) {
         for (char word : string.toCharArray()) {
             if (!Character.isDigit(word)) {
                 return false;
@@ -130,6 +126,10 @@ public class Calculator {
         }
 
         return true;
+    }
+
+    private static boolean isStartsWithDigit(String string) {
+        return Character.isDigit(string.charAt(0));
     }
 
     private static boolean isNegative(int number) {
