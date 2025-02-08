@@ -29,6 +29,7 @@ public class StringCalculator {
             }
             sum += Integer.parseInt(words[i]);
         }
+
         return sum;
     }
 }
