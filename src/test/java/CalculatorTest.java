@@ -4,12 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//한글 메서드명 대신 @DisplayName으로 쓰자
 @DisplayName("초간단 계산기 테스트")
 class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
-    //@Nested 중첩 클래스 선언, 여러가지 메서드를 사용할 수 있음.
     @Nested
     class Add {
         @Test

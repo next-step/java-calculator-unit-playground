@@ -13,7 +13,6 @@ public class Calculator {
     }
 
     public int divide(int a, int b) {
-        //b가 0이면 에러메세지
         if (b == 0) {
             throw new ArithmeticException("Divide by zero");
         }
