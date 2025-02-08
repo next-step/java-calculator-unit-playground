@@ -9,7 +9,11 @@ public class Calculator {
     }
 
     public int multiply(int num1, int num2) {
-        return num1 * num2;
+        long result = (long) num1 * num2;
+        if (result > Integer.MAX_VALUE) {
+            throw new ArithmeticException("오버플로우가 발생했습니다.");
+        }
+        return (int) result;
     }
 
     public int divide(int dividend, int divisor) {
