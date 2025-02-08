@@ -47,11 +47,17 @@ class StringCalculatorTest {
         @DisplayName("숫자가 아닌 값이 포함되면 예외를 발생해야 한다.")
         void should_throw_exception_when_contains_non_number() {
 
+            // 특수문자가 포함된 경우
             assertThatThrownBy(() -> stringCalculator.getSum("//;\n1;*;3"))
                     .isInstanceOf(RuntimeException.class)
                     .hasMessageContaining("숫자가 아닌 값이 포함되어 있습니다.");
 
             assertThatThrownBy(() -> stringCalculator.getSum("//;\n1456;-;3"))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessageContaining("숫자가 아닌 값이 포함되어 있습니다.");
+
+            // 글자가 포함된 경우
+            assertThatThrownBy(() -> stringCalculator.getSum("//;\nddd;ad;3"))
                     .isInstanceOf(RuntimeException.class)
                     .hasMessageContaining("숫자가 아닌 값이 포함되어 있습니다.");
         }
