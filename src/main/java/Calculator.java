@@ -1,7 +1,7 @@
-import static util.CalculatorUtil.*;
-
 import java.util.*;
 import java.util.logging.Logger;
+
+import static util.CalculatorUtil.*;
 
 public class Calculator {
 
