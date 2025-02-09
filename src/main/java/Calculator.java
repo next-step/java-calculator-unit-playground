@@ -40,15 +40,16 @@ public class Calculator {
      */
     public int addAll(String input) {
         List<Integer> numbers;
+        logger.info("입력된 값: " + input);
 
         if (isStartsWithCustomSeparatorStarter(input)) {
             String customSeparator = getCustomSeparatorFromInput(input);
             String extractedInput = removeCustomSeparatorDeclarationFromInput(input);
-            SafetyCustomSeparatorMapper safetyMapper = new SafetyCustomSeparatorMapper(customSeparator, extractedInput);
+            SafetyCustomSeparatorMapper safetyMapper = new SafetyCustomSeparatorMapper(customSeparator);
 
             String regex = createRegexByCustomSeparator(safetyMapper.getSafetyCustomSeparator());
             logger.info("생성된 Regex: " + regex);
-            numbers = convertStringNumbersIntoList(safetyMapper.getSafetyExtractedInput(), regex);
+            numbers = convertStringNumbersIntoList(extractedInput, regex);
         } else {
             logger.info("BASIC_REGEX 사용: " + BASIC_REGEX);
             numbers = convertStringNumbersIntoList(input, BASIC_REGEX);
@@ -80,7 +81,7 @@ public class Calculator {
         List<Integer> results = new ArrayList<>();
 
         String[] stringNumberArray = stringNumbers.split(regex);
-        logger.info("문자열로부터 변환된 리스트: " + Arrays.toString(stringNumberArray));
+        logger.info("문자열로부터 변환된 배열: " + Arrays.toString(stringNumberArray));
         for (String stringNumber : stringNumberArray) {
             validateStringNumber(stringNumber, regex);
 
@@ -160,11 +161,9 @@ public class Calculator {
 
         private static final Set<Character> REGEX_META_CHARACTERS = Set.of('\"', '.', '^', '$', '*', '+', '?', '{', '}', '[', ']', '(', ')', '|');
         private final String customSeparator;
-        private final String extractedInput;
 
-        public SafetyCustomSeparatorMapper(String customSeparator, String extractedInput) {
+        public SafetyCustomSeparatorMapper(String customSeparator) {
             this.customSeparator = customSeparator;
-            this.extractedInput = extractedInput;
         }
 
         /**
@@ -177,7 +176,7 @@ public class Calculator {
             StringBuilder safetyCustomSeparatorBuilder = new StringBuilder();
 
             for (char word : customSeparator.toCharArray()) {
-                if (REGEX_META_CHARACTERS.contains(word)) {
+                if (isMetaCharacter(word)) {
                     safetyCustomSeparatorBuilder.append(addEscape(word));
                 } else {
                     safetyCustomSeparatorBuilder.append(word);
@@ -187,39 +186,10 @@ public class Calculator {
             return safetyCustomSeparatorBuilder.toString();
         }
 
-        /**
-         * customSeparator가 메타문자일 경우, 문자열 내 모든 customSeparator를 안전하게 변경한 extractedInput을 반환한다. <br>
-         * customSeparator가 메타문자가 아닐 경우, 생성자로 전달받은 extractedInput을 그대로 반환한다.
-         *
-         * @return 안전하게 변환된 extractedInput
-         */
-        public String getSafetyExtractedInput() {
-            if (isMetaCharacter(customSeparator)) {
-                StringBuilder safetyInputBuilder = new StringBuilder();
-                String extractedInputCopy = extractedInput;
-
-                while (extractedInputCopy.contains(customSeparator)) {
-                    int indexOfCustomSeparator = findIndexOfCustomSeparator(customSeparator, extractedInputCopy);
-
-                    safetyInputBuilder.append(extractedInputCopy, 0, indexOfCustomSeparator)
-                            .append(getSafetyCustomSeparator());
-
-                    extractedInputCopy = extractedInputCopy.substring(indexOfCustomSeparator + customSeparator.length());
-                }
-
-                return safetyInputBuilder.toString();
-            }
-
-            return extractedInput;
+        private boolean isMetaCharacter(char word) {
+            return REGEX_META_CHARACTERS.contains(word);
         }
 
-        private boolean isMetaCharacter(String customSeparator) {
-            return REGEX_META_CHARACTERS.contains(customSeparator);
-        }
-
-        private int findIndexOfCustomSeparator(String customSeparator, String extractedInput) {
-            return extractedInput.indexOf(customSeparator);
-        }
     }
 
     enum Operator {
