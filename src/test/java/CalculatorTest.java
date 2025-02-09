@@ -449,11 +449,12 @@ class CalculatorTest {
             assertThat(actualResult).isEqualTo(expectedResult);
         }
 
-        @Test
+        @ParameterizedTest
         @DisplayName("두 글자인 커스텀 구분자를 사용한다")
-        void customSeparator_twoLetters() {
+        @ValueSource(strings = {"/@", "$-", "AB", "-+", "?!"})
+        void customSeparator_twoLetters(String customSeparator) {
             // given
-            String input = addAllInputGenerator.CUSTOM_SEPARATOR.createInputFromList(TEST_NUMBERS, "/@");
+            String input = addAllInputGenerator.CUSTOM_SEPARATOR.createInputFromList(TEST_NUMBERS, customSeparator);
             int expectedResult = getSumOfList(TEST_NUMBERS);
             System.out.println("input = " + input);
 
