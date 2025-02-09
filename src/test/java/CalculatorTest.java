@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
@@ -11,14 +13,16 @@ public class CalculatorTest {
     @DisplayName("덧셈 테스트")
     class addTest {
 
+        private final Calculator calculator = new Calculator();
+
         @Test
         @DisplayName("두 정수의 합을 반환한다.")
         void shouldReturnSumOfTwoIntegers() {
             final int a = 3;
             final int b = 5;
-            final int actual = a + b;
+            final int actual = 8;
 
-            assertEquals(actual, calculator.add(a, b));
+            assertThat(actual).isEqualTo(calculator.add(a, b));
         }
 
         @Test
@@ -26,9 +30,9 @@ public class CalculatorTest {
         void shouldReturnSumOfTwoNegativeIntegers() {
             final int a = -3;
             final int b = -5;
-            final int actual = a + b;
+            final int actual = -8;
 
-            assertEquals(actual, calculator.add(a, b));
+            assertThat(actual).isEqualTo(calculator.add(a, b));
         }
     }
 
@@ -43,7 +47,7 @@ public class CalculatorTest {
             final int b = 3;
             final int actual = a - b;
 
-            assertEquals(actual, calculator.subtract(a, b));
+            assertThat(actual).isEqualTo(calculator.subtract(a, b));
         }
 
         @Test
@@ -53,7 +57,7 @@ public class CalculatorTest {
             final int b = -3;
             final int actual = a - b;
 
-            assertEquals(actual, calculator.subtract(a, b));
+            assertThat(actual).isEqualTo(calculator.subtract(a, b));
         }
     }
 
@@ -68,7 +72,7 @@ public class CalculatorTest {
             final int b = 3;
             final int actual = a * b;
 
-            assertEquals(actual, calculator.multiply(a, b));
+            assertThat(actual).isEqualTo(calculator.multiply(a, b));
         }
 
         @Test
@@ -78,7 +82,7 @@ public class CalculatorTest {
             final int b = -3;
             final int actual = a * b;
 
-            assertEquals(actual, calculator.multiply(a, b));
+            assertThat(actual).isEqualTo(calculator.multiply(a, b));
         }
     }
 
@@ -93,7 +97,7 @@ public class CalculatorTest {
             final int b = 3;
             final int actual = a / b;
 
-            assertEquals(actual, calculator.divide(a, b));
+            assertThat(actual).isEqualTo(calculator.divide(a, b));
         }
 
         @Test
@@ -103,7 +107,7 @@ public class CalculatorTest {
             final int b = -3;
             final int actual = a / b;
 
-            assertEquals(actual, calculator.divide(a, b));
+            assertThat(actual).isEqualTo(calculator.divide(a, b));
         }
 
         @Test
@@ -112,7 +116,7 @@ public class CalculatorTest {
             final int a = 15;
             final int b = 0;
 
-            assertThrows(ArithmeticException.class, () -> calculator.divide(a, b));
+            assertThatThrownBy(() -> calculator.divide(a, b)).isInstanceOf(ArithmeticException.class);
         }
     }
 }
