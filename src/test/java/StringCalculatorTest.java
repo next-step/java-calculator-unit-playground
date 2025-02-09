@@ -36,7 +36,7 @@ public class StringCalculatorTest {
 
         @Test
         @DisplayName("커스텀 구분자를 사용한 문자열의 합을 반환한다.")
-        void shouldReturnSumWithCustomDistinguishedOfString() {
+        void shouldReturnSumWithCustomDelimiterOfString() {
             final String expression = "1//;\n2,3:4";
             assertThat(10).isEqualTo(stringCalculator.add(expression));
         }
@@ -84,7 +84,7 @@ public class StringCalculatorTest {
 
         @Test
         @DisplayName("커스텀 구분자를 사용한 문자열의 차을 반환한다.")
-        void shouldReturnSumWithCustomDistinguishedOfString() {
+        void shouldReturnSumWithCustomDelimiterOfString() {
             final String expression = "4:1//;\n2,1";
             assertThat(0).isEqualTo(stringCalculator.subtract(expression));
         }
@@ -124,7 +124,7 @@ public class StringCalculatorTest {
 
         @Test
         @DisplayName("커스텀 구분자를 사용한 문자열의 곱을 반환한다.")
-        void shouldReturnSumWithCustomDistinguishedOfString() {
+        void shouldReturnSumWithCustomDelimiterOfString() {
             final String expression = "2:4,1//;\n2";
             assertThat(16).isEqualTo(stringCalculator.multiply(expression));
         }
@@ -142,7 +142,7 @@ public class StringCalculatorTest {
         }
 
         @Test
-        @DisplayName("0으로 나누면 ArithmeticException이 발생한다..")
+        @DisplayName("0으로 나누면 ArithmeticException이 발생한다.")
         void shouldReturnDivideWithZeroOfString() {
             final String expression = "1,2:0";
             assertThatThrownBy(() -> stringCalculator.divide(expression)).isInstanceOf(ArithmeticException.class);
@@ -157,7 +157,7 @@ public class StringCalculatorTest {
 
         @Test
         @DisplayName("커스텀 구분자를 사용한 문자열의 몫을 반환한다.")
-        void shouldReturnSumWithCustomDistinguishedOfString() {
+        void shouldReturnSumWithCustomDelimiterOfString() {
             final String expression = "50:2,5//;\n1";
             assertThat(5).isEqualTo(stringCalculator.divide(expression));
         }
