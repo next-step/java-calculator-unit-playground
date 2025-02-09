@@ -47,6 +47,7 @@ class CalculatorTest {
         void addUnderflow() {
             assertThrows(ArithmeticException.class, () -> calculator.add(Integer.MIN_VALUE, -1));
         }
+
     }
 
     @Nested
@@ -88,6 +89,7 @@ class CalculatorTest {
         void subtractUnderflow() {
             assertThrows(ArithmeticException.class, () -> calculator.subtract(Integer.MIN_VALUE, 1));
         }
+
     }
 
     @Nested
@@ -160,5 +162,6 @@ class CalculatorTest {
         void divideOverflow() {
             assertThrows(ArithmeticException.class, () -> calculator.divide(Integer.MIN_VALUE, -1));
         }
+
     }
 }
