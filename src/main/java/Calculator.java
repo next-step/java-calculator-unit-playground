@@ -8,6 +8,7 @@ public class Calculator {
     private static final Set<String> BASIC_SEPARATORS = CalculatorConstant.BASIC_SEPARATORS;
     private static final String CUSTOM_SEPARATOR_STARTER = CalculatorConstant.CUSTOM_SEPARATOR_STARTER;
     private static final String CUSTOM_SEPARATOR_TERMINATOR = CalculatorConstant.CUSTOM_SEPARATOR_TERMINATOR;
+    private static final Set<Character> REGEX_META_CHARACTERS = CalculatorConstant.REGEX_META_CHARACTERS;
     private static final String BASIC_REGEX = createBasicRegex(BASIC_SEPARATORS);
 
     private final Logger logger = Logger.getLogger("Calculator Logger");
@@ -45,9 +46,9 @@ public class Calculator {
         if (isStartsWithCustomSeparatorStarter(input)) {
             String customSeparator = getCustomSeparatorFromInput(input);
             String extractedInput = removeCustomSeparatorDeclarationFromInput(input);
-            SafetyCustomSeparatorMapper safetyMapper = new SafetyCustomSeparatorMapper(customSeparator);
+            String safetyCustomSeparator = getSafetyCustomSeparator(customSeparator);
 
-            String regex = createRegexByCustomSeparator(safetyMapper.getSafetyCustomSeparator());
+            String regex = createRegexByCustomSeparator(safetyCustomSeparator);
             logger.info("생성된 Regex: " + regex);
             numbers = convertStringNumbersIntoList(extractedInput, regex);
         } else {
@@ -105,6 +106,20 @@ public class Calculator {
         }
     }
 
+    private String getSafetyCustomSeparator(String customSeparator) {
+        StringBuilder safetyCustomSeparatorBuilder = new StringBuilder();
+
+        for (char word : customSeparator.toCharArray()) {
+            if (isMetaCharacter(word)) {
+                safetyCustomSeparatorBuilder.append(addEscape(word));
+            } else {
+                safetyCustomSeparatorBuilder.append(word);
+            }
+        }
+
+        return safetyCustomSeparatorBuilder.toString();
+    }
+
     private boolean hasProperCustomSeparator(String input) {
         if (!isContainsStarterAndTerminator(input)) {
             return false;
@@ -153,43 +168,12 @@ public class Calculator {
                 .toString();
     }
 
-    private static boolean isStartsWithCustomSeparatorStarter(String input) {
-        return input.startsWith(CUSTOM_SEPARATOR_STARTER);
+    private static boolean isMetaCharacter(char word) {
+        return REGEX_META_CHARACTERS.contains(word);
     }
 
-    static class SafetyCustomSeparatorMapper {
-
-        private static final Set<Character> REGEX_META_CHARACTERS = Set.of('\"', '.', '^', '$', '*', '+', '?', '{', '}', '[', ']', '(', ')', '|');
-        private final String customSeparator;
-
-        public SafetyCustomSeparatorMapper(String customSeparator) {
-            this.customSeparator = customSeparator;
-        }
-
-        /**
-         * customSeparator가 메타문자일 경우, 이스케이프 문자가 더해진 customSeparator를 반환한다. <br>
-         * 메타문자가 아닐 경우, 생성자로 전달받은 customSeparator를 그대로 반환한다.
-         *
-         * @return 안전하게 변환된 customSeparator
-         */
-        public String getSafetyCustomSeparator() {
-            StringBuilder safetyCustomSeparatorBuilder = new StringBuilder();
-
-            for (char word : customSeparator.toCharArray()) {
-                if (isMetaCharacter(word)) {
-                    safetyCustomSeparatorBuilder.append(addEscape(word));
-                } else {
-                    safetyCustomSeparatorBuilder.append(word);
-                }
-            }
-
-            return safetyCustomSeparatorBuilder.toString();
-        }
-
-        private boolean isMetaCharacter(char word) {
-            return REGEX_META_CHARACTERS.contains(word);
-        }
-
+    private static boolean isStartsWithCustomSeparatorStarter(String input) {
+        return input.startsWith(CUSTOM_SEPARATOR_STARTER);
     }
 
     enum Operator {

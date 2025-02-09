@@ -5,8 +5,9 @@ public class CalculatorConstant {
     private CalculatorConstant() {
     }
 
+    public static final Set<String> BASIC_SEPARATORS = Set.of(",", ":");
     public static final String CUSTOM_SEPARATOR_STARTER = "//";
     public static final String CUSTOM_SEPARATOR_TERMINATOR = "\n";
-    public static final Set<String> BASIC_SEPARATORS = Set.of(",", ":");
+    public static final Set<Character> REGEX_META_CHARACTERS = Set.of('\"', '.', '^', '$', '*', '+', '?', '{', '}', '[', ']', '(', ')', '|');
 
 }
