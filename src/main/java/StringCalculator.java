@@ -6,13 +6,22 @@ public class StringCalculator {
 
     public int add(String input) {
 
-        // null이거나 빈 문자열일 경우 0을 반환
-        if (input == null || input.isEmpty()) {
+        // 빈 문자열일 경우 0을 반환
+        if (emptyCase(input)) {
             return 0;
         }
 
+        // 문자열을 정수 리스트로 변환하고 검증하는 메서드 호출
+        List<Integer> parsedNumbers = parseAndValidateNumbers(input);
+
+        // 변환된 숫자 리스트의 합을 반환
+        return sum(parsedNumbers);
+    }
+
+    // 문자열을 정수 리스트로 변환하고 검증하는 메서드
+    private List<Integer> parseAndValidateNumbers(String input) {
         // 기본 구분자 쉽표(,), 콜론(:)
-        String delimiter = "[:,]";
+        String delimitersRegex = "[:,]";
 
         // 문자열이 "//"로 시작하면 커스텀 구분자가 정의된 상태
         if (input.startsWith("//")) {
@@ -27,46 +36,57 @@ public class StringCalculator {
             if (newLine == input.length() - 1) {
                 throw new RuntimeException(("숫자를 입력해주세요."));
             }
-            delimiter = Pattern.quote(input.substring(2, newLine)); // "//" 뒤부터 "\n" 직전까지의 문자열을 구분자로 설정
+            delimitersRegex = Pattern.quote(input.substring(2, newLine)); // "//" 뒤부터 "\n" 직전까지의 문자열을 구분자로 설정
             input = input.substring(newLine + 1); // "\n" 이후의 숫자 부분 추출
         }
 
-        String[] numbers = input.split(delimiter); // 구분자를 기준으로 문자열을 분리하여 배열에 저장
-
-        return sum(numbers); // 배열에 있는 숫자를 더해준 값을 반환
+        String[] numbers = splitNumbers(input, delimitersRegex); // 구분자를 기준으로 문자열을 분리하여 배열에 저장
+        return convertAndValidateNumbers(numbers); // 문자열 배열을 숫자로 변환하고 검증
     }
 
-    // 숫자를 합해주는 메서드
-    public int sum(String[] numbers) {
-        int sum = 0;
-        List<Integer> negatives = new ArrayList<>(); // 음수를 저장할 리스트 (예외 발생 시 사용)
-        List<String> invalidNumbers = new ArrayList<>(); // 숫자가 아닌 값 저장할 리스트(예외 발생 시 사용)
+    // 문자열을 구분자 기준으로 나누어 배열로 반환하는 메서드
+    private String[] splitNumbers(String input, String delimitersRegex) {
+        return input.split(delimitersRegex);
+    }
 
+    // 문자열 배열을 숫자로 변환하고 검증하는 메서드
+    private List<Integer> convertAndValidateNumbers(String[] numbers) {
+        List<Integer> parsedNumbers = new ArrayList<>();
         for (String str : numbers) {
-            try {
-                int num = Integer.parseInt(str); // 숫자로 변환
-
-                if (num < 0) { // 음수를 리스트에 추가
-                    negatives.add(num);
-                }
-
-                sum += num;
-            } catch (NumberFormatException e) {
-                invalidNumbers.add(str); // 숫자가 아닌 값을 리스트에 추가
-            }
+            int num = parseNumber(str);
+            validateNegativeNumber(num);
+            parsedNumbers.add(num);
         }
+        return parsedNumbers;
+    }
 
-        // 숫자가 아닌 값이 있는 경우 예외 발생
-        if (!invalidNumbers.isEmpty()) {
-            throw new RuntimeException("숫자가 아닌 값이 입력되었습니다: " + invalidNumbers);
+    // 빈 문자열을 입력할 경우 확인하는 메서드
+    private boolean emptyCase(String input) {
+        return input.isEmpty();
+    }
+
+    // 문자열을 정수로 변환하고, 숫자가 아닌 값이 입력될 경우 예외 발생 메서드
+    private int parseNumber(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자가 아닌 값이 입력되었습니다: " + str);
         }
+    }
 
-        // 음수가 있는 경우 예외 발생
-        if (!negatives.isEmpty()) {
-            throw new RuntimeException("음수가 입력되었습니다: " + negatives);
+    // 숫자가 음수인 경우 예외 발생 메서드
+    private void validateNegativeNumber(int num) {
+        if (num < 0) {
+            throw new RuntimeException("음수가 입력되었습니다: " + num);
         }
+    }
 
+    // 정수 리스트의 합을 구하는 메서드
+    private int sum(List<Integer> numbers) {
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
         return sum;
     }
-
 }
