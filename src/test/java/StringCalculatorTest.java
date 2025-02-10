@@ -127,7 +127,6 @@ class StringCalculatorTest {
                     .hasMessage("숫자 이외의 다른 값이 전달되었습니다.");
         }
 
-
         @Test
         @DisplayName("잘못된 형식의 커스텀 구분자 사용 시 커스텀 구분자 형식 예외가 발생한다.")
         void shouldThrowExceptionForInvalidCustomDelimiterFormat() {
