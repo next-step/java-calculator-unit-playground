@@ -1,59 +1,62 @@
 import java.util.regex.Pattern;
 
-
-/**
- * 문자열을 숫자로 변환하여 합산하는 계산기임. <br>
- * 쉼표 또는 콜론을 기본 구분자로 사용함.<br>
- * //<구분자>\n 해당 위치에 원하는 구분자를 넣으면,<br>
- * 단일 문자로 커스텀 구분자 지정이 가능함.<br>
- * //@\n1:2@3,4 같은 형식도 처리 가능<br>
- * 음수나 숫자가 아닌 값이 포함되면 예외를 발생시킴.
- */
 public class StringCalculator {
+
+    // 기본 구분자
+    private static final String DEFAULT_DELIMITER = "[,|:]";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String NEW_LINE = "\n";
+    private static final int CUSTOM_DELIMITER_PREFIX_LENGTH = 2;
 
     public static int add(String input) {
         if (input.isEmpty()) {
             return 0;
         }
 
-        String delimiter = "[,|:]"; // 기본 구분자 정의
+        String delimiter = DEFAULT_DELIMITER; // 기본 구분자 정의
 
-        if (input.startsWith("//")) { // 커스텀 구분자 처리 (여러 글자 지원)
-            int delimiterEnd = input.indexOf("\n");
-            String customDelimiter = input.substring(2, delimiterEnd);
-            delimiter = "[,|:]|" + Pattern.quote(customDelimiter);
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) { // 커스텀 구분자 처리 (여러 글자 지원)
+            int delimiterEnd = input.indexOf(NEW_LINE);
+            String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX_LENGTH, delimiterEnd);
+            delimiter = DEFAULT_DELIMITER + "|" + Pattern.quote(customDelimiter);
             input = input.substring(delimiterEnd + 1);
         }
 
-        String[] numbers = input.split(Pattern.compile(delimiter).pattern());
+        Pattern pattern = Pattern.compile(delimiter);
+        String[] numbers = pattern.split(input);
         return sum(numbers);
     }
 
-    public static int sum(String[] numbers) { //문자열을 숫자로 변환하여 합을 계산
+    private static int sum(String[] numbers) { // 문자열을 숫자로 변환하여 합을 계산
         int sum = 0;
-        StringBuilder negativeNumber = new StringBuilder(); // 음수가 포함될 경우 예외메시지 만드는데 사용
+        StringBuilder negativeNumbers = new StringBuilder(); // 음수값을 저장
 
         for (String num : numbers) {
-            int value;
-
-            try {
-                value = Integer.parseInt(num); // parseInt 사용하여 문자열을 숫자로 변환
-            } catch (NumberFormatException e) {
-                // 숫자가 아닌 값이 포함되면 런타임 에러 발생
-                throw new RuntimeException("Invalid input: 숫자가 아닌 값이 포함되었습니다.");
-            }
-            // 음수값이 발견되면 negativeNumber에 추가
-            if (value < 0) {
-                negativeNumber.append(value).append(" ");
-            }
-
+            int value = parseAndValidateNumber(num, negativeNumbers); // 숫자 변환 및 검증
             sum += value;
         }
-        // 음수값이 있는 경우 예외처리
-        if (!negativeNumber.isEmpty()) {
-            throw new RuntimeException("입력한 값 중 음수 값이 존재합니다.: " + negativeNumber.toString().trim());
+
+        // 음수값이 존재하면 예외 발생
+        if (!negativeNumbers.isEmpty()) {
+            throw new RuntimeException("입력한 값 중 음수 값이 존재합니다: " + negativeNumbers.toString().trim());
         }
 
         return sum;
+    }
+
+    private static int parseAndValidateNumber(String num, StringBuilder negativeNumbers) {
+        int value;
+
+        try {
+            value = Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid input: 숫자가 아닌 값이 포함되었습니다.");
+        }
+
+        if (value < 0) {
+            negativeNumbers.append(value).append(" ");
+        }
+
+        return value;
     }
 }
