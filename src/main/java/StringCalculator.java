@@ -25,7 +25,8 @@ public class StringCalculator {
             input = input.substring(delimiterEnd + 1);
         }
 
-        String[] numbers = input.split(Pattern.compile(delimiter).pattern());
+        Pattern pattern = Pattern.compile(delimiter);
+        String[] numbers = pattern.split(input);
         return sum(numbers);
     }
 
