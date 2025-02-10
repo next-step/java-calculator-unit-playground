@@ -14,7 +14,6 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter')
     testImplementation platform('org.assertj:assertj-bom:3.25.1')
     testImplementation('org.assertj:assertj-core')
-
 }
 
 test {
