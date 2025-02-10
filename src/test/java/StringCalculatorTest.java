@@ -67,13 +67,12 @@ class StringCalculatorTest {
         }
     }
 
-
     @Nested
     @DisplayName("예외 발생 테스트")
     class ExceptionCases {
 
         @Test
-        @DisplayName("기본 구분자 ':' 사용 시 음수를 입력하면 RuntimeException이 발생한다.")
+        @DisplayName("기본 구분자 ':' 사용 시 음수를 입력하면 예외가 발생한다.")
         void addNegativeWithDefaultDelimiter() {
             assertThatThrownBy(() -> stringCalculator.add("-1:2"))
                     .isInstanceOf(RuntimeException.class)
@@ -81,7 +80,7 @@ class StringCalculatorTest {
         }
 
         @Test
-        @DisplayName("커스텀 구분자 사용 시 음수를 입력하면 RuntimeException이 발생한다.")
+        @DisplayName("커스텀 구분자 사용 시 음수를 입력하면 예외가 발생한다.")
         void addNegativeWithCustomDelimiter() {
             assertThatThrownBy(() -> stringCalculator.add("//;\n-1;2;3"))
                     .isInstanceOf(RuntimeException.class)
@@ -89,16 +88,15 @@ class StringCalculatorTest {
         }
 
         @Test
-        @DisplayName("공백이 포함된 숫자가 입력되면 RuntimeException이 발생한다.")
+        @DisplayName("공백이 포함된 숫자가 입력되면 예외가 발생한다.")
         void throwExceptionForNumbersWithSpaces() {
             assertThatThrownBy(() -> stringCalculator.add(" 1,2"))
                     .isInstanceOf(RuntimeException.class)
                     .hasMessageContaining("숫자 이외의 다른 값이 전달되었습니다.");
         }
 
-
         @Test
-        @DisplayName("기본 구분자 사용 시 숫자가 아닌 값이 입력되면 RuntimeException이 발생한다.")
+        @DisplayName("기본 구분자 사용 시 숫자가 아닌 값이 입력되면 예외가 발생한다.")
         void addNonNumericWithDefaultDelimiter() {
             assertThatThrownBy(() -> stringCalculator.add("1,a,3"))
                     .isInstanceOf(RuntimeException.class)
@@ -106,11 +104,36 @@ class StringCalculatorTest {
         }
 
         @Test
-        @DisplayName("커스텀 구분자 사용 시 숫자가 아닌 값이 입력되면 RuntimeException이 발생한다.")
+        @DisplayName("커스텀 구분자 사용 시 숫자가 아닌 값이 입력되면 예외가 발생한다.")
         void addNonNumericWithCustomDelimiter() {
             assertThatThrownBy(() -> stringCalculator.add("//;\n1;b;3"))
                     .isInstanceOf(RuntimeException.class)
                     .hasMessageContaining("숫자 이외의 다른 값이 전달되었습니다.");
+        }
+
+        @Test
+        @DisplayName("커스텀 구분자와 기본 구분자 혼합 사용 시 예외가 발생한다.")
+        void shouldThrowExceptionForMixedDelimiters() {
+            assertThatThrownBy(() -> stringCalculator.add("//;\n1,2;3"))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessageContaining("숫자 이외의 다른 값이 전달되었습니다.");
+        }
+
+        @Test
+        @DisplayName("커스텀 구분자 사용 시 공백이 들어오면 예외가 발생한다.")
+        void shouldThrowExceptionForWhitespaceInCustomDelimiter() {
+            assertThatThrownBy(() -> stringCalculator.add("// \n 1 2 3"))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessage("숫자 이외의 다른 값이 전달되었습니다.");
+        }
+
+
+        @Test
+        @DisplayName("잘못된 형식의 커스텀 구분자 사용 시 커스텀 구분자 형식 예외가 발생한다.")
+        void shouldThrowExceptionForInvalidCustomDelimiterFormat() {
+            assertThatThrownBy(() -> stringCalculator.add("//@\n//#\n1@2#3"))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessage("커스텀 구분자 형식이 잘못되었습니다.");
         }
     }
 }
