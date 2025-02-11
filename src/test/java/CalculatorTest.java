@@ -8,67 +8,75 @@ public class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
     @Nested
-    @DisplayName("덧셈 테스트")
-    class addTest {
+    @DisplayName("덧셈 기능")
+    class Addition {
 
         @Test
-        @DisplayName("정수의 합")
-        void add_Test() {
+        @DisplayName("두 정수의 합을 계산한다")
+        void add() {
             final int a = 3;
             final int b = 5;
-            final int actual = a + b;
+            final int expected = a + b;
 
-            assertEquals(actual, calculator.add(a, b));
+            assertEquals(expected, calculator.add(a, b));
         }
     }
 
     @Nested
-    @DisplayName("뺄셈 데스트")
-    class subtractTest {
+    @DisplayName("뺄셈 기능")
+    class Subtraction {
 
         @Test
-        @DisplayName("정수의 차")
-        void subtract_Test() {
+        @DisplayName("두 정수의 차를 계산한다")
+        void subtract() {
             final int a = 5;
             final int b = 3;
-            final int actual = a - b;
+            final int expected = a - b;
 
-            assertEquals(actual, calculator.subtract(a, b));
+            assertEquals(expected, calculator.subtract(a, b));
         }
     }
 
     @Nested
-    @DisplayName("곱셈 테스트")
-    class multiplyTest {
+    @DisplayName("곱셈 기능")
+    class Multiplication {
 
         @Test
-        @DisplayName("정수의 곱셈")
-        void multiply_Test() {
+        @DisplayName("두 정수의 곱을 계산한다")
+        void multiply() {
             final int a = 5;
             final int b = 3;
-            final int actual = a * b;
+            final int expected = a * b;
 
-            assertEquals(actual, calculator.multiply(a, b));
+            assertEquals(expected, calculator.multiply(a, b));
+        }
+
+        @Test
+        @DisplayName("정수 오버플로우 발생 시 ArithmeticException이 발생한다")
+        void multiplyOverflow() {
+            int a = Integer.MAX_VALUE;
+            int b = 2;
+            assertThrows(ArithmeticException.class, () -> calculator.multiply(a, b));
         }
     }
 
     @Nested
-    @DisplayName("나눗셈 테스트")
-    class divideTest {
+    @DisplayName("나눗셈 기능")
+    class Division {
 
         @Test
-        @DisplayName("정수의 나눗셈")
-        void divide_Test() {
+        @DisplayName("두 정수의 나눗셈을 계산한다")
+        void divide() {
             final int a = 15;
             final int b = 3;
-            final int actual = a / b;
+            final int expected = a / b;
 
-            assertEquals(actual, calculator.divide(a, b));
+            assertEquals(expected, calculator.divide(a, b));
         }
 
         @Test
-        @DisplayName("0으로 나누었을 때 ArithmeticException 예외 발생")
-        void divideWithZero_Test() {
+        @DisplayName("0으로 나누면 ArithmeticException이 발생한다")
+        void divideByZero() {
             final int a = 15;
             final int b = 0;
 
