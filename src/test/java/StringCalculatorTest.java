@@ -36,9 +36,15 @@ public class StringCalculatorTest {
         }
 
         @Test
+        @DisplayName("커스텀 구분자와 기본 구분자를 함께 사용한 경우")
+        void delimiterCustom() {
+            assertThat(6).isEqualTo(sc.add("//;\n1;2:3"));
+        }
+
+        @Test
         @DisplayName("커스텀 구분자를 사용한 경우")
-        void delimeterCustom() {
-            assertThat(6).isEqualTo(sc.add("//;\n1;2;3;"));
+        void deliiterComplex() {
+            assertThat(10).isEqualTo(sc.add("//;\n1;2,3:4"));
         }
     }
 
@@ -54,18 +60,16 @@ public class StringCalculatorTest {
         @Test
         @DisplayName("음수를 입력한 경우 올바른 예외가 발생하는지 확인")
         void invalidInputNegativeNumber() {
-            assertThatThrownBy(() -> {
-                sc.add("-1:2:3");
-            }).isInstanceOf(RuntimeException.class)
+            assertThatThrownBy(() -> sc.add("-1:2:3"))
+                    .isInstanceOf(RuntimeException.class)
                     .hasMessage("음수는 입력할 수 없습니다");
         }
 
         @Test
         @DisplayName("숫자가 아닌 다른 것을 입력한 경우 올바른 예외가 발생하는지 확인")
         void invalidInputNotNumber() {
-            assertThatThrownBy(() -> {
-                sc.add("2~3*9");
-            }).isInstanceOf(RuntimeException.class)
+            assertThatThrownBy(() -> sc.add("2~3*9"))
+                    .isInstanceOf(RuntimeException.class)
                     .hasMessage("숫자만 입력해 주세요");
         }
 

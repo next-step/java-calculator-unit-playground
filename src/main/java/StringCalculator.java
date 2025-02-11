@@ -2,7 +2,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class StringCalculator {
-    private String delimiter = ",|:";
+    private final String delimiter = ",|:";
     // (.+) : 비어있으면 안되는 1개 이상의 문자, (.*) : 비어 있어도 되는 0개 이상의 문자
     private final Pattern customDelimiterPattern = Pattern.compile("//(.+)\\n(.*)");
 
@@ -14,17 +14,14 @@ public class StringCalculator {
         // 커스텀 구분자를 설정하는 (.+) 부분은 group(1)과 매칭, 뒤의 문자열은 group(2)와 매칭시킨다
         Matcher matcher = customDelimiterPattern.matcher(input);
 
-        // matches() : 전체 일치 , find() : 부분 일치
         if(matcher.matches()) {
-            delimiter += "|" + matcher.group(1);
+            String customDelimiter = delimiter + "|" + matcher.group(1);
             input = matcher.group(2);
+            return sum(input.split(customDelimiter));
         }
 
-        String[] numbers = input.split(delimiter);
-
-        return sum(numbers);
+        return sum(input.split(delimiter));
     }
-
     int sum(String[] numbers) {
         int sum = 0;
 
