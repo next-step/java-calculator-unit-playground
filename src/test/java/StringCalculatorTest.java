@@ -67,14 +67,16 @@ public class StringCalculatorTest {
                 .hasMessage(expectedMessage); // 예외 메시지가 정확히 일치하는지 검증
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("입력값이 숫자가 아닌 값이 존재하는 경우 예외 발생")
-    void testNonNumericValuesThrowException() {
-        assertThatThrownBy(() -> StringCalculator.add("1,a,3"))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("Invalid input: 숫자가 아닌 값이 포함되었습니다.");
-
-        assertThatThrownBy(() -> StringCalculator.add("//;\n1;B;3"))
+    @CsvSource({
+            "'1,a,3'",       // 숫자가 아닌 값 'a' 포함
+            "'//;\n1;B;3'",  // 숫자가 아닌 값 'B' 포함
+            "'2,X,5'",       // 숫자가 아닌 값 'X' 포함
+            "'//|\n2|@|5'",  // 특수문자 '@' 포함
+    })
+    void testNonNumericValuesThrowException(String input) {
+        assertThatThrownBy(() -> StringCalculator.add(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("Invalid input: 숫자가 아닌 값이 포함되었습니다.");
     }

@@ -29,32 +29,26 @@ public class StringCalculator {
 
     private static int sum(String[] numbers) { // 문자열을 숫자로 변환하여 합을 계산
         int sum = 0;
-        StringBuilder negativeNumbers = new StringBuilder(); // 음수값을 저장
 
         for (String num : numbers) {
-            int value = parseAndValidateNumber(num, negativeNumbers); // 숫자 변환 및 검증
+            int value = parseAndValidateNumber(num); // 숫자 변환 및 검증
             sum += value;
-        }
-
-        // 음수값이 존재하면 예외 발생
-        if (!negativeNumbers.isEmpty()) {
-            throw new RuntimeException("입력한 값 중 음수 값이 존재합니다: " + negativeNumbers.toString().trim());
         }
 
         return sum;
     }
 
-    private static int parseAndValidateNumber(String num, StringBuilder negativeNumbers) {
+    private static int parseAndValidateNumber(String num) {
         int value;
 
         try {
-            value = Integer.parseInt(num);
+            value = Integer.parseInt(num.trim());
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid input: 숫자가 아닌 값이 포함되었습니다.");
         }
 
         if (value < 0) {
-            negativeNumbers.append(value).append(" ");
+            throw new RuntimeException("입력한 값 중 음수 값이 존재합니다: " + value);
         }
 
         return value;
