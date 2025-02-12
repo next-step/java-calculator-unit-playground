@@ -45,7 +45,7 @@ public class CalculatorTest {
         void shouldReturnSubtractOfTwoIntegers() {
             final int a = 5;
             final int b = 3;
-            final int actual = a - b;
+            final int actual = 2;
 
             assertThat(actual).isEqualTo(calculator.subtract(a, b));
         }
@@ -55,7 +55,7 @@ public class CalculatorTest {
         void shouldReturnSubtractOfTwoNegativeIntegers() {
             final int a = -5;
             final int b = -3;
-            final int actual = a - b;
+            final int actual = -2;
 
             assertThat(actual).isEqualTo(calculator.subtract(a, b));
         }
@@ -70,7 +70,7 @@ public class CalculatorTest {
         void shouldReturnMultiplyOfTwoIntegers() {
             final int a = 5;
             final int b = 3;
-            final int actual = a * b;
+            final int actual = 15;
 
             assertThat(actual).isEqualTo(calculator.multiply(a, b));
         }
@@ -80,7 +80,7 @@ public class CalculatorTest {
         void shouldReturnMultiplyOfTwoNegativeIntegers() {
             final int a = -5;
             final int b = -3;
-            final int actual = a * b;
+            final int actual = 15;
 
             assertThat(actual).isEqualTo(calculator.multiply(a, b));
         }
@@ -95,7 +95,7 @@ public class CalculatorTest {
         void shouldReturnDivideOfTwoIntegers() {
             final int a = 15;
             final int b = 3;
-            final int actual = a / b;
+            final int actual = 5;
 
             assertThat(actual).isEqualTo(calculator.divide(a, b));
         }
@@ -105,7 +105,7 @@ public class CalculatorTest {
         void shouldReturnDivideOfTwoNegativeIntegers() {
             final int a = -15;
             final int b = -3;
-            final int actual = a / b;
+            final int actual = 5;
 
             assertThat(actual).isEqualTo(calculator.divide(a, b));
         }

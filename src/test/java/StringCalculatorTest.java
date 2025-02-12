@@ -21,11 +21,42 @@ public class StringCalculatorTest {
         }
 
         @Test
-        @DisplayName("숫자 문자 1개만 입력 되었을 때 해당 숫자를 반환한다.")
+        @DisplayName("숫자 한 개만 입력된 경우 해당 숫자를 반환한다.")
         void shouldReturnSumOfChar() {
             final String expression = "1";
             assertThat(1).isEqualTo(stringCalculator.add(expression));
         }
+    }
+
+    @Nested
+    @DisplayName("커스텀 구분자를 포함한 문자열 합 계산")
+    class CustomDelimiterTest {
+
+        @Test
+        @DisplayName("커스텀 구분자를 사용한 문자열의 합을 반환한다.")
+        void shouldReturnSumWithCustomDelimiterOfString() {
+            final String expression = "1//;\n2,3:4";
+            assertThat(stringCalculator.add(expression)).isEqualTo(10);
+        }
+
+        @Test
+        @DisplayName("커스텀 구분자와 기본 구분자를 함께 사용한 문자열의 합을 반환한다.")
+        void shouldReturnSumWithCustomDelimiterAndDefaultDelimiterOfString() {
+            final String expression = "1//***\n2,3***4";
+            assertThat(stringCalculator.add(expression)).isEqualTo(10);
+        }
+
+        @Test
+        @DisplayName("커스텀 구분자가 여러 개 문자를 포함할 때 문자열의 합을 반환한다.")
+        void shouldReturnSumWithCustomDelimitersOfString() {
+            final String expression = "1//**\n2**3**4";
+            assertThat(stringCalculator.add(expression)).isEqualTo(10);
+        }
+    }
+
+    @Nested
+    @DisplayName("예외 발생")
+    class ExceptionTest {
 
         @Test
         @DisplayName("숫자가 아닌 문자열이 입력 되었을 때 RuntimeException이 발생한다.")
@@ -35,131 +66,32 @@ public class StringCalculatorTest {
         }
 
         @Test
-        @DisplayName("커스텀 구분자를 사용한 문자열의 합을 반환한다.")
-        void shouldReturnSumWithCustomDelimiterOfString() {
-            final String expression = "1//;\n2,3:4";
-            assertThat(10).isEqualTo(stringCalculator.add(expression));
-        }
-
-    }
-
-    @Nested
-    @DisplayName("입력된 문자열의 차 계산")
-    class subtractTest {
-
-        @Test
-        @DisplayName("쉽표와 콜론을 구분자로 가지는 문자열의 차로 양수를 반환한다.")
-        void shouldReturnSubtractWithPositiveOfString() {
-            final String expression = "4,2:1";
-            assertThat(1).isEqualTo(stringCalculator.subtract(expression));
+        @DisplayName("빈 문자열이 입력된 경우 0을 반환한다.")
+        void shouldReturnZeroWhenEmptyStringIsEntered() {
+            final String expression = "";
+            assertThat(stringCalculator.add(expression)).isEqualTo(0);
         }
 
         @Test
-        @DisplayName("쉽표와 콜론을 구분자로 가지는 문자열의 차로 0을 반환한다.")
-        void shouldReturnSubtractWithZeroOfString() {
-            final String expression = "3:2,1";
-            assertThat(0).isEqualTo(stringCalculator.subtract(expression));
+        @DisplayName("구분자만 입력된 경우 RuntimeException이 발생한다.")
+        void shouldThrowRuntimeExceptionWhenOnlyDelimitersAreEntered() {
+            final String expression = ",,,";
+            assertThatThrownBy(() -> stringCalculator.add(expression)).isInstanceOf(RuntimeException.class);
         }
 
         @Test
-        @DisplayName("쉼표와 콜론을 구분자로 가지는 문자열의 차로 음수를 반환한다.")
-        void shouldReturnSubtractWithNegativeOfString() {
-            final String expression = "1,2:3";
-            assertThat(-4).isEqualTo(stringCalculator.subtract(expression));
+        @DisplayName("커스텀 구분자 사이에 공백이 포함된 경우 RuntimeException이 발생한다.")
+        void shouldThrowRuntimeExceptionWhenSpaceExistsBetweenCustomDelimiters() {
+            final String expression = "1//;\n2; 3;4";
+            assertThatThrownBy(() -> stringCalculator.add(expression)).isInstanceOf(RuntimeException.class);
         }
 
         @Test
-        @DisplayName("숫자 문자 1개만 입력 되었을 때 해당 숫자를 반환한다.")
-        void shouldReturnSubtractOfChar() {
-            final String expression = "1";
-            assertThat(1).isEqualTo(stringCalculator.subtract(expression));
+        @DisplayName("커스텀 구분자를 잘못된 방식으로 입력한 경우 RuntimeException이 발생한다.")
+        void shouldThrowRuntimeExceptionWhenInvalidCustomDelimiterFormatIsUsed() {
+            final String expression = "//;\n1;2;3;";
+            assertThatThrownBy(() -> stringCalculator.add(expression)).isInstanceOf(RuntimeException.class);
         }
 
-        @Test
-        @DisplayName("숫자가 아닌 문자열이 입력 되었을 때 RuntimeException이 발생한다.")
-        void shouldReturnRuntimeExceptionToNumberFormatException() {
-            final String expression = "example";
-            assertThatThrownBy(() -> stringCalculator.subtract(expression)).isInstanceOf(RuntimeException.class);
-        }
-
-        @Test
-        @DisplayName("커스텀 구분자를 사용한 문자열의 차을 반환한다.")
-        void shouldReturnSumWithCustomDelimiterOfString() {
-            final String expression = "4:1//;\n2,1";
-            assertThat(0).isEqualTo(stringCalculator.subtract(expression));
-        }
-    }
-
-    @Nested
-    @DisplayName("입력된 문자열의 곱 계산")
-    class multiplyTest {
-
-        @Test
-        @DisplayName("쉼표와 콜론을 구분자로 가지는 문자열의 곱으로 양수를 반환한다.")
-        void shouldReturnMultiplyWithPositiveOfString() {
-            final String expression = "1,2:3";
-            assertThat(6).isEqualTo(stringCalculator.multiply(expression));
-        }
-
-        @Test
-        @DisplayName("쉼표와 콜론을 구분자로 가지는 문자열의 곱으로 0을 반환한다.")
-        void shouldReturnMultiplyWithZeroOfString() {
-            final String expression = "1,2:0";
-            assertThat(0).isEqualTo(stringCalculator.multiply(expression));
-        }
-
-        @Test
-        @DisplayName("쉽표와 콜론을 구분자로 가지는 문자열의 곱으로 음수를 반환한다.")
-        void shouldReturnMultiplyWithNegativeOfString() {
-            final String expression = "1,2:-3";
-            assertThat(-6).isEqualTo(stringCalculator.multiply(expression));
-        }
-
-        @Test
-        @DisplayName("숫자가 아닌 문자열이 입력 되었을 때 RuntimeException이 발생한다.")
-        void shouldReturnRuntimeExceptionToNumberFormatException() {
-            final String expression = "example";
-            assertThatThrownBy(() -> stringCalculator.multiply(expression)).isInstanceOf(RuntimeException.class);
-        }
-
-        @Test
-        @DisplayName("커스텀 구분자를 사용한 문자열의 곱을 반환한다.")
-        void shouldReturnSumWithCustomDelimiterOfString() {
-            final String expression = "2:4,1//;\n2";
-            assertThat(16).isEqualTo(stringCalculator.multiply(expression));
-        }
-    }
-
-    @Nested
-    @DisplayName("입력된 문자열의 몫 계산")
-    class divideTest {
-
-        @Test
-        @DisplayName("쉼표와 콜론을 구분자로 가지는 문자열의 몫으로 양수를 반환한다.")
-        void shouldReturnDivideOfStringToPositive() {
-            final String expression = "24,2:3";
-            assertThat(4).isEqualTo(stringCalculator.divide(expression));
-        }
-
-        @Test
-        @DisplayName("0으로 나누면 ArithmeticException이 발생한다.")
-        void shouldReturnDivideWithZeroOfString() {
-            final String expression = "1,2:0";
-            assertThatThrownBy(() -> stringCalculator.divide(expression)).isInstanceOf(ArithmeticException.class);
-        }
-
-        @Test
-        @DisplayName("숫자가 아닌 문자열이 입력 되었을 때 RuntimeException이 발생한다.")
-        void shouldReturnRuntimeExceptionToNumberFormatException() {
-            final String expression = "example";
-            assertThatThrownBy(() -> stringCalculator.divide(expression)).isInstanceOf(RuntimeException.class);
-        }
-
-        @Test
-        @DisplayName("커스텀 구분자를 사용한 문자열의 몫을 반환한다.")
-        void shouldReturnSumWithCustomDelimiterOfString() {
-            final String expression = "50:2,5//;\n1";
-            assertThat(5).isEqualTo(stringCalculator.divide(expression));
-        }
     }
 }

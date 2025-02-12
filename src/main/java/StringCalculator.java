@@ -1,81 +1,57 @@
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private static int[] ExpressionToTokens(String expression) {
-        try {
-            String tokens = expression;
-            String delimiters = "[,:]";
 
-            if (expression.contains("//") && expression.contains("\n")) {
-                String customDelimiter = extractCustomDelimiter(expression);
-                tokens = extractToken(expression);
-                delimiters = "[,:" + customDelimiter + "]";
-            }
+    private static int[] expressionToTokens(String expression) {
+        if (expression.isEmpty()) {
+            return new int[]{0};
+        }
 
-            String[] splitTokens = tokens.split(delimiters);
-            return StringArrayToIntArray(splitTokens);
+        String tokens = expression;
+        String delimiters = "[,:]";
+
+        if (expression.contains("//") && expression.contains("\n")) {
+            String customDelimiter = extractCustomDelimiter(expression);
+            tokens = extractToken(expression);
+            delimiters = "[,:]" + "|"  + customDelimiter;
+        }
+
+        String[] splitTokens = tokens.split(delimiters);
+        return stringArrayToIntArray(splitTokens);
+    }
+
+    private static String extractCustomDelimiter(String expression) {
+        Pattern pattern = Pattern.compile("//(.*?)\n");
+        Matcher matcher = pattern.matcher(expression);
+        if (matcher.find()) {
+            return Pattern.quote(matcher.group(1));
+        }
+        throw new IllegalArgumentException("Invalid custom delimiter format");
+    }
+
+    private static String extractToken(String expression) {
+        return expression.replaceFirst("//.*?\n", ",");
+    }
+
+    private static int[] stringArrayToIntArray(String[] expression) {
+        try{
+            return Arrays.stream(expression).mapToInt(Integer::parseInt).toArray();
         } catch (NumberFormatException e) {
             throw new RuntimeException("Contains non-numerical values.");
         }
     }
 
-    private static String extractCustomDelimiter(String expression) {
-        int startIndex = expression.indexOf("//") + 2;
-        int endIndex = expression.indexOf("\n");
-        return expression.substring(startIndex, endIndex);
-    }
-
-    private static String extractToken(String expression) {
-        int startIndex = expression.indexOf("//");
-        int endIndex = expression.indexOf("\n");
-
-        return expression.substring(0, startIndex) + expression.substring(startIndex + 2, endIndex) + expression.substring(endIndex + 1);
-    }
-
-    private static int[] StringArrayToIntArray(String[] expression) {
-        return Arrays.stream(expression).mapToInt(Integer::parseInt).toArray();
-    }
-
     public int add(String expression) {
-        int[] tokens = ExpressionToTokens(expression);
+        int[] tokens = expressionToTokens(expression);
+
         int answer = tokens[0];
         for (int i = 1; i < tokens.length; i++) {
             answer += tokens[i];
         }
         return answer;
-    }
-
-    public int subtract(String expression) {
-        int[] tokens = ExpressionToTokens(expression);
-        int answer = tokens[0];
-        for (int i = 1; i < tokens.length; i++) {
-            answer -= tokens[i];
-        }
-        return answer;
-    }
-
-    public int multiply(String expression) {
-        int[] tokens = ExpressionToTokens(expression);
-        int answer = tokens[0];
-        for (int i = 1; i < tokens.length; i++) {
-            answer *= tokens[i];
-        }
-        return answer;
-
-    }
-
-    public int divide(String expression) {
-        int[] tokens = ExpressionToTokens(expression);
-        int answer = tokens[0];
-        for (int i = 1; i < tokens.length; i++) {
-            if (tokens[i] == 0) {
-                throw new ArithmeticException("Divide by zero");
-            }
-            answer /= tokens[i];
-        }
-        return answer;
-
     }
 }
 
