@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
@@ -11,14 +13,26 @@ public class CalculatorTest {
     @DisplayName("덧셈 테스트")
     class addTest {
 
+        private final Calculator calculator = new Calculator();
+
         @Test
-        @DisplayName("정수의 합")
-        void add_Test() {
+        @DisplayName("두 정수의 합을 반환한다.")
+        void shouldReturnSumOfTwoIntegers() {
             final int a = 3;
             final int b = 5;
-            final int actual = a+b;
+            final int actual = 8;
 
-            assertEquals(actual, calculator.add(a,b));
+            assertThat(actual).isEqualTo(calculator.add(a, b));
+        }
+
+        @Test
+        @DisplayName("두 음수 정수의 합을 반환한다.")
+        void shouldReturnSumOfTwoNegativeIntegers() {
+            final int a = -3;
+            final int b = -5;
+            final int actual = -8;
+
+            assertThat(actual).isEqualTo(calculator.add(a, b));
         }
     }
 
@@ -27,13 +41,23 @@ public class CalculatorTest {
     class subtractTest {
 
         @Test
-        @DisplayName("정수의 차")
-        void subtract_Test() {
+        @DisplayName("두 정수의 차를 반환한다.")
+        void shouldReturnSubtractOfTwoIntegers() {
             final int a = 5;
             final int b = 3;
-            final int actual = a-b;
+            final int actual = 2;
 
-            assertEquals(actual, calculator.subtract(a,b));
+            assertThat(actual).isEqualTo(calculator.subtract(a, b));
+        }
+
+        @Test
+        @DisplayName("두 음수 정수의 차를 반환한다.")
+        void shouldReturnSubtractOfTwoNegativeIntegers() {
+            final int a = -5;
+            final int b = -3;
+            final int actual = -2;
+
+            assertThat(actual).isEqualTo(calculator.subtract(a, b));
         }
     }
 
@@ -42,13 +66,23 @@ public class CalculatorTest {
     class multiplyTest {
 
         @Test
-        @DisplayName("정수의 곱셈")
-        void multiply_Test() {
+        @DisplayName("두 정수의 곱을 반환한다.")
+        void shouldReturnMultiplyOfTwoIntegers() {
             final int a = 5;
             final int b = 3;
-            final int actual = a*b;
+            final int actual = 15;
 
-            assertEquals(actual, calculator.multiply(a,b));
+            assertThat(actual).isEqualTo(calculator.multiply(a, b));
+        }
+
+        @Test
+        @DisplayName("두 음수 정수의 곱을 반환한다.")
+        void shouldReturnMultiplyOfTwoNegativeIntegers() {
+            final int a = -5;
+            final int b = -3;
+            final int actual = 15;
+
+            assertThat(actual).isEqualTo(calculator.multiply(a, b));
         }
     }
 
@@ -57,22 +91,32 @@ public class CalculatorTest {
     class divideTest {
 
         @Test
-        @DisplayName("정수의 나눗셈")
-        void divide_Test() {
+        @DisplayName("두 정수의 몫을 반환한다.")
+        void shouldReturnDivideOfTwoIntegers() {
             final int a = 15;
             final int b = 3;
-            final int actual = a/b;
+            final int actual = 5;
 
-            assertEquals(actual, calculator.divide(a,b));
+            assertThat(actual).isEqualTo(calculator.divide(a, b));
         }
 
         @Test
-        @DisplayName("0으로 나누었을 때 ArithmeticException 예외 발생")
-        void divideWithZero_Test() {
+        @DisplayName("두 음수 정수의 몫을 반환한다.")
+        void shouldReturnDivideOfTwoNegativeIntegers() {
+            final int a = -15;
+            final int b = -3;
+            final int actual = 5;
+
+            assertThat(actual).isEqualTo(calculator.divide(a, b));
+        }
+
+        @Test
+        @DisplayName("정수를 0으로 나누면 ArithmeticException이 발생한다.")
+        void shouldReturnDivideWithZeroOfTwoIntegers() {
             final int a = 15;
             final int b = 0;
 
-            assertThrows(ArithmeticException.class, () -> calculator.divide(a,b));
+            assertThatThrownBy(() -> calculator.divide(a, b)).isInstanceOf(ArithmeticException.class);
         }
     }
 }
