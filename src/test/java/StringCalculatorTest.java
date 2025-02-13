@@ -37,13 +37,13 @@ public class StringCalculatorTest {
 
         @Test
         @DisplayName("커스텀 구분자와 기본 구분자를 함께 사용한 경우")
-        void delimiterCustom() {
+        void delimiterDefaultPlusCustom() {
             assertThat(6).isEqualTo(sc.add("//;\n1;2:3"));
         }
 
         @Test
         @DisplayName("커스텀 구분자를 사용한 경우")
-        void deliiterComplex() {
+        void delimiterCustom() {
             assertThat(10).isEqualTo(sc.add("//;\n1;2,3:4"));
         }
     }
