@@ -3,6 +3,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @DisplayName("Calculator Test")
@@ -62,4 +63,14 @@ class CalculatorTest {
         assertEquals(expected, result);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "5, 0",
+            "0, 0",
+            "-3, 0"
+    })
+    @DisplayName("나눗셈: 0으로 나누면 IllegalArgumentException이 발생한다.")
+    void divideByZeroException(int firstNumber, int secondNumber) {
+        assertThrows(IllegalArgumentException.class, () -> calculator.divide(firstNumber, secondNumber));
+    }
 }
