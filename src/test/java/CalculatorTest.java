@@ -1,0 +1,23 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class CalculatorTest {
+
+    @Test
+    @DisplayName("두 개의 인자를 받아 정상적으로 덧셈 결과를 반환한다.")
+    void shouldReturnResult_Add() {
+        // given
+        Calculator calculator = new Calculator();
+        int a = 1;
+        int b = 2;
+
+        // when
+        int expected = calculator.add(a, b);
+
+        // then
+        int actual = 3;
+        assertEquals(expected, actual);
+    }
+}
