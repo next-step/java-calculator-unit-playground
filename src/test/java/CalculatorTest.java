@@ -69,4 +69,21 @@ class CalculatorTest {
         int actual = 2;
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("두 개의 인자 중 작은 값에서 큰 값을 나누려고 할 경우 예외가 발생한다.")
+    void shouldThrowException_whenIndivisibleValue() {
+        // given
+        Calculator calculator = new Calculator();
+        int a = 2;
+        int b = 4;
+
+        // when
+        ArithmeticException e = assertThrows(ArithmeticException.class,
+                () -> calculator.division(a, b)
+        );
+
+        // then
+        assertEquals(e.getMessage(), "작은 값으로 큰 값을 나눌 수 없습니다.");
+    }
 }
