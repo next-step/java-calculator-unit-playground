@@ -43,7 +43,7 @@ public class SimpleCaluculatorTest {
 
         @ParameterizedTest
         @MethodSource("operationTestArguments")
-        @DisplayName("divide 함수는 x,y가 인자로 주어지면 곱셈 연산을 수행한다.")
+        @DisplayName("divide 함수는 x,y가 인자로 주어지면 나눗셈 연산을 수행한다.")
         void testDivideOperation(int x, int y) {
             int actual = SimpleCalculator.divide(x, y);
             assertEquals(x / y, actual);
@@ -56,6 +56,11 @@ public class SimpleCaluculatorTest {
             assertThrows(RuntimeException.class, () -> SimpleCalculator.divide(1, 0));
         }
 
+        /**
+         *
+         * @MethodSource는 테스트 인스턴스가 생성되기 전에 호출된다.
+         * 그래서 기본적으로 static 메서드를 요구한다.
+         */
         private static Stream<Arguments> operationTestArguments() {
             return Stream.of(
                     Arguments.arguments(1, 2),
