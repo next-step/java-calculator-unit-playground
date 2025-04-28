@@ -36,4 +36,17 @@ class CalculatorTest {
         assertEquals(expected, result);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "2, 3, 6",
+            "-2, 3, -6",
+            "0, 5, 0",
+            "-3, -3, 9"
+    })
+    @DisplayName("곱셈: 두 수를 곱한 결과를 반환한다.")
+    void multiplyMethod(int firstNumber, int secondNumber, int expected) {
+        int result = calculator.multiply(firstNumber, secondNumber);
+        assertEquals(expected, result);
+    }
+
 }
