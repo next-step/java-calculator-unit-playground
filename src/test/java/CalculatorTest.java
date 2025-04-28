@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,22 @@ class CalculatorTest {
 
         // then
         int actual = 6;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("두 개의 인자를 받아 정상적으로 나눗셈 결과를 반환한다.")
+    void shouldReturnResult_Division() {
+        // given
+        Calculator calculator = new Calculator();
+        int a = 4;
+        int b = 2;
+
+        // when
+        int expected = calculator.division(a, b);
+
+        // then
+        int actual = 2;
         assertEquals(expected, actual);
     }
 }
