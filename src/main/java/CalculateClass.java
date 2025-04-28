@@ -1,11 +1,11 @@
 public class CalculateClass {
-    public int[] calculate(int a, int b) {
-        int plus = a + b;
-        int min = (a > b) ? (a - b) : (b - a);
-        int mul = a * b;
-        int div = a / b;
-
-        int[] result = {plus, min, mul, div};
-        return result;
+    public int add(int a, int b) {return a + b;}
+    public int min(int a, int b) {
+        return a > b ? ( a - b ) : (b - a );
     }
+    public int div(int a, int b) {return a / b;}
+    public int mul (int a, int b) {return a * b;}
 }
+
+
+
