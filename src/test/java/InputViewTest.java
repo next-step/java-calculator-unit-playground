@@ -19,10 +19,10 @@ class InputViewTest {
     }
 
     @Test
-    @DisplayName("readNumber: 입력받은 문자열을 정수로 변환하여 반환한다.")
-    void readNumber() {
+    @DisplayName("readInput: 입력받은 문자열을 그대로 반환한다.")
+    void readInput() {
         System.setIn(new ByteArrayInputStream(INPUT.getBytes()));
         InputView inputView = new InputView();
-        assertEquals(42, inputView.readNumber());
+        assertEquals("42", inputView.readInput());
     }
 }
