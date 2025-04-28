@@ -32,4 +32,12 @@ class OutputViewTest {
         String output = outputStream.toString();
         assertTrue(output.contains(OutputView.FIRST_NUMBER_PROMPT));
     }
+
+    @Test
+    @DisplayName("두 번째 숫자 입력 프롬프트를 출력한다.")
+    void printSecondNumberPrompt() {
+        outputView.printSecondNumberPrompt();
+        String output = outputStream.toString();
+        assertTrue(output.contains(OutputView.SECOND_NUMBER_PROMPT));
+    }
 }
