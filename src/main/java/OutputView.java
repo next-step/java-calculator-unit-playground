@@ -1,8 +1,8 @@
 public class OutputView {
 
-    private static final String FIRST_NUMBER_PROMPT = "첫 번째 숫자를 입력하세요: ";
-    private static final String SECOND_NUMBER_PROMPT = "두 번째 숫자를 입력하세요: ";
-    private static final String RESULT_MESSAGE = "계산 결과: ";
+    static final String FIRST_NUMBER_PROMPT = "첫 번째 숫자를 입력하세요: ";
+    static final String SECOND_NUMBER_PROMPT = "두 번째 숫자를 입력하세요: ";
+    static final String RESULT_MESSAGE = "계산 결과: ";
 
     public void printFirstNumberPrompt() {
         System.out.print(FIRST_NUMBER_PROMPT);
