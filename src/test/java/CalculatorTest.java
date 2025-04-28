@@ -36,4 +36,20 @@ class CalculatorTest {
         int actual = 1;
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("두 개의 인자를 받아 정상적으로 곱셈 결과를 반환한다.")
+    void shouldReturnResult_Multiplication() {
+        // given
+        Calculator calculator = new Calculator();
+        int a = 2;
+        int b = 3;
+
+        // when
+        int expected = calculator.multiplication(a, b);
+
+        // then
+        int actual = 6;
+        assertEquals(expected, actual);
+    }
 }
