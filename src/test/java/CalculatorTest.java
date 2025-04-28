@@ -20,4 +20,20 @@ class CalculatorTest {
         int actual = 3;
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("두 개의 인자를 받아 정상적으로 뺄셈 결과를 반환한다.")
+    void shouldReturnResult_Subtraction() {
+        // given
+        Calculator calculator = new Calculator();
+        int a = 2;
+        int b = 1;
+
+        // when
+        int expected = calculator.subtraction(a, b);
+
+        // then
+        int actual = 1;
+        assertEquals(expected, actual);
+    }
 }
