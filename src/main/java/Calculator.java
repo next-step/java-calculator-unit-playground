@@ -13,6 +13,9 @@ public class Calculator {
     }
 
     public int division(int a, int b) {
+        if (a < b) {
+            throw new ArithmeticException("작은 값으로 큰 값을 나눌 수 없습니다.");
+        }
         return a / b;
     }
 }
