@@ -49,4 +49,17 @@ class CalculatorTest {
         assertEquals(expected, result);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "6, 3, 2",
+            "9, 3, 3",
+            "-9, 3, -3",
+            "10, -2, -5"
+    })
+    @DisplayName("나눗셈: 두 수를 나눈 결과를 반환한다.")
+    void divideMethod(int firstNumber, int secondNumber, int expected) {
+        int result = calculator.divide(firstNumber, secondNumber);
+        assertEquals(expected, result);
+    }
+
 }
