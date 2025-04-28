@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("초간단 계산기 unit 테스트")
 public class SimpleCaluculatorTest {
@@ -48,6 +51,13 @@ public class SimpleCaluculatorTest {
             assertEquals(x / y, actual);
         }
 
+
+        @Test
+        @DisplayName("divide 함수는 0으로 나눌때 RuntimeException을 던진다.")
+        void zeroDivisionRuntimeExceptionTest(){
+            assertThrows(RuntimeException.class,() ->  SimpleCalculator.divide(1,0));
+        }
+
         private static Stream<Arguments> operationTestArguments(){
             return Stream.of(
                     Arguments.arguments(1,2),
@@ -55,6 +65,5 @@ public class SimpleCaluculatorTest {
                     Arguments.arguments(2,1)
             );
         }
-
     }
 }
