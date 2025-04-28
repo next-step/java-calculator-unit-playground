@@ -40,4 +40,13 @@ class OutputViewTest {
         String output = outputStream.toString();
         assertTrue(output.contains(OutputView.SECOND_NUMBER_PROMPT));
     }
+
+    @Test
+    @DisplayName("계산 결과를 출력한다.")
+    void printResult() {
+        int result = 10;
+        outputView.printResult(result);
+        String output = outputStream.toString();
+        assertTrue(output.contains(OutputView.RESULT_MESSAGE + result));
+    }
 }
