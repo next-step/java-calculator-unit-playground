@@ -61,13 +61,11 @@ public class StringCalculatorTest {
 
         private static Stream<Arguments> customDelimeterStringInputArguments() {
             return Stream.of(
-                    Arguments.arguments(
-                            Arguments.arguments("//;\\n1;2;3;4", 10),
-                            Arguments.arguments("//;\\n1,2;3,4", 10),
-                            Arguments.arguments("//;\\n1,2;3,4", 10),
-                            Arguments.arguments("//;\\n1,2;3,4", 10),
-                            Arguments.arguments("//;\\n1,2,3,4", 10)
-                    )
+                    Arguments.arguments("//;\\n1;2;3;4", 10),
+                    Arguments.arguments("//;\\n1,2;3,4", 10),
+                    Arguments.arguments("//;\\n1,2;3,4", 10),
+                    Arguments.arguments("//;\\n1,2;3,4", 10),
+                    Arguments.arguments("//;\\n1,2,3,4", 10)
             );
         }
 
