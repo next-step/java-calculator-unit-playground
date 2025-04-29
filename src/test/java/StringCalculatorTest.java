@@ -8,7 +8,6 @@
   - [ ] 음수를 전달하는 경우 RuntimeException 예외를 던진다.
  */
 
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,6 +18,7 @@ import stringCalc.StringCalculator;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("문자열 계산기 unit 테스트")
 public class StringCalculatorTest {
@@ -45,7 +45,6 @@ public class StringCalculatorTest {
             assertEquals(expected, actual);
         }
 
-        @DisplayName("")
         private static Stream<Arguments> basicDelimeterStringInputArguments() {
             return Stream.of(
                     Arguments.arguments("1:2", 3),
@@ -53,13 +52,30 @@ public class StringCalculatorTest {
                     Arguments.arguments("1,2:3", 6)
             );
         }
-
-
     }
 
     @Nested
     @DisplayName("커스텀 구분자 처리 테스트")
     class CustomDelimiterTest {
+
+        @ParameterizedTest
+        @MethodSource("customDelimeterArguments")
+        @DisplayName("커스텀 구분자를 인식하여 합을 반환한다.")
+        void customDelimeterStringInputTest(String value, int expected) {
+            assertEquals(expected, StringCalculator.add(value));
+        }
+
+        private static Stream<Arguments> customDelimeterArguments() {
+            return Stream.of(
+                    Arguments.arguments(
+                            Arguments.arguments("//;\\n1;2;3;4", 10),
+                            Arguments.arguments("//;\\n1,2;3,4", 10),
+                            Arguments.arguments("//;\\n1,2;3,4", 10),
+                            Arguments.arguments("//;\\n1,2;3,4", 10),
+                            Arguments.arguments("//;\\n1,2,3,4", 10)
+                    )
+            );
+        }
 
     }
 
@@ -67,6 +83,8 @@ public class StringCalculatorTest {
     @DisplayName("커스텀 구분자 처리 테스트")
     class ExceptionThrowingTest {
 
+
     }
+
 
 }
