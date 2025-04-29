@@ -1,3 +1,5 @@
+package utils;
+
 public class CustomDelimiterParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";

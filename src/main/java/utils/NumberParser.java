@@ -1,3 +1,7 @@
+package utils;
+
+import domain.Number;
+
 public class NumberParser {
 
     private static final String ERROR_NOT_A_NUMBER = "[ERROR] 입력은 숫자여야 합니다.";

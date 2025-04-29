@@ -1,14 +1,17 @@
+package utils;
+
+import domain.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("NumberParser Test")
+@DisplayName("parser.NumberParser Test")
 class NumberParserTest {
 
     @Test
-    @DisplayName("정상 입력: 문자열을 정수로 변환하여 Number 객체를 반환한다.")
+    @DisplayName("정상 입력: 문자열을 정수로 변환하여 domain.Number 객체를 반환한다.")
     void parseValidInput() {
         Number number = NumberParser.parse("42");
         assertEquals(new Number(42), number);
