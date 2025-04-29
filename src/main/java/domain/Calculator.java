@@ -1,3 +1,5 @@
+package domain;
+
 public class Calculator {
 
     private static final String DIVIDE_BY_ZERO_ERROR_MESSAGE = "[ERROR] 0으로 나눌 수 없습니다.";

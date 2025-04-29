@@ -1,3 +1,5 @@
+package domain;
+
 public class CustomDelimiterRegister {
 
     private final Delimiters delimiters;

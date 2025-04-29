@@ -1,3 +1,7 @@
+package domain;
+
+import utils.NumberParser;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,7 +14,7 @@ public class NumberTokens {
     public NumberTokens(List<String> tokens) {
         this.numbers = tokens.stream()
                 .map(NumberParser::parse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
         validateNoNegative();
     }
 
