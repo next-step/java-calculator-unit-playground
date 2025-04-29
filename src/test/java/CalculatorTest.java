@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +18,7 @@ class CalculatorTest {
         int expected = calculator.sum(input);
 
         //then
-        assertEquals(expected, 0);
+        assertThat(0).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -33,6 +33,6 @@ class CalculatorTest {
 
         // then
         int actual = 6;
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 }

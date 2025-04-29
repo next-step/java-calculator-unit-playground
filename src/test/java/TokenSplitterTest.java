@@ -1,4 +1,5 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ class TokenSplitterTest {
         String[] token = tokenSplitter.tokenize(value);
 
         // then
-        assertEquals(Arrays.toString(token), "[1, 2, 3]");
+        assertThat("[1, 2, 3]").isEqualTo(Arrays.toString(token));
     }
 
     @ParameterizedTest
@@ -33,7 +34,8 @@ class TokenSplitterTest {
         String[] token = tokenSplitter.tokenize(customValue);
 
         // then
-        assertEquals(Arrays.toString(token), "[1, 2, 3]");
+        assertThat("[1, 2, 3]").isEqualTo(Arrays.toString(token));
+
     }
 
     @Test
@@ -43,12 +45,9 @@ class TokenSplitterTest {
         String input = "//;1;2;3";
         TokenSplitter tokenSplitter = new TokenSplitter();
 
-        // when
-        RuntimeException e = assertThrows(RuntimeException.class,
-                () -> tokenSplitter.tokenize(input)
-        );
-
-        // then
-        assertEquals(e.getMessage(), "커스텀 구분자 형식이 올바르지 않습니다.");
+        // when & then
+        assertThatThrownBy(() -> tokenSplitter.tokenize(input))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("커스텀 구분자 형식이 올바르지 않습니다.");
     }
 }

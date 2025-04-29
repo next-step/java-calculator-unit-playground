@@ -1,5 +1,5 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ class StringConverterTest {
         List<Integer> converterNumbers = stringConverter.convertAndValidateNumbers(token);
 
         // then
-        assertEquals(converterNumbers, List.of(1, 2, 3));
+        assertThat(List.of(1, 2, 3)).isEqualTo(converterNumbers);
     }
 
     @Test
@@ -28,13 +28,10 @@ class StringConverterTest {
         String[] token = new String[]{"1", "ab", "3"};
         StringConverter stringConverter = new StringConverter();
 
-        // when
-        RuntimeException e = assertThrows(RuntimeException.class,
-                () ->stringConverter.convertAndValidateNumbers(token)
-        );
-
-        // then
-        assertEquals(e.getMessage(), "숫자가 아닌 다른 값이 입력되었습니다.");
+        // when & then
+        assertThatThrownBy(() -> stringConverter.convertAndValidateNumbers(token))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("숫자가 아닌 다른 값이 입력되었습니다.");
     }
 
     @Test
@@ -44,12 +41,9 @@ class StringConverterTest {
         String[] token = new String[]{"-1", "2", "3"};
         StringConverter stringConverter = new StringConverter();
 
-        // when
-        RuntimeException e = assertThrows(RuntimeException.class,
-                () ->stringConverter.convertAndValidateNumbers(token)
-        );
-
-        // then
-        assertEquals(e.getMessage(), "양의 정수만 입력할 수 있습니다.");
+        // when & then
+        assertThatThrownBy(() -> stringConverter.convertAndValidateNumbers(token))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("양의 정수만 입력할 수 있습니다.");
     }
 }
