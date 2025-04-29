@@ -9,10 +9,14 @@ public class Delimiters {
 
     private final List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
 
-    public void addCustomDelimiters(String customDelimiters) {
-        if (customDelimiters == null || customDelimiters.isEmpty()) {
+    public void addCustomDelimiters(String customDelimiter) {
+        if (customDelimiter == null || customDelimiter.isEmpty()) {
             return;
         }
-        delimiters.add(customDelimiters);
+        delimiters.add(customDelimiter);
+    }
+
+    public List<String> getDelimiters() {
+        return new ArrayList<>(delimiters);
     }
 }
