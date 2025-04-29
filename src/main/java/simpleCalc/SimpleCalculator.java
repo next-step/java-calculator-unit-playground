@@ -1,3 +1,5 @@
+package simpleCalc;
+
 public class SimpleCalculator {
 
     public static int add(int x, int y) {
