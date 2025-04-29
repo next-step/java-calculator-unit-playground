@@ -22,7 +22,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1:2,3", "1,2,3"})
+    @ValueSource(strings = {"1:2,3", "1,2,3", "//;\\n1;2;3"})
     @DisplayName("입력한 문자열에 대해 올바른 덧셈 결과를 반환한다.")
     void shouldReturnSum_whenInputString(String input) {
         // given

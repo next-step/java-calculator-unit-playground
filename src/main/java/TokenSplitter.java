@@ -8,16 +8,16 @@ public class TokenSplitter {
     private static final String DEFAULT_REGEX = "[,|:]";
     private static final Pattern CUSTOM_REGEX = Pattern.compile("(?<=//)(.+?)(?=\\\\n)");
 
-    public String[] getToken(final String input) {
+    public String[] tokenize(final String input) {
         if (input.startsWith(CUSTOM_PREFIX)) {
-            checkCustomFormat(input);
+            validateCustomFormat(input);
             String preInput = preprocessInput(input);
             return preInput.split(findCustom(input));
         }
         return input.split(DEFAULT_REGEX);
     }
 
-    private void checkCustomFormat(final String input) {
+    private void validateCustomFormat(final String input) {
         if (!input.contains(CUSTOM_SUFFIX)) {
             throw new RuntimeException("커스텀 구분자 형식이 올바르지 않습니다.");
         }

@@ -1,12 +1,13 @@
-import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
 
     private final TokenSplitter tokenSplitter;
+    private final StringConverter stringConverter;
 
     public Calculator() {
         this.tokenSplitter = new TokenSplitter();
+        this.stringConverter = new StringConverter();
     }
 
     public int sum(String input) {
@@ -14,19 +15,13 @@ public class Calculator {
             return 0;
         }
 
-        String[] tokens = tokenSplitter.getToken(input);
-        List<Integer> numbers = getNumbers(tokens);
+        String[] tokens = tokenSplitter.tokenize(input);
+        List<Integer> numbers = stringConverter.convertAndValidateNumbers(tokens);
 
         int result = 0;
         for (int number : numbers) {
             result += number;
         }
         return result;
-    }
-
-    private List<Integer> getNumbers(final String[] tokens) {
-        return Arrays.stream(tokens)
-                .map(Integer::parseInt)
-                .toList();
     }
 }

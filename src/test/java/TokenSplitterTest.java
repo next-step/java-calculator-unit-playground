@@ -16,7 +16,7 @@ class TokenSplitterTest {
         TokenSplitter tokenSplitter = new TokenSplitter();
 
         // when
-        String[] token = tokenSplitter.getToken(value);
+        String[] token = tokenSplitter.tokenize(value);
 
         // then
         assertEquals(Arrays.toString(token), "[1, 2, 3]");
@@ -30,7 +30,7 @@ class TokenSplitterTest {
         TokenSplitter tokenSplitter = new TokenSplitter();
 
         // when
-        String[] token = tokenSplitter.getToken(customValue);
+        String[] token = tokenSplitter.tokenize(customValue);
 
         // then
         assertEquals(Arrays.toString(token), "[1, 2, 3]");
@@ -45,7 +45,7 @@ class TokenSplitterTest {
 
         // when
         RuntimeException e = assertThrows(RuntimeException.class,
-                () -> tokenSplitter.getToken(input)
+                () -> tokenSplitter.tokenize(input)
         );
 
         // then
