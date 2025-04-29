@@ -4,7 +4,7 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public String readInput() {
+    public String readExpression() {
         return scanner.nextLine();
     }
 }

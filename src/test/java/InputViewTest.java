@@ -20,9 +20,9 @@ class InputViewTest {
 
     @Test
     @DisplayName("readInput: 입력받은 문자열을 그대로 반환한다.")
-    void readInput() {
+    void readExpression() {
         System.setIn(new ByteArrayInputStream(INPUT.getBytes()));
         InputView inputView = new InputView();
-        assertEquals("42", inputView.readInput());
+        assertEquals("42", inputView.readExpression());
     }
 }
