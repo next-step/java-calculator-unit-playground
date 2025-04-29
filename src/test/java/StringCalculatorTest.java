@@ -59,13 +59,13 @@ public class StringCalculatorTest {
     class CustomDelimiterTest {
 
         @ParameterizedTest
-        @MethodSource("customDelimeterArguments")
+        @MethodSource("customDelimeterStringInputArguments")
         @DisplayName("커스텀 구분자를 인식하여 합을 반환한다.")
         void customDelimeterStringInputTest(String value, int expected) {
             assertEquals(expected, StringCalculator.add(value));
         }
 
-        private static Stream<Arguments> customDelimeterArguments() {
+        private static Stream<Arguments> customDelimeterStringInputArguments() {
             return Stream.of(
                     Arguments.arguments(
                             Arguments.arguments("//;\\n1;2;3;4", 10),
@@ -80,11 +80,61 @@ public class StringCalculatorTest {
     }
 
     @Nested
-    @DisplayName("커스텀 구분자 처리 테스트")
+    @DisplayName("예외 처리 테스트")
     class ExceptionThrowingTest {
 
+        @ParameterizedTest
+        @MethodSource("negativeIncludedStringInputArguments")
+        @DisplayName("음수가 포함될 경우 RuntimeException이 발생한다.")
+        void negativeInputExceptionThrowTest(String value) {
+            assertThrows(RuntimeException.class, () -> StringCalculator.add(value));
+        }
 
+        @ParameterizedTest
+        @MethodSource("noneAcceptedValueIncludedStringInputArguments")
+        @DisplayName("숫자 이외의 값이 포함될 경우 RuntimeException이 발생한다.")
+        void noneAcceptedValueInputExceptionThrowTest(String value) {
+            assertThrows(RuntimeException.class, () -> StringCalculator.add(value));
+        }
+
+        @ParameterizedTest
+        @MethodSource("spaceIncludedStringInputArguments")
+        @DisplayName("공백이 포함될 경우 RuntimeException이 발생한다.")
+        void spaceIncludedInputExceptionThrowTest(String value) {
+            assertThrows(RuntimeException.class, () -> StringCalculator.add(value));
+        }
+
+        private static Stream<Arguments> negativeIncludedStringInputArguments() {
+            return Stream.of(
+                    Arguments.arguments("-1,2:3"),
+                    Arguments.arguments("1,-2:3"),
+                    Arguments.arguments("1,2:-3"),
+                    Arguments.arguments("//;\\n-1,2;3"),
+                    Arguments.arguments("//;\\n1,-2;3"),
+                    Arguments.arguments("//;\\n1,2;-3")
+            );
+        }
+
+        private static Stream<Arguments> noneAcceptedValueIncludedStringInputArguments() {
+            return Stream.of(
+                    Arguments.arguments("a,2:3"),
+                    Arguments.arguments("1,+2:3"),
+                    Arguments.arguments("1,2:*3"),
+                    Arguments.arguments("//;\\n-1,2;3,(,4")
+            );
+
+        }
+
+        private static Stream<Arguments> spaceIncludedStringInputArguments() {
+            return Stream.of(
+                    Arguments.arguments("1,2 3"),
+                    Arguments.arguments("1, "),
+                    Arguments.arguments(" "),
+                    Arguments.arguments("//;\\n ;2;3"),
+                    Arguments.arguments("//;\\n "),
+                    Arguments.arguments("//;\\n1; ;3")
+            );
+        }
     }
-
 
 }
