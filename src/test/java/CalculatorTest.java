@@ -12,11 +12,11 @@ public class CalculatorTest {
 
     @Nested
     @DisplayName("덧셈 테스트")
-    class SumTest{
+    class AddTest{
 
         @Test
         @DisplayName("주어진 인자 2개를 더한 결과를 반환한다")
-        void Test_SumTest() {
+        void Test_AddTest() {
 
             // given
             int a = 3;
