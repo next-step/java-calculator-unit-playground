@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,12 +16,15 @@ public class StringCalculatorTest {
     @Nested
     @DisplayName("기본 구분자 처리 테스트")
     class BasicDelimiterTest {
+
+        @Test
         @DisplayName("빈 문자열은 0을 반환한다.")
         void emptyStringInputTest() {
             int actual = StringCalculator.add("");
             assertEquals(0, actual);
         }
 
+        @Test
         @DisplayName("숫자 하나만 있을 경우, 그 숫자를 반환한다.")
         void oneSizeStringInputTest() {
             int actual = StringCalculator.add("1");
@@ -112,7 +116,6 @@ public class StringCalculatorTest {
                     Arguments.arguments("1,2:*3"),
                     Arguments.arguments("//;\\n-1,2;3,(,4")
             );
-
         }
 
         private static Stream<Arguments> spaceIncludedStringInputArguments() {
