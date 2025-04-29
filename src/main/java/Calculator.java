@@ -3,12 +3,18 @@ import java.util.List;
 
 public class Calculator {
 
+    private final TokenSplitter tokenSplitter;
+
+    public Calculator() {
+        this.tokenSplitter = new TokenSplitter();
+    }
+
     public int sum(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        String[] tokens = getTokens(input);
+        String[] tokens = tokenSplitter.getToken(input);
         List<Integer> numbers = getNumbers(tokens);
 
         int result = 0;
@@ -16,10 +22,6 @@ public class Calculator {
             result += number;
         }
         return result;
-    }
-
-    private String[] getTokens(final String input) {
-        return input.split("[,|:]");
     }
 
     private List<Integer> getNumbers(final String[] tokens) {
