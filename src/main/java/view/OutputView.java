@@ -1,3 +1,5 @@
+package view;
+
 public class OutputView {
 
     static final String FIRST_NUMBER_PROMPT = "첫 번째 숫자를 입력하세요: ";

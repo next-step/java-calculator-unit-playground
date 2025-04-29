@@ -1,3 +1,5 @@
+package view;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,7 +9,7 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("InputView Test")
+@DisplayName("view.InputView Test")
 class InputViewTest {
 
     private static final String INPUT = "42\n";

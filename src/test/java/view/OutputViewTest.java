@@ -1,3 +1,5 @@
+package view;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +10,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DisplayName("OutputView Test")
+@DisplayName("view.OutputView Test")
 class OutputViewTest {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
