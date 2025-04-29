@@ -1,21 +1,30 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Calculator {
 
-    public int add(int a, int b) {
-        return a + b;
-    }
-
-    public int subtraction(int a, int b) {
-        return a - b;
-    }
-
-    public int multiplication(int a, int b) {
-        return a * b;
-    }
-
-    public int division(int a, int b) {
-        if (a < b) {
-            throw new ArithmeticException("작은 값으로 큰 값을 나눌 수 없습니다.");
+    public int sum(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
         }
-        return a / b;
+
+        String[] tokens = getTokens(input);
+        List<Integer> numbers = getNumbers(tokens);
+
+        int result = 0;
+        for (int number : numbers) {
+            result += number;
+        }
+        return result;
+    }
+
+    private String[] getTokens(final String input) {
+        return input.split("[,|:]");
+    }
+
+    private List<Integer> getNumbers(final String[] tokens) {
+        return Arrays.stream(tokens)
+                .map(Integer::parseInt)
+                .toList();
     }
 }
