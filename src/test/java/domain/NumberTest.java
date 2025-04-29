@@ -3,10 +3,8 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("domain.Number Test")
 class NumberTest {
 
     @Test
@@ -17,7 +15,7 @@ class NumberTest {
     }
 
     @Test
-    @DisplayName("동일한 값을 가진 domain.Number 객체는 equals로 비교 시 같다.")
+    @DisplayName("동일한 값을 가진 Number 객체는 equals로 비교 시 같다.")
     void numbersWithSameValueAreEqual() {
         Number number1 = new Number(42);
         Number number2 = new Number(42);
@@ -25,10 +23,16 @@ class NumberTest {
     }
 
     @Test
-    @DisplayName("다른 값을 가진 domain.Number 객체는 equals로 비교 시 다르다.")
+    @DisplayName("다른 값을 가진 Number 객체는 equals로 비교 시 다르다.")
     void numbersWithDifferentValuesAreNotEqual() {
         Number number1 = new Number(42);
         Number number2 = new Number(43);
         assertNotEquals(number1, number2);
+    }
+
+    @Test
+    @DisplayName("음수 값을 가진 경우 예외가 발생한다.")
+    void throwsExceptionWhenNegativeValue() {
+        assertThrows(IllegalArgumentException.class, () -> new Number(-1));
     }
 }
