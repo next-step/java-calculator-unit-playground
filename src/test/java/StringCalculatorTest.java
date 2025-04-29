@@ -24,47 +24,48 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StringCalculatorTest {
     @Nested
     @DisplayName("기본 구분자 처리 테스트")
-    class BasicDelimiterTest{
+    class BasicDelimiterTest {
         @DisplayName("빈 문자열은 0을 반환한다.")
-        void emptyStringInputTest(){
+        void emptyStringInputTest() {
             int actual = StringCalculator.add("");
-            assertEquals(0,actual);
+            assertEquals(0, actual);
         }
 
         @DisplayName("숫자 하나만 있을 경우, 그 숫자를 반환한다.")
-        void oneSizeStringInputTest(){
+        void oneSizeStringInputTest() {
             int actual = StringCalculator.add("1");
-            assertEquals(1,actual);
+            assertEquals(1, actual);
         }
 
         @ParameterizedTest
         @MethodSource("basicDelimeterStringInputArguments")
         @DisplayName("쉼표와 콜론으로 구분된 숫자들의 합을 반환한다.")
-        void basicDelimeterStringInputTest(String value, int expected){
+        void basicDelimeterStringInputTest(String value, int expected) {
             int actual = StringCalculator.add(value);
-            assertEquals(expected,actual);
+            assertEquals(expected, actual);
         }
 
         @DisplayName("")
-        private static Stream<Arguments> basicDelimeterStringInputArguments(){
+        private static Stream<Arguments> basicDelimeterStringInputArguments() {
             return Stream.of(
-                    Arguments.arguments("1:2",3),
-                    Arguments.arguments("1,2",3),
-                    Arguments.arguments("1,2:3",6)
+                    Arguments.arguments("1:2", 3),
+                    Arguments.arguments("1,2", 3),
+                    Arguments.arguments("1,2:3", 6)
             );
         }
 
 
     }
+
     @Nested
     @DisplayName("커스텀 구분자 처리 테스트")
-    class CustomDelimiterTest{
+    class CustomDelimiterTest {
 
     }
 
     @Nested
     @DisplayName("커스텀 구분자 처리 테스트")
-    class ExceptionThrowingTest{
+    class ExceptionThrowingTest {
 
     }
 
