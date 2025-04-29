@@ -26,9 +26,9 @@ public class StringCalculator {
 
         String numbersExpression = extractNumbersExpression(expression);
         List<String> tokens = splitNumbers(numbersExpression);
-        NumberTokens numberTokens = new NumberTokens(tokens);
+        Numbers numbers = new Numbers(tokens);
 
-        return numberTokens.sum();
+        return numbers.sum();
     }
 
     private boolean isEmpty(String expression) {
