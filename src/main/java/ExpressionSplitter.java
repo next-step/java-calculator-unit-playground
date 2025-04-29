@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class ExpressionSplitter {
@@ -8,9 +9,9 @@ public class ExpressionSplitter {
         this.delimiters = delimiters;
     }
 
-    public String[] split(String expression) {
+    public List<String> split(String expression) {
         List<String> delimiterList = delimiters.getDelimiters();
         String regex = String.join("|", delimiterList);
-        return expression.split(regex);
+        return Arrays.asList(expression.split(regex));
     }
 }
