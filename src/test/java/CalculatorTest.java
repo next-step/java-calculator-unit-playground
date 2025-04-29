@@ -1,0 +1,36 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@DisplayName("계산기 테스트")
+public class CalculatorTest {
+
+    Calculator calculator = new Calculator();
+
+    @Nested
+    @DisplayName("덧셈 테스트")
+    class SumTest{
+
+        @Test
+        @DisplayName("주어진 인자 2개를 더한 결과를 반환한다")
+        void Test_SumTest() {
+
+            // given
+            int a = 3;
+            int b = 2;
+
+            // when
+            int expected = calculator.add(a,b);
+
+            // then
+            int actual = 5;
+
+            assertEquals(expected,actual);
+        }
+    }
+
+
+}
