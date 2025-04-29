@@ -32,5 +32,27 @@ public class CalculatorTest {
         }
     }
 
+    @Nested
+    @DisplayName("뺄셈 테스트")
+    class SubtractTest{
+
+        @Test
+        @DisplayName("주어진 인자 2개를 뺀 결과를 반환한다")
+        void Test_SubtractTest() {
+
+            // given
+            int a = 3;
+            int b = 2;
+
+            // when
+            int expected = calculator.subtract(a,b);
+
+            // then
+            int actual = 1;
+
+            assertEquals(expected,actual);
+        }
+    }
+
 
 }
