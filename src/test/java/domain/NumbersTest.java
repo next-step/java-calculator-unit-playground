@@ -1,7 +1,6 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ class NumbersTest {
         Numbers numbers = new Numbers(tokens);
 
         // then
-        assertEquals(6, numbers.sum());
+        assertThat(6).isEqualTo(numbers.sum());
     }
 
     @Test
@@ -30,7 +29,8 @@ class NumbersTest {
         List<String> tokens = List.of("1", "-2", "3");
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> new Numbers(tokens));
+        assertThatThrownBy(() -> new Numbers(tokens))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -43,6 +43,6 @@ class NumbersTest {
         Numbers numbers = new Numbers(tokens);
 
         // then
-        assertEquals(0, numbers.sum());
+        assertThat(0).isEqualTo(numbers.sum());
     }
 }
