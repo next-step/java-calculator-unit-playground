@@ -73,7 +73,6 @@ class CalculatorTest {
     })
     @DisplayName("나눗셈: 0으로 나누면 IllegalArgumentException이 발생한다.")
     void divideByZeroException(int firstNumber, int secondNumber) {
-//        assertThrows(IllegalArgumentException.class, () -> calculator.divide(firstNumber, secondNumber));
         assertThatThrownBy(() -> calculator.divide(firstNumber, secondNumber))
                 .isInstanceOf(IllegalArgumentException.class);
 
