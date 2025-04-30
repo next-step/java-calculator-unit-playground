@@ -1,17 +1,17 @@
 public class Calculator {
-    int add(int a, int b) {
+    public int add(int a, int b) {
         return a + b;
     }
 
-    int subtract(int a, int b) {
+    public int subtract(int a, int b) {
         return a - b;
     }
 
-    int multiply(int a, int b) {
+    public int multiply(int a, int b) {
         return a * b;
     }
 
-    int divide(int a, int b) {
+    public int divide(int a, int b) {
         if (b == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
