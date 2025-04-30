@@ -1,6 +1,6 @@
 public class StringCalculator {
     int sum(String str){
-        System.out.println(str);
+//        System.out.println(str);
         if(str == null || str.isEmpty()){
             return 0;
         }
