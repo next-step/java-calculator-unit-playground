@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("domain.Calculator Test")
 class CalculatorTest {
 
     private final Calculator calculator = new Calculator();
@@ -23,7 +23,7 @@ class CalculatorTest {
     @DisplayName("덧셈: 두 수를 더한 결과를 반환한다.")
     void addMethod(int firstNumber, int secondNumber, int expected) {
         int result = calculator.add(firstNumber, secondNumber);
-        assertEquals(expected, result);
+        assertThat(expected).isEqualTo(result);
     }
 
     @ParameterizedTest
@@ -36,7 +36,7 @@ class CalculatorTest {
     @DisplayName("뺄셈: 두 수를 뺀 결과를 반환한다.")
     void subtractMethod(int firstNumber, int secondNumber, int expected) {
         int result = calculator.subtract(firstNumber, secondNumber);
-        assertEquals(expected, result);
+        assertThat(expected).isEqualTo(result);
     }
 
     @ParameterizedTest
@@ -49,7 +49,7 @@ class CalculatorTest {
     @DisplayName("곱셈: 두 수를 곱한 결과를 반환한다.")
     void multiplyMethod(int firstNumber, int secondNumber, int expected) {
         int result = calculator.multiply(firstNumber, secondNumber);
-        assertEquals(expected, result);
+        assertThat(expected).isEqualTo(result);
     }
 
     @ParameterizedTest
@@ -62,7 +62,7 @@ class CalculatorTest {
     @DisplayName("나눗셈: 두 수를 나눈 결과를 반환한다.")
     void divideMethod(int firstNumber, int secondNumber, int expected) {
         int result = calculator.divide(firstNumber, secondNumber);
-        assertEquals(expected, result);
+        assertThat(expected).isEqualTo(result);
     }
 
     @ParameterizedTest
@@ -73,6 +73,9 @@ class CalculatorTest {
     })
     @DisplayName("나눗셈: 0으로 나누면 IllegalArgumentException이 발생한다.")
     void divideByZeroException(int firstNumber, int secondNumber) {
-        assertThrows(IllegalArgumentException.class, () -> calculator.divide(firstNumber, secondNumber));
+//        assertThrows(IllegalArgumentException.class, () -> calculator.divide(firstNumber, secondNumber));
+        assertThatThrownBy(() -> calculator.divide(firstNumber, secondNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+
     }
 }
