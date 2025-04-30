@@ -1,6 +1,6 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +21,6 @@ class CustomDelimiterRegisterTest {
 
         // then
         List<String> expected = List.of(",", ":", ";");
-        assertEquals(expected, delimiters.getDelimiters());
+        assertThat(delimiters.getDelimiters()).isEqualTo(expected);
     }
 }
