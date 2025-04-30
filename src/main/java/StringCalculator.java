@@ -24,7 +24,7 @@ public class StringCalculator {
             // 정규식 특수문자 앞에 /를 붙인다. [\\\\^$.|?*+()\\[\\]{}]는 정규식 특수문자를 모두 찾는 패턴, \\\\는 자바에서 \를 앞에 붙여주는 표현
             customSeparator = customSeparator.replaceAll("[\\\\^$.|?*+()\\[\\]{}]", "\\\\$0");
 
-            separator = customSeparator;
+            separator = customSeparator + "|,|;";
 
             numbers = input.substring(newSeparatorIndex + 1).trim();
         }
