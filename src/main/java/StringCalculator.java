@@ -8,10 +8,10 @@ public class StringCalculator {
         }
 
         // 지정 구분자
-        String separator = ",|;";
+        String separator = "[,;]";
         String numbers = input;
 
-        /**
+        /*
          * 커스텀 구분자 체크
          *  1. 입력받은 문자열이 //로 시작하면 \n 으로 끝나는 사이의 값을 구분자로 지정한다.
          *  2. 커스텀 구분자가 정규 표현식으로 사용되는 문자일 경우 이스케이프 처리한다.

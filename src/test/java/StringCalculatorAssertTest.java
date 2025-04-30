@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("String Calculator Assert Test")
 public class StringCalculatorAssertTest {
 
-    private StringCalculator calculator = new StringCalculator();
+    private final StringCalculator calculator = new StringCalculator();
 
     @Test
     @DisplayName("빈 문자열을 입력하면 0을 반환한다.")
