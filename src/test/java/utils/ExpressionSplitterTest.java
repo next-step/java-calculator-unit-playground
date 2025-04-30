@@ -1,6 +1,6 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.*;
 
 import domain.Delimiters;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ class ExpressionSplitterTest {
         List<String> result = splitter.split(expression);
 
         // then
-        assertEquals(List.of("1", "2", "3"), result);
+        assertThat(result).isEqualTo(List.of("1", "2", "3"));
     }
 
     @Test
@@ -38,7 +38,7 @@ class ExpressionSplitterTest {
         List<String> result = splitter.split(expression);
 
         // then
-        assertEquals(List.of("1", "2", "3", "4"), result);
+        assertThat(result).isEqualTo(List.of("1", "2", "3", "4"));
     }
 
     @Test
@@ -53,6 +53,6 @@ class ExpressionSplitterTest {
         List<String> result = splitter.split(expression);
 
         // then
-        assertEquals(List.of(""), result);
+        assertThat(result).isEqualTo(List.of(""));
     }
 }
