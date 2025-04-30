@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("view.InputView Test")
 class InputViewTest {
@@ -25,6 +25,9 @@ class InputViewTest {
     void readExpression() {
         System.setIn(new ByteArrayInputStream(INPUT.getBytes()));
         InputView inputView = new InputView();
-        assertEquals("42", inputView.readExpression());
+
+        String result = inputView.readExpression();
+
+        assertThat(result).isEqualTo("42");
     }
 }
