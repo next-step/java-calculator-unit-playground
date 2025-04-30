@@ -16,7 +16,7 @@ public class StringCalculator {
         String del = "";//구분자
         if(str.contains("//")){
             del = str.substring(2,3);
-            str = str.substring(5);
+            str = str.substring(4);
         }
         else if(str.contains(",") || str.contains(":")){
             del = "[,|:]";
