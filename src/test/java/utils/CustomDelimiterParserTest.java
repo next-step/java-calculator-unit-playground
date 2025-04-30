@@ -1,9 +1,6 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +14,7 @@ class CustomDelimiterParserTest {
     void hasCustomDelimiter_true() {
         String expression = "//;\n1;2;3";
 
-        assertTrue(parser.hasCustomDelimiter(expression));
+        assertThat(parser.hasCustomDelimiter(expression)).isTrue();
     }
 
     @Test
@@ -25,7 +22,7 @@ class CustomDelimiterParserTest {
     void hasCustomDelimiter_false() {
         String expression = "1,2:3";
 
-        assertFalse(parser.hasCustomDelimiter(expression));
+        assertThat(parser.hasCustomDelimiter(expression)).isFalse();
     }
 
     @Test
@@ -35,7 +32,7 @@ class CustomDelimiterParserTest {
 
         String customDelimiter = parser.parseCustomDelimiter(expression);
 
-        assertEquals(";", customDelimiter);
+        assertThat(customDelimiter).isEqualTo(";");
     }
 
     @Test
@@ -43,7 +40,8 @@ class CustomDelimiterParserTest {
     void parseCustomDelimiter_invalidFormat() {
         String invalidExpression = "//;1;2;3";
 
-        assertThrows(IllegalArgumentException.class, () -> parser.parseCustomDelimiter(invalidExpression));
+        assertThatThrownBy(() -> parser.parseCustomDelimiter(invalidExpression))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -53,6 +51,6 @@ class CustomDelimiterParserTest {
 
         String numbers = parser.parseNumbersExpression(expression);
 
-        assertEquals("1;2;3", numbers);
+        assertThat(numbers).isEqualTo("1;2;3");
     }
 }
