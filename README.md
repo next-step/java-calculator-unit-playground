@@ -2,7 +2,7 @@
 
 # Step4
 
-- [ ] build.gradle에 AssertJ 의존성을 추가한다.
+- [x] build.gradle에 AssertJ 의존성을 추가한다.
 - [ ] 기존 JUnit5로 작성되어 있던 단위 테스트를 AssertJ로 리팩터링한다. 
 - [ ] JUnit5에서 제공하는 기능과 AssertJ에서 제공하는 기능을 사용해보고, 어떠한 차이가 있는지 경험한다.
 - [ ] 메인 메서드는 만들지 않는다.
