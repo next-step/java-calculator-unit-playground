@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("view.OutputView Test")
 class OutputViewTest {
@@ -32,7 +32,7 @@ class OutputViewTest {
     void printFirstNumberPrompt() {
         outputView.printFirstNumberPrompt();
         String output = outputStream.toString();
-        assertTrue(output.contains(OutputView.FIRST_NUMBER_PROMPT));
+        assertThat(output).contains(OutputView.FIRST_NUMBER_PROMPT);
     }
 
     @Test
@@ -40,7 +40,7 @@ class OutputViewTest {
     void printSecondNumberPrompt() {
         outputView.printSecondNumberPrompt();
         String output = outputStream.toString();
-        assertTrue(output.contains(OutputView.SECOND_NUMBER_PROMPT));
+        assertThat(output).contains(OutputView.SECOND_NUMBER_PROMPT);
     }
 
     @Test
@@ -49,6 +49,6 @@ class OutputViewTest {
         int result = 10;
         outputView.printResult(result);
         String output = outputStream.toString();
-        assertTrue(output.contains(OutputView.RESULT_MESSAGE + result));
+        assertThat(output).contains(OutputView.RESULT_MESSAGE + result);
     }
 }
