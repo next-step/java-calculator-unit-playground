@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("계산기 테스트 ")
 class CalculateClassTest {
     CalculateClass calculateClass = new CalculateClass();
+    @Test
     void addTest(){
         assertEquals(5, calculateClass.add(2,3));
     }
