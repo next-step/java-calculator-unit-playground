@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 
 class StringConverterTest {
 
+    private final StringConverter stringConverter = new StringConverter();
+
     @Test
     @DisplayName("입력된 문자열을 정상적으로 숫자로 변환한다.")
     void shouldConvertNumber_whenInputString() {
         // given
         String[] token = new String[]{"1", "2", "3"};
-        StringConverter stringConverter = new StringConverter();
 
         // when
         List<Integer> converterNumbers = stringConverter.convertAndValidateNumbers(token);
@@ -26,7 +27,6 @@ class StringConverterTest {
     void shouldThrowException_whenUn() {
         // given
         String[] token = new String[]{"1", "ab", "3"};
-        StringConverter stringConverter = new StringConverter();
 
         // when & then
         assertThatThrownBy(() -> stringConverter.convertAndValidateNumbers(token))
@@ -39,7 +39,6 @@ class StringConverterTest {
     void shouldThrowException_whenNegativeNumber() {
         // given
         String[] token = new String[]{"-1", "2", "3"};
-        StringConverter stringConverter = new StringConverter();
 
         // when & then
         assertThatThrownBy(() -> stringConverter.convertAndValidateNumbers(token))

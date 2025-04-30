@@ -9,14 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class TokenSplitterTest {
 
+    private final TokenSplitter tokenSplitter = new TokenSplitter();
+
     @ParameterizedTest
     @ValueSource(strings = {"1:2:3", "1,2:3"})
     @DisplayName("기본 구분자를 사용한 문자열을 입력했을 경우 정상적으로 나누어진다.")
     void shouldRemove_whenBasicInput(String value) {
-        // given
-        TokenSplitter tokenSplitter = new TokenSplitter();
-
-        // when
+        // given & when
         String[] token = tokenSplitter.tokenize(value);
 
         // then
@@ -27,14 +26,11 @@ class TokenSplitterTest {
     @ValueSource(strings = {"//;\\n1;2;3"})
     @DisplayName("커스텀 구분자를 사용한 문자열을 입력했을 경우 정상적으로 나누어진다.")
     void shouldRemove_whenCustomInput(String customValue) {
-        // given
-        TokenSplitter tokenSplitter = new TokenSplitter();
-
-        // when
+        // given & when
         String[] token = tokenSplitter.tokenize(customValue);
 
         // then
-        assertThat("[1, 2, 3]").isEqualTo(Arrays.toString(token));
+        assertThat("[1, 2, 3]").isEqualTo(token);
 
     }
 
@@ -43,7 +39,6 @@ class TokenSplitterTest {
     void shouldThrowException_whenInvalidCustomFormat() {
         // given
         String input = "//;1;2;3";
-        TokenSplitter tokenSplitter = new TokenSplitter();
 
         // when & then
         assertThatThrownBy(() -> tokenSplitter.tokenize(input))

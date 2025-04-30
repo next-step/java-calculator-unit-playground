@@ -7,14 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class CalculatorTest {
 
+    private final Calculator calculator = new Calculator();
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("입력 문자열이 없을 경우 0을 반환한다.")
     void shouldReturnZero_whenNothingInputValue(String input) {
-        // given
-        Calculator calculator = new Calculator();
-
-        // when
+        // given & when
         int expected = calculator.sum(input);
 
         //then
@@ -25,10 +24,7 @@ class CalculatorTest {
     @ValueSource(strings = {"1:2,3", "1,2,3", "//;\\n1;2;3"})
     @DisplayName("입력한 문자열에 대해 올바른 덧셈 결과를 반환한다.")
     void shouldReturnSum_whenInputString(String input) {
-        // given
-        Calculator calculator = new Calculator();
-
-        // when
+        // given & when
         int expected = calculator.sum(input);
 
         // then
