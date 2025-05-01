@@ -4,7 +4,7 @@ import domain.Operand;
 import domain.Operator;
 
 public class DivideOperator implements Operator {
-    public String value = "/";
+    public String[] symbols = {"/"};
 
     @Override
     public int process(Operand firstOperand, Operand secondOperand) {
@@ -13,5 +13,10 @@ public class DivideOperator implements Operator {
         }
 
         return firstOperand.getValue() / secondOperand.getValue();
+    }
+
+    @Override
+    public String[] getSymbols() {
+        return this.symbols;
     }
 }
