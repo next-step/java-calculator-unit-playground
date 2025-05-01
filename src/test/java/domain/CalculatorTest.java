@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 public class CalculatorTest {
 
     Calculator calculator = new Calculator(new Operator[]
-        {new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator()});
+        {AddOperator.INSTANCE, new SubtractOperator(), new MultiplyOperator(), new DivideOperator()});
 
     @Nested
     @DisplayName("문자열 계산기 테스트")
@@ -27,10 +27,17 @@ public class CalculatorTest {
             // Given
 
             // When & Then
-            assertThrows(IllegalArgumentException.class, () -> calculator.calculateStringExpression("1"));
-            assertThrows(IllegalArgumentException.class, () -> calculator.calculateStringExpression("1+"));
-            assertThrows(IllegalArgumentException.class, () -> calculator.calculateStringExpression("1+2+3"));
+            assertThrows(RuntimeException.class, () -> calculator.calculateStringExpression("1+"));
+            assertThrows(RuntimeException.class, () -> calculator.calculateStringExpression("+"));
+            assertThrows(RuntimeException.class, () -> calculator.calculateStringExpression("-2"));
+            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression("/;\n1;2"));
+            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression("//\n1.2"));
+            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression(";\n1;2"));
+            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression(";\n1.2"));
+            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression("1.2"));
+
             assertDoesNotThrow(() -> calculator.calculateStringExpression("1+2"));
+            assertDoesNotThrow(() -> calculator.calculateStringExpression(""));
         }
 
         @Test
@@ -40,14 +47,10 @@ public class CalculatorTest {
 
             // When & Then
             assertEquals(5,calculator.calculateStringExpression("1+4"));
-            assertEquals(-3,calculator.calculateStringExpression("1+-4"));
-            assertEquals(-3,calculator.calculateStringExpression("1+ -4"));
             assertEquals(5,calculator.calculateStringExpression("1,4"));
-            assertEquals(-3,calculator.calculateStringExpression("1,-4"));
-            assertEquals(-3,calculator.calculateStringExpression("1, -4"));
             assertEquals(5,calculator.calculateStringExpression("1:4"));
-            assertEquals(-3,calculator.calculateStringExpression("1:-4"));
-            assertEquals(-3,calculator.calculateStringExpression("1: -4"));
+            assertEquals(6,calculator.calculateStringExpression("1,2:3"));
+            assertEquals(6,calculator.calculateStringExpression("1,2,3"));
         }
 
         @Test
@@ -57,8 +60,6 @@ public class CalculatorTest {
 
             // When & Then
             assertEquals(-3,calculator.calculateStringExpression("1-4"));
-            assertEquals(5,calculator.calculateStringExpression("1--4"));
-            assertEquals(5,calculator.calculateStringExpression("1- -4"));
         }
 
         @Test
@@ -69,7 +70,6 @@ public class CalculatorTest {
             // When & Then
             assertEquals(4,calculator.calculateStringExpression("1*4"));
             assertEquals(0,calculator.calculateStringExpression("1*0"));
-            assertEquals(-4,calculator.calculateStringExpression("1*-4"));
         }
 
         @Test
@@ -82,6 +82,17 @@ public class CalculatorTest {
             assertEquals(2,calculator.calculateStringExpression("4/2"));
 
             assertThrows(ArithmeticException.class,() -> calculator.calculateStringExpression("1/0"));
+        }
+
+        @Test
+        @DisplayName("커스텀 문자열 테스트")
+        void calculateCustomSymbolTest() {
+            // Given
+
+            // When & Then
+            assertEquals(0,calculator.calculateStringExpression(""));
+            assertEquals(5,calculator.calculateStringExpression("//;\n1;4"));
+            assertEquals(6,calculator.calculateStringExpression("//;\n1;2;3"));
         }
     }
 }
