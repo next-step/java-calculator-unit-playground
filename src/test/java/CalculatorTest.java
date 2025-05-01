@@ -23,10 +23,10 @@ public class CalculatorTest {
             int b = 2;
 
             // when
-            int expected = calculator.add(a,b);
+            int actual = calculator.add(a,b);
 
             // then
-            int actual = 5;
+            int expected = 5;
 
             assertEquals(expected,actual);
         }
@@ -45,10 +45,10 @@ public class CalculatorTest {
             int b = 2;
 
             // when
-            int expected = calculator.subtract(a,b);
+            int actual = calculator.subtract(a,b);
 
             // then
-            int actual = 1;
+            int expected = 1;
 
             assertEquals(expected,actual);
         }
@@ -67,10 +67,10 @@ public class CalculatorTest {
             int b = 2;
 
             // when
-            int expected = calculator.multiply(a,b);
+            int actual = calculator.multiply(a,b);
 
             // then
-            int actual = 6;
+            int expected = 6;
 
             assertEquals(expected,actual);
         }
@@ -89,10 +89,10 @@ public class CalculatorTest {
             int b = 2;
 
             // when
-            int expected = calculator.divide(a,b);
+            int actual = calculator.divide(a,b);
 
             // then
-            int actual = 1;
+            int expected = 1;
 
             assertEquals(expected,actual);
         }

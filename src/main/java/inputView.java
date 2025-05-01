@@ -1,5 +1,3 @@
-package view;
-
 import java.util.Scanner;
 
 public class inputView {
@@ -9,4 +7,5 @@ public class inputView {
     public String getString() {
         return input_string.nextLine();
     }
+
 }
