@@ -9,8 +9,8 @@ public class CustomDelimiterAndBodyExtractor {
     public static DelimeterAndBodyInfo extract(String input) {
         Matcher matcher = CUSTOM_PATTERN.matcher(input);
         if(matcher.matches()){
-            String customDelimiter = matcher.group(0);
-            String body = matcher.group(1);
+            String customDelimiter = matcher.group(1);
+            String body = matcher.group(2);
             return new DelimeterAndBodyInfo(customDelimiter, body);
         }
         return new DelimeterAndBodyInfo("",input);
@@ -18,22 +18,18 @@ public class CustomDelimiterAndBodyExtractor {
 
     public static class DelimeterAndBodyInfo {
 
-        private String BASIC_DELIMITER_COMMA = ",";
-        private String BASIC_DELIMITER_COLON = ":";
-        private ArrayList<String> delimiter;
+        public String BASIC_DELIMITER_COMMA = ",";
+        public String BASIC_DELIMITER_COLON = ":";
+        private String customDelimiter;
         private String body;
 
         public DelimeterAndBodyInfo(String delimiter, String body) {
-
-            this.delimiter.add(BASIC_DELIMITER_COLON);
-            this.delimiter.add(BASIC_DELIMITER_COMMA);
-            this.delimiter.add(delimiter);
+            this.customDelimiter = delimiter;
             this.body = body;
-
         }
 
-        public ArrayList<String> getDelimiter(){
-            return delimiter;
+        public String getDelimiter(){
+            return customDelimiter;
         }
 
         public String getBody(){
