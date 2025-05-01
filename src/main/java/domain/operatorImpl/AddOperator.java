@@ -6,7 +6,7 @@ import domain.Operator;
 public class AddOperator extends Operator {
     public static final AddOperator INSTANCE = new AddOperator();
 
-    public AddOperator(){
+    private AddOperator(){
         super('+',',',':');
     }
 
