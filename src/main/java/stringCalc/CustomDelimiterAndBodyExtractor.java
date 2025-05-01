@@ -1,4 +1,5 @@
 package stringCalc;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,15 +17,22 @@ public class CustomDelimiterAndBodyExtractor {
     }
 
     public static class DelimeterAndBodyInfo {
-        private String delimiter;
+
+        private String BASIC_DELIMITER_COMMA = ",";
+        private String BASIC_DELIMITER_COLON = ":";
+        private ArrayList<String> delimiter;
         private String body;
 
         public DelimeterAndBodyInfo(String delimiter, String body) {
-            this.delimiter = delimiter;
+
+            this.delimiter.add(BASIC_DELIMITER_COLON);
+            this.delimiter.add(BASIC_DELIMITER_COMMA);
+            this.delimiter.add(delimiter);
             this.body = body;
+
         }
 
-        public String getDelimiter(){
+        public ArrayList<String> getDelimiter(){
             return delimiter;
         }
 
