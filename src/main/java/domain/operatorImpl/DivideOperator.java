@@ -3,8 +3,10 @@ package domain.operatorImpl;
 import domain.Operand;
 import domain.Operator;
 
-public class DivideOperator implements Operator {
-    public String[] symbols = {"/"};
+public class DivideOperator extends Operator {
+    public DivideOperator() {
+        super('/');
+    }
 
     @Override
     public int process(Operand firstOperand, Operand secondOperand) {
@@ -13,10 +15,5 @@ public class DivideOperator implements Operator {
         }
 
         return firstOperand.getValue() / secondOperand.getValue();
-    }
-
-    @Override
-    public String[] getSymbols() {
-        return this.symbols;
     }
 }
