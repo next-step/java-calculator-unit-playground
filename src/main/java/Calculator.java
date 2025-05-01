@@ -15,7 +15,7 @@ public class Calculator {
             return 0;
         }
 
-        String[] tokens = tokenSplitter.tokenize(input);
+        List<String> tokens = tokenSplitter.tokenize(input);
         List<Integer> numbers = stringConverter.convertAndValidateNumbers(tokens);
 
         int result = 0;

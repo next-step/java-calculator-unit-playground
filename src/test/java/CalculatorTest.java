@@ -14,10 +14,10 @@ class CalculatorTest {
     @DisplayName("입력 문자열이 없을 경우 0을 반환한다.")
     void shouldReturnZero_whenNothingInputValue(String input) {
         // given & when
-        int expected = calculator.sum(input);
+        int actual = calculator.sum(input);
 
         //then
-        assertThat(0).isEqualTo(expected);
+        assertThat(actual).isEqualTo(0);
     }
 
     @ParameterizedTest
@@ -25,10 +25,10 @@ class CalculatorTest {
     @DisplayName("입력한 문자열에 대해 올바른 덧셈 결과를 반환한다.")
     void shouldReturnSum_whenInputString(String input) {
         // given & when
-        int expected = calculator.sum(input);
+        int actual = calculator.sum(input);
 
         // then
-        int actual = 6;
+        int expected = 6;
         assertThat(actual).isEqualTo(expected);
     }
 }

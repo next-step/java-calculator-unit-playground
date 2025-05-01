@@ -1,7 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,10 +16,10 @@ class TokenSplitterTest {
     @DisplayName("기본 구분자를 사용한 문자열을 입력했을 경우 정상적으로 나누어진다.")
     void shouldRemove_whenBasicInput(String value) {
         // given & when
-        String[] token = tokenSplitter.tokenize(value);
+        List<String> token = tokenSplitter.tokenize(value);
 
         // then
-        assertThat("[1, 2, 3]").isEqualTo(Arrays.toString(token));
+        assertThat(token).isEqualTo(List.of("1", "2", "3"));
     }
 
     @ParameterizedTest
@@ -27,11 +27,10 @@ class TokenSplitterTest {
     @DisplayName("커스텀 구분자를 사용한 문자열을 입력했을 경우 정상적으로 나누어진다.")
     void shouldRemove_whenCustomInput(String customValue) {
         // given & when
-        String[] token = tokenSplitter.tokenize(customValue);
+        List<String> token = tokenSplitter.tokenize(customValue);
 
         // then
-        assertThat("[1, 2, 3]").isEqualTo(token);
-
+        assertThat(token).isEqualTo(List.of("1", "2", "3"));
     }
 
     @Test
