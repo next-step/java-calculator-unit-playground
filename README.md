@@ -23,7 +23,7 @@
 
 [ 공통 ]
 
-- `RuntimeException` 예외
+- `IllegalArgumentException` 예외
     - 숫자 이외의 값 또는 음수 전달
     - 잘못된 커스텀 구분자 형식
 
