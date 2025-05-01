@@ -1,6 +1,5 @@
 package domain;
 
-import utils.CustomDelimiterParser;
 import utils.ExpressionSplitter;
 
 import java.util.List;
@@ -8,14 +7,10 @@ import java.util.List;
 public class StringCalculator {
 
     private final Delimiters delimiters;
-    private final CustomDelimiterParser parser;
-    private final CustomDelimiterRegister register;
     private final ExpressionSplitter splitter;
 
     public StringCalculator() {
         this.delimiters = new Delimiters();
-        this.parser = new CustomDelimiterParser();
-        this.register = new CustomDelimiterRegister(delimiters);
         this.splitter = new ExpressionSplitter(delimiters);
     }
 
@@ -24,35 +19,29 @@ public class StringCalculator {
             return 0;
         }
 
-        String numbersExpression = extractNumbersExpression(expression);
-        List<String> tokens = splitNumbers(numbersExpression);
-        Numbers numbers = new Numbers(tokens);
+        String numbersExpression = extract(expression);
+        List<String> tokens = splitter.split(numbersExpression);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(tokens);
 
-        return numbers.sum();
+        return positiveNumbers.sum();
     }
 
     private boolean isEmpty(String expression) {
-        return expression == null || expression.isEmpty();
+        return expression == null || expression.isBlank();
     }
 
-    private String extractNumbersExpression(String expression) {
-        if (parser.hasCustomDelimiter(expression)) {
-            registerCustomDelimiter(expression);
-            return extractPureNumbers(expression);
+    private String extract(String expression) {
+        final String prefix = "//";
+        final String suffix = "\n";
+        if (!expression.startsWith(prefix)) {
+            return expression;
         }
-        return expression;
-    }
-
-    private void registerCustomDelimiter(String expression) {
-        String customDelimiter = parser.parseCustomDelimiter(expression);
-        register.register(customDelimiter);
-    }
-
-    private String extractPureNumbers(String expression) {
-        return parser.parseNumbersExpression(expression);
-    }
-
-    private List<String> splitNumbers(String numbersExpression) {
-        return splitter.split(numbersExpression);
+        int endIndex = expression.indexOf(suffix);
+        if (endIndex == -1) {
+            throw new IllegalArgumentException("[ERROR] 커스텀 구분자 형식이 잘못되었습니다.");
+        }
+        String customDelimiter = expression.substring(prefix.length(), endIndex);
+        delimiters.registerCustomDelimiter(customDelimiter);
+        return expression.substring(endIndex + 1);
     }
 }

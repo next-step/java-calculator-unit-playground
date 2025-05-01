@@ -4,6 +4,8 @@ import domain.Delimiters;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ExpressionSplitter {
 
@@ -14,8 +16,9 @@ public class ExpressionSplitter {
     }
 
     public List<String> split(String expression) {
-        List<String> delimiterList = delimiters.getDelimiters();
-        String regex = String.join("|", delimiterList);
+        String regex = delimiters.getDelimiters().stream()
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
         return Arrays.asList(expression.split(regex));
     }
 }

@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Numbers {
+public class PositiveNumbers {
 
-    private final List<Number> numbers;
+    private final List<PositiveNumber> positiveNumbers;
 
-    public Numbers(List<String> tokens) {
-        this.numbers = tokens.stream()
+    public PositiveNumbers(List<String> tokens) {
+        this.positiveNumbers = tokens.stream()
                 .map(NumberParser::parse)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int sum() {
-        return numbers.stream()
-                .mapToInt(Number::value)
+        return positiveNumbers.stream()
+                .mapToInt(PositiveNumber::getPositiveNumber)
                 .sum();
     }
 }

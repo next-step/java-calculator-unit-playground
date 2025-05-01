@@ -30,7 +30,7 @@ class ExpressionSplitterTest {
     void splitByCustomDelimiter() {
         // given
         Delimiters delimiters = new Delimiters();
-        delimiters.addCustomDelimiters(";");
+        delimiters.registerCustomDelimiter(";");
         ExpressionSplitter splitter = new ExpressionSplitter(delimiters);
         String expression = "1;2,3:4";
 

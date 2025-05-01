@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class NumbersTest {
+class PositiveNumbersTest {
 
     @Test
     @DisplayName("숫자 문자열 리스트를 합산한다")
@@ -16,10 +16,10 @@ class NumbersTest {
         List<String> tokens = List.of("1", "2", "3");
 
         // when
-        Numbers numbers = new Numbers(tokens);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(tokens);
 
         // then
-        assertThat(6).isEqualTo(numbers.sum());
+        assertThat(6).isEqualTo(positiveNumbers.sum());
     }
 
     @Test
@@ -29,7 +29,7 @@ class NumbersTest {
         List<String> tokens = List.of("1", "-2", "3");
 
         // when & then
-        assertThatThrownBy(() -> new Numbers(tokens))
+        assertThatThrownBy(() -> new PositiveNumbers(tokens))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -40,9 +40,9 @@ class NumbersTest {
         List<String> tokens = List.of();
 
         // when
-        Numbers numbers = new Numbers(tokens);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(tokens);
 
         // then
-        assertThat(0).isEqualTo(numbers.sum());
+        assertThat(0).isEqualTo(positiveNumbers.sum());
     }
 }
