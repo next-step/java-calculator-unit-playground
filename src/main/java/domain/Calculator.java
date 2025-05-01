@@ -1,24 +1,30 @@
 package domain;
 
 public class Calculator {
+    private final Operator[] operators;
 
-    int add(int firstNumber, int secondNumber) {
-        return firstNumber + secondNumber;
+    public Calculator(Operator[] operators) {
+        this.operators = operators;
     }
 
-    int subtract(int firstNumber, int secondNumber) {
-        return firstNumber - secondNumber;
-    }
+    public int calculateStringExpression(String expression) {
+        for (int i = 0; i < expression.length(); i++) {
+            char value = expression.charAt(i);
 
-    int multiply(int firstNumber, int secondNumber) {
-        return firstNumber * secondNumber;
-    }
+            if (Character.isDigit(value)) {
+                continue;
+            }
 
-    int divide(int dividend, int divisor) {
-        if (divisor == 0) {
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            for (Operator operator : operators) {
+                if (operator.checkSymbols(value)) {
+                    Operand leftOperand = new Operand(expression.substring(0, i).trim());
+                    Operand rightOperand = new Operand(expression.substring(i + 1).trim());
+
+                    return operator.process(leftOperand, rightOperand);
+                }
+            }
         }
 
-        return dividend / divisor;
+        throw new IllegalArgumentException("계산할 수 없는 문자열입니다.");
     }
 }
