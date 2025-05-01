@@ -1,8 +1,8 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 import domain.operatorImpl.AddOperator;
 import domain.operatorImpl.DivideOperator;
@@ -15,84 +15,82 @@ import org.junit.jupiter.api.Test;
 @DisplayName("계산기 테스트")
 public class CalculatorTest {
 
-    Calculator calculator = new Calculator(new Operator[]
-        {AddOperator.INSTANCE, new SubtractOperator(), new MultiplyOperator(), new DivideOperator()});
+    Calculator calculator = new Calculator(new Operator[] {
+        AddOperator.INSTANCE,
+        new SubtractOperator(),
+        new MultiplyOperator(),
+        new DivideOperator()
+    });
 
     @Nested
     @DisplayName("문자열 계산기 테스트")
     class StringExpressionTest {
+
         @Test
         @DisplayName("문자열 입력 유효성 검증 테스트")
         void validateInputExpressionTest() {
-            // Given
+            assertThatThrownBy(() -> calculator.calculateStringExpression("1+"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression("+"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression("-2"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression("/;\n1;2"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression("//\n1.2"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression(";\n1;2"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression(";\n1.2"))
+                .isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calculator.calculateStringExpression("1.2"))
+                .isInstanceOf(RuntimeException.class);
 
-            // When & Then
-            assertThrows(RuntimeException.class, () -> calculator.calculateStringExpression("1+"));
-            assertThrows(RuntimeException.class, () -> calculator.calculateStringExpression("+"));
-            assertThrows(RuntimeException.class, () -> calculator.calculateStringExpression("-2"));
-            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression("/;\n1;2"));
-            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression("//\n1.2"));
-            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression(";\n1;2"));
-            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression(";\n1.2"));
-            assertThrows(RuntimeException.class,() -> calculator.calculateStringExpression("1.2"));
-
-            assertDoesNotThrow(() -> calculator.calculateStringExpression("1+2"));
-            assertDoesNotThrow(() -> calculator.calculateStringExpression(""));
+            assertThatCode(() -> calculator.calculateStringExpression("1+2"))
+                .doesNotThrowAnyException();
+            assertThatCode(() -> calculator.calculateStringExpression(""))
+                .doesNotThrowAnyException();
         }
 
         @Test
         @DisplayName("문자열 덧셈 테스트")
         void calculateAddTest() {
-            // Given
-
-            // When & Then
-            assertEquals(5,calculator.calculateStringExpression("1+4"));
-            assertEquals(5,calculator.calculateStringExpression("1,4"));
-            assertEquals(5,calculator.calculateStringExpression("1:4"));
-            assertEquals(6,calculator.calculateStringExpression("1,2:3"));
-            assertEquals(6,calculator.calculateStringExpression("1,2,3"));
+            assertThat(calculator.calculateStringExpression("1+4")).isEqualTo(5);
+            assertThat(calculator.calculateStringExpression("1,4")).isEqualTo(5);
+            assertThat(calculator.calculateStringExpression("1:4")).isEqualTo(5);
+            assertThat(calculator.calculateStringExpression("1,2:3")).isEqualTo(6);
+            assertThat(calculator.calculateStringExpression("1,2,3")).isEqualTo(6);
         }
 
         @Test
         @DisplayName("문자열 뺄셈 테스트")
         void calculateSubtractTest() {
-            // Given
-
-            // When & Then
-            assertEquals(-3,calculator.calculateStringExpression("1-4"));
+            assertThat(calculator.calculateStringExpression("1-4")).isEqualTo(-3);
         }
 
         @Test
         @DisplayName("문자열 곱셈 테스트")
         void calculateMultiplyTest() {
-            // Given
-
-            // When & Then
-            assertEquals(4,calculator.calculateStringExpression("1*4"));
-            assertEquals(0,calculator.calculateStringExpression("1*0"));
+            assertThat(calculator.calculateStringExpression("1*4")).isEqualTo(4);
+            assertThat(calculator.calculateStringExpression("1*0")).isEqualTo(0);
         }
 
         @Test
         @DisplayName("문자열 나눗셈 테스트")
         void calculateDivideTest() {
-            // Given
+            assertThat(calculator.calculateStringExpression("1/4")).isEqualTo(0);
+            assertThat(calculator.calculateStringExpression("4/2")).isEqualTo(2);
 
-            // When & Then
-            assertEquals(0,calculator.calculateStringExpression("1/4"));
-            assertEquals(2,calculator.calculateStringExpression("4/2"));
-
-            assertThrows(ArithmeticException.class,() -> calculator.calculateStringExpression("1/0"));
+            assertThatThrownBy(() -> calculator.calculateStringExpression("1/0"))
+                .isInstanceOf(ArithmeticException.class);
         }
 
         @Test
         @DisplayName("커스텀 문자열 테스트")
         void calculateCustomSymbolTest() {
-            // Given
-
-            // When & Then
-            assertEquals(0,calculator.calculateStringExpression(""));
-            assertEquals(5,calculator.calculateStringExpression("//;\n1;4"));
-            assertEquals(6,calculator.calculateStringExpression("//;\n1;2;3"));
+            assertThat(calculator.calculateStringExpression("")).isEqualTo(0);
+            assertThat(calculator.calculateStringExpression("//;\n1;4")).isEqualTo(5);
+            assertThat(calculator.calculateStringExpression("//;\n1;2;3")).isEqualTo(6);
         }
     }
 }
