@@ -1,12 +1,13 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Operator {
     protected List<Character> symbols;
 
     public Operator(Character... symbols) {
-        this.symbols = List.of(symbols);
+        this.symbols = new ArrayList<>(List.of(symbols));
     }
 
     public abstract int process(Operand firstOperand, Operand secondOperand);
