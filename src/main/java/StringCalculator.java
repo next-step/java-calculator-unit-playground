@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,9 +26,25 @@ public class StringCalculator {
         }
 
         String[] split_input = input.split(delimiter);
+        List<Integer> string_to_number = new ArrayList<>();
 
-        for(String s : split_input){
-            SUM += Integer.parseInt(s);
+        // 예외처리 추가
+
+        try {
+            for (String s : split_input) {
+                int token = Integer.parseInt(s);
+
+                if (token < 0) {
+                    throw new RuntimeException("음수를 입력할 수 없습니다.");
+                }
+                string_to_number.add(token);
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException("숫자가 아닌 값을 입력했습니다");
+        }
+
+        for(int i : string_to_number){
+            SUM += i;
         }
 
         return SUM;
@@ -34,4 +52,3 @@ public class StringCalculator {
     }
 
 }
-
