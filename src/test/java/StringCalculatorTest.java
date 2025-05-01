@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -23,7 +25,7 @@ public class StringCalculatorTest {
         // then
         int expected = 0;
 
-        Assertions.assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
 
     }
 
@@ -40,7 +42,7 @@ public class StringCalculatorTest {
         // then
         int expected = 149;
 
-        Assertions.assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
 
     }
 
@@ -57,7 +59,7 @@ public class StringCalculatorTest {
         // then
         int expected = 179;
 
-        Assertions.assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
 
     }
 
@@ -66,7 +68,8 @@ public class StringCalculatorTest {
     public void negativeTest_basicDelimiter() {
 
         String input = "4,5,9:-5";
-        assertThrows(RuntimeException.class, () -> stringCalculator.calculate(input));
+        assertThatThrownBy(() -> stringCalculator.calculate(input))
+                .isInstanceOf(RuntimeException.class);
 
     }
 
@@ -75,7 +78,8 @@ public class StringCalculatorTest {
     public void negativeTest_customDelimiter() {
 
         String input = "//;\n-142;34;3";
-        assertThrows(RuntimeException.class, () -> stringCalculator.calculate(input));
+        assertThatThrownBy(() -> stringCalculator.calculate(input))
+                .isInstanceOf(RuntimeException.class);
 
     }
 
@@ -84,7 +88,8 @@ public class StringCalculatorTest {
     public void notAllowedTest() {
 
         String input = "계산해주세요hurry";
-        assertThrows(RuntimeException.class, () -> stringCalculator.calculate(input));
+        assertThatThrownBy(() -> stringCalculator.calculate(input))
+                .isInstanceOf(RuntimeException.class);
     }
 
 
