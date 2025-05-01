@@ -5,7 +5,7 @@ import domain.Operator;
 
 public class AddOperator extends Operator {
     public AddOperator(){
-        super('+');
+        super('+',',',':');
     }
 
     @Override

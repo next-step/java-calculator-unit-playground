@@ -42,6 +42,12 @@ public class CalculatorTest {
             assertEquals(5,calculator.calculateStringExpression("1+4"));
             assertEquals(-3,calculator.calculateStringExpression("1+-4"));
             assertEquals(-3,calculator.calculateStringExpression("1+ -4"));
+            assertEquals(5,calculator.calculateStringExpression("1,4"));
+            assertEquals(-3,calculator.calculateStringExpression("1,-4"));
+            assertEquals(-3,calculator.calculateStringExpression("1, -4"));
+            assertEquals(5,calculator.calculateStringExpression("1:4"));
+            assertEquals(-3,calculator.calculateStringExpression("1:-4"));
+            assertEquals(-3,calculator.calculateStringExpression("1: -4"));
         }
 
         @Test
