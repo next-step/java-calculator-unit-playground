@@ -50,5 +50,5 @@ public class StringCalculator {
         return SUM;
 
     }
-
+    
 }

@@ -61,5 +61,31 @@ public class StringCalculatorTest {
 
     }
 
+    @Test
+    @DisplayName("음수 입력 시 예외처리 발생하는지 테스트 - 기본 구분자일 때")
+    public void negativeTest_basicDelimiter() {
+
+        String input = "4,5,9:-5";
+        assertThrows(RuntimeException.class, () -> stringCalculator.calculate(input));
+
+    }
+
+    @Test
+    @DisplayName("음수 입력 시 예외처리 발생하는지 테스트 - 커스텀 구분자일 때")
+    public void negativeTest_customDelimiter() {
+
+        String input = "//;\n-142;34;3";
+        assertThrows(RuntimeException.class, () -> stringCalculator.calculate(input));
+
+    }
+
+    @Test
+    @DisplayName("숫자 외에 다른 문자를 입력했을 때 예외처리 발생하는지 테스트")
+    public void notAllowedTest() {
+
+        String input = "계산해주세요hurry";
+        assertThrows(RuntimeException.class, () -> stringCalculator.calculate(input));
+    }
+
 
 }
