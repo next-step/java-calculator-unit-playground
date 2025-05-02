@@ -17,9 +17,6 @@ public class CustomDelimiterAndBodyExtractor {
     }
 
     public static class DelimeterAndBodyInfo {
-
-        public String BASIC_DELIMITER_COMMA = ",";
-        public String BASIC_DELIMITER_COLON = ":";
         private String customDelimiter;
         private String body;
 
