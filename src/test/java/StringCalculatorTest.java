@@ -104,9 +104,9 @@ public class StringCalculatorTest {
                     Arguments.arguments("-1,2:3"),
                     Arguments.arguments("1,-2:3"),
                     Arguments.arguments("1,2:-3"),
-                    Arguments.arguments("//;\\n-1,2;3"),
-                    Arguments.arguments("//;\\n1,-2;3"),
-                    Arguments.arguments("//;\\n1,2;-3")
+                    Arguments.arguments("//;\n-1,2;3"),
+                    Arguments.arguments("//;\n1,-2;3"),
+                    Arguments.arguments("//;\n1,2;-3")
             );
         }
 
@@ -114,7 +114,7 @@ public class StringCalculatorTest {
             return Stream.of(
                     Arguments.arguments("a,2:3"),
                     Arguments.arguments("1,2:*3"),
-                    Arguments.arguments("//;\\n-1,2;3,(,4")
+                    Arguments.arguments("//;\n-1,2;3,(,4")
             );
         }
 
@@ -123,9 +123,9 @@ public class StringCalculatorTest {
                     Arguments.arguments("1,2 3"),
                     Arguments.arguments("1, "),
                     Arguments.arguments(" "),
-                    Arguments.arguments("//;\\n ;2;3"),
-                    Arguments.arguments("//;\\n "),
-                    Arguments.arguments("//;\\n1; ;3")
+                    Arguments.arguments("//;\n ;2;3"),
+                    Arguments.arguments("//;\n "),
+                    Arguments.arguments("//;\n1; ;3")
             );
         }
     }

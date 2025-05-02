@@ -9,7 +9,7 @@ public class StringParser {
     public static List<String> parse(String customDelimiter, String body) {
         String expression = getRegularSplitRegex(customDelimiter);
         String[] split_nums = body.split(expression);
-        validate(List.of(split_nums));
+        ValueValidator.validate(List.of(split_nums));
         return List.of(split_nums);
     }
 
