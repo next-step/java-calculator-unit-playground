@@ -8,6 +8,7 @@ import stringCalc.StringParser;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("string input이 주어질때 구분자로 파싱하여 ")
@@ -18,7 +19,7 @@ public class StringParserTest {
     @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 커스텀 구분자 포함 ")
     void givenCustomDelAndBody_whenParse_thenReturnValueList(String customDel, String body, List<String> expected) {
         List<String> actual = StringParser.parse(customDel, body);
-        assertEquals(expected, actual);
+        assertThat(actual).containsExactlyElementsOf(expected);
     }
 
     @ParameterizedTest
@@ -27,7 +28,7 @@ public class StringParserTest {
     void givenBody_whenParse_thenReturnValueList(String body) {
         List<String> actual = StringParser.parse("", body);
         List<String> expected = List.of("1", "2", "3");
-        assertEquals(expected, actual);
+        assertThat(actual).containsExactlyElementsOf(expected);
     }
 
 

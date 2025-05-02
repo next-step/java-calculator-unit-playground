@@ -5,8 +5,8 @@ import stringCalc.CustomDelimiterAndBodyExtractor;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomDelimiterAndBodyExtractorTest {
 
@@ -15,10 +15,7 @@ public class CustomDelimiterAndBodyExtractorTest {
     @MethodSource("inputStringArguments")
     void givenMatchedPattern_whenExtract_thenGiveInputInfo(String input, String expected_body, String expected_del) {
         CustomDelimiterAndBodyExtractor.DelimeterAndBodyInfo actual = CustomDelimiterAndBodyExtractor.extract(input);
-        assertAll(
-                () -> assertEquals(expected_body, actual.getBody()),
-                () -> assertEquals(expected_del, actual.getDelimiter())
-        );
+        assertThat(actual).extracting("customDelimiter", "body").containsExactly(expected_del, expected_body);
     }
 
     private static Stream<Arguments> inputStringArguments() {

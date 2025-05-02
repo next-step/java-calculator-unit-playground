@@ -9,8 +9,8 @@ import stringCalc.StringCalculator;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("문자열 계산기 unit 테스트")
 public class StringCalculatorTest {
@@ -22,7 +22,7 @@ public class StringCalculatorTest {
         @DisplayName("빈 문자열은 0을 반환한다.")
         void givenEmptyString_whenAdd_thenReturnsZero() {
             int actual = StringCalculator.add("");
-            assertEquals(0, actual);
+            assertThat(actual).isEqualTo(0);
         }
 
         @ParameterizedTest
@@ -30,7 +30,7 @@ public class StringCalculatorTest {
         @DisplayName("숫자 하나만 있을 경우, 그 값을 숫자의 형태로 반환한다.")
         void givenSingleNum_whenAdd_thenReturnSingleNum(String value) {
             int actual = StringCalculator.add(value);
-            assertEquals(Integer.parseInt(value), actual);
+            assertThat(actual).isEqualTo(Integer.parseInt(value));
         }
 
         @ParameterizedTest
@@ -38,7 +38,7 @@ public class StringCalculatorTest {
         @DisplayName("쉼표와 콜론으로 구분된 숫자들의 합을 반환한다.")
         void givenBasicDelimiter_whenAdd_thenSumsCorrectly(String value, int expected) {
             int actual = StringCalculator.add(value);
-            assertEquals(expected, actual);
+            assertThat(actual).isEqualTo(expected);
         }
 
         private static Stream<Arguments> basicDelimeterStringInputArguments() {
@@ -58,7 +58,8 @@ public class StringCalculatorTest {
         @MethodSource("customDelimeterStringInputArguments")
         @DisplayName("커스텀 구분자를 인식하여 합을 반환한다.")
         void givenCustomDelimiter_whenAdd_thenSumsCorrectly(String value, int expected) {
-            assertEquals(expected, StringCalculator.add(value));
+            int actual = StringCalculator.add(value);
+            assertThat(actual).isEqualTo(expected);
         }
 
         private static Stream<Arguments> customDelimeterStringInputArguments() {
@@ -81,21 +82,21 @@ public class StringCalculatorTest {
         @MethodSource("negativeIncludedStringInputArguments")
         @DisplayName("음수가 포함될 경우 RuntimeException이 발생한다.")
         void givenNegativeNum_whenAdd_thenThrowRuntimeException(String value) {
-            assertThrows(RuntimeException.class, () -> StringCalculator.add(value));
+            assertThatThrownBy(()->{StringCalculator.add(value);}).isInstanceOf(RuntimeException.class);
         }
 
         @ParameterizedTest
         @MethodSource("noneAcceptedValueIncludedStringInputArguments")
         @DisplayName("숫자 이외의 값이 포함될 경우 RuntimeException이 발생한다.")
         void givenNonNumValue_whenAdd_thenThrowRuntimeException(String value) {
-            assertThrows(RuntimeException.class, () -> StringCalculator.add(value));
+            assertThatThrownBy(()->{StringCalculator.add(value);}).isInstanceOf(RuntimeException.class);
         }
 
         @ParameterizedTest
         @MethodSource("spaceIncludedStringInputArguments")
         @DisplayName("공백이 포함될 경우 RuntimeException이 발생한다.")
         void givenSpace_whenAdd_thenThrowRuntimeException(String value) {
-            assertThrows(RuntimeException.class, () -> StringCalculator.add(value));
+            assertThatThrownBy(()->{StringCalculator.add(value);}).isInstanceOf(RuntimeException.class);
         }
 
         private static Stream<Arguments> negativeIncludedStringInputArguments() {

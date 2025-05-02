@@ -9,8 +9,9 @@ import simpleCalc.SimpleCalculator;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("초간단 계산기 unit 테스트")
 public class SimpleCaluculatorTest {
@@ -24,7 +25,7 @@ public class SimpleCaluculatorTest {
         @DisplayName("add 함수는 x,y가 인자로 주어지면 덧셈 연산을 수행한다.")
         void testAddOperation(int x, int y) {
             int actual = SimpleCalculator.add(x, y);
-            assertEquals(x + y, actual);
+            assertThat(actual).isEqualTo(x+y);
         }
 
         @ParameterizedTest
@@ -32,7 +33,7 @@ public class SimpleCaluculatorTest {
         @DisplayName("substract 함수는 x,y가 인자로 주어지면 뺄셈 연산을 수행한다.")
         void testSubstractOperation(int x, int y) {
             int actual = SimpleCalculator.substract(x, y);
-            assertEquals(x - y, actual);
+            assertThat(actual).isEqualTo(x-y);
         }
 
         @ParameterizedTest
@@ -40,7 +41,7 @@ public class SimpleCaluculatorTest {
         @DisplayName("multiply 함수는 x,y가 인자로 주어지면 곱셈 연산을 수행한다.")
         void testMutiplyOperation(int x, int y) {
             int actual = SimpleCalculator.multiply(x, y);
-            assertEquals(x * y, actual);
+            assertThat(actual).isEqualTo(x*y);
         }
 
         @ParameterizedTest
@@ -48,7 +49,7 @@ public class SimpleCaluculatorTest {
         @DisplayName("divide 함수는 x,y가 인자로 주어지면 나눗 ㄸ 연산을 수행한다.")
         void testDivideOperation(int x, int y) {
             int actual = SimpleCalculator.divide(x, y);
-            assertEquals(x / y, actual);
+            assertThat(actual).isEqualTo(x/y);
         }
 
 
@@ -56,6 +57,8 @@ public class SimpleCaluculatorTest {
         @DisplayName("divide 함수는 0으로 나눌때 RuntimeException을 던진다.")
         void zeroDivisionRuntimeExceptionTest() {
             assertThrows(RuntimeException.class, () -> SimpleCalculator.divide(1, 0));
+            assertThatThrownBy(() -> {SimpleCalculator.divide(1, 0);})
+                    .isInstanceOf(RuntimeException.class);
         }
 
         /**
