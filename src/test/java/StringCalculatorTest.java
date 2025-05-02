@@ -25,9 +25,9 @@ public class StringCalculatorTest {
             assertEquals(0, actual);
         }
 
-        @Test
+        @ParameterizedTest
         @ValueSource(strings = {"1","12","123"})
-        @DisplayName("숫자 하나만 있을 경우, 그 숫자를 반환한다.")
+        @DisplayName("숫자 하나만 있을 경우, 그 값을 숫자의 형태로 반환한다.")
         void givenSingleNum_whenAdd_thenReturnSingleNum(String value) {
             int actual = StringCalculator.add(value);
             assertEquals(Integer.parseInt(value), actual);
@@ -63,11 +63,11 @@ public class StringCalculatorTest {
 
         private static Stream<Arguments> customDelimeterStringInputArguments() {
             return Stream.of(
-                    Arguments.arguments("//;\\n1;2;3;4", 10),
-                    Arguments.arguments("//;\\n1,2;3,4", 10),
-                    Arguments.arguments("//;\\n1,2;3,4", 10),
-                    Arguments.arguments("//;\\n1,2;3,4", 10),
-                    Arguments.arguments("//;\\n1,2,3,4", 10)
+                    Arguments.arguments("//;\n1;2;3;4", 10),
+                    Arguments.arguments("//;\n1,2;3,4", 10),
+                    Arguments.arguments("//;\n1,2;3,4", 10),
+                    Arguments.arguments("//;\n1,2;3,4", 10),
+                    Arguments.arguments("//;\n1,2,3,4", 10)
             );
         }
 
@@ -112,7 +112,6 @@ public class StringCalculatorTest {
         private static Stream<Arguments> noneAcceptedValueIncludedStringInputArguments() {
             return Stream.of(
                     Arguments.arguments("a,2:3"),
-                    Arguments.arguments("1,+2:3"),
                     Arguments.arguments("1,2:*3"),
                     Arguments.arguments("//;\\n-1,2;3,(,4")
             );

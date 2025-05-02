@@ -2,11 +2,14 @@ package stringCalc;
 
 import java.util.List;
 
+import static stringCalc.ValueValidator.validate;
+
 public class StringParser {
 
     public static List<String> parse(String customDelimiter, String body) {
         String expression = getRegularSplitRegex(customDelimiter);
         String[] split_nums = body.split(expression);
+        validate(List.of(split_nums));
         return List.of(split_nums);
     }
 
