@@ -1,32 +1,61 @@
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
-    int sum(String str){
-//        System.out.println(str);
-        if(str == null || str.isEmpty()){
+    static final String DEFAULT_DELIMITER = ",|:";
+    static final String REGEX = "//(.*)\n(.*)";
+
+    int sum(String input){
+        if(input == null || input.isEmpty()){
             return 0;
         }
-        if(str.contains("-")){//음수이면
+        List<Integer> numbers = splitString(input);
+        return numbers.stream().mapToInt(i->i).sum();
+    }
+
+    List<Integer> splitString(String input) {
+        String delimiter = DEFAULT_DELIMITER;
+        String numbers = input;
+
+        if (input.startsWith("//")) {
+            Matcher customDelimiter = Pattern.compile(REGEX).matcher(input);
+            if (customDelimiter.matches()) {
+                delimiter = finalDelimiter(customDelimiter.group(1));
+                numbers = customDelimiter.group(2);
+            }
+        }
+        String[] tokens = numbers.split(delimiter);
+        List<Integer> result = new ArrayList<>();
+        for (String token : tokens) {
+            int number = parseIntOrThrow(token);
+            result.add(number);
+        }
+        return result;
+    }
+
+    String finalDelimiter(String input){
+        if(input.length() == 1){ //delimiter가 1개라면 다시 return
+            return input;
+        }
+        //delimiter가 2개 이상일 때
+        StringBuilder result = new StringBuilder();
+        result.append(Pattern.quote(String.valueOf(input.charAt(0))));
+        for (int i = 1; i < input.length(); i++) {
+            result.append("|").append(Pattern.quote(String.valueOf(input.charAt(i))));
+        }
+        return result.toString();
+    }
+
+    int parseIntOrThrow (String token){
+        try {
+            int number = Integer.parseInt(token);
+            if (number < 0) {//음수라면
+                throw new RuntimeException();
+            }
+            return number;
+        } catch (NumberFormatException e) {//숫자가 아닌 값이 들어온다면
             throw new RuntimeException();
         }
-        if(str.matches(".*[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z].*")){//숫자 이외의 값이 들어온다면
-            throw new RuntimeException();
-        }
-
-
-        int total = 0;
-        String del = "";//구분자
-        if(str.contains("//")){
-            del = str.substring(2,3);
-            str = str.substring(4);
-        }
-        else if(str.contains(",") || str.contains(":")){
-            del = "[,|:]";
-        }
-
-        String[] arr = str.split(del);
-        for(String s : arr){
-            total += Integer.parseInt(s);
-        }
-
-        return total;
     }
 }
