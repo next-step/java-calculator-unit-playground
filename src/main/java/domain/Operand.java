@@ -9,8 +9,7 @@ public class Operand {
 
     public Operand(String operand) {
         try {
-            double parsed = Double.parseDouble(operand);
-            this.operand = (int) parsed;
+            this.operand = Integer.parseInt(operand);
             if(this.operand < 0){
                 throw new RuntimeException("음수는 계산할 수 없습니다.");
             }
