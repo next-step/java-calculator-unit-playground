@@ -11,7 +11,7 @@ public class StringCalculator {
             return 0;
         }
 
-        CustomDelimiterAndBodyExtractor.DelimeterAndBodyInfo info = extract(input);
+        DelimiterAndBodyInfo info = extract(input);
         List<String> values =  parse(info.getDelimiter(),info.getBody());
 
         int sum = 0;
