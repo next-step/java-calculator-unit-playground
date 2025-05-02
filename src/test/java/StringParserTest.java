@@ -16,27 +16,27 @@ public class StringParserTest {
     @ParameterizedTest
     @MethodSource("customDelimieterAndBodyInputArguments")
     @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 커스텀 구분자 포함 ")
-    void givenCustomDelAndBody_whenParse_thenReturnValueList(String customDel, String body, List<String> expected){
-        List<String> actual = StringParser.parse(customDel,body);
-        assertEquals(expected,actual);
+    void givenCustomDelAndBody_whenParse_thenReturnValueList(String customDel, String body, List<String> expected) {
+        List<String> actual = StringParser.parse(customDel, body);
+        assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 기본 구분자만 포함")
     @CsvSource({"'1,2,3'", "1:2:3", "'1:2,3'"})
-    void givenBody_whenParse_thenReturnValueList(String body){
-            List<String> actual = StringParser.parse("",body);
-            List<String> expected = List.of("1","2","3");
-            assertEquals(expected,actual);
+    void givenBody_whenParse_thenReturnValueList(String body) {
+        List<String> actual = StringParser.parse("", body);
+        List<String> expected = List.of("1", "2", "3");
+        assertEquals(expected, actual);
     }
 
 
-    private static Stream<Arguments> customDelimieterAndBodyInputArguments(){
+    private static Stream<Arguments> customDelimieterAndBodyInputArguments() {
         return Stream.of(
-                Arguments.of(";","1;2;3",List.of("1","2","3")),
-                Arguments.of(";","1,2;3",List.of("1","2","3")),
-                Arguments.of("[","1[2[3",List.of("1","2","3")),
-                Arguments.of("*","1*2*3",List.of("1","2","3"))
+                Arguments.of(";", "1;2;3", List.of("1", "2", "3")),
+                Arguments.of(";", "1,2;3", List.of("1", "2", "3")),
+                Arguments.of("[", "1[2[3", List.of("1", "2", "3")),
+                Arguments.of("*", "1*2*3", List.of("1", "2", "3"))
         );
     }
 

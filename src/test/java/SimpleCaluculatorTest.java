@@ -8,6 +8,7 @@ import simpleCalc.SimpleCalculator;
 
 
 import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -58,14 +59,15 @@ public class SimpleCaluculatorTest {
         }
 
         /**
-         *operationTestArguments이 static으로 선언되는 이유
-         *
+         * operationTestArguments이 static으로 선언되는 이유
+         * <p>
          * 방법 1. (가장 일반적) operationTestArguments를 private static으로 만든다.
-                 * @MethodSource는 테스트 인스턴스가 생성되기 전에 호출된다.
-                 * 그래서 기본적으로 static 메서드를 요구한다.
+         *
+         * @MethodSource는 테스트 인스턴스가 생성되기 전에 호출된다.
+         * 그래서 기본적으로 static 메서드를 요구한다.
          * 방법 2. @TestInstance(TestInstance.Lifecycle.PER_CLASS)를 클래스에 붙여서 non-static 메서드를 허용한다.
-         *          이걸 붙이면, JUnit이 테스트 클래스 인스턴스를 미리 하나 만들어놓고 그 인스턴스에서 메서드를 찾아서 호출할 수 있게 된다.
-         *          하지만 테스트 클래스는 최대한 stateless(상태 없는) 구조로 가는 게 좋기 때문에, 특별한 이유 없으면 static으로 만드는 것이 좋다.
+         * 이걸 붙이면, JUnit이 테스트 클래스 인스턴스를 미리 하나 만들어놓고 그 인스턴스에서 메서드를 찾아서 호출할 수 있게 된다.
+         * 하지만 테스트 클래스는 최대한 stateless(상태 없는) 구조로 가는 게 좋기 때문에, 특별한 이유 없으면 static으로 만드는 것이 좋다.
          */
         private static Stream<Arguments> operationTestArguments() {
             return Stream.of(

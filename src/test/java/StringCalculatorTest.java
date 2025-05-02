@@ -26,7 +26,7 @@ public class StringCalculatorTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"1","12","123"})
+        @ValueSource(strings = {"1", "12", "123"})
         @DisplayName("숫자 하나만 있을 경우, 그 값을 숫자의 형태로 반환한다.")
         void givenSingleNum_whenAdd_thenReturnSingleNum(String value) {
             int actual = StringCalculator.add(value);
