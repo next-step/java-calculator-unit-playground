@@ -5,7 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private static final String REGEX_PATTERN = "^\\/\\/(.)\\n([\\s\\S]*)";
+    // '//'와 '\n' 사이의 커스텀 기호와 뒤에 문자열을 분리하는 정규표현식
+    private static final String CUSTOM_SYMBOL_EXPRESSION_REGEX_PATTERN = "^\\/\\/(.)\\n([\\s\\S]*)";
     private final Operator[] operators;
 
     public Calculator(Operator[] operators) {
@@ -17,30 +18,35 @@ public class Calculator {
             return 0;
         }
 
-        int result;
         if (expression.startsWith("//")) {
-            String remainedExpression = this.extractCustomSymbol(expression);
-            result = calculate(remainedExpression);
-        } else{
-            result = calculate(expression);
+            String[] customSymbolAndRemainedExpression = separateCustomExpression(expression);
+            char customSymbol = customSymbolAndRemainedExpression[0].charAt(0);
+            addCustomSymbol(AddOperator.INSTANCE, customSymbol);
+            String remainedExpression = customSymbolAndRemainedExpression[1];
+
+            return calculate(remainedExpression);
         }
 
-        return result;
+        return calculate(expression);
     }
 
-    private String extractCustomSymbol(String expression) {
-        Pattern pattern = Pattern.compile(REGEX_PATTERN);
+    private String[] separateCustomExpression(String expression) {
+        Pattern pattern = Pattern.compile(CUSTOM_SYMBOL_EXPRESSION_REGEX_PATTERN);
         Matcher matcher = pattern.matcher(expression);
 
         if (matcher.matches()) {
             if (matcher.group(1).length() != 1) {
                 throw new IllegalArgumentException("커스텀 구분자가 올바르지 않습니다.");
             }
-            AddOperator.INSTANCE.addSymbol(matcher.group(1).charAt(0));
-            return matcher.group(2);
+
+            return new String[]{matcher.group(1), matcher.group(2)};
         }
 
         throw new IllegalArgumentException("커스텀 문자열이 형식에 맞지 않습니다.");
+    }
+
+    private void addCustomSymbol(Operator operator, char customSymbol) {
+        operator.addSymbol(customSymbol);
     }
 
     private int calculate(String expression) {
