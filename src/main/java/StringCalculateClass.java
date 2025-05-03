@@ -8,12 +8,12 @@ public class StringCalculateClass {
     public int combineString(String input){
 
         //없는 경우
-        if (input.isEmpty() || input == null){
+        if (input == null || input.isEmpty()){
             return 0;
         }
         //커스텀 문자 사용하는 경우
         if (input.startsWith("//")){
-            String[] splitString = (input.substring(5)).split(String.valueOf(input.charAt(2)));
+            String[] splitString = (input.substring(4)).split(String.valueOf(input.charAt(2)));
             return sum(splitString);
         }
         //; , 을 사용하는 경우
