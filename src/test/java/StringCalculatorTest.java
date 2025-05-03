@@ -228,7 +228,6 @@ public class StringCalculatorTest {
                 int actual = stringCalculator.separateResult(input);
 
                 assertThat(actual).isEqualTo(13);
-
             }
         }
     }
