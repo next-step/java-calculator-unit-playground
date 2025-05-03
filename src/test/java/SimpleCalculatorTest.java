@@ -1,5 +1,7 @@
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class SimpleCalculatorTest {
@@ -24,5 +26,11 @@ class SimpleCalculatorTest {
     @Test
     void divide() {
         assertEquals(cal.divide(10, 2), 5);
+    }
+
+    @Test
+    @DisplayName("0으로 나누면 예외가 발생한다")
+    void divideByZero() {
+        assertThatThrownBy(() -> cal.divide(1, 0)).isInstanceOf(RuntimeException.class);
     }
 }
