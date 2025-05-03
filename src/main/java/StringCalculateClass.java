@@ -5,7 +5,7 @@ public class StringCalculateClass {
     //2. 문자열을 구분한 후 -> 정수화 후 더하기
     //3. 결과값 출력
     //4. 예외 처리
-    public int add(String input){
+    public int combineString(String input){
         //커스텀 문자 사용하는 경우
         if (input.startsWith("//")){
             String[] splitString = (input.substring(5)).split(String.valueOf(input.charAt(2)));

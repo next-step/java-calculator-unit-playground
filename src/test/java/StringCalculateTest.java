@@ -10,25 +10,25 @@ public class StringCalculateTest {
     @Test
     @DisplayName("콤마를 구분자로 가진다")
     void addComma(){
-        assertEquals(6,stringCalculateClass.add("1,2,3"));
+        assertEquals(6,stringCalculateClass.combineString("1,2,3"));
     }
 
     @Test
     @DisplayName("쉼표를 구분자로 가진다")
     void addColons() {
-        assertEquals(6,stringCalculateClass.add("1;2;3"));
+        assertEquals(6,stringCalculateClass.combineString("1;2;3"));
     }
 
     @Test
     @DisplayName("콤마,쉼표 동시에 구분자로 가진다")
     void addCommaAndColons() {
-        assertEquals(6,stringCalculateClass.add("1,2;3"));
+        assertEquals(6,stringCalculateClass.combineString("1,2;3"));
     }
     @Test
     @DisplayName("음수를 입력하면 예외를 던진다")
     void exceptionMinus(){
         assertThrows(RuntimeException.class, () -> {
-            stringCalculateClass.add("-1");
+            stringCalculateClass.combineString("-1");
         });
     }
 
@@ -36,7 +36,7 @@ public class StringCalculateTest {
     @DisplayName("숫자 아닌 값을 입력하면 예외를 던진다")
     void exceptionEng(){
         assertThrows(RuntimeException.class, () -> {
-            stringCalculateClass.add("a");
+            stringCalculateClass.combineString("a");
         });
     }
 
