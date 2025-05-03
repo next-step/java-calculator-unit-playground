@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("계산기 테스트")
 public class CalculatorTest {
@@ -16,7 +17,7 @@ public class CalculatorTest {
 
         @Test
         @DisplayName("주어진 인자 2개를 더한 결과를 반환한다")
-        void Test_AddTest() {
+        void add_CanCalulate() {
 
             // given
             int a = 3;
@@ -38,7 +39,7 @@ public class CalculatorTest {
 
         @Test
         @DisplayName("주어진 인자 2개를 뺀 결과를 반환한다")
-        void Test_SubtractTest() {
+        void subtract_CanCalulate() {
 
             // given
             int a = 3;
@@ -60,7 +61,7 @@ public class CalculatorTest {
 
         @Test
         @DisplayName("주어진 인자 2개를 곱한 결과를 반환한다")
-        void Test_MultiplyTest() {
+        void multiply_CanCalulate() {
 
             // given
             int a = 3;
@@ -80,23 +81,44 @@ public class CalculatorTest {
     @DisplayName("나눗셈 테스트")
     class DivideTest{
 
-        @Test
-        @DisplayName("주어진 인자 2개를 나눈 결과를 반환한다")
-        void Test_DivideTest() {
+        @Nested
+        @DisplayName("1 - 일반적인 상황")
+        class DivideGeneral {
 
-            // given
-            int a = 3;
-            int b = 2;
+            @Test
+            @DisplayName("주어진 인자 2개를 나눈 결과를 반환한다")
+            void divide_CanCalulate() {
 
-            // when
-            int actual = calculator.divide(a,b);
+                // given
+                int a = 3;
+                int b = 2;
 
-            // then
-            int expected = 1;
+                // when
+                int actual = calculator.divide(a, b);
 
-            assertEquals(expected,actual);
+                // then
+                int expected = 1;
+
+                assertEquals(expected, actual);
+            }
         }
-    }
 
+        @Nested
+        @DisplayName("2 - 예외적인 상황")
+        class DivideException {
+
+            @Test
+            @DisplayName("0으로 나눴을 때 예외처리가 발생된다.")
+            void divide_ByZero_ExceptionThrown() {
+
+                int a = 3;
+                int b = 0;
+
+                assertThrows(ArithmeticException.class, () -> calculator.divide(a,b));
+
+            }
+        }
+
+    }
 
 }
