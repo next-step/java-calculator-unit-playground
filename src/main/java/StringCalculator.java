@@ -10,11 +10,6 @@ public class StringCalculator {
     private static final String EXCEPTION_NEGATIVE = "음수는 입력할 수 없습니다.";
     private static final String EXCEPTION_INCORRECT = "숫자만 입력할 수 있습니다.";
 
-    public boolean verifyInput(String input) {
-
-        return input == null || input.isEmpty();
-
-    }
 
     public String findDelimiter(String input) {
 
@@ -61,19 +56,25 @@ public class StringCalculator {
 
     }
 
-    public int addNumbers(String input, List<Integer> numberList) {
+    public int addNumbers(List<Integer> numberList) {
 
         int sum = 0;
-
-        if (verifyInput(input)) {
-            return sum;
-        }
 
         for (int number : numberList) {
             sum += number;
         }
 
         return sum;
+
+    }
+
+    public int separateResult(String input) {
+
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        return addNumbers(makeNumberList(parseInput(input,findDelimiter(input))));
 
     }
 }
