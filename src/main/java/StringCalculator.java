@@ -4,22 +4,22 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     static final String DEFAULT_DELIMITER = ",|:";
-    static final String REGEX = "//(.*)\n(.*)";
+    static final String CUSTOM_REGEX = "//(.*)\n(.*)";
 
     int sum(String input){
         if(input == null || input.isEmpty()){
             return 0;
         }
-        List<Integer> numbers = splitString(input);
+        List<Integer> numbers = splitInput(input);
         return numbers.stream().mapToInt(i->i).sum();
     }
 
-    List<Integer> splitString(String input) {
+    private List<Integer> splitInput(String input) {
         String delimiter = DEFAULT_DELIMITER;
         String numbers = input;
 
         if (input.startsWith("//")) {
-            Matcher customDelimiter = Pattern.compile(REGEX).matcher(input);
+            Matcher customDelimiter = Pattern.compile(CUSTOM_REGEX).matcher(input);
             if (customDelimiter.matches()) {
                 delimiter = finalDelimiter(customDelimiter.group(1));
                 numbers = customDelimiter.group(2);
@@ -28,13 +28,13 @@ public class StringCalculator {
         String[] tokens = numbers.split(delimiter);
         List<Integer> result = new ArrayList<>();
         for (String token : tokens) {
-            int number = parseIntOrThrow(token);
+            int number = stringToInt(token);
             result.add(number);
         }
         return result;
     }
 
-    String finalDelimiter(String input){
+    private String finalDelimiter(String input){
         if(input.length() == 1){ //delimiter가 1개라면 다시 return
             return input;
         }
@@ -47,7 +47,7 @@ public class StringCalculator {
         return result.toString();
     }
 
-    int parseIntOrThrow (String token){
+    private int stringToInt(String token){
         try {
             int number = Integer.parseInt(token);
             if (number < 0) {//음수라면
