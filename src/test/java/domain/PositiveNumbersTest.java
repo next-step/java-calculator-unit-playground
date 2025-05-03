@@ -1,0 +1,48 @@
+package domain;
+
+import static org.assertj.core.api.Assertions.*;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+class PositiveNumbersTest {
+
+    @Test
+    @DisplayName("숫자 문자열 리스트를 합산한다")
+    void sumNumbers_success() {
+        // given
+        List<String> tokens = List.of("1", "2", "3");
+
+        // when
+        PositiveNumbers positiveNumbers = new PositiveNumbers(tokens);
+
+        // then
+        assertThat(6).isEqualTo(positiveNumbers.sum());
+    }
+
+    @Test
+    @DisplayName("음수가 포함된 경우 예외를 던진다")
+    void throwException_whenNegativeNumberExists() {
+        // given
+        List<String> tokens = List.of("1", "-2", "3");
+
+        // when & then
+        assertThatThrownBy(() -> new PositiveNumbers(tokens))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("빈 리스트가 주어지면 합은 0이다")
+    void sumZero_whenEmptyList() {
+        // given
+        List<String> tokens = List.of();
+
+        // when
+        PositiveNumbers positiveNumbers = new PositiveNumbers(tokens);
+
+        // then
+        assertThat(0).isEqualTo(positiveNumbers.sum());
+    }
+}
