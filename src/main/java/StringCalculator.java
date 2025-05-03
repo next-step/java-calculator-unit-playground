@@ -4,51 +4,76 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    String DELIMITER = "[,|:]";
-    String CUSTOM_DELIMITER = "([//])(.)([\n])";
-    Pattern CUSTTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
-    int SUM = 0;
+    private static final String DEFAULT_DELIMITER = "[,|:]";
+    private static final String CUSTOM_DELIMITER = "([//])(.)([\n])";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
+    private static final String EXCEPTION_NEGATIVE = "음수는 입력할 수 없습니다.";
+    private static final String EXCEPTION_INCORRECT = "숫자만 입력할 수 있습니다.";
 
-    public int calculate(String input) {
-        String delimiter = DELIMITER;
-        Matcher find_custom_delimiter = CUSTTOM_DELIMITER_PATTERN.matcher(input);
-        int start_cal_index = input.indexOf("\n")+1;
+    public boolean verifyInput(String input) {
 
-        // 입력된 값이 없으면 0 반환
-        if (input.length() == 0) {
-            return 0;
-        }
-
-        // 커스텀 구분자를 사용하는 경우 구분자와 계산할 문자열 바꾸기
-        if (find_custom_delimiter.find()){
-            delimiter = find_custom_delimiter.group(2);
-            input = input.substring(start_cal_index);
-        }
-
-        String[] split_input = input.split(delimiter);
-        List<Integer> string_to_number = new ArrayList<>();
-
-        // 예외처리 추가
-
-        try {
-            for (String s : split_input) {
-                int token = Integer.parseInt(s);
-
-                if (token < 0) {
-                    throw new RuntimeException("음수를 입력할 수 없습니다.");
-                }
-                string_to_number.add(token);
-            }
-        } catch (RuntimeException e) {
-            throw new RuntimeException("숫자가 아닌 값을 입력했습니다");
-        }
-
-        for(int i : string_to_number){
-            SUM += i;
-        }
-
-        return SUM;
+        return input == null || input.isEmpty();
 
     }
 
+    public String findDelimiter(String input) {
+
+        String delimiter = DEFAULT_DELIMITER;
+        final Matcher findCustomDelimiter = CUSTOM_DELIMITER_PATTERN.matcher(input);
+
+        if (findCustomDelimiter.find()){
+            delimiter = findCustomDelimiter.group(2);
+
+            return delimiter;
+        }
+
+        return delimiter;
+
+    }
+
+    public String[] parseInput(String input, String delimiter) {
+        int startCalculateIndex = input.indexOf("\n")+1;
+        input = input.substring(startCalculateIndex);
+
+        String[] inputToToken = input.split(delimiter);
+
+        return inputToToken;
+
+    }
+
+    public List<Integer> makeNumberList(String[] inputToToken) {
+        List<Integer> numberList = new ArrayList<>();
+
+        try {
+            for (String token  : inputToToken) {
+                int calculateNumber = Integer.parseInt(token);
+
+                if (calculateNumber < 0 ) {
+                    throw new RuntimeException(EXCEPTION_NEGATIVE);
+                }
+                numberList.add(calculateNumber);
+            }
+        } catch (NumberFormatException e ) {
+            throw new RuntimeException(EXCEPTION_INCORRECT);
+        }
+
+        return numberList;
+
+    }
+
+    public int addNumbers(String input, List<Integer> numberList) {
+
+        int sum = 0;
+
+        if (verifyInput(input)) {
+            return sum;
+        }
+
+        for (int number : numberList) {
+            sum += number;
+        }
+
+        return sum;
+
+    }
 }
