@@ -39,6 +39,18 @@ public class StringCalculateTest {
             stringCalculateClass.combineString("a");
         });
     }
+    @Test
+    @DisplayName("null 입력이면 0을 반환한다")
+    void nullInputReturnsZero() {
+        assertEquals(0, stringCalculateClass.combineString(null));
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 사용할 수 있다")
+    void customDelimiter() {
+        int result = stringCalculateClass.combineString("//;\n1;2");
+        assertEquals(3, result);
+    }
 
 
 }
