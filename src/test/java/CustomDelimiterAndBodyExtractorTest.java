@@ -28,6 +28,7 @@ public class CustomDelimiterAndBodyExtractorTest {
                 Arguments.arguments(" ", " ", ""),
                 Arguments.arguments("123", "123", "")
         );
+        
     }
 
 }
