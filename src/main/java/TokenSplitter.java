@@ -7,7 +7,7 @@ public class TokenSplitter {
     private static final String CUSTOM_PREFIX = "//";
     private static final String CUSTOM_SUFFIX = "\\n";
     private static final String DEFAULT_REGEX = "[,|:]";
-    private static final Pattern CUSTOM_REGEX = Pattern.compile("(?<=//)(.+?)(?=\\\\n)");
+    private static final Pattern CUSTOM_DELIMITER_FORMAT_REGEX = Pattern.compile("(?<=//)(.+?)(?=\\\\n)");
 
     public List<String> tokenize(final String input) {
         if (input.startsWith(CUSTOM_PREFIX)) {
@@ -29,7 +29,7 @@ public class TokenSplitter {
     }
 
     private String findCustom(final String input) {
-        Matcher matcher = CUSTOM_REGEX.matcher(input);
+        Matcher matcher = CUSTOM_DELIMITER_FORMAT_REGEX.matcher(input);
         matcher.find();
         return Pattern.quote(matcher.group());
     }
