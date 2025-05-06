@@ -1,5 +1,6 @@
 package stringCalc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StringParser {
@@ -12,24 +13,14 @@ public class StringParser {
     }
 
     private static String getRegularSplitRegex(String customDelimiter) {
-        StringBuilder ex = new StringBuilder();
 
-        ex.append("[");
-        for (String del : DefaultDelimiter.getSymbolsAsList()) {
-            ex.append(del);
-            ex.append("|");
+        List<String> delimiters = new ArrayList<>(DefaultDelimiter.getSymbolsAsList());
+
+        if(!customDelimiter.isEmpty()){
+            delimiters.add(escapeForSpecial(customDelimiter));
         }
 
-        if (!customDelimiter.isEmpty()) {
-            ex.append(escapeForSpecial(customDelimiter));
-        } else {
-            // 마지막 '|' 제거
-            ex.setLength(ex.length() - 1);
-        }
-
-        ex.append("]");
-
-        return ex.toString();
+        return "[" + String.join("|",delimiters) + "]";
     }
 
     private static String escapeForSpecial(String symbol) {
