@@ -10,7 +10,7 @@ public class StringCalculator {
             return 0;
         }
 
-        ExtractedDelimiterAndContent info = CustomDelimiterAndBodyExtractor.extract(input);
+        ExtractedDelimiterAndBody info = CustomDelimiterAndBodyExtractor.extract(input);
         List<String> values =  StringParser.parse(info.getDelimiter(),info.getContent());
 
         int sum = 0;

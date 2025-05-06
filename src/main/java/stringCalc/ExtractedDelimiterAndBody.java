@@ -1,10 +1,10 @@
 package stringCalc;
 
-public class ExtractedDelimiterAndContent {
+public class ExtractedDelimiterAndBody {
     private String customDelimiter;
     private String content;
 
-    public ExtractedDelimiterAndContent(String delimiter, String content) {
+    public ExtractedDelimiterAndBody(String delimiter, String content) {
         this.customDelimiter = delimiter;
         this.content = content;
     }
