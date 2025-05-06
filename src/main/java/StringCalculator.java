@@ -11,7 +11,7 @@ public class StringCalculator {
     private static final String EXCEPTION_INCORRECT = "숫자만 입력할 수 있습니다.";
 
 
-    public String findDelimiter(String input) {
+    private String findDelimiter(String input) {
 
         String delimiter = DEFAULT_DELIMITER;
         final Matcher findCustomDelimiter = CUSTOM_DELIMITER_PATTERN.matcher(input);
@@ -26,7 +26,7 @@ public class StringCalculator {
 
     }
 
-    public String[] parseInput(String input, String delimiter) {
+    private String[] parseInput(String input, String delimiter) {
         int startCalculateIndex = input.indexOf("\n")+1;
         input = input.substring(startCalculateIndex);
 
@@ -36,7 +36,7 @@ public class StringCalculator {
 
     }
 
-    public List<Integer> makeNumberList(String[] inputToToken) {
+    private List<Integer> makeNumberList(String[] inputToToken) {
         List<Integer> numberList = new ArrayList<>();
 
         try {
@@ -56,7 +56,7 @@ public class StringCalculator {
 
     }
 
-    public int addNumbers(List<Integer> numberList) {
+    private int addNumbers(List<Integer> numberList) {
 
         int sum = 0;
 
