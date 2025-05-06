@@ -2,6 +2,7 @@ import NumberCalc.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.Arguments;
 
@@ -18,15 +19,19 @@ public class CalculatorTest {
     @DisplayName("사칙연산 테스트")
     class OperationTest {
 
-        @ParameterizedTest
-        @MethodSource("addArguments")
+        @ParameterizedTest(name = "1 + 2 = 3")
+        // @MethodSource("addArguments")
+        @CsvSource({
+                "1, 2, 3",
+                "-3, 3, 0"
+        })
         @DisplayName("add는 x, y를 입력받아 덧셈 결과를 반환한다")
         void addTest(int x, int y, int expected) {
             int result = calc.add(x, y);
             assertEquals(expected, result);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "3 - 2 = 1")
         @MethodSource("subtractArguments")
         @DisplayName("subtract는 x, y를 입력받아 뺄셈 결과를 반환한다")
         void subtractTest(int x, int y, int expected) {
@@ -34,7 +39,7 @@ public class CalculatorTest {
             assertEquals(expected, result);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "1 * 2 = 2")
         @MethodSource("multiplyArguments")
         @DisplayName("multiply는 x, y를 입력받아 곱셈 결과를 반환한다")
         void multiplyTest(int x, int y, int expected) {
@@ -42,7 +47,7 @@ public class CalculatorTest {
             assertEquals(expected, result);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "2 / 1 = 2")
         @MethodSource("divideArguments")
         @DisplayName("divide는 x, y를 입력받아 나눗셈 결과를 반환한다")
         void divideTest(int x, int y, int expected) {
@@ -50,12 +55,12 @@ public class CalculatorTest {
             assertEquals(expected, result);
         }
 
-        static Stream<Arguments> addArguments() {
-            return Stream.of(
-                    Arguments.of(1, 2, 3),
-                    Arguments.of(-3, 3, 0)
-            );
-        }
+//        static Stream<Arguments> addArguments() {
+//            return Stream.of(
+//                    Arguments.of(1, 2, 3),
+//                    Arguments.of(-3, 3, 0)
+//            );
+//        }
 
         static Stream<Arguments> subtractArguments() {
             return Stream.of(

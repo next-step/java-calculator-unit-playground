@@ -30,7 +30,8 @@ public class StringCalculator {
 
         for (String token : tokens) {
             if (token.trim().isEmpty()) {
-                continue;
+                //continue;
+                throw new RuntimeException("구분자 사이에 값이 없습니다.");
             }
 
             try {
