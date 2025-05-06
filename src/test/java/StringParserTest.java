@@ -14,16 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("string input이 주어질때 구분자로 파싱하여 ")
 public class StringParserTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "문자열 파싱 및 value 리스트 반환 테스트 - 커스텀 구분자 포함 ")
     @MethodSource("customDelimieterAndBodyInputArguments")
-    @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 커스텀 구분자 포함 ")
     void givenCustomDelAndBody_whenParse_thenReturnValueList(String customDel, String body, List<String> expected) {
         List<String> actual = StringParser.parseStringToNumValues(customDel, body);
         assertThat(actual).containsExactlyElementsOf(expected);
     }
 
-    @ParameterizedTest
-    @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 기본 구분자만 포함")
+    @ParameterizedTest(name = "문자열 파싱 및 value 리스트 반환 테스트 - 기본 구분자만 포함")
     @CsvSource({"'1,2,3'", "1:2:3", "'1:2,3'"})
     void givenBody_whenParse_thenReturnValueList(String body) {
         List<String> actual = StringParser.parseStringToNumValues("", body);

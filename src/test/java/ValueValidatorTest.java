@@ -17,6 +17,7 @@ public class ValueValidatorTest {
     }
 
     @Test
+    @DisplayName("숫자가 아닌 값이 포함되면 RuntimeException을 던진다.")
     void givenNotNumberValue_whenValidate_thenThrowsRuntimeException() {
         assertThatThrownBy(()->{validate(List.of("a", "2", "1"));})
                 .isInstanceOf(RuntimeException.class).hasMessageContaining("a");

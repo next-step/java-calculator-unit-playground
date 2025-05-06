@@ -26,17 +26,15 @@ public class StringCalculatorTest {
             Assertions.assertThat(actual).isEqualTo(0);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "숫자 하나만 있을 경우, 그 값을 숫자의 형태로 반환한다.")
         @ValueSource(strings = {"1", "12", "123"})
-        @DisplayName("숫자 하나만 있을 경우, 그 값을 숫자의 형태로 반환한다.")
         void givenSingleNum_whenAdd_thenReturnSingleNum(String value) {
             int actual = StringCalculator.sumOfNumbersInString(value);
             assertThat(actual).isEqualTo(Integer.parseInt(value));
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "쉼표와 콜론으로 구분된 숫자들의 합을 반환한다.")
         @MethodSource("basicDelimeterStringInputArguments")
-        @DisplayName("쉼표와 콜론으로 구분된 숫자들의 합을 반환한다.")
         void givenBasicDelimiter_whenAdd_thenSumsCorrectly(String value, int expected) {
             int actual = StringCalculator.sumOfNumbersInString(value);
             assertThat(actual).isEqualTo(expected);
@@ -79,23 +77,20 @@ public class StringCalculatorTest {
     @DisplayName("예외 처리 테스트")
     class ExceptionThrowingTest {
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "음수가 포함될 경우 RuntimeException이 발생한다.")
         @MethodSource("negativeIncludedStringInputArguments")
-        @DisplayName("음수가 포함될 경우 RuntimeException이 발생한다.")
         void givenNegativeNum_whenAdd_thenThrowRuntimeException(String value) {
             assertThatThrownBy(()->{StringCalculator.sumOfNumbersInString(value);}).isInstanceOf(RuntimeException.class);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "숫자 이외의 값이 포함될 경우 RuntimeException이 발생한다.")
         @MethodSource("noneAcceptedValueIncludedStringInputArguments")
-        @DisplayName("숫자 이외의 값이 포함될 경우 RuntimeException이 발생한다.")
         void givenNonNumValue_whenAdd_thenThrowRuntimeException(String value) {
             assertThatThrownBy(()->{StringCalculator.sumOfNumbersInString(value);}).isInstanceOf(RuntimeException.class);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "공백이 포함될 경우 RuntimeException이 발생한다.")
         @MethodSource("spaceIncludedStringInputArguments")
-        @DisplayName("공백이 포함될 경우 RuntimeException이 발생한다.")
         void givenSpace_whenAdd_thenThrowRuntimeException(String value) {
             assertThatThrownBy(()->{StringCalculator.sumOfNumbersInString(value);}).isInstanceOf(RuntimeException.class);
         }

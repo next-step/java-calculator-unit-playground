@@ -18,35 +18,31 @@ public class SimpleCaluculatorTest {
 
     @Nested
     @DisplayName("사칙 연산 계산 기능 테스트")
-    class fourOperationTest {
+    class FourOperationTest {
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "add 함수는 x,y가 인자로 주어지면 덧셈 연산을 수행한다.")
         @MethodSource("operationTestArguments")
-        @DisplayName("add 함수는 x,y가 인자로 주어지면 덧셈 연산을 수행한다.")
         void testAddOperation(int x, int y) {
             int actual = SimpleCalculator.add(x, y);
             assertThat(actual).isEqualTo(x+y);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "substract 함수는 x,y가 인자로 주어지면 뺄셈 연산을 수행한다.")
         @MethodSource("operationTestArguments")
-        @DisplayName("substract 함수는 x,y가 인자로 주어지면 뺄셈 연산을 수행한다.")
         void testSubstractOperation(int x, int y) {
             int actual = SimpleCalculator.substract(x, y);
             assertThat(actual).isEqualTo(x-y);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "multiply 함수는 x,y가 인자로 주어지면 곱셈 연산을 수행한다.")
         @MethodSource("operationTestArguments")
-        @DisplayName("multiply 함수는 x,y가 인자로 주어지면 곱셈 연산을 수행한다.")
         void testMutiplyOperation(int x, int y) {
             int actual = SimpleCalculator.multiply(x, y);
             assertThat(actual).isEqualTo(x*y);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "divide 함수는 x,y가 인자로 주어지면 나눗 ㄸ 연산을 수행한다.")
         @MethodSource("operationTestArguments")
-        @DisplayName("divide 함수는 x,y가 인자로 주어지면 나눗 ㄸ 연산을 수행한다.")
         void testDivideOperation(int x, int y) {
             int actual = SimpleCalculator.divide(x, y);
             assertThat(actual).isEqualTo(x/y);
