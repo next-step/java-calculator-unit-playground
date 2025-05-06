@@ -21,7 +21,7 @@ public class StringCalculatorTest {
         @Test
         @DisplayName("빈 문자열은 0을 반환한다.")
         void givenEmptyString_whenAdd_thenReturnsZero() {
-            int actual = StringCalculator.add("");
+            int actual = StringCalculator.sumOfNumbersInString("");
             assertThat(actual).isEqualTo(0);
         }
 
@@ -29,7 +29,7 @@ public class StringCalculatorTest {
         @ValueSource(strings = {"1", "12", "123"})
         @DisplayName("숫자 하나만 있을 경우, 그 값을 숫자의 형태로 반환한다.")
         void givenSingleNum_whenAdd_thenReturnSingleNum(String value) {
-            int actual = StringCalculator.add(value);
+            int actual = StringCalculator.sumOfNumbersInString(value);
             assertThat(actual).isEqualTo(Integer.parseInt(value));
         }
 
@@ -37,7 +37,7 @@ public class StringCalculatorTest {
         @MethodSource("basicDelimeterStringInputArguments")
         @DisplayName("쉼표와 콜론으로 구분된 숫자들의 합을 반환한다.")
         void givenBasicDelimiter_whenAdd_thenSumsCorrectly(String value, int expected) {
-            int actual = StringCalculator.add(value);
+            int actual = StringCalculator.sumOfNumbersInString(value);
             assertThat(actual).isEqualTo(expected);
         }
 
@@ -58,7 +58,7 @@ public class StringCalculatorTest {
         @MethodSource("customDelimeterStringInputArguments")
         @DisplayName("커스텀 구분자를 인식하여 합을 반환한다.")
         void givenCustomDelimiter_whenAdd_thenSumsCorrectly(String value, int expected) {
-            int actual = StringCalculator.add(value);
+            int actual = StringCalculator.sumOfNumbersInString(value);
             assertThat(actual).isEqualTo(expected);
         }
 
@@ -82,21 +82,21 @@ public class StringCalculatorTest {
         @MethodSource("negativeIncludedStringInputArguments")
         @DisplayName("음수가 포함될 경우 RuntimeException이 발생한다.")
         void givenNegativeNum_whenAdd_thenThrowRuntimeException(String value) {
-            assertThatThrownBy(()->{StringCalculator.add(value);}).isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(()->{StringCalculator.sumOfNumbersInString(value);}).isInstanceOf(RuntimeException.class);
         }
 
         @ParameterizedTest
         @MethodSource("noneAcceptedValueIncludedStringInputArguments")
         @DisplayName("숫자 이외의 값이 포함될 경우 RuntimeException이 발생한다.")
         void givenNonNumValue_whenAdd_thenThrowRuntimeException(String value) {
-            assertThatThrownBy(()->{StringCalculator.add(value);}).isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(()->{StringCalculator.sumOfNumbersInString(value);}).isInstanceOf(RuntimeException.class);
         }
 
         @ParameterizedTest
         @MethodSource("spaceIncludedStringInputArguments")
         @DisplayName("공백이 포함될 경우 RuntimeException이 발생한다.")
         void givenSpace_whenAdd_thenThrowRuntimeException(String value) {
-            assertThatThrownBy(()->{StringCalculator.add(value);}).isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(()->{StringCalculator.sumOfNumbersInString(value);}).isInstanceOf(RuntimeException.class);
         }
 
         private static Stream<Arguments> negativeIncludedStringInputArguments() {

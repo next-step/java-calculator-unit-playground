@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class StringCalculator {
-    public static int add(String input) {
+    public static int sumOfNumbersInString(String input) {
 
         if (input == null || input.isEmpty()){
             return 0;
