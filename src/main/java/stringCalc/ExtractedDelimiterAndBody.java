@@ -4,19 +4,19 @@ import java.util.Objects;
 
 public class ExtractedDelimiterAndBody {
     private String customDelimiter;
-    private String content;
+    private String body;
 
-    public ExtractedDelimiterAndBody(String delimiter, String content) {
+    public ExtractedDelimiterAndBody(String delimiter, String body) {
         this.customDelimiter = delimiter;
-        this.content = content;
+        this.body = body;
     }
 
     public String getDelimiter(){
         return customDelimiter;
     }
 
-    public String getContent(){
-        return content;
+    public String getBody(){
+        return body;
     }
 
     @Override
@@ -25,12 +25,12 @@ public class ExtractedDelimiterAndBody {
         if (o == null || getClass() != o.getClass()) return false;
         ExtractedDelimiterAndBody that = (ExtractedDelimiterAndBody) o;
         return Objects.equals(customDelimiter, that.customDelimiter) &&
-                Objects.equals(content, that.content);
+                Objects.equals(body, that.body);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customDelimiter, content);
+        return Objects.hash(customDelimiter, body);
     }
 
 

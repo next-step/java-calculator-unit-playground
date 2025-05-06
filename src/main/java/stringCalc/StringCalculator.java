@@ -11,7 +11,7 @@ public class StringCalculator {
         }
 
         ExtractedDelimiterAndBody info = CustomDelimiterAndBodyExtractor.extract(input);
-        List<String> values =  StringParser.parseStringToNumValues(info.getDelimiter(),info.getContent());
+        List<String> values =  StringParser.parseStringToNumValues(info.getDelimiter(),info.getBody());
 
         int sum = 0;
         for(String value : values){

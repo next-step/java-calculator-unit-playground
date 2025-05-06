@@ -14,21 +14,21 @@ public class CustomDelimiterAndBodyExtractorTest {
 
     @ParameterizedTest
     @MethodSource("inputStringArguments")
-    void givenMatchedPattern_whenExtract_thenGiveInputInfo(String input, String expected_body, String expected_del) {
+    void givenMatchedPattern_whenExtract_thenGiveInputInfo(String input, ExtractedDelimiterAndBody extractedDelimiterAndBody) {
         ExtractedDelimiterAndBody actual = CustomDelimiterAndBodyExtractor.extract(input);
-        assertThat(actual).extracting("customDelimiter", "body").containsExactly(expected_del, expected_body);
+        assertThat(actual).extracting("customDelimiter", "body")
+                .containsExactly(extractedDelimiterAndBody.getDelimiter(), extractedDelimiterAndBody.getBody());
     }
 
     private static Stream<Arguments> inputStringArguments() {
         return Stream.of(
-                Arguments.arguments("//;\n1;2;3", "1;2;3", ";"),
-                Arguments.arguments("//#\n 1;2;3", " 1;2;3", "#"),
-                Arguments.arguments("1,2,3", "1,2,3", ""),
-                Arguments.arguments("", "", ""),
-                Arguments.arguments(" ", " ", ""),
-                Arguments.arguments("123", "123", "")
+                Arguments.arguments("//;\n1;2;3", new ExtractedDelimiterAndBody(";", "1;2;3")),
+                Arguments.arguments("//#\n 1;2;3", new ExtractedDelimiterAndBody("#", " 1;2;3")),
+                Arguments.arguments("1,2,3", new ExtractedDelimiterAndBody("", "1,2,3")),
+                Arguments.arguments("", new ExtractedDelimiterAndBody("", "")),
+                Arguments.arguments(" ", new ExtractedDelimiterAndBody("", " ")),
+                Arguments.arguments("123", new ExtractedDelimiterAndBody("", "123"))
         );
-
     }
 
 }
