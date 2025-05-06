@@ -10,8 +10,8 @@ public class StringCalculator {
             return 0;
         }
 
-        DelimiterAndBodyInfo info = CustomDelimiterAndBodyExtractor.extract(input);
-        List<String> values =  StringParser.parse(info.getDelimiter(),info.getBody());
+        ExtractedDelimiterAndContent info = CustomDelimiterAndBodyExtractor.extract(input);
+        List<String> values =  StringParser.parse(info.getDelimiter(),info.getContent());
 
         int sum = 0;
         for(String value : values){

@@ -2,7 +2,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import stringCalc.CustomDelimiterAndBodyExtractor;
-import stringCalc.DelimiterAndBodyInfo;
+import stringCalc.ExtractedDelimiterAndContent;
 
 import java.util.stream.Stream;
 
@@ -15,7 +15,7 @@ public class CustomDelimiterAndBodyExtractorTest {
     @ParameterizedTest
     @MethodSource("inputStringArguments")
     void givenMatchedPattern_whenExtract_thenGiveInputInfo(String input, String expected_body, String expected_del) {
-        DelimiterAndBodyInfo actual = CustomDelimiterAndBodyExtractor.extract(input);
+        ExtractedDelimiterAndContent actual = CustomDelimiterAndBodyExtractor.extract(input);
         assertThat(actual).extracting("customDelimiter", "body").containsExactly(expected_del, expected_body);
     }
 
@@ -28,7 +28,7 @@ public class CustomDelimiterAndBodyExtractorTest {
                 Arguments.arguments(" ", " ", ""),
                 Arguments.arguments("123", "123", "")
         );
-        
+
     }
 
 }
