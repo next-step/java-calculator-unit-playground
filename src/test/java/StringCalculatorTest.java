@@ -1,3 +1,4 @@
+import NumberCalc.Input;
 import StringCalc.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -6,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.Arguments;
 
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StringCalculatorTest {
 
     StringCalculator calc = new StringCalculator();
+
+    @DisplayName("입력 테스트")
+    void ReadNumberTest() {
+        String Input = "10\n20\n";
+        Scanner sc = new Scanner(Input);
+        Input input = new Input(sc);
+
+        int n1 = input.readFirstNumber();
+        int n2 = input.readSecondNumber();
+
+        assertEquals(10, n1);
+        assertEquals(20, n2);
+    }
 
     @Nested
     @DisplayName("구분자 테스트")

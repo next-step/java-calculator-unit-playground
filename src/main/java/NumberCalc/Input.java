@@ -3,8 +3,17 @@ package NumberCalc;
 import java.util.Scanner;
 
 public class Input {
-    Scanner sc = new Scanner(System.in);
+    private final Scanner sc;
 
-    int n1 = sc.nextInt();
-    int n2 = sc.nextInt();
+    public Input(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public int readFirstNumber() {
+        return sc.nextInt();
+    }
+
+    public int readSecondNumber() {
+        return sc.nextInt();
+    }
 }
