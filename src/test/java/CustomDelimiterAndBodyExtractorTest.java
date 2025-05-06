@@ -14,10 +14,10 @@ public class CustomDelimiterAndBodyExtractorTest {
 
     @ParameterizedTest
     @MethodSource("inputStringArguments")
-    void givenMatchedPattern_whenExtract_thenGiveInputInfo(String input, ExtractedDelimiterAndBody extractedDelimiterAndBody) {
+    void givenMatchedPattern_whenExtract_thenGiveInputInfo(String input, ExtractedDelimiterAndBody expected) {
         ExtractedDelimiterAndBody actual = CustomDelimiterAndBodyExtractor.extract(input);
         assertThat(actual).extracting("customDelimiter", "body")
-                .containsExactly(extractedDelimiterAndBody.getDelimiter(), extractedDelimiterAndBody.getBody());
+                .containsExactly(expected.getDelimiter(), expected.getBody());
     }
 
     private static Stream<Arguments> inputStringArguments() {
