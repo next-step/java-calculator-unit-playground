@@ -18,7 +18,7 @@ public class StringParserTest {
     @MethodSource("customDelimieterAndBodyInputArguments")
     @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 커스텀 구분자 포함 ")
     void givenCustomDelAndBody_whenParse_thenReturnValueList(String customDel, String body, List<String> expected) {
-        List<String> actual = StringParser.parse(customDel, body);
+        List<String> actual = StringParser.parseStringToNumValues(customDel, body);
         assertThat(actual).containsExactlyElementsOf(expected);
     }
 
@@ -26,7 +26,7 @@ public class StringParserTest {
     @DisplayName("문자열 파싱 및 value 리스트 반환 테스트 - 기본 구분자만 포함")
     @CsvSource({"'1,2,3'", "1:2:3", "'1:2,3'"})
     void givenBody_whenParse_thenReturnValueList(String body) {
-        List<String> actual = StringParser.parse("", body);
+        List<String> actual = StringParser.parseStringToNumValues("", body);
         List<String> expected = List.of("1", "2", "3");
         assertThat(actual).containsExactlyElementsOf(expected);
     }

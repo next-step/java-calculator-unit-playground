@@ -1,3 +1,4 @@
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class StringCalculatorTest {
         @DisplayName("빈 문자열은 0을 반환한다.")
         void givenEmptyString_whenAdd_thenReturnsZero() {
             int actual = StringCalculator.sumOfNumbersInString("");
-            assertThat(actual).isEqualTo(0);
+            Assertions.assertThat(actual).isEqualTo(0);
         }
 
         @ParameterizedTest
