@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import simpleCalc.SimpleCalculator;
 
 
@@ -15,40 +17,32 @@ public class SimpleCalculatorTest {
     @DisplayName("사칙 연산 계산 기능 테스트")
     class FourOperationTest {
 
-        @Test
+        @ParameterizedTest(name = "{0} add {1} 은 {2}이다.")
+        @CsvSource({"1,2,3", "-1,-2,-3", "2,1,3", "1,-1,0"})
         @DisplayName("add 함수는 두 정수를 더한 값을 반환한다.")
-        void testAddOperation() {
-            assertThat(SimpleCalculator.add(1, 2)).isEqualTo(3);
-            assertThat(SimpleCalculator.add(-1, -2)).isEqualTo(-3);
-            assertThat(SimpleCalculator.add(2, 1)).isEqualTo(3);
-            assertThat(SimpleCalculator.add(1, -1)).isEqualTo(0);
+        void testAddOperation(int a, int b, int expected) {
+            assertThat(SimpleCalculator.add(a, b)).isEqualTo(expected);
         }
 
-        @Test
+        @ParameterizedTest(name = "{0} subtract {1} 은 {2}이다.")
+        @CsvSource({"1,2,-1", "-1,-2,1", "2,1,1", "1,-1,2"})
         @DisplayName("substract 함수는 두 정수를 뺀 값을 반환한다.")
-        void testSubstractOperation() {
-            assertThat(SimpleCalculator.substract(1, 2)).isEqualTo(-1);
-            assertThat(SimpleCalculator.substract(-1, -2)).isEqualTo(1);
-            assertThat(SimpleCalculator.substract(2, 1)).isEqualTo(1);
-            assertThat(SimpleCalculator.substract(1, -1)).isEqualTo(2);
+        void testSubstractOperation(int a, int b, int expected) {
+            assertThat(SimpleCalculator.subtract(a, b)).isEqualTo(expected);
         }
 
-        @Test
+        @ParameterizedTest(name = "{0} multiply {1} 은 {2}이다.")
+        @CsvSource({"1,2,2", "-1,-2,2", "2,1,2", "1,-1,-1"})
         @DisplayName("multiply 함수는 두 정수를 곱한 값을 반환한다.")
-        void testMultiplyOperation() {
-            assertThat(SimpleCalculator.multiply(1, 2)).isEqualTo(2);
-            assertThat(SimpleCalculator.multiply(-1, -2)).isEqualTo(2);
-            assertThat(SimpleCalculator.multiply(2, 1)).isEqualTo(2);
-            assertThat(SimpleCalculator.multiply(1, -1)).isEqualTo(-1);
+        void testMultiplyOperation(int a, int b, int expected) {
+            assertThat(SimpleCalculator.multiply(a, b)).isEqualTo(expected);
         }
 
-        @Test
+        @ParameterizedTest(name = "{0} divide {1} 은 {2}이다.")
+        @CsvSource({"1,2,0", "-1,-2,0", "2,1,2", "1,-1,-1"})
         @DisplayName("divide 함수는 두 정수를 나눈 값을 반환한다.")
-        void testDivideOperation() {
-            assertThat(SimpleCalculator.divide(4, 2)).isEqualTo(2);
-            assertThat(SimpleCalculator.divide(9, 3)).isEqualTo(3);
-            assertThat(SimpleCalculator.divide(-4, 2)).isEqualTo(-2);
-            assertThat(SimpleCalculator.divide(4, -2)).isEqualTo(-2);
+        void testDivideOperation(int a, int b, int expected) {
+            assertThat(SimpleCalculator.divide(a, b)).isEqualTo(expected);
         }
 
         @Test

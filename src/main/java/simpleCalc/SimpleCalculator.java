@@ -6,7 +6,7 @@ public class SimpleCalculator {
         return x + y;
     }
 
-    public static int substract(int x, int y) {
+    public static int subtract(int x, int y) {
         return x - y;
     }
 
