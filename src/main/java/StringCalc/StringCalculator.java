@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     public int add(String input) {
 
-        if (input == null || input.trim().isBlank()) return 0;
+        if (input == null || input.isBlank()) return 0;
 
         String delimiter = DelimiterParsing.extractDelimiter(input);
         String numbersStr = DelimiterParsing.extractNumbers(input);
