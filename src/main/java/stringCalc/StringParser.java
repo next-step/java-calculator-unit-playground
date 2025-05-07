@@ -1,25 +1,19 @@
 package stringCalc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StringParser {
 
-//    public static List<String> parseStringToNumValues(String customDelimiter, String body) {
-//        String expression = getRegularSplitRegex(customDelimiter);
-//        String[] split_nums = body.split(expression);
-//        ValueValidator.validate(List.of(split_nums));
-//        return List.of(split_nums);
-//    }
 
-    public static List<PositiveNumber> parseStringToNumValues(String customDelimiter, String body) {
+    public static List<NonNegativeInteger> parseStringToNumValues(String customDelimiter, String body) {
         String expression = getRegularSplitRegex(customDelimiter);
         String[] splitValues = body.split(expression);
 
-        List<PositiveNumber> splitNums = new ArrayList<>();
-        for (String splitValue : splitValues) {
-            splitNums.add(new PositiveNumber(splitValue));
-        }
+        List<NonNegativeInteger> splitNums = Arrays.stream(splitValues)
+                .map(NonNegativeInteger::new)
+                .toList();
 
         return splitNums;
     }

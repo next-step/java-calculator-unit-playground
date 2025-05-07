@@ -11,10 +11,10 @@ public class StringCalculator {
         }
 
         ExtractedDelimiterAndBody info = CustomDelimiterAndBodyExtractor.extract(input);
-        List<PositiveNumber> values = StringParser.parseStringToNumValues(info.getDelimiter(), info.getBody());
+        List<NonNegativeInteger> values = StringParser.parseStringToNumValues(info.getDelimiter(), info.getBody());
 
         int sum = 0;
-        for (PositiveNumber positiveNumber : values) {
+        for (NonNegativeInteger positiveNumber : values) {
             sum += positiveNumber.getValue();
         }
 
