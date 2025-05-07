@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("string input이 주어질때 구분자로 파싱하여 ")
 public class StringParserTest {
@@ -26,17 +25,17 @@ public class StringParserTest {
     @CsvSource({"'1,2,3'", "1:2:3", "'1:2,3'"})
     void givenBody_whenParse_thenReturnValueList(String body) {
         List<NonNegativeInteger> actual = StringParser.parseStringToNumValues("", body);
-        List<NonNegativeInteger> expected = List.of(new NonNegativeInteger("1"), new NonNegativeInteger("2"), new NonNegativeInteger("3"));
+        List<NonNegativeInteger> expected = List.of(new NonNegativeInteger(1), new NonNegativeInteger(2), new NonNegativeInteger(3));
         assertThat(actual).containsExactlyElementsOf(expected);
     }
 
 
     private static Stream<Arguments> customDelimieterAndBodyInputArguments() {
         return Stream.of(
-                Arguments.of(";", "1;2;3", List.of(new NonNegativeInteger("1"), new NonNegativeInteger("2"), new NonNegativeInteger("3"))),
-                Arguments.of(";", "1,2;3", List.of(new NonNegativeInteger("1"), new NonNegativeInteger("2"), new NonNegativeInteger("3"))),
-                Arguments.of("[", "1[2[3", List.of(new NonNegativeInteger("1"), new NonNegativeInteger("2"), new NonNegativeInteger("3"))),
-                Arguments.of("*", "1*2*3", List.of(new NonNegativeInteger("1"), new NonNegativeInteger("2"), new NonNegativeInteger("3")))
+                Arguments.of(";", "1;2;3", List.of(new NonNegativeInteger(1), new NonNegativeInteger(2), new NonNegativeInteger(3))),
+                Arguments.of(";", "1,2;3", List.of(new NonNegativeInteger(1), new NonNegativeInteger(2), new NonNegativeInteger(3))),
+                Arguments.of("[", "1[2[3", List.of(new NonNegativeInteger(1), new NonNegativeInteger(2), new NonNegativeInteger(3))),
+                Arguments.of("*", "1*2*3", List.of(new NonNegativeInteger(1), new NonNegativeInteger(2), new NonNegativeInteger(3)))
         );
     }
 

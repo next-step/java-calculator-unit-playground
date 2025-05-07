@@ -12,8 +12,15 @@ public class StringParser {
         String[] splitValues = body.split(expression);
 
         List<NonNegativeInteger> splitNums = Arrays.stream(splitValues)
-                .map(NonNegativeInteger::new)
-                .toList();
+                .map(
+                        s -> {
+                            try {
+                                int value = Integer.parseInt(s);
+                                return new NonNegativeInteger(value);
+                            } catch (NumberFormatException e) {
+                                throw new RuntimeException("숫자가 아닌 값이 들어왔습니다.: " + s, e);
+                            }
+                        }).toList();
 
         return splitNums;
     }
