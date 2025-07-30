@@ -1,12 +1,14 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class StringCalculatorJunit5Test {
-    private StringCalculator stringCalculator = new StringCalculator();
+    private final StringCalculator stringCalculator = new StringCalculator();
 
     @Nested
+    @DisplayName("덧셈 테스트")
     class AddTest {
         @Test
         void 빈_문자열() {

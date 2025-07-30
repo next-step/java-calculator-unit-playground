@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class CalculatorJunit5Test {
 
-    private Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
 
     @Nested
     @DisplayName("덧셈 테스트")
