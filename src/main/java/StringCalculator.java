@@ -2,16 +2,13 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    //입력 문자열이 null인지 확인
     public String checkInput(String input){
         if(input == null) throw new RuntimeException("null은 허용되지 않습니다.");
         return input;
     }
 
-    //커스텀 구분자가 있는지 확인
     public int checkDelimiter(String checkedInput) {
         if(checkedInput.isEmpty()) return -2; //문자열이 빈 경우
-
 
         if (checkedInput.startsWith("//")) { //커스텀 구분자를 설정하는가?
             int idx = checkedInput.indexOf("\n"); //제대로된 형식인가?
@@ -25,19 +22,18 @@ public class StringCalculator {
     private String[] splitInput(String checkedInput, int idx){
         if(idx == -1){
             String delimiter = "[,:]";
-            return checkedInput.split(delimiter); //기본 구분자대로 나누기
+            return checkedInput.split(delimiter);
         }
         else if(idx == -2){
             return new String[0]; //빈 문자열인 경우
         }
         else{
-            String delimiter = checkedInput.substring(2, idx); //구분자 나누기
-            String regex = Pattern.quote(delimiter); //정규표현식에 사용되는 문자가 커스텀 구분자일 경우를 위해 설정
-            return checkedInput.substring(idx + 1).split(regex); //커스텀 구분자대로 문자열을 나눔
+            String delimiter = checkedInput.substring(2, idx);
+            String regex = Pattern.quote(delimiter);
+            return checkedInput.substring(idx + 1).split(regex);
         }
     }
 
-    //문자열 덧셈 실행
     public int sum(String[] strings){
         if(strings.length == 0) return 0;
 
@@ -48,7 +44,6 @@ public class StringCalculator {
 
             int num = checkException(n);
 
-            //예외 처리
             if(sum > Integer.MAX_VALUE - num || sum < Integer.MIN_VALUE + num) throw new RuntimeException("int 범위를 벗어났습니다.");
 
             sum += num;
