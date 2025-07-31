@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class StringCalculatorJunit5Test {
+
     private final StringCalculator stringCalculator = new StringCalculator();
 
     @Nested
     @DisplayName("덧셈 테스트")
     class AddTest {
+
         @Test
         void 빈_문자열() {
             assertEquals(0, stringCalculator.add(""));

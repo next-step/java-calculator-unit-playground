@@ -3,10 +3,10 @@ import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 
 public class StringCalculator {
+
     private static String delimiter = ",|:";
 
     public int add(String input) {
-
         String delimiter = this.delimiter;
 
         if (StringUtils.isEmpty(input)) {
