@@ -4,7 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StringCalculator {
 
-    private static String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String START_CUSTOM_DELIMITER = "//";
+    private static final String END_CUSTOM_DELIMITER = "\n";
+
     private String customDelimiter = "";
 
     public int add(String input) {
@@ -32,8 +35,8 @@ public class StringCalculator {
     }
 
     private String extractCustomDelimiter(String input) {
-        int endCustomDelimiterIndex = input.indexOf('\n');
-        this.customDelimiter = input.substring(2, endCustomDelimiterIndex);
+        int endCustomDelimiterIndex = input.indexOf(END_CUSTOM_DELIMITER);
+        this.customDelimiter = input.substring(START_CUSTOM_DELIMITER.length(), endCustomDelimiterIndex);
         return input.substring(endCustomDelimiterIndex + 1);
     }
 
@@ -50,7 +53,7 @@ public class StringCalculator {
     }
 
     private boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//");
+        return input.startsWith(START_CUSTOM_DELIMITER);
     }
 
     private boolean isNumber(String number) {
