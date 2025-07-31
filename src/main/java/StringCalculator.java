@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class StringCalculator {
     private final String delimiter = ",|:";
 
@@ -7,7 +9,7 @@ public class StringCalculator {
 
         String delimiter = this.delimiter;
 
-        if (isEmptyOrNull(input)) {
+        if (StringUtils.isEmpty(input)) {
             return 0;
         }
 
@@ -31,10 +33,6 @@ public class StringCalculator {
             }
             return number;
         }).sum();
-    }
-
-    private boolean isEmptyOrNull(String input) {
-        return input == null || input.isEmpty();
     }
 
     private boolean isNumber(String number) {
