@@ -5,11 +5,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringCalculatorTest {
+
+    private final StringCalculator calc = new StringCalculator();
+
     @Nested
     class StringTest{
+
         @Test
         void defaultDelimiterTest(){
-            StringCalculator calc = new StringCalculator();
             assertEquals(3, calc.calculate("1,2"));
             assertEquals(6, calc.calculate("1,2,3"));
             assertEquals(3, calc.calculate("1:2"));
@@ -18,7 +21,6 @@ public class StringCalculatorTest {
 
         @Test
         void customDelimiterTest(){
-            StringCalculator calc = new StringCalculator();
             assertEquals(6, calc.calculate("//;\n1;2;3"));
             assertEquals(5, calc.calculate("//;;\n1;;1;;2;;1"));
             assertEquals(6, calc.calculate("//.\n1.2.3"));
@@ -28,15 +30,13 @@ public class StringCalculatorTest {
 
         @Test
         void exceptionTest(){
-            StringCalculator calc = new StringCalculator();
-
             assertThatThrownBy(() -> calc.calculate("-1,2")).isInstanceOf(RuntimeException.class);
             assertThatThrownBy(() -> calc.calculate("2147483647,10")).isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calc.calculate("hello")).isInstanceOf(RuntimeException.class);
         }
 
         @Test
         void blankTest(){
-            StringCalculator calc = new StringCalculator();
             assertEquals(0, calc.calculate(""));
             assertThatThrownBy(() -> calc.calculate(" ")).isInstanceOf(RuntimeException.class);
         }
