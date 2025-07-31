@@ -24,23 +24,31 @@ public class StringCalculator {
 
     private int getSum(String[] numbers) {
         return Arrays.stream(numbers).mapToInt(num -> {
-            if (!isNumber(num)) {
-                throw new RuntimeException("숫자가 아닌 값이 포함되어 있습니다");
-            }
+            validateIsNumber(num);
             int number = Integer.parseInt(num);
-            if (number < 0) {
-                throw new RuntimeException("음수는 허용되지 않습니다");
-            }
+            validateIsPositive(number);
             return number;
         }).sum();
     }
 
-    private boolean isNumber(String number) {
-        return number.matches("-?\\d+");
+    private void validateIsNumber(String number) {
+        if (!isNumber(number)) {
+            throw new RuntimeException("숫자가 아닌 값이 포함되어 있습니다");
+        }
+    }
+
+    private void validateIsPositive(Integer number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 허용되지 않습니다");
+        }
     }
 
     private boolean hasCustomDelimiter(String input) {
         return input.startsWith("//");
+    }
+
+    private boolean isNumber(String number) {
+        return number.matches("-?\\d+");
     }
 
 }
