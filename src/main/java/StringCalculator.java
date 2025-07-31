@@ -3,7 +3,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 
 public class StringCalculator {
-    private final String delimiter = ",|:";
+    private static String delimiter = ",|:";
 
     public int add(String input) {
 
