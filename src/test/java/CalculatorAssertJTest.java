@@ -15,14 +15,14 @@ public class CalculatorAssertJTest {
         @Test
         public void 정수_더하기() {
             // Given
-            final int a = 2;
-            final int b = 3;
+            int a = 2;
+            int b = 3;
 
             // When
-            final int actual = calculator.add(a, b);
+            int actual = calculator.add(a, b);
 
             // Then
-            final int expected = 5;
+            int expected = 5;
             assertThat(actual).isEqualTo(expected);
         }
     }
@@ -34,14 +34,14 @@ public class CalculatorAssertJTest {
         @Test
         public void 정수_빼기() {
             // Given
-            final int a = 3;
-            final int b = 2;
+            int a = 3;
+            int b = 2;
 
             // When
-            final int actual = calculator.subtract(a, b);
+            int actual = calculator.subtract(a, b);
 
             // Then
-            final int expected = 1;
+            int expected = 1;
             assertThat(actual).isEqualTo(expected);
         }
     }
@@ -53,14 +53,14 @@ public class CalculatorAssertJTest {
         @Test
         public void 정수_곱하기() {
             // Given
-            final int a = 2;
-            final int b = 3;
+            int a = 2;
+            int b = 3;
 
             // When
-            final int actual = calculator.multiply(a, b);
+            int actual = calculator.multiply(a, b);
 
             // Then
-            final int expected = 6;
+            int expected = 6;
             assertThat(actual).isEqualTo(expected);
         }
     }
@@ -72,22 +72,22 @@ public class CalculatorAssertJTest {
         @Test
         public void 정수_나누기() {
             // Given
-            final int a = 6;
-            final int b = 3;
+            int a = 6;
+            int b = 3;
 
             // When
-            final int actual = calculator.divide(a, b);
+            int actual = calculator.divide(a, b);
 
             // Then
-            final int expected = 2;
+            int expected = 2;
             assertThat(actual).isEqualTo(expected);
         }
 
         @Test
         public void 예외_0_나누기() {
             // Given
-            final int a = 1;
-            final int b = 0;
+            int a = 1;
+            int b = 0;
 
             // When & Then
             assertThatThrownBy(() -> calculator.divide(a, b))
@@ -101,14 +101,14 @@ public class CalculatorAssertJTest {
         @Test
         public void 나누기_결과가_정수가_아닐때() {
             // Given
-            final int a = 5;
-            final int b = 2;
+            int a = 5;
+            int b = 2;
 
             // When
-            final int actual = calculator.divide(a, b);
+            int actual = calculator.divide(a, b);
 
             // Then
-            final int expected = 2; // 결과값은 정수로 나옴
+            int expected = 2; // 결과값은 정수로 나옴
             assertThat(actual).isEqualTo(expected);
         }
     }
