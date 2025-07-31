@@ -1,7 +1,7 @@
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("문자열 계산기 테스트")
 class StringCalcTest {
@@ -12,9 +12,8 @@ class StringCalcTest {
     void addWithComma() {
         final var input = "1,2,3";
         final var actual = stringCalc.add(input);
-        final var expected = 6;
         
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(6);
     }
 
     @Test
@@ -22,9 +21,8 @@ class StringCalcTest {
     void addWithColon() {
         final var input = "1:2:3";
         final var actual = stringCalc.add(input);
-        final var expected = 6;
         
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(6);
     }
 
     @Test
@@ -32,9 +30,8 @@ class StringCalcTest {
     void addWithMixedDelimiters() {
         final var input = "1,2:3";
         final var actual = stringCalc.add(input);
-        final var expected = 6;
         
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(6);
     }
 
     @Test
@@ -42,9 +39,8 @@ class StringCalcTest {
     void addEmptyString() {
         final var input = "";
         final var actual = stringCalc.add(input);
-        final var expected = 0;
         
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(0);
     }
 
     @Test
@@ -52,9 +48,8 @@ class StringCalcTest {
     void addNullInput() {
         final String input = null;
         final var actual = stringCalc.add(input);
-        final var expected = 0;
         
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(0);
     }
 
     @Test
@@ -62,9 +57,8 @@ class StringCalcTest {
     void addWithCustomDelimiter() {
         final var input = "//;\n1;2;3";
         final var actual = stringCalc.add(input);
-        final var expected = 6;
         
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(6);
     }
 
     @Test
@@ -72,7 +66,9 @@ class StringCalcTest {
     void addNegativeNumberThrowsException() {
         final var input = "1,-2,3";
         
-        assertThrows(RuntimeException.class, () -> stringCalc.add(input));
+        assertThatThrownBy(() -> stringCalc.add(input))
+            .isInstanceOf(RuntimeException.class)
+            .hasMessage("음수는 입력할 수 없습니다.");
     }
 
     @Test
@@ -80,6 +76,8 @@ class StringCalcTest {
     void addNonNumericValueThrowsException() {
         final var input = "1,a,3";
         
-        assertThrows(RuntimeException.class, () -> stringCalc.add(input));
+        assertThatThrownBy(() -> stringCalc.add(input))
+            .isInstanceOf(RuntimeException.class)
+            .hasMessage("숫자 이외의 값이 포함되어 있습니다.");
     }
 }
