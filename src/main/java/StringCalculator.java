@@ -4,19 +4,19 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StringCalculator {
 
-    private static String delimiter = ",|:";
+    private static String DEFAULT_DELIMITER = ",|:";
+    private String customDelimiter = "";
 
     public int add(String input) {
-        String delimiter = this.delimiter;
+        String delimiter = DEFAULT_DELIMITER;
 
         if (StringUtils.isEmpty(input)) {
             return 0;
         }
 
         if (hasCustomDelimiter(input)) {
-            int endCustomDelimiterIndex = input.indexOf('\n');
-            delimiter += "|" + input.substring(2, endCustomDelimiterIndex);
-            input = input.substring(endCustomDelimiterIndex + 1);
+            input = extractCustomDelimiter(input);
+            delimiter += "|" + this.customDelimiter;
         }
 
         return getSum(input.split(delimiter));
@@ -29,6 +29,12 @@ public class StringCalculator {
             validateIsPositive(number);
             return number;
         }).sum();
+    }
+
+    private String extractCustomDelimiter(String input) {
+        int endCustomDelimiterIndex = input.indexOf('\n');
+        this.customDelimiter = input.substring(2, endCustomDelimiterIndex);
+        return input.substring(endCustomDelimiterIndex + 1);
     }
 
     private void validateIsNumber(String number) {
