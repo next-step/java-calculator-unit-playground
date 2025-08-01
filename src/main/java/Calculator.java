@@ -1,15 +1,15 @@
 public class Calculator {
 
     public int add(int a, int b) {
-        return a + b;
+        return Math.addExact(a, b);
     }
 
     public int subtract(int a, int b) {
-        return a - b;
+        return Math.subtractExact(a, b);
     }
 
     public int multiply(int a, int b) {
-        return a * b;
+        return Math.multiplyExact(a, b);
     }
 
     public int divide(int a, int b) {
@@ -17,6 +17,6 @@ public class Calculator {
             throw new IllegalArgumentException("0 나누기 오류");
         }
 
-        return a / b;
+        return Math.floorDiv(a, b);
     }
 }

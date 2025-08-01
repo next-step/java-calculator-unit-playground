@@ -31,7 +31,7 @@ public class StringCalculator {
             int number = Integer.parseInt(num);
             validateIsPositive(number);
             return number;
-        }).sum();
+        }).reduce(0, Math::addExact);
     }
 
     private String extractCustomDelimiter(String input) {
