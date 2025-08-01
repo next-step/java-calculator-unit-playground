@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SimpleCalculatorTest {
@@ -11,7 +10,7 @@ public class SimpleCalculatorTest {
     private final SimpleCalculator calc = new SimpleCalculator();
 
     @Nested
-    class SimpleTest {
+    class TestWithJunit5 {
 
         @Test
         void addTest() {
@@ -36,6 +35,18 @@ public class SimpleCalculatorTest {
             assertEquals(5, calc.divide(10, 2));
             assertEquals(30, calc.divide(180, 6));
         }
+    }
+
+    @Nested
+    class TestWithAssertJ {
+
+        @Test
+        void simpleCalcTest(){
+            assertThat(calc.add(1, 2)).isEqualTo(3);
+            assertThat(calc.minus(1,2)).isEqualTo(-1);
+            assertThat(calc.divide(4, 2)).isEqualTo(2);
+            assertThat(calc.multiply(3,2)).isEqualTo(6);
+        }
 
         @Test
         void errorTestDivideZero() {
@@ -48,17 +59,6 @@ public class SimpleCalculatorTest {
             assertThatThrownBy(() -> calc.minus(Integer.MAX_VALUE, -3)).isInstanceOf(ArithmeticException.class);
             assertThatThrownBy(() -> calc.multiply(Integer.MAX_VALUE, 3)).isInstanceOf(ArithmeticException.class);
             assertThatThrownBy(() -> calc.divide(Integer.MIN_VALUE, -1)).isInstanceOf(ArithmeticException.class);
-        }
-    }
-
-    @Nested
-    class CalculatorTest{
-        @Test
-        void simpleCalcTest(){
-            assertThat(calc.add(1, 2)).isEqualTo(3);
-            assertThat(calc.minus(1,2)).isEqualTo(-1);
-            assertThat(calc.divide(4, 2)).isEqualTo(2);
-            assertThat(calc.multiply(3,2)).isEqualTo(6);
         }
     }
 }
