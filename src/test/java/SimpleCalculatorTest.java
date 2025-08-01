@@ -43,13 +43,11 @@ public class SimpleCalculatorTest {
         }
 
         @Test
-        void errorTestOverFlowMinus() {
+        void errorTestOverFlow() {
+            assertThatThrownBy(() -> calc.add(Integer.MAX_VALUE, 1)).isInstanceOf(ArithmeticException.class);
             assertThatThrownBy(() -> calc.minus(Integer.MAX_VALUE, -3)).isInstanceOf(ArithmeticException.class);
-        }
-
-        @Test
-        void errorTestOverFlowMultiply() {
             assertThatThrownBy(() -> calc.multiply(Integer.MAX_VALUE, 3)).isInstanceOf(ArithmeticException.class);
+            assertThatThrownBy(() -> calc.divide(Integer.MIN_VALUE, -1)).isInstanceOf(ArithmeticException.class);
         }
     }
 
