@@ -15,7 +15,7 @@ public class Calc {
     }
 
     public int divide(int a, int b) {
-        if (a == 0 || b == 0) {
+        if (b == 0) {
             throw new IllegalArgumentException("0 으로 나눌 수 없습니다.");
         }
         int res = a / b;
