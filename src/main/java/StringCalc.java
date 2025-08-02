@@ -3,14 +3,14 @@ import java.util.regex.Pattern;
 
 public class StringCalc {
 
-    private static final String defaultDelimiters = "[,:]";
+    private static final String DEFAULT_DELIMITERS = "[,:]";
 
     public int add(String text) {
         if (text == null || text.isEmpty()) {
             return 0;
         }
 
-        String delimiters = defaultDelimiters;
+        String delimiters = DEFAULT_DELIMITERS;
         String actualTextToParse = text;
 
         Pattern customDelimiterPattern = Pattern.compile("//(.)\n(.*)");
