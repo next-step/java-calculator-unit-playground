@@ -30,9 +30,12 @@ public class StringCalculatorTest {
 
         @Test
         void exceptionTest(){
-            assertThatThrownBy(() -> calc.calculate("-1,2")).isInstanceOf(RuntimeException.class);
-            assertThatThrownBy(() -> calc.calculate("2147483647,10")).isInstanceOf(RuntimeException.class);
-            assertThatThrownBy(() -> calc.calculate("hello")).isInstanceOf(RuntimeException.class);
+            assertThatThrownBy(() -> calc.calculate("-1,2")).isInstanceOf(RuntimeException.class).
+                    hasMessageContaining("음수는 입력이 불가합니다.");
+            assertThatThrownBy(() -> calc.calculate("2147483647,10")).isInstanceOf(RuntimeException.class).
+                    hasMessageContaining("int 범위를 벗어났습니다.");
+            assertThatThrownBy(() -> calc.calculate("hello")).isInstanceOf(RuntimeException.class).
+                    hasMessageContaining("int 값을 벗어났거나 잘못된 숫자 형식입니다.");
         }
 
         @Test
