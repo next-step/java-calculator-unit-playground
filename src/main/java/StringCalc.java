@@ -27,7 +27,9 @@ public class StringCalc {
         if (matcher.find()) {
             String customDelimiter = Pattern.quote(matcher.group(1));
             String actualTextToParse = matcher.group(2);
-            return new DelimiterInfo(customDelimiter, actualTextToParse);
+            // 커스텀 구분자와 기본 구분자를 모두 포함
+            String combinedDelimiters = DEFAULT_DELIMITERS + "|" + customDelimiter;
+            return new DelimiterInfo(combinedDelimiters, actualTextToParse);
         }
 
         return new DelimiterInfo(DEFAULT_DELIMITERS, text);
