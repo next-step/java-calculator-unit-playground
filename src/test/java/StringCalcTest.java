@@ -80,4 +80,13 @@ class StringCalcTest {
             .isInstanceOf(RuntimeException.class)
             .hasMessage("숫자 이외의 값이 포함되어 있습니다.");
     }
+
+    @Test
+    @DisplayName("커스텀 구분자와 기본 구분자 혼합 테스트")
+    void addWithCustomAndDefaultDelimiters() {
+        final var input = "//@\n1@2,3:4";
+        final var actual = stringCalc.add(input);
+        
+        assertThat(actual).isEqualTo(10);
+    }
 }
