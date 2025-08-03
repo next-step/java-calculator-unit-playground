@@ -1,49 +1,80 @@
-import org.junit.jupiter.api.DisplayName;
+import domain.StringCalculator;
+import exception.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import util.DelimiterUtil;
+import util.ParseUtil;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
+
+    private final StringCalculator stringCalculator = new StringCalculator();
+
     @ParameterizedTest
-    @DisplayName("문자열 계산기 기능 테스트")
-    @ValueSource(strings = {"1:2:3", "1,2,3", "3:2,1", "3,2:1"})
-    public void testDefaultDelimeter(String str) {
-        assertThat(StringCalculator.calculate(str)).isEqualTo(6);
+    @ValueSource(strings = {
+            "1,2,3:4",
+            "1 , 2: 3,4 "
+    })
+    public void 기본_구분자_문자열_계산기_테스트(String str) {
+        int actual = stringCalculator.calculate(str);
+
+        assertThat(actual).isEqualTo(10);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " ", "  "})
-    @DisplayName("공백을 줬을 경우 테스트")
-    public void testEmptyValue(String value) {
-        assertThat(StringCalculator.calculate(value)).isEqualTo(0);
+    @ValueSource(strings = {
+            "//+\n1+2+3+4",
+            "// \n1 2 3 4",
+            "//||\n1||2||3||4"
+    })
+    public void 커스텀_구분자_문자열_계산기_테스트(String str) {
+        int actual = stringCalculator.calculate(str);
+
+        assertThat(actual).isEqualTo(10);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "//!!\n1!!2!!3"})
-    @DisplayName("커스텀 구분자 테스트")
-    public void testCustomDelimeter(String value) {
-        assertThat(StringCalculator.calculate(value)).isEqualTo(6);
+    @ValueSource(strings = {
+            "//1;2;3;4",
+            "\n1;2;3;4",
+            "//\n1;2;3;4"
+    })
+    public void 커스텀_구분자_형식에_맞지_않은_경우_예외_발생(String str) {
+        assertThatThrownBy(() -> stringCalculator.calculate(str))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"/;\n1;2;3", "/;\t1;2;3", "//;;\n1;2;3", "// n1 2 3"})
-    @DisplayName("커스텀 구분자 형식에 맞지 않을 경우 예외 발생 테스트")
-    public void testCustomDelimeterFormatError(String value) {
-        assertThatThrownBy(() -> StringCalculator.calculate(value)).isInstanceOf(RuntimeException.class);
+    @NullSource
+    public void 문자열이_널값인_경우_예외_발생(String str) {
+        assertThatThrownBy(() -> stringCalculator.calculate(str))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining(ErrorMessage.NULL_STRING);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "",
+        " "
+    })
+    public void 문자열이_비어있는_경우_결과값으로_0리턴(String str) {
+        int actual = stringCalculator.calculate(str);
+
+        assertThat(actual).isEqualTo(0);
     }
 
     @Test
-    @DisplayName("커스텀 구분자에 아무것도 주지 않은 상황 테스트")
-    public void testEmptyCustomDelimeter() {
-        assertThatThrownBy(() -> StringCalculator.calculate("//\n1;2;3")).isInstanceOf(RuntimeException.class);
-    }
+    public void 구분자_없이_숫자만_입력한_경우() {
+        String str = "1";
+        int actual = stringCalculator.calculate(str);
 
-    @Test
-    @DisplayName("계산 결과가 int 범위를 벗어나는 경우 예외 발생 테스트")
-    public void testReusltOverflow() {
-        assertThatThrownBy(() -> StringCalculator.calculate("2147483647:2:3")).isInstanceOf(ArithmeticException.class);
+        assertThat(actual).isEqualTo(1);
     }
 }
