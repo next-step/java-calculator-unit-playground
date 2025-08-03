@@ -1,25 +1,26 @@
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
+
+    private final StringCalculator calc = new StringCalculator();
+
     @Nested
     class StringTest{
+
         @Test
-        void default_delimiter_Test(){
-            StringCalculator calc = new StringCalculator();
+        void defaultDelimiterTest(){
             assertEquals(3, calc.calculate("1,2"));
             assertEquals(6, calc.calculate("1,2,3"));
             assertEquals(3, calc.calculate("1:2"));
             assertEquals(38, calc.calculate("1:2,3:4,5:6:7:10"));
-            assertEquals(0, calc.calculate(""));
         }
 
         @Test
-        void custom_delimiter_Test(){
-            StringCalculator calc = new StringCalculator();
+        void customDelimiterTest(){
             assertEquals(6, calc.calculate("//;\n1;2;3"));
             assertEquals(5, calc.calculate("//;;\n1;;1;;2;;1"));
             assertEquals(6, calc.calculate("//.\n1.2.3"));
@@ -29,19 +30,18 @@ public class StringCalculatorTest {
 
         @Test
         void exceptionTest(){
-            StringCalculator calc = new StringCalculator();
+            assertThatThrownBy(() -> calc.calculate("-1,2")).isInstanceOf(RuntimeException.class).
+                    hasMessageContaining("음수는 입력이 불가합니다.");
+            assertThatThrownBy(() -> calc.calculate("2147483647,10")).isInstanceOf(RuntimeException.class).
+                    hasMessageContaining("int 범위를 벗어났습니다.");
+            assertThatThrownBy(() -> calc.calculate("hello")).isInstanceOf(RuntimeException.class).
+                    hasMessageContaining("int 값을 벗어났거나 잘못된 숫자 형식입니다.");
+        }
 
-            RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                calc.calculate("-1,2")
-            );
-
-            assertEquals("음수는 입력이 불가합니다.", exception.getMessage());
-
-            RuntimeException exception2 = assertThrows(RuntimeException.class, () ->
-                    calc.calculate("2147483647,10")
-            );
-
-            assertEquals("int 범위를 벗어났습니다.", exception2.getMessage());
+        @Test
+        void blankTest(){
+            assertEquals(0, calc.calculate(""));
+            assertThatThrownBy(() -> calc.calculate(" ")).isInstanceOf(RuntimeException.class);
         }
     }
 }
