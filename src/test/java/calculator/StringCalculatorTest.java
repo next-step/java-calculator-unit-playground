@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -38,11 +39,11 @@ public class StringCalculatorTest {
     @DisplayName("구분자 분리 및 합산 검증")
     class DelimiterAndSumTest {
         @ParameterizedTest
-        @ValueSource(strings = {"1,2", "1:2"})
+        @CsvSource(value = {"1,2|3", "1:2|3", "1,2:3|6"}, delimiter = '|')
         @DisplayName("쉼표(,) 또는 콜론(:)을 구분자로 사용하여 합을 구한다")
-        void should_return_sum_with_default_delimiters(String input) {
+        void should_return_sum_with_default_delimiters(String input, int expected) {
             // assertEquals(3, StringCalculator.splitAndSum(input));
-            assertThat(StringCalculator.splitAndSum(input)).isEqualTo(3);
+            assertThat(StringCalculator.splitAndSum(input)).isEqualTo(expected);
         }
 
         @Test
