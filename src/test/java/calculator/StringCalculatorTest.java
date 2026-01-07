@@ -49,7 +49,7 @@ public class StringCalculatorTest {
         @DisplayName("커스텀 구분자를 사용하여 합을 구한다")
         void should_return_sum_with_custom_delimiter() {
             // assertEquals(6, StringCalculator.splitAndSum("//d\n2d4"));
-            assertEquals(6, StringCalculator.splitAndSum("//d\n2d4"));
+            assertThat(StringCalculator.splitAndSum("//d\n2d4")).isEqualTo(6);
         }
     }
 
