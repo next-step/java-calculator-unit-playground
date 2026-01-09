@@ -18,7 +18,7 @@ public class Calculator {
     }
 
     public long divide(double a, double b) {
-        if (b == 0) throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        if (b == 0) throw new ArithmeticException("0으로 나눌 수 없습니다.");
         return roundAndValidate(a / b);
     }
 
