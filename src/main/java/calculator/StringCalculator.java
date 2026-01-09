@@ -33,7 +33,7 @@ public class StringCalculator {
     private static int parseAndValidate(String value) {
 
         if (value == null || value.isBlank()) {
-            throw new RuntimeException("구분자 사이에 숫자가 누락되었거나 공백입니다.");
+            throw new IllegalArgumentException("구분자 사이에 숫자가 누락되었거나 공백입니다.");
         }
 
         try {
@@ -41,13 +41,13 @@ public class StringCalculator {
             validateNonNegative(number); // 음수가 아닌지 확인
             return number;
         } catch (NumberFormatException e) {
-            throw new RuntimeException("숫자가 아닙니다.", e);
+            throw new IllegalArgumentException("숫자가 아닙니다.", e);
         }
     }
 
     private static void validateNonNegative(int number) {
         if (number < 0) {
-            throw new RuntimeException("음수가 입력되었습니다.");
+            throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
     }
 }
