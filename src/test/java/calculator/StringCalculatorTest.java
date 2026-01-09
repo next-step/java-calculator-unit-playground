@@ -58,12 +58,17 @@ public class StringCalculatorTest {
     @DisplayName("예외 상황 검증")
     class ExceptionTest {
         @ParameterizedTest
+        @ValueSource(strings = {" ", "  ", "1, ,2"}) // 단독 공백, 여러 공백, 숫자 사이 공백
+        @DisplayName("공백이 입력되거나 숫자 사이에 공백이 있으면 RuntimeException이 발생한다")
+        void should_throw_exception_when_input_is_blank(String input) {
+            assertThatThrownBy(() -> StringCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("구분자 사이에 숫자가 누락되었거나 공백입니다.");
+        }
+        @ParameterizedTest
         @ValueSource(strings = {"1,a,d", "//d\nfd9"})
         @DisplayName("숫자 이외의 문자가 포함되면 RuntimeException이 발생한다")
         void should_throw_exception_when_input_is_not_number(String input) {
-//            RuntimeException exception = assertThrows(RuntimeException.class,
-//                () -> StringCalculator.splitAndSum(input));
-//            assertEquals("숫자가 아닙니다.", exception.getMessage());
             assertThatThrownBy(() -> StringCalculator.splitAndSum(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("숫자가 아닙니다.");
@@ -72,23 +77,25 @@ public class StringCalculatorTest {
         @Test
         @DisplayName("음수가 포함되면 예외 메시지와 함께 RuntimeException이 발생한다")
         void should_throw_exception_when_input_is_negative() {
-//            RuntimeException exception = assertThrows(RuntimeException.class,
-//                () -> StringCalculator.splitAndSum("-1,4:7"));
-//            assertEquals("음수가 입력되었습니다.", exception.getMessage());
             assertThatThrownBy(() -> StringCalculator.splitAndSum("-1,4:7"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("음수가 입력되었습니다.");
+                .hasMessage("음수는 입력할 수 없습니다.");
         }
 
         @Test
         @DisplayName("구분자 사이에 숫자가 누락되면 예외가 발생한다")
         void should_throw_exception_when_value_is_missing() {
-//            RuntimeException exception = assertThrows(RuntimeException.class,
-//                () -> StringCalculator.splitAndSum("//d\nd9"));
-//            assertEquals("구분자 사이에 숫자가 누락되었거나 공백입니다.", exception.getMessage());
             assertThatThrownBy(() -> StringCalculator.splitAndSum("//d\nd9"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("구분자 사이에 숫자가 누락되었거나 공백입니다.");
+        }
+
+        @Test
+        @DisplayName("전체 합계가 Long 타입의 범위를 초과하면 예외가 발생한다")
+        void should_throw_exception_when_sum_exceeds_long_max_value() {
+            assertThatThrownBy(() -> StringCalculator.splitAndSum("9223372036854775807,1"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("전체 합계가 정수(Long) 범위를 초과하여 계산할 수 없습니다.");
         }
     }
 }
