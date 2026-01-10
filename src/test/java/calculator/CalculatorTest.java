@@ -17,7 +17,7 @@ class CalculatorTest {
         int b = 5;
 
         // when
-        int result = calculator.add(a, b);
+        long result = calculator.add(a, b);
 
         // then
         assertThat(result).isEqualTo(8);
@@ -31,7 +31,7 @@ class CalculatorTest {
         int b = 5;
 
         // when
-        int result = calculator.minus(a, b);
+        long result = calculator.minus(a, b);
 
         // then
         assertThat(result).isEqualTo(3);
@@ -45,7 +45,7 @@ class CalculatorTest {
         int b = 5;
 
         // when
-        int result = calculator.multiply(a, b);
+        long result = calculator.multiply(a, b);
 
         // then
         assertThat(result).isEqualTo(15);
@@ -59,7 +59,7 @@ class CalculatorTest {
         int b = 3;
 
         // when
-        int result = calculator.divide(a, b);
+        long result = calculator.divide(a, b);
 
         // then
         assertThat(result).isEqualTo(2);

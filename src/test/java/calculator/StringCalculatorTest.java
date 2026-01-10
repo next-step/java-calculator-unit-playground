@@ -72,7 +72,7 @@ class StringCalculatorTest {
 
     @DisplayName("커스텀 구분자 입력 형식이 올바르지 않으면 예외를 발생시킨다.")
     @ParameterizedTest
-    @ValueSource(strings = {"//\n1,2", "//;1;2", "///;\\n1;2"})
+    @ValueSource(strings = {"//\n1,2", "//;1;2", "///;\\n1;2", "//\n\n1\n2\n3"})
     void throw_runtime_exception_when_custom_delimiter_format_is_invalid(String input) {
         // when & then
         assertThatThrownBy(() -> stringCalculator.add(input))
