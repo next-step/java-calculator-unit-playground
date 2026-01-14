@@ -2,6 +2,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -9,18 +12,29 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
+    private static final int SCALE = 18;
+    private static final RoundingMode ROUNDING = RoundingMode.HALF_UP;
+
+    private BigDecimal bd(String v) {
+        return new BigDecimal(v);
+    }
+
+    private BigDecimal bd18(String v) {
+        return new BigDecimal(v).setScale(SCALE, ROUNDING);
+    }
+
     @Nested
     @DisplayName("덧셈")
     class addTest{
         @Test
         @DisplayName("두 인자로 덧셈 연산")
         void add(){
-            int a = 1,  b = 4;
+            BigDecimal a = bd("4");
+            BigDecimal b = bd("3");
 
-            int actual = calculator.add(a, b);
+            BigDecimal actual = calculator.add(a, b);
 
-            int expected = 5;
-
+            BigDecimal expected = bd18("7");
             assertEquals(expected, actual);
         }
     }
@@ -31,12 +45,12 @@ public class CalculatorTest {
         @Test
         @DisplayName("두 인자로 뺄셈 연산")
         void subtract(){
-            int a = 4,  b = 1;
+            BigDecimal a = bd("4");
+            BigDecimal b = bd("3");
 
-            int actual = calculator.subtract(a, b);
+            BigDecimal actual = calculator.subtract(a, b);
 
-            int expected = 3;
-
+            BigDecimal expected = bd18("1");
             assertEquals(expected, actual);
         }
     }
@@ -47,12 +61,12 @@ public class CalculatorTest {
         @Test
         @DisplayName("두 인자로 곱셈 연산")
         void multiply(){
-            int a = 1,  b = 4;
+            BigDecimal a = bd("1");
+            BigDecimal b = bd("3.2");
 
-            int actual = calculator.multiply(a, b);
+            BigDecimal actual = calculator.multiply(a, b);
 
-            int expected = 4;
-
+            BigDecimal expected = bd18("3.2");
             assertEquals(expected, actual);
         }
     }
@@ -63,19 +77,20 @@ public class CalculatorTest {
         @Test
         @DisplayName("두 인자로 나눗셈 연산")
         void divide(){
-            int a = 4,  b = 2;
+            BigDecimal a = bd("4");
+            BigDecimal b = bd("3");
 
-            int actual = calculator.divide(a, b);
+            BigDecimal actual = calculator.divide(a, b);
 
-            int expected = 2;
-
+            BigDecimal expected = bd18("1.333333333333333333");
             assertEquals(expected, actual);
         }
 
         @Test
         @DisplayName("두 번째 인자로 0으로 나누면 ArithmeticException 예외처리")
         void divideByZero() {
-            int a = 4, b = 0;
+            BigDecimal a = bd("4");
+            BigDecimal b = bd("0");
 
             assertThrows(ArithmeticException.class, () -> calculator.divide(a, b));
         }

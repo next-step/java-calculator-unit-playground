@@ -1,20 +1,31 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Calculator {
-    public int add(int i, int j){
-        return i + j;
+
+    private static final int SCALE = 18;
+    private static final RoundingMode ROUNDING = RoundingMode.HALF_UP;
+
+    public BigDecimal add(BigDecimal a, BigDecimal b) {
+        return normalize(a.add(b));
     }
 
-    public int subtract(int i, int j){
-        return i - j;
+    public BigDecimal subtract(BigDecimal a, BigDecimal b) {
+        return normalize(a.subtract(b));
     }
 
-    public int multiply(int i, int j){
-        return i * j;
+    public BigDecimal multiply(BigDecimal a, BigDecimal b) {
+        return normalize(a.multiply(b));
     }
 
-    public int divide(int i, int j){
-        if (j == 0){
+    public BigDecimal divide(BigDecimal a, BigDecimal b) {
+        if (b.compareTo(BigDecimal.ZERO) == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
-        return i / j;
+        return a.divide(b, SCALE, ROUNDING);
+    }
+
+    private BigDecimal normalize(BigDecimal value) {
+        return value.setScale(SCALE, ROUNDING);
     }
 }
