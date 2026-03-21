@@ -1,19 +1,16 @@
 package calculator;
 
 public class Calculator{
-    int add(int num1, int num2){
-        return num1 + num2;
+    int add(int addend, int addend2){
+        return addend + addend2;
     }
-    int subtract(int num1, int num2){
-        return num1 - num2;
+    int subtract(int minuend, int subtrahend){
+        return minuend - subtrahend;
     }
-    int multiply(int num1, int num2){
-        return num1 * num2;
+    int multiply(int multiplicand, int multiplier){
+        return multiplicand * multiplier;
     }
-    int divide(int num1, int num2){
-        return num1 / num2;
+    int divide(int dividend, int divisor){
+        return dividend / divisor;
     }
 }
-
-
-
