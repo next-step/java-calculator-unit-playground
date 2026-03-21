@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
