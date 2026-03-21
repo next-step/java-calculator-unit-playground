@@ -1,5 +1,7 @@
 package calculator;
 
+import java.io.IOException;
+
 public class StringCalculator {
     String[] setCustomSplit(String str){
         int postfixDelimiterIndex = str.indexOf("\n");
@@ -18,7 +20,14 @@ public class StringCalculator {
         int numOfInt = nums.length;
         int sum = 0;
         for (int i = 0; i<numOfInt; i++){
-            sum += Integer.parseInt(nums[i]);
+            try {
+                int x = Integer.parseInt(nums[i]);
+                if (x < 0){
+                    throw new RuntimeException("음수는 전달할 수 없습니다.");
+                }
+            } catch (NumberFormatException e){
+                throw new RuntimeException("숫자가 아닙니다.");
+            }
         }
         return sum;
     }
