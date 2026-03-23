@@ -11,7 +11,10 @@ public class Calculator {//shift f6을 누르면서 이름을 바꾸면 파일�
         return num1*num2;
     }
     int divide(int num1, int num2){
-        return num1/num2;
+        if (num2 == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        return num1 / num2;
     }
     int splitAdd(String string){
         String regex = ":|,"; //구분자 선언
