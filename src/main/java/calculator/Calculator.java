@@ -11,6 +11,9 @@ public class Calculator{
         return multiplicand * multiplier;
     }
     int divide(int dividend, int divisor){
+        if (divisor == 0){
+            throw new ArithmeticException();
+        }
         return dividend / divisor;
     }
 }
