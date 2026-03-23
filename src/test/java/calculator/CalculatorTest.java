@@ -47,4 +47,12 @@ class CalculatorTest{
         assertEquals(2, result);
     }
 
+    @DisplayName("0으로 나누었을 때의 오류 검출")
+    @Test
+    void testDividebyZero(){
+        Calculator calculator = new Calculator();
+
+        assertThrows(ArithmeticException.class, ()->calculator.divide(4, 0));
+    }
+
 }

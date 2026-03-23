@@ -29,4 +29,24 @@ class StringCalculatorTest {
 
         assertEquals(9, fin);
     }
+
+    @DisplayName("음수일 때, RuntimeException 예외 throw")
+    @Test
+    void testMinusException(){
+        StringCalculator calculator = new StringCalculator();
+
+        String[] result = calculator.basicSplit("-1, 4, 6");
+
+        assertThrows(RuntimeException.class, () -> calculator.addAll(result));
+    }
+
+    @DisplayName("숫자가 아닐 때, RuntimeException 예외 throw")
+    @Test
+    void testNonNumberException(){
+        StringCalculator calculator = new StringCalculator();
+
+        String[] result = calculator.basicSplit("일, 4, 6");
+
+        assertThrows(RuntimeException.class, () -> calculator.addAll(result));
+    }
 }
