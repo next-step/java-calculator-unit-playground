@@ -1,8 +1,6 @@
 package calculator;
 
-import java.io.IOException;
-
-public class StringCalculator {
+public class StringCalculator extends Calculator{
     String[] setCustomSplit(String str){
         int postfixDelimiterIndex = str.indexOf("\n");
         int prefixDelimiterIndex = 2;
@@ -25,6 +23,7 @@ public class StringCalculator {
                 if (x < 0){
                     throw new RuntimeException("음수는 전달할 수 없습니다.");
                 }
+                sum = this.add(sum, x);
             } catch (NumberFormatException e){
                 throw new RuntimeException("숫자가 아닙니다.");
             }
