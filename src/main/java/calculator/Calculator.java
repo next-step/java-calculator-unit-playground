@@ -1,31 +1,29 @@
 package calculator;
 
 public class Calculator {
-    int add(int num1, int num2) {
-        return num1 + num2;
-    }
+    public int add(int num1, int num2) { return num1 + num2; }
 
-    int subtract(int num1, int num2) {
+    public int subtract(int num1, int num2) {
         return num1 - num2;
     }
 
-    int multiply(int num1, int num2) {
+    public int multiply(int num1, int num2) {
         return num1 * num2;
     }
 
-    int divide(int num1, int num2) {
+    public int divide(int num1, int num2) {
         return num1 / num2;
     }
 
-    int stringAdd(String expression) {
-
+    public int stringAdd(String expression) {
         if (expression.equals("")) {
             return 0;
         }
 
 
         if (expression.matches("//.\n.*")) {
-            String delimiter = expression.split("//|\n")[1];
+            String customDelimiter = expression.split("//|\n")[1];
+            String delimiter = "[,:" + customDelimiter + "]";
             String withoutDelimiter = expression.split("\n")[1];
             String[] tokens = withoutDelimiter.split(delimiter);
 
